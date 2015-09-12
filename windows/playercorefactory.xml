@@ -1,6 +1,10 @@
  <playercorefactory>
-
  <players>
+    <player name="save-url" type="ExternalPlayer" audio="false" video="true">
+         <filename>C:\Windows\System32\cmd.exe</filename>
+         <args>-i "{0}" > C:\users\username\desktop\videourl.txt</args>
+    <hidexbmc>true</hidexbmc>
+    </player>
    <player name="vlc" type="ExternalPlayer" audio="false" video="true">
 		<filename>C:\Program Files (x86)\VideoLAN\VLC\vlc.exe</filename>
      <args>"{0}"</args>
@@ -11,11 +15,6 @@
 	<args>"{0}" --sout=file/ts:"C:\users\username\desktop\vlcS.mkv" &</args>
 	<hidexbmc>true</hidexbmc>
    </player>
-    <player name="save-url" type="ExternalPlayer" audio="false" video="true">
-         <filename>C:\Windows\System32\cmd.exe</filename>
-         <args></args>
-    <hidexbmc>true</hidexbmc>
-    </player>
    <player name="mpv" type="ExternalPlayer" audio="false" video="true">
 		<filename>C:\users\username\desktop\mpv.exe</filename>
      <args>"{0}"</args>
