@@ -9,8 +9,16 @@ so we get the non free codecs
 yaourt -S ffmpeg-full
 
 edit pkg with nano during install 
-remove the line that says libvideobut
+remove the line that says  "--enable-libutvideo" from PKGBUILD.
 then continue with install
+
+
+## reinstall to fix misisng libraries if needed
+
+yaourt -Sy fmpeg-full
+
+yaourt -S fmpeg-full
+
 
 
 ## ubuntu 
