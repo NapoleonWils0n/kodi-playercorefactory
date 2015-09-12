@@ -20,6 +20,36 @@ curl
 wget
 
 
+## usage
+
+press y on the keyboard while a video is playing to bring up the play using contextual menu,
+you can then choose from one the players in the playercorefactory.xml to play the video in an external player or record the video stream
+
+### background recording from kodi
+
+
+### foreground recording in the terminal
+
+
+## download with git and symlink
+
+download the kodi-playercorefactory repo with git
+
+
+git clone url
+
+
+symlink from one of the playercorefactory.xml in the git repo to where the playercorefactory.xml is
+
+ln -s ~/git/kodi-playercorefactory/linux/combined/playercorefactory.xml ~/.kodi/userdata/playercorefactory.xml 
+
+
+you should also be able to use an alias on mac osx and the windows equivilant
+
+see below for location of the userdata folder for your operating system
+
+
+
 ## Kodi wiki Userdata directory
 
 http://kodi.wiki/view/Userdata
