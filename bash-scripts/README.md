@@ -1,6 +1,6 @@
 # kodi bash scripts 
 
-set up
+bash scripts set up
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/bash-scripts-setup
 
@@ -22,3 +22,7 @@ Save the url of the video from kodi by press y on the keyboard while a video is 
 
 You can then use one of the bash scripts and pass in the location of the text file with the url of video,
 as an argument to script and it will download the video in a terminal window in the foreground
+
+### Important note for curl and wget scripts
+
+the curl and wget scripts must not be run in the background
