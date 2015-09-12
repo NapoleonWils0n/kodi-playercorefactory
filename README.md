@@ -13,43 +13,43 @@ You can also select a recording duration from the play using menu
 
 ### players
 
-*ffmpeg  
-*ffmpeg aac audio fix  
-*ffmpeg x-forward http header  
-*ffmpeg user agent referer http header  
+* ffmpeg  
+* ffmpeg aac audio fix  
+* ffmpeg x-forward http header  
+* ffmpeg user agent referer http header  
 
 each ffmpeg player also has a recording duration for 30min, 1hr, 2hrs  
 
-*ffplay  
-*ffplay x-forward http header  
-*ffplay user agent referer http header  
+* ffplay  
+* ffplay x-forward http header  
+* ffplay user agent referer http header  
 
-*vlc play  
-*vlc record  
-*vlc play and record  
+* vlc play  
+* vlc record  
+* vlc play and record  
 
-*mpv play  
-*mpv record  
-*mpv play and record  
+* mpv play  
+* mpv record  
+* mpv play and record  
 
-*curl download video  
-*curl download video - useragent referer http header  
+* curl download video  
+* curl download video - useragent referer http header  
 
-*wget download video  
-*wget download video - useragent referer http header  
+* wget download video  
+* wget download video - useragent referer http header  
 
 ### bash scripts 
 
-*ffmpeg   
-*ffmpeg aac audio fix  
-*ffmpeg x-forward http header  
-*ffmpeg user agent referer http header  
+* ffmpeg   
+* ffmpeg aac audio fix  
+* ffmpeg x-forward http header  
+* ffmpeg user agent referer http header  
 
 each ffmpeg bash script also has a player with a recording duration for 30min, 1hr, 2hrs 
 so you can specify how long to record the video for 
 
-*curl record m3u8 video stream  
-*wget record m3u8 video stream  
+* curl record m3u8 video stream  
+* wget record m3u8 video stream  
 
 
 ### background recording from kodi
@@ -62,10 +62,10 @@ so you can specify how long to record the video for
 
 eg:
 
-*ffmpeg  
-*ffmpeg 30mins  
-*ffmpeg 1hrs  
-*ffmpeg 2hrs  
+* ffmpeg  
+* ffmpeg 30mins  
+* ffmpeg 1hrs  
+* ffmpeg 2hrs  
 
 if you dont specify a recording duration you have to manually find the process id of ffmpeg and kill it to stop recording
 
