@@ -21,22 +21,22 @@ You can also select a recording duration from the play using menu
 each ffmpeg player also has a recording duration for 30min, 1hr, 2hrs  
 
 * ffplay  
-* ffplay x-forward http header  
+* ffplay x-forward http header 
 * ffplay user agent referer http header  
 
-* vlc play  
-* vlc record  
-* vlc play and record  
+* vlc play 
+* vlc record 
+* vlc play and record 
 
-* mpv play  
-* mpv record  
-* mpv play and record  
+* mpv play 
+* mpv record 
+* mpv play and record 
 
-* curl download video  
-* curl download video - useragent referer http header  
+* curl download video 
+* curl download video - useragent referer http header 
 
-* wget download video  
-* wget download video - useragent referer http header  
+* wget download video 
+* wget download video - useragent referer http header 
 
 ### bash scripts 
 
