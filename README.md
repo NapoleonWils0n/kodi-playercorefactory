@@ -34,12 +34,11 @@ ffmpeg aac audio fix
 ffmpeg x-forward http header
 ffmpeg user agent referer http header
 
-each ffmpeg player also has a recording duration for 30min, 1hr, 2hrs
+each ffmpeg bash script also has a player with a recording duration for 30min, 1hr, 2hrs
+so you can specify how long to record the video for
 
-
-curl record m3u8 video
-
-wget record m3u8 video
+curl record m3u8 video stream
+wget record m3u8 video stream
 
 ## usage
 
@@ -51,10 +50,30 @@ You can also select a recording duration from the play using menu
 
 ### background recording from kodi
 
+When you use one of the players to record a video from kodi by using the play using contextual menu the video is recorded in the background and does not open a terminal window
+
+each ffmpeg player in the playercorefactory.xml file also has a player with a recording duration for 30min, 1hr, 2hrs
+
+so you can specify how long to record the video for
+
+eg:
+
+ffmpeg
+ffmpeg 30mins
+ffmpeg 1hrs
+ffmpeg 2hrs
+
+if you dont specify a recording duration you have to manually find the process id of ffmpeg and kill it to stop recording
+
+find the process id with ps aux | grep ffmpeg
 
 ps aux | grep ffmpeg
 
+or by using pgrep ffmpeg
+
 pgrep ffmpeg
+
+then kill the process, replace PID with the process id you got from ps aux or pgrep
 
 kill PID
 
