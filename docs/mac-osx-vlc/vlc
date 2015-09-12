@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
+# copy to /usr/bin/vlc
+
 /Applications/VLC.app/Contents/MacOS/VLC -I rc "$@"
