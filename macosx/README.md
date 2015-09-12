@@ -1,3 +1,3 @@
 # Mac osx use linux players and scipts
 
-Read the docs/macosx/README page to set up VLC
+Read the docs/mac-osx-vlc/README page to set up VLC
