@@ -35,14 +35,13 @@ each ffmpeg player also has a recording duration for 30min, 1hr, 2hrs
 
 ### bash scripts 
 
+each ffmpeg bash script also has a player with a recording duration for 30min, 1hr, 2hrs 
+so you can specify how long to record the video for 
+
 * ffmpeg   
 * ffmpeg aac audio fix  
 * ffmpeg x-forward http header  
 * ffmpeg user agent referer http header  
-
-each ffmpeg bash script also has a player with a recording duration for 30min, 1hr, 2hrs 
-so you can specify how long to record the video for 
-
 * curl record m3u8 video stream  
 * wget record m3u8 video stream  
 
