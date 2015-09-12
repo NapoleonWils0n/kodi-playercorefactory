@@ -1,4 +1,4 @@
-# Mac osx VLC set up
+# Mac osx vlc set up
 
 save script to  /usr/bin/vlc
 
