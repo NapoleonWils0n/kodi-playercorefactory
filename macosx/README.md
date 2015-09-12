@@ -1,3 +1,5 @@
 # Mac osx use linux players and scripts
 
-Read the docs/mac-osx-vlc/README page to set up VLC
+Mac osx vlc script
+
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/mac-osx-vlc
