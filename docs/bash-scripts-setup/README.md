@@ -1,4 +1,4 @@
-# Scripts set up
+# Bash scripts set up
 
 #### We need to create a bin directory in your home for the bash scripts
 
