@@ -15,3 +15,4 @@ enter your admin password at the prompt
 	reload your ~/.bashrc
 
 	. ~/.bashrc
+
