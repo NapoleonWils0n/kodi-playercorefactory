@@ -32,3 +32,4 @@ make all the bash scripts executable
 source your ~/.bashrc to pick up the scripts
 
 	. ~/.bashrc
+
