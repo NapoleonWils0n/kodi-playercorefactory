@@ -3,6 +3,12 @@
 A set of playercorefactory.xml files for kodi to play videos in an external player or record the video.
 There is also a set of bash script to record the outside of kodi using the terminal
 
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/bash-scripts-setup
+
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/ffmpeg-install
+
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/mac-osx-vlc
+
 ## usage
 
 press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu,
