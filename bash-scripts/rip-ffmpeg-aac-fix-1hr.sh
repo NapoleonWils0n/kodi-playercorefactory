@@ -16,8 +16,6 @@ elif [[ $# > 1 ]]
 		exit 2 # exit with non zero
 else
 
-URL=`/usr/bin/cat "$1" | sed "s/^/'/;s/$/'/"`
-/usr/bin/ffmpeg -i "{0}" -c:v copy -bsf:a aac_adtstoasc -t 01:00:00 "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv"
-done
+/usr/bin/ffmpeg -i "$1" -c:v copy -bsf:a aac_adtstoasc -t 01:00:00 -loglevel error "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv"
 
 fi
