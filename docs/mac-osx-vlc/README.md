@@ -12,7 +12,7 @@ make it executable
 
 enter your admin password at the prompt
 
-	reload your ~/.bashrc
+reload your ~/.bashrc
 
 	. ~/.bashrc
 
