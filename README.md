@@ -9,6 +9,12 @@ kodi record any video by using ffmpeg, rtmpdump, vlc and mpv as external players
 
 https://www.youtube.com/playlist?list=PL7hhhG5qUoXlpmIjqv2eEBukAeJSVNsdX
 
+Youtube video showing you how to set up the kodi-playercorefactory repo
+
+kodi playercorefactory.xml git repo - kodi recording videos 27
+
+https://www.youtube.com/watch?v=It92vzpK9xo
+
 ### documentation
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/bash-scripts-setup
