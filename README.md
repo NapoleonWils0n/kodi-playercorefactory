@@ -1,6 +1,17 @@
 # Kodi playercorefactory.xml repo
 
-## players
+A set of playercorefactory.xml files for kodi to play videos in an external player or record the video.
+There is also a set of bash script to record the outside of kodi using the terminal
+
+## usage
+
+press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu,
+you can then choose from one the players in the playercorefactory.xml,
+to play the video in an external player or record the video stream
+
+You can also select a recording duration from the play using menu
+
+### players
 
 ffmpeg  
 ffmpeg aac audio fix  
@@ -27,7 +38,7 @@ curl download video - useragent referer http header
 wget download video  
 wget download video - useragent referer http header  
 
-## bash scripts 
+### bash scripts 
 
 ffmpeg   
 ffmpeg aac audio fix  
@@ -40,13 +51,6 @@ so you can specify how long to record the video for
 curl record m3u8 video stream  
 wget record m3u8 video stream  
 
-## usage
-
-press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu,
-you can then choose from one the players in the playercorefactory.xml,
-to play the video in an external player or record the video stream
-
-You can also select a recording duration from the play using menu
 
 ### background recording from kodi
 
@@ -85,7 +89,7 @@ You can then use one of the bash scripts and pass in the location of the text fi
 as an argument to script and it will download the video in a terminal window in the foreground
 
 
-## download the kodi-playercorefactory repo with git
+#### download the kodi-playercorefactory repo with git
 
 create a git directory in your home
 
@@ -103,9 +107,6 @@ you should also be able to use an alias on mac osx and the windows equivilant
 
 see below for location of the userdata folder for your operating system
 
-## Kodi wiki Userdata directory
-
-http://kodi.wiki/view/Userdata
 
 ### Location of the userdata folder
 
@@ -117,7 +118,12 @@ Mac	/Users/<your_user_name>/Library/Application Support/Kodi/userdata/ (see note
 OpenELEC	/storage/.kodi/userdata/  
 Windows	Start - type %APPDATA%\kodi\userdata - press <Enter>  
 
-## Kodi wiki External players - playercorefactory.xml
+### Kodi wiki Userdata directory
+
+http://kodi.wiki/view/Userdata
+
+
+#### Kodi wiki External players - playercorefactory.xml
 
 http://kodi.wiki/view/External_players
 
