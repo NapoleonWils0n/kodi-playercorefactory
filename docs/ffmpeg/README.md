@@ -3,6 +3,9 @@
 
 ## arch linux
 
+we need to install ffmpeg-full from the aur using yaourt
+so we get the non free codecs
+
 yaourt -S ffmpeg-full
 
 edit pkg with nano during install 
