@@ -19,6 +19,6 @@ else
 URL=`/usr/bin/cat "$1" | sed "s/^/'/;s/$/'/"`
 VIDEOURL=`/usr/bin/echo "$URL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_-]*\.(m3u8)'`
 XFORWARD=`/usr/bin/echo "$URL" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
-/usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "{0}" -c:v copy -bsf:a aac_adtstoasc -t 00:30:00 "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv"
+/usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -t 00:30:00 "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv"
 
 fi

@@ -12,8 +12,12 @@ ffplay x-forward http header
 ffplay user agent referer http header
 
 vlc
+vlc record
+vlc play and record
 
 mpv
+mpv record
+mpv play and record
 
 curl
 
@@ -22,19 +26,31 @@ wget
 
 ## usage
 
-press y on the keyboard while a video is playing to bring up the play using contextual menu,
-you can then choose from one the players in the playercorefactory.xml to play the video in an external player or record the video stream
+press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu,
+you can then choose from one the players in the playercorefactory.xml,
+to play the video in an external player or record the video stream
+
+You can also select a recording duration from the play using menu
 
 ### background recording from kodi
 
 
+
+
 ### foreground recording in the terminal
+
+
 
 
 ## download with git and symlink
 
 download the kodi-playercorefactory repo with git
 
+create a git directory in your home
+
+mkdir -p ~/git
+
+cd ~/git
 
 git clone url
 
@@ -47,7 +63,6 @@ ln -s ~/git/kodi-playercorefactory/linux/combined/playercorefactory.xml ~/.kodi/
 you should also be able to use an alias on mac osx and the windows equivilant
 
 see below for location of the userdata folder for your operating system
-
 
 
 ## Kodi wiki Userdata directory
