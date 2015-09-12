@@ -7,22 +7,22 @@
    </player>
    <player name="ssh ffmpeg record" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/ssh</filename>
-     <args>servername '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
+     <args>ffmpegserver '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ssh ffmpeg record 30 minutes" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/ssh</filename>
-     <args>servername '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy -t 00:30:00 "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
+     <args>ffmpegserver '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy -t 00:30:00 "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ssh ffmpeg record 1 hour" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/ssh</filename>
-     <args>servername '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy -t 01:00:00 "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
+     <args>ffmpegserver '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy -t 01:00:00 "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ssh ffmpeg record 2 hours" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/ssh</filename>
-     <args>servername '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy -t 02:00:00 "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
+     <args>ffmpegserver '/usr/bin/ffmpeg -i "{0}" -c:v copy -c:a copy -t 02:00:00 "$HOME/mount/ffmpeg/video-$(date +"%m-%d-%y-%H-%M").mkv"' &</args>
      <hidexbmc>false</hidexbmc>
    </player>
  </players>
