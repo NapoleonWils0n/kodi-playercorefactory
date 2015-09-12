@@ -21,8 +21,14 @@ then continue with install
 
 ## ubuntu 
 
-sudo apt-get install ffmpeg
+https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
+
+https://www.ffmpeg.org/download.html
 
 ## mac osx
 
+https://www.ffmpeg.org/download.html
+
 ## windows
+
+https://www.ffmpeg.org/download.html
