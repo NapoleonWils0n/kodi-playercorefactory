@@ -3,6 +3,14 @@
 A set of playercorefactory.xml files for kodi to play videos in an external player or record the video.
 There is also a set of bash script to record the outside of kodi using the terminal
 
+Files are part of this youtube tutorial 
+
+kodi record any video by using ffmpeg, rtmpdump, vlc and mpv as external players
+
+https://www.youtube.com/playlist?list=PL7hhhG5qUoXlpmIjqv2eEBukAeJSVNsdX
+
+### documentation
+
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/bash-scripts-setup
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/ffmpeg-install
