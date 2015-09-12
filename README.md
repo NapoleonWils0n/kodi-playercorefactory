@@ -1,5 +1,24 @@
 # Kodi playercorefactory.xml files and bash scripts
 
+## players
+
+ffmpeg
+ffmpeg aac audio fix
+ffmpeg x-forward http header
+ffmpeg user agent referer http header
+
+ffplay
+ffplay x-forward http header
+ffplay user agent referer http header
+
+vlc
+
+mpv
+
+curl
+
+wget
+
 
 ## Kodi wiki Userdata directory
 
