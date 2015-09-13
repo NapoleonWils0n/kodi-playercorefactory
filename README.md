@@ -115,6 +115,10 @@ create a git directory in your home
 
 symlink from one of the playercorefactory.xml in the git repo to where the playercorefactory.xml is
 
+symlink syntax
+
+	ln -s /path/to/source /path/to/destination
+
 	ln -s ~/git/kodi-playercorefactory/linux/combined/playercorefactory.xml ~/.kodi/userdata/playercorefactory.xml 
 
 you should also be able to use an alias on mac osx and the windows equivilant
