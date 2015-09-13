@@ -119,6 +119,14 @@ symlink from one of the playercorefactory.xml in the git repo to where the playe
 
 you should also be able to use an alias on mac osx and the windows equivilant
 
+to update the repository change directory to the kodi-playercorefactory  
+
+	cd ~/git/kodi-playercorefactory
+
+then run the git pull command to pull down the latest changes from github
+
+	git pull
+
 see below for location of the userdata folder for your operating system
 
 
