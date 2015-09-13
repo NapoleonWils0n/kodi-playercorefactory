@@ -16,6 +16,7 @@ elif [[ $# > 1 ]]
 		exit 2 # exit with non zero
 else
 
-/usr/bin/ffmpeg -i "$1" -c:v copy -c:a copy -t 01:00:00 -loglevel error "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv"
+URL=`/usr/bin/cat "$1"`
+/usr/bin/ffmpeg -i "$URL" -c:v copy -c:a copy -t 01:00:00 -loglevel error "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv"
 
 fi
