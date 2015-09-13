@@ -1,6 +1,6 @@
 # Kodi playercorefactory.xml repo
 
-A set of playercorefactory.xml files for kodi to play videos in an external player or record the video.
+A set of playercorefactory.xml files for kodi to play videos in an external player or record the video.  
 There is also a set of bash script to record the outside of kodi using the terminal
 
 Files are part of this youtube tutorial 
