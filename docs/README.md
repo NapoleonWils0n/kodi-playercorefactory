@@ -1,4 +1,4 @@
-# Kodi playercorefactory.xml repo documentation
+### Kodi playercorefactory.xml repo documentation
 
 How to set up the bash scripts  
 
