@@ -13,6 +13,9 @@ list of scripts
 * ffmpeg aac audio fix  
 * ffmpeg x-forward http header  
 * ffmpeg user agent referer http header  
+* ffplay
+* ffplay x-forward http header  
+* ffplay user agent referer http header 
 * curl record m3u8 video stream  
 * wget record m3u8 video stream  
 
