@@ -54,7 +54,7 @@ Use ^d to exit from at prompt.
 
 ### Dont use the wget and scripts with at
 
-Dont run either rip-m3u8-curl-xforward.sh rip-m3u8-wget-xforward.sh in the background with at
+Dont run either rip-m3u8-curl-xforward.sh rip-m3u8-wget-xforward.sh in the background with at  
 They must only be run in the foreground in a terminal windows to you can ctrl c to kill them
 
 
