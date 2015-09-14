@@ -19,7 +19,7 @@
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | while read url
 do
-VIDEOURL=`/usr/bin/echo "$URL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
+VIDEOURL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
 XFORWARD=`/usr/bin/echo "$url" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
 /usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -loglevel error "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
 done</args>
@@ -60,7 +60,7 @@ done</args>
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | while read url
 do
-VIDEOURL=`/usr/bin/echo "$URL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
+VIDEOURL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
 XFORWARD=`/usr/bin/echo "$url" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
 /usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -loglevel error -t 00:30:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
 done</args>
@@ -70,7 +70,7 @@ done</args>
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | while read url
 do
-VIDEOURL=`/usr/bin/echo "$URL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
+VIDEOURL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
 XFORWARD=`/usr/bin/echo "$url" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
 /usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -loglevel error -t 01:00:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
 done</args>
@@ -80,7 +80,7 @@ done</args>
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | while read url
 do
-VIDEOURL=`/usr/bin/echo "$URL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
+VIDEOURL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
 XFORWARD=`/usr/bin/echo "$url" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
 /usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -loglevel error -t 02:00:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
 done</args>
@@ -90,7 +90,7 @@ done</args>
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | while read url
 do
-VIDEOURL=`/usr/bin/echo "$URL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
+VIDEOURL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@-]*\.(m3u8)'`
 XFORWARD=`/usr/bin/echo "$url" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
 /usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -loglevel error -t 03:00:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
 done</args>
