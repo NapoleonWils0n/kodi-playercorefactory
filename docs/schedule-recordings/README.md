@@ -44,6 +44,15 @@ type the name of the recording script and the path to the text file with the url
 
 Use ^d to exit from at prompt.
 
+
+To record a stream at 15:00 PM Saturday for 3 hours
+
+	at 15:00 PM Sat
+	rip-ffmpeg-xforward-3hrs.sh ~/Documents/schedule/video.txt
+
+Use ^d to exit from at prompt.
+
+
 #### List the scheduled jobs using atq
 
 	atq
