@@ -51,6 +51,11 @@ done</args>
      <args>-i "{0}" -c:v copy -c:a copy -t 02:00:00 "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv" &</args>
      <hidexbmc>false</hidexbmc>
    </player>
+  <player name="ffmpeg 3 hours" type="ExternalPlayer" audio="false" video="true">
+		<filename>/usr/bin/ffmpeg</filename>
+     <args>-i "{0}" -c:v copy -c:a copy -t 03:00:00 "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv" &</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
   <player name="ffmpeg - xforward 30 mins" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | while read url
@@ -78,6 +83,16 @@ do
 VIDEOURL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_-]*\.(m3u8)'`
 XFORWARD=`/usr/bin/echo "$url" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
 /usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -loglevel error -t 02:00:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
+done</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+  <player name="ffmpeg - xforward 3 hours" type="ExternalPlayer" audio="false" video="true">
+		<filename>/usr/bin/echo</filename>
+     <args>"{0}" | while read url
+do
+VIDEOURL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_-]*\.(m3u8)'`
+XFORWARD=`/usr/bin/echo "$url" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
+/usr/bin/ffmpeg -headers 'X-Forwarded-For: '"$XFORWARD"''$'\r\n' -i "$VIDEOURL" -c:v copy -bsf:a aac_adtstoasc -loglevel error -t 03:00:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
 done</args>
      <hidexbmc>false</hidexbmc>
    </player>
@@ -111,6 +126,17 @@ URL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\.(mk
 USERAGENT=`/usr/bin/echo "$url" | grep -Eo 'User-Agent=[a-zA-Z]*/[0-9]{1,1}\.[0-9]{1,1}(.[^&]*)'`
 REFERER=`/usr/bin/echo "$url" | grep -Eo 'Referer=(http|https)://[a-zA-Z0-9./?=_-]*(/|\.html)' | sed 's/Referer=//'`
 /usr/bin/ffmpeg -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" -c:v copy -c:a copy -loglevel error -t 02:00:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
+done</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="ffmpeg - useragent referer 3 hours" type="ExternalPlayer" audio="false" video="true">
+		<filename>/usr/bin/echo</filename>
+     <args>"{0}" | while read url
+do
+URL=`/usr/bin/echo "$url" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\.(mkv|mp4|m3u8|avi)'`
+USERAGENT=`/usr/bin/echo "$url" | grep -Eo 'User-Agent=[a-zA-Z]*/[0-9]{1,1}\.[0-9]{1,1}(.[^&]*)'`
+REFERER=`/usr/bin/echo "$url" | grep -Eo 'Referer=(http|https)://[a-zA-Z0-9./?=_-]*(/|\.html)' | sed 's/Referer=//'`
+/usr/bin/ffmpeg -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" -c:v copy -c:a copy -loglevel error -t 03:00:00 "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &
 done</args>
      <hidexbmc>false</hidexbmc>
    </player>
