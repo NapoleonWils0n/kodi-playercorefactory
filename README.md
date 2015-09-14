@@ -64,6 +64,9 @@ so you can specify how long to record the video for
 * ffmpeg aac audio fix  
 * ffmpeg x-forward http header  
 * ffmpeg user agent referer http header  
+* ffplay
+* ffplay x-forward http header  
+* ffplay user agent referer http header 
 * curl record m3u8 video stream  
 * wget record m3u8 video stream  
 
