@@ -23,6 +23,8 @@ https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/ffmpeg
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/mac-osx-vlc
 
+https://github.com/NapoleonWils0n/kodi-playercorefactory/blob/master/docs/schedule-recordings
+
 ## usage
 
 press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu,
