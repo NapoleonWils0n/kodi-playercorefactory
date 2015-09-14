@@ -24,6 +24,11 @@ start the atd daemon before using at
 	sudo systemctl start atd
 
 
+start the atd daemon automatically
+
+	sudo systemctl enable atd
+
+
 ### ubuntu install at
 
 	sudo apt-get install at
