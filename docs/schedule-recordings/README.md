@@ -1,5 +1,9 @@
 # schedule recordings with the at command
 
+Youtube video explaining the set up
+
+https://www.youtube.com/watch?v=VWIOuE1NoOY&list=PL7hhhG5qUoXlpmIjqv2eEBukAeJSVNsdX&index=30
+
 Save the url of the video from kodi by press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu. 
 Then select the save url option which will echo the url into a text file on your Documents/schedule
 
