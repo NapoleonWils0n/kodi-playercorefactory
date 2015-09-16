@@ -49,7 +49,7 @@ then run the git pull command to pull down the latest changes from github
 
 	git pull
 
-#### Step 3 - Bash scripts set up
+#### Step 3 - bash scripts set up
 
 add the $HOME/git/kodi-playercorefactory/bash-scripts directory to your bash path
 
