@@ -157,6 +157,9 @@ source your ~/.bashrc to pick up the scripts
 
 see below for location of the userdata folder for your operating system
 
+### Important note for curl and wget scripts
+
+the curl and wget scripts must not be run in the background
 
 ### Location of the userdata folder
 
