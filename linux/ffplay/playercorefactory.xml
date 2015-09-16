@@ -9,7 +9,7 @@
 		<filename>/usr/bin/echo</filename>
      <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; /usr/bin/echo "{0}" | while read url
 do
-VIDEOFILE=`echo "{0}" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(mkv|mp4|avi)'`
+VIDEOFILE=`echo "{0}" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(mkv|mp4|avi|flv)'`
 M3U8=`echo "{0}" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)'`
 XFORWARD=`echo "{0}" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)\|X-Forwarded-For=[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
 XFORWARDIP=`echo "$XFORWARD" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
