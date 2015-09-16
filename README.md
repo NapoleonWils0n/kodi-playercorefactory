@@ -19,7 +19,7 @@ https://www.youtube.com/watch?v=It92vzpK9xo
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs
 
-#### download the kodi-playercorefactory repo with git
+#### Step 1 - download the kodi-playercorefactory repo with git
 
 create a git directory in your home
 
@@ -28,6 +28,8 @@ create a git directory in your home
 	cd ~/git
 
 	git clone https://github.com/NapoleonWils0n/kodi-playercorefactory.git
+
+#### Step 2 - create the symlink to the playercorefactory.xml file
 
 symlink from one of the playercorefactory.xml in the git repo to where the playercorefactory.xml is
 
@@ -47,7 +49,7 @@ then run the git pull command to pull down the latest changes from github
 
 	git pull
 
-#### Bash scripts set up
+#### Step 3 - Bash scripts set up
 
 add the $HOME/git/kodi-playercorefactory/bash-scripts directory to your bash path
 
