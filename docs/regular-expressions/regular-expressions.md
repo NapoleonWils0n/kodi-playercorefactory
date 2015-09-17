@@ -48,3 +48,17 @@ http://192.54.104.104:8080/d/mwhzccskpqosuqhy77kmar5tctikmrscw4fxctbfe2g5a4gzxkb
 	"$USEREF")
 	ffplay -fs -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$VIDEOFILE"
 	;;
+
+### m3u8 user agent
+
+http://rtmp1.arconaitv.me/live/J8s5ZQCFMZ5-FBth4b8fUA/1194425127/office.m3u8|user-agent=iPhone
+
+	M3U8USERAGENT=`echo "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)\|user-agent=[a-zA-Z]*'`
+	M3U8UAG=`echo "$M3U8USERAGENT" | grep -Eo 'user-agent=[a-zA-Z]*' | sed 's/user-agent=//'`
+	M3U8UAGM3U8=`echo "$M3U8USERAGENT" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)'`
+
+
+	"$M3U8USERAGENT")
+	ffplay -hide_banner -loglevel error -fs -user-agent "$M3U8UAG" "$M3U8UAGM3U8"
+	;;
+
