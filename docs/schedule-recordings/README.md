@@ -5,12 +5,7 @@ Youtube video explaining the set up
 https://www.youtube.com/watch?v=VWIOuE1NoOY&list=PL7hhhG5qUoXlpmIjqv2eEBukAeJSVNsdX&index=30
 
 Save the url of the video from kodi by press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu. 
-Then select the save url option which will echo the url into a text file on your Documents/schedule
-
-Create a directory called schedule for example in your ~/Documents directory 
-which we will use to store text files with urls to record from
-
-	mkdir -p ~/Documents/schedule
+Then select the save url option which will echo the url into a text file on your Desktop  
 
 ## install at to schedule recordings
 
@@ -49,15 +44,19 @@ type the name of the recording script and the path to the text file with the url
 
 
 	at now + 1 min
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt
 
 Use ^d to exit from at prompt.
 
 
+use the -t 00:00:00 option to specify a duration in hours minutes seconds  
+
+rip-ffmpeg.sh textfile.txt -t 00:00:00
+
 To record a stream at 15:00 PM Saturday for 3 hours
 
 	at 15:00 PM Sat
-	rip-ffmpeg-xforward-3hrs.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 03:00:00
 
 Use ^d to exit from at prompt.
 
@@ -88,112 +87,112 @@ In above example 4 is the job id.
 #### Examples of at Command:
 
 
-#### Example 1: Schedule task at comming 10:00 AM.
+#### Example 1: Schedule task at comming 10:00 AM and record for 1 hour
 
 	at 10:00 AM
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 01:00:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 2: Schedule task at 10:00 AM on comming Sunday.
+#### Example 2: Schedule task at 10:00 AM on comming Sunday and record for 2 hours
 
 	at 10:00 AM Sun
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 02:00:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 3: Schedule task at 10:00 AM on comming 25’th July.
+#### Example 3: Schedule task at 10:00 AM on comming 25’th July and record for 2 hours
 
 	at 10:00 AM July 25
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 02:00:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 4: Schedule task at 10:00 AM on comming 22’nd June 2015.
+#### Example 4: Schedule task at 10:00 AM on comming 22’nd June 2015 and record for 30 minutes  
 
 	at 10:00 AM 6/22/2015
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 00:30:00
 
 Use ^d to exit from at prompt.
 
 	at 10:00 AM 6.22.2015
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 00:30:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 5: Schedule task at 10:00 AM on same date at next month.
+#### Example 5: Schedule task at 10:00 AM on same date at next month and record for 30 minutes
 
 	at 10:00 AM next month
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 00:30:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 6: Schedule task at 10:00 AM tomorrow.
+#### Example 6: Schedule task at 10:00 AM tomorrow and record for 30 minutes
 
 	at 10:00 AM tomorrow
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 00:30:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 7: Schedule task at 10:00 AM tomorrow.
+#### Example 7: Schedule task at 10:00 AM tomorrow and record for 30 minutes
 
 	at 10:00 AM tomorrow
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 00:30:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 8: Schedule task to execute just after 1 hour.
+#### Example 8: Schedule task to execute just after 1 hour and record for 2 hours
 
 	at now + 1 hour
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 02:00:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 9: Schedule task to execute just after 30 minutes.
+#### Example 9: Schedule task to execute just after 30 minutes and record for 2 hours
 
 	at now + 30 minutes
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 02:00:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 10: Schedule task to execute just after 1 and 2 weeks.
+#### Example 10: Schedule task to execute just after 1 and 2 weeks and record for 6 hours
 
 	at now + 1 week
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 06:00:00
 
 Use ^d to exit from at prompt.
 
 	at now + 2 weeks
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 06:00:00
 
 Use ^d to exit from at prompt.
 
 
-#### Example 11: Schedule task to execute just after 1 and 2 years.
+#### Example 11: Schedule task to execute just after 1 and 2 years and record for 4 hours
 
 	at now + 1 year
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 04:00:00
 
 Use ^d to exit from at prompt.
 
 	at now + 2 years
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 04:00:00
 
 Use ^d to exit from at prompt.
 
-#### Example 12: Schedule task to execute at midnight.
+#### Example 12: Schedule task to execute at midnight and record for 45 minutes  
 
 	at midnight
-	rip-ffmpeg-xforward.sh ~/Documents/schedule/video.txt
+	rip-ffmpeg.sh video.txt -t 00:45:00
 
 Use ^d to exit from at prompt
 
