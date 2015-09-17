@@ -1,0 +1,14 @@
+<playercorefactory>
+ <players>
+   <player name="save url" type="ExternalPlayer" audio="false" video="true">
+		<filename>/usr/bin/echo</filename>
+     <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+  <player name="ffplay" type="ExternalPlayer" audio="false" video="true">
+		<filename>/usr/bin/echo</filename>
+     <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; VIDEOURL=`echo "{0}"`; echo "$VIDEOURL" | rip-ffplay.sh -</args>
+     <hidexbmc>true</hidexbmc>
+   </player>
+ </players>
+</playercorefactory>
