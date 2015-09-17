@@ -4,7 +4,7 @@
 
 echo ' ______________________________________ ';
 echo '/ Enter the number next to the channel \';
-echo '\ you want to play with ffplay         /';
+echo '\ you want to record with ffmpeg       /';
 echo ' -------------------------------------- ';
 echo '        \   ^__^                        ';
 echo '         \  (oo)\_______                ';
