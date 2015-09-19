@@ -19,7 +19,7 @@ DURATION="$3"
 echo $VIDEOURL |
 while read url
 do
-source rip-regex.sh
+source rip-video-regex.sh
 
 case "$url" in
 	"$VIDEOFILE")
