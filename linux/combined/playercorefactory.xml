@@ -5,32 +5,32 @@
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
-  <player name="ffplay" type="ExternalPlayer" audio="false" video="true">
+  <player name="play" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; echo "{0}" | rip-ffplay.sh -</args>
      <hidexbmc>true</hidexbmc>
    </player>
-   <player name="ffmpeg" type="ExternalPlayer" audio="false" video="true">
+   <player name="record" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | rip-ffmpeg.sh - &</args>
      <hidexbmc>false</hidexbmc>
    </player>  
-   <player name="ffmpeg 30 mins" type="ExternalPlayer" audio="false" video="true">
+   <player name="record 30 mins" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | rip-ffmpeg.sh - -t 00:30:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
-   <player name="ffmpeg 1 hour" type="ExternalPlayer" audio="false" video="true">
+   <player name="record 1 hour" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | rip-ffmpeg.sh - -t 01:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
-   <player name="ffmpeg 2 hours" type="ExternalPlayer" audio="false" video="true">
+   <player name="record 2 hours" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | rip-ffmpeg.sh - -t 02:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
-   <player name="ffmpeg 3 hours" type="ExternalPlayer" audio="false" video="true">
+   <player name="record 3 hours" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | rip-ffmpeg.sh - -t 02:00:00 &</args>
      <hidexbmc>false</hidexbmc>
