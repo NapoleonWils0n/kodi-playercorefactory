@@ -9,13 +9,16 @@ file paths need to be changed
 
 http://windowsitpro.com/systems-management/what-environment-variables-are-available-windows
 
-home variable linux
+home variable linux  
+
 	$HOME
 
-home variable windows
+home variable windows  
+
 	%HOMEPATH%
 
-home drive 
+home drive  
+
 	%HOMEDRIVE%
 
 
@@ -24,7 +27,7 @@ home drive
 https://superuser.com/questions/198525/how-can-i-execute-a-windows-command-line-in-background
 
 
-C:\> start /B myprog.exe
+	C:\> start /B myprog.exe
 
 
 ### Comparison of Common DOS and Linux Commands
