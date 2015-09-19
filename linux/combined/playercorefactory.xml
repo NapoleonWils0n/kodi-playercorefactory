@@ -10,11 +10,6 @@
      <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; echo "{0}" | rip-play.sh -</args>
      <hidexbmc>true</hidexbmc>
    </player>
-   <player name="stream" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/echo</filename>
-     <args>"{0}" | rip-stream.sh - &</args>
-     <hidexbmc>false</hidexbmc>
-   </player>
    <player name="record" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | rip-record.sh - &</args>
@@ -40,5 +35,10 @@
      <args>"{0}" | rip-record.sh - -t 02:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
+   <player name="stream" type="ExternalPlayer" audio="false" video="true">
+		<filename>/usr/bin/echo</filename>
+     <args>"{0}" | rip-stream.sh - &</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
  </players>
 </playercorefactory>
