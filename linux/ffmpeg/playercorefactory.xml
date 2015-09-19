@@ -5,6 +5,11 @@
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
+   <player name="stream" type="ExternalPlayer" audio="false" video="true">
+		<filename>/usr/bin/echo</filename>
+     <args>"{0}" | rip-ffmpeg-stream.sh - &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
    <player name="record" type="ExternalPlayer" audio="false" video="true">
 		<filename>/usr/bin/echo</filename>
      <args>"{0}" | rip-ffmpeg.sh - &</args>
