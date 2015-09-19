@@ -95,6 +95,12 @@ Windows	Start - type %APPDATA%\kodi\userdata - press <Enter>
 
 ## usage
 
+You can press c on the keyboard on a video link to bring up the play using menu and then select a player 
+and begin recording
+
+On some video links you need to open the video first and then press y on the keyboard 
+to bring up the play using menu and then select a player and begin recording
+
 press y on the keyboard while a video is playing in kodi to bring up the play using contextual menu,
 you can then choose from one the players in the playercorefactory.xml,
 to play the video in an external player or record the video stream
