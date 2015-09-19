@@ -17,7 +17,7 @@ VIDEOURL=`cat "$1"`
 echo $VIDEOURL |
 while read url
 do
-source rip-video-regex.sh
+source video-regex.sh
 
 case "$url" in
 	"$VIDEOFILE")
