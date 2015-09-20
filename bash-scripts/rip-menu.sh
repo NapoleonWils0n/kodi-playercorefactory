@@ -58,7 +58,7 @@ do
 	break ;;
         "record") which_record 
 	break ;;
-        "stream") which_record 
+        "stream") which_stream
 	break ;;
     esac
 done
