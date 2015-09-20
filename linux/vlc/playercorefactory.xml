@@ -1,22 +1,22 @@
 <playercorefactory>
  <players>
    <player name="save url" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/echo</filename>
+		<filename>echo</filename>
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="vlc" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/vlc</filename>
+		<filename>vlc</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="vlc - rtmpdump" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/rtmpdump</filename>
+		<filename>rtmpdump</filename>
      <args>-i "{0}" | vlc fd://0</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="vlc - record" type="ExternalPlayer" audio="false" video="true">
-	<filename>/usr/bin/vlc</filename>
+	<filename>vlc</filename>
 	<args>"{0}" --sout=file/ts:"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv" &</args>
 	<hidexbmc>false</hidexbmc>
    </player>

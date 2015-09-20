@@ -1,22 +1,22 @@
 <playercorefactory>
  <players>
    <player name="save url" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/echo</filename>
+		<filename>echo</filename>
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="mpv" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/mpv</filename>
+		<filename>mpv</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="mpv - capture" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/mpv</filename>
+		<filename>mpv</filename>
      <args>"{0}" --stream-capture="$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv"</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="mpv - dump" type="ExternalPlayer" audio="false" video="true">
-		<filename>/usr/bin/mpv</filename>
+		<filename>mpv</filename>
      <args>"{0}" --stream-dump="$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv" &</args>
      <hidexbmc>false</hidexbmc>
    </player>
