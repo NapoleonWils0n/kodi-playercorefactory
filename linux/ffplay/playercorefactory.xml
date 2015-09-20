@@ -7,7 +7,7 @@
    </player>
   <player name="play" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
-     <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; echo "{0}" | rip-play.sh -</args>
+     <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; echo "{0}" | rip-play -</args>
      <hidexbmc>true</hidexbmc>
    </player>
  </players>
