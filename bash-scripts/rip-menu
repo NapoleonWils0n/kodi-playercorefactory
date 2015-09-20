@@ -14,7 +14,7 @@ function which_play {
         case $fileName in
 	quit ) 
 	break ;;
-	$fileName ) rip-play.sh ${IPTVDIR}/${fileName}$EXT ;;
+	$fileName ) rip-play ${IPTVDIR}/${fileName}$EXT ;;
 	* ) echo “Invalid Selection, enter a number” ;;
         esac
     done
@@ -27,7 +27,7 @@ function which_record {
         case $fileName in
 	quit ) 
 	break ;;
-	$fileName ) rip-record.sh ${IPTVDIR}/${fileName}$EXT ;;
+	$fileName ) rip-record ${IPTVDIR}/${fileName}$EXT ;;
 	* ) echo “Invalid Selection, enter a number” ;;
         esac
     done
@@ -40,7 +40,7 @@ function which_stream {
         case $fileName in
 	quit ) 
 	break ;;
-	$fileName ) rip-stream.sh ${IPTVDIR}/${fileName}$EXT ;;
+	$fileName ) rip-stream ${IPTVDIR}/${fileName}$EXT ;;
 	* ) echo “Invalid Selection, enter a number” ;;
         esac
     done
