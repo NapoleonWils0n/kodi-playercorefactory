@@ -58,8 +58,8 @@ move the bash_profile in this directory to ~/.bash_profile
 
 mv bash_profile ~/.bash_profile
 
-	if [ -d "$HOME/git/kodi-playercorefactory/bash-scripts" ] ; then
-	        PATH="$HOME/git/kodi-playercorefactory/bash-scripts:$PATH"
+	if [ -d "$HOME/git/kodi-playercorefactory/macosx/bash-scripts" ] ; then
+	        PATH="$HOME/git/kodi-playercorefactory/macosx/bash-scripts:$PATH"
 	fi
 
 
