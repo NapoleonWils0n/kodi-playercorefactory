@@ -11,6 +11,24 @@ so you need to download and install kekaosxto open the 7 zip files
 
 http://www.kekaosx.com/en/
 
+
+open kekaosx from the application folder and click ok for dialog asking if you want to open it
+
+then double click the .7zip and they will unzip
+
+### next you need to copy ffmpeg and ffplay to /usr/bin
+
+open the terminal and cd to your downloads folder
+
+	cd ~/Downloads
+
+switch to root and copy ffmpeg and ffplay to /usr/bin
+
+	sudo cp ffplay ffmpeg /usr/bin
+
+enter your admin password at the prompt
+
+
 ###  download the kodi-playercorefactory repo with git
 
 create a git directory in your home, cd into the git directory
@@ -24,9 +42,13 @@ then clone the git repository
 	git clone https://github.com/NapoleonWils0n/kodi-playercorefactory.git
 
 
-### create the symlink to the playercorefactory.xml
+### copy the playercorefactory.xml to your kodi userdata directory
 
-	ln -s ~/git/kodi-playercorefactory/macosx/playercorefactory.xml \
+In the Finder select the go menu and hold down alt, 
+you should see the Library appear, select the Libray to open it in the Finder
+
+Copy the playercorefactory.xml to the location below
+	
 	~/Library/Application Support/Kodi/userdata/playercorefactory.xml
 
 
