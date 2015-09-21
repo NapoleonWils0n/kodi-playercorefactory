@@ -19,6 +19,12 @@ https://www.youtube.com/watch?v=It92vzpK9xo
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs
 
+### mac osx set up
+
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/macosx
+
+### linux set up
+
 #### Step 1 - download the kodi-playercorefactory repo with git
 
 create a git directory in your home
