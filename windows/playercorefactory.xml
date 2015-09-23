@@ -1,9 +1,39 @@
  <playercorefactory>
  <players>
     <player name="save url" type="ExternalPlayer" audio="false" video="true">
-         <filename>/usr/bin/echo.exe</filename>
-         <args>"{0}" > "%HOMEDRIVE%%HOMEPATH%/Desktop/videourl-%TIME%.txt"</args>
+         <filename>C:\Windows\System32\cmd.exe</filename>
+         <args>/c echo "{0}" > %HOMEDRIVE%%HOMEPATH%\Desktop\videourl.txt</args>
     <hidexbmc>false</hidexbmc>
     </player>
+   <player name="vlc" type="ExternalPlayer" audio="false" video="true">
+		<filename>C:\Program Files (x86)\VideoLAN\VLC\vlc.exe</filename>
+     <args>"{0}"</args>
+     <hidexbmc>true</hidexbmc>
+   </player>
+   <player name="vlc save" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Program Files (x86)\VideoLAN\VLC\vlc.exe</filename>
+	<args>"{0}" --sout=file/ts:"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv" &</args>
+	<hidexbmc>true</hidexbmc>
+   </player>
+   <player name="mpv" type="ExternalPlayer" audio="false" video="true">
+		<filename>C:\Program Files (x86)\mpv.exe</filename>
+     <args>"{0}"</args>
+     <hidexbmc>true</hidexbmc>
+   </player>
+   <player name="mpv capture" type="ExternalPlayer" audio="false" video="true">
+		<filename>C:\Program Files (x86)\mpv.exe</filename>
+     <args>"{0}" --stream-capture="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv"</args>
+     <hidexbmc>true</hidexbmc>
+   </player>
+   <player name="mpv dump" type="ExternalPlayer" audio="false" video="true">
+		<filename>C:\Program Files (x86)\mpv.exe</filename>
+     <args>"{0}" --stream-dump="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv" &</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+ <rules action="overwrite">
+   <rule name="rtmp" protocols="rtmp" player="mpv"></rule>
+   <rule video="true" internetstream="true" player="vlc"></rule>
+   <rule name="smb" protocols="smb" player="vlc"></rule>
+ </rules>
  </players>
 </playercorefactory>
