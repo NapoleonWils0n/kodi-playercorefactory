@@ -6,13 +6,13 @@
     <hidexbmc>false</hidexbmc>
     </player>
    <player name="ffplay" type="ExternalPlayer" audio="false" video="true">
-		<filename>%HOMEDRIVE%\ffmpeg\bin\ffplay.exe</filename>
-     <args>-fs "{0}"</args>
+		<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c %HOMEDRIVE%\ffmpeg\bin\ffplay.exe -fs "{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ffmpeg" type="ExternalPlayer" audio="false" video="true">
-		<filename>%HOMEDRIVE%\ffmpeg\bin\ffmpeg.exe</filename>
-     <args>-i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/video.mkv" &</args>
+		<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c %HOMEDRIVE%\ffmpeg\bin\ffmpeg.exe -i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/video.mkv" &</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="vlc" type="ExternalPlayer" audio="false" video="true">
@@ -26,18 +26,18 @@
 	<hidexbmc>true</hidexbmc>
    </player>
    <player name="mpv" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Program Files (x86)\mpv.exe</filename>
-     <args>"{0}"</args>
+		<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c C:\Program Files (x86)\mpv.exe "{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="mpv capture" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Program Files (x86)\mpv.exe</filename>
-     <args>"{0}" --stream-capture="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv"</args>
+		<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c C:\Program Files (x86)\mpv.exe "{0}" --stream-capture="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv"</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="mpv dump" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Program Files (x86)\mpv.exe</filename>
-     <args>"{0}" --stream-dump="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv" &</args>
+		<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c C:\Program Files (x86)\mpv.exe "{0}" --stream-dump="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv" &</args>
      <hidexbmc>false</hidexbmc>
    </player>
  <rules action="overwrite">
