@@ -1,5 +1,9 @@
 # Windows set up
 
+Youtube video
+
+https://www.youtube.com/watch?v=r7Funnh1veY
+
 
 ## 7zip
 
