@@ -11,8 +11,8 @@
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="record" type="ExternalPlayer" audio="false" video="true">
-		<filename>start</filename>
-     <args>/B C:\Windows\System32\cmd.exe /c %HOMEDRIVE%\ffmpeg\bin\ffmpeg.exe -i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/video.mkv"</args>
+		<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c %HOMEDRIVE%\ffmpeg\bin\ffmpeg.exe -i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/video.mkv"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="vlc" type="ExternalPlayer" audio="false" video="true">
