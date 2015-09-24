@@ -10,6 +10,11 @@
      <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; echo "{0}" | rip-play -</args>
      <hidexbmc>true</hidexbmc>
    </player>
+  <player name="video statistics" type="ExternalPlayer" audio="false" video="true">
+		<filename>echo</filename>
+     <args>"{0}" | rip-statistics -</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
    <player name="record" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
      <args>"{0}" | rip-record - &</args>
