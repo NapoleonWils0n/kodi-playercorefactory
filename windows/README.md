@@ -1,63 +1,78 @@
 # Windows set up
 
-echo command needs to be tested
 
-file paths need to be changed
+## 7zip
 
-
-### windows enviormntal variables
-
-http://windowsitpro.com/systems-management/what-environment-variables-are-available-windows
-
-home variable linux  
-
-	$HOME
-
-home variable windows  
-
-	%HOMEPATH%
-
-home drive  
-
-	%HOMEDRIVE%
+http://www.7-zip.org/
 
 
-### run windows command in the background
+## ffmpeg
 
-https://superuser.com/questions/198525/how-can-i-execute-a-windows-command-line-in-background
+download
 
+http://ffmpeg.zeranoe.com/builds/
 
-	C:\> start /B myprog.exe
+unzip the ffmpeg.7zip file
 
+rename the folder to ffmpeg
 
-### Comparison of Common DOS and Linux Commands
+copy the ffmpeg to C:\
 
-http://windowsitpro.com/systems-management/what-environment-variables-are-available-windows
-
-
-
-#### sly man comment
-
-https://www.youtube.com/watch?v=XlcUUQIzg8w
-
-ffmpeg work fine whit this code  on (win8.1 64 bits and kodi 16.0)
-at this time i dont have find the way to increment the file name or to add time and date
+C:\ffmpeg\bin
 
 
-	</player>
-	   <player name="ffmpegdump" type="ExternalPlayer" audio="false" video="true">
-	  <filename>C:\Users\sly\Desktop\testmpv\ffmpeg\bin\ffmpeg.exe</filename>
-	     <args>-i "{0}" -c:v copy -c:a copy "C:/Users/sly/Desktop/testmpv/ffmpegdump.mkv" </args>
-	     <hidexbmc>true</hidexbmc>
-	</player>
+you can run the ff-prompt script to set up ffmpeg with the windows cmd path
+
+or you can manually add it
 
 
-### windows ffmpeg player with variables for c drive and home directory
+add ffmpeg path
+
+system properties
+
+advanced system settings
+
+enviormnental variables
+
+system variables
+
+path
+
+edit
+
+;C:\ffmpeg\bin
 
 
-	</player>
-	   <player name="ffmpegdump" type="ExternalPlayer" audio="false" video="true">
-	  <filename>C:\Users\sly\Desktop\testmpv\ffmpeg\bin\ffmpeg.exe</filename>
-	     <args>-i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/ffmpegdump.mkv" </args>
-	     <hidexbmc>true</hidexbmc>
-	</player>
+
+## git install
+
+https://git-scm.com/download/win
+
+select 2nd option for path not git bash shell
+
+
+## vlc
+
+https://www.videolan.org/vlc/index.html
+
+
+### cygwin
+
+
+https://cygwin.com/install.html
+
+add cygwin path
+
+system properties
+
+advanced system settings
+
+enviormnental variables
+
+system variables
+
+path
+
+edit
+
+;C:\cygwin\bin
