@@ -5,12 +5,12 @@
          <args>/c echo "{0}" > %HOMEDRIVE%%HOMEPATH%\Desktop\videourl.txt</args>
     <hidexbmc>false</hidexbmc>
     </player>
-   <player name="ffplay" type="ExternalPlayer" audio="false" video="true">
+   <player name="play" type="ExternalPlayer" audio="false" video="true">
 		<filename>C:\Windows\System32\cmd.exe</filename>
      <args>/c %HOMEDRIVE%\ffmpeg\bin\ffplay.exe -fs "{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
-   <player name="ffmpeg" type="ExternalPlayer" audio="false" video="true">
+   <player name="record" type="ExternalPlayer" audio="false" video="true">
 		<filename>C:\Windows\System32\cmd.exe</filename>
      <args>/c %HOMEDRIVE%\ffmpeg\bin\ffmpeg.exe -i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/video.mkv" &</args>
      <hidexbmc>false</hidexbmc>
@@ -25,23 +25,8 @@
 	<args>"{0}" --sout=file/ts:"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv" &</args>
 	<hidexbmc>true</hidexbmc>
    </player>
-   <player name="mpv" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c C:\Program Files (x86)\mpv\mpv.exe "{0}"</args>
-     <hidexbmc>true</hidexbmc>
-   </player>
-   <player name="mpv capture" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c C:\Program Files (x86)\mpv\mpv.exe "{0}" --stream-capture="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv"</args>
-     <hidexbmc>true</hidexbmc>
-   </player>
-   <player name="mpv dump" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c C:\Program Files (x86)\mpv\mpv.exe "{0}" --stream-dump="%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv" &</args>
-     <hidexbmc>false</hidexbmc>
-   </player>
  <rules action="overwrite">
-   <rule name="rtmp" protocols="rtmp" player="mpv"></rule>
+   <rule name="rtmp" protocols="rtmp" player="vlc"></rule>
    <rule video="true" internetstream="true" player="vlc"></rule>
    <rule name="smb" protocols="smb" player="vlc"></rule>
  </rules>
