@@ -38,7 +38,7 @@ case "$url" in
 	-loglevel error "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv"
 	;;
 	"$USEREF")
-	ffmpeg -hide_banner -i  "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
+	ffmpeg -hide_banner -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
 	-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 	-loglevel error "$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv"
 	;;
