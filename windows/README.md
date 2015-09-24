@@ -51,6 +51,33 @@ https://git-scm.com/download/win
 select 2nd option for path not git bash shell
 
 
+download the kodi-playercorefactory git repository
+
+create a folder called git in your home 
+
+open the cmd prompt and change into the git repo
+
+	cd git
+
+
+then clone the kodi-playercorefactory git repository
+
+	git clone https://github.com/NapoleonWils0n/kodi-playercorefactory.git
+
+
+copy the kodi-playercorefactory\windows\playercorefactory.xml to your kodi userdata folder
+see below
+
+open your Windows Start menu and type
+
+	%APPDATA%\kodi\userdata
+
+then press <Enter> to open the folder, 
+pin the folder to your file manager sidebar so you find it easily
+
+then copy the kodi-playercorefactory\windows\playercorefactory.xml to your kodi userdata folder
+
+
 ## vlc
 
 https://www.videolan.org/vlc/index.html
@@ -76,3 +103,4 @@ path
 edit
 
 ;C:\cygwin\bin
+
