@@ -21,8 +21,8 @@
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="vlc save" type="ExternalPlayer" audio="false" video="true">
-	<filename>start</filename>
-	<args>/B C:\Program Files (x86)\VideoLAN\VLC\vlc.exe "{0}" --sout=file/ts:"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv"</args>
+	<filename>C:\Program Files (x86)\VideoLAN\VLC\vlc.exe</filename>
+	<args>"{0}" --sout=file/ts:"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv"</args>
 	<hidexbmc>true</hidexbmc>
    </player>
  </players>
