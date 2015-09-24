@@ -5,6 +5,16 @@
          <args>/c echo "{0}" > %HOMEDRIVE%%HOMEPATH%\Desktop\videourl.txt</args>
     <hidexbmc>false</hidexbmc>
     </player>
+   <player name="ffplay" type="ExternalPlayer" audio="false" video="true">
+		<filename>%HOMEDRIVE%\ffmpeg\bin\ffplay.exe</filename>
+     <args>-fs "{0}"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="ffmpeg" type="ExternalPlayer" audio="false" video="true">
+		<filename>%HOMEDRIVE%\ffmpeg\bin\ffmpeg.exe</filename>
+     <args>-i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/video.mkv" &</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
    <player name="vlc" type="ExternalPlayer" audio="false" video="true">
 		<filename>C:\Program Files (x86)\VideoLAN\VLC\vlc.exe</filename>
      <args>"{0}"</args>
