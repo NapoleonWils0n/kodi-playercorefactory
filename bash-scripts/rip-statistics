@@ -22,37 +22,37 @@ source video-regex.sh
 case "$url" in
 	"$VIDEOFILE")
 	ffprobe -v error -hide_banner -show_entries \
-	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \	
+	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
 	-i "$VIDEOFILE" \
 	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$M3U8")
 	ffprobe -v error -hide_banner -show_entries \
-	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
+	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 	-i "$M3U8" \
 	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$XFORWARD")
 	ffprobe -v error -hide_banner -show_entries \
-	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
+	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 	-headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$USEREF")
 	ffprobe -v error -hide_banner -show_entries \
-	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
+	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 	-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
 	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$M3U8USERAGENT")
 	ffprobe -v error -hide_banner -show_entries \
-	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
+	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 	-user-agent "$M3U8UAG" -i "$M3U8UAGM3U8" \
 	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	*)
 	ffprobe -v error -hide_banner -show_entries \
-	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
+	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 	-i "$VIDEOURL" \
 	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
