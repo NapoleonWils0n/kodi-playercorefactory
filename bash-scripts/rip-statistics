@@ -23,38 +23,38 @@ case "$url" in
 	"$VIDEOFILE")
 	ffprobe -v error -hide_banner -show_entries \
 	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \	
-	-i "$VIDEOFILE" | \
-	sed 1i${VIDEOURL}\ > "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
+	-i "$VIDEOFILE" \
+	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$M3U8")
 	ffprobe -v error -hide_banner -show_entries \
 	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
-	-i "$M3U8" | \
-	sed 1i${VIDEOURL}\ > "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
+	-i "$M3U8" \
+	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$XFORWARD")
 	ffprobe -v error -hide_banner -show_entries \
 	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
-	-headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" | \
-	sed 1i${VIDEOURL}\ > "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
+	-headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
+	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$USEREF")
 	ffprobe -v error -hide_banner -show_entries \
 	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
-	-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" | \
-	sed 1i${VIDEOURL}\ > "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
+	-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
+	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	"$M3U8USERAGENT")
 	ffprobe -v error -hide_banner -show_entries \
 	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
-	-user-agent "$M3U8UAG" -i "$M3U8UAGM3U8" | \
-	sed 1i${VIDEOURL}\ > "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
+	-user-agent "$M3U8UAG" -i "$M3U8UAGM3U8" \
+	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 	*)
 	ffprobe -v error -hide_banner -show_entries \
 	format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of csv \
-	-i "$VIDEOURL" | \
-	sed 1i${VIDEOURL}\ > "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
+	-i "$VIDEOURL" \
+	| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt"
 	;;
 esac
 done
