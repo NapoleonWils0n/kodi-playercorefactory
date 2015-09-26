@@ -2,19 +2,6 @@
 
 # rip batch recording
 
-if [[ $# > 0 ]]
-	then
-		printf "%b" "too many aruments passed to the script" '\n'
-		exit 1 # exit with non zero
-else
-
+[[ $# > 0 ]] && printf "%b" "too many aruments passed to the script" '\n' exit 1
 read -erp "enter a directory path: " DIR
-
-if [ -d $DIR ]
-  then
-    find $DIR -maxdepth 1 -name '*.txt' -type f -print0 | xargs -i -0 rip-record '{}'
-  else
-    echo directory doesnt exist
-fi
-
-fi
+[ -d $DIR ] && find $DIR -maxdepth 1 -name '*.txt' -type f -print0 | xargs -i -0 rip-record '{}' || echo directory doesnt exist
