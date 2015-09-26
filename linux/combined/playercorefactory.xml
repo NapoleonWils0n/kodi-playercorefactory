@@ -5,7 +5,7 @@
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
-  <player name="video statistics" type="ExternalPlayer" audio="false" video="true">
+  <player name="video stats" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
      <args>"{0}" | rip-stats -</args>
      <hidexbmc>false</hidexbmc>
