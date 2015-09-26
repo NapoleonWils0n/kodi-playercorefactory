@@ -7,7 +7,7 @@
    </player>
   <player name="video statistics" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
-     <args>"{0}" | rip-statistics -</args>
+     <args>"{0}" | rip-stats -</args>
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="play" type="ExternalPlayer" audio="false" video="true">
