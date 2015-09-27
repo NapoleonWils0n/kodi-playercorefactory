@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# ffplay play url from text file
-
 [[ $# -eq 1 ]] || exit
 VIDEOURL=`cat "$1"`; echo $VIDEOURL | while read url; do source video-regex.sh
 
