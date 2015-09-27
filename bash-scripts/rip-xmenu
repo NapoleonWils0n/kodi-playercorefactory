@@ -1,7 +1,6 @@
 #!/bin/bash
 
 [[ $# -eq 0 ]] || exit
-
 IPTVDIR="$HOME/Documents/iptv" 
 EXT='.txt' # file extension
 fileList=$(find $IPTVDIR -maxdepth 1 -type f -name "*.txt" -exec basename -s $EXT {} \;)
