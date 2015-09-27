@@ -12,11 +12,11 @@ case "$url" in
 	"$M3U8")
 		ffmpeg -hide_banner -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv" 2>&1 | sed '/\[/d';;
+		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mp4";;
 	"$XFORWARD")
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mp4";;
 	"$USEREF")
 		ffmpeg -hide_banner -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
@@ -24,7 +24,7 @@ case "$url" in
 	"$M3U8USERAGENT")
 		ffmpeg -hide_banner -loglevel error -user-agent "$M3U8UAG" -i "$M3U8UAGM3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
-		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
+		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mp4";;
 	*)
 		ffmpeg -hide_banner -i "$VIDEOURL" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
