@@ -1,25 +1,12 @@
 #!/bin/bash
 
-# ffmpeg record url from text file
-
-if [[ $# < 1 ]]
-	then
-		printf "%b" "error not enough aruments passed to the script" '\n'
-		exit 1 # exit with non zero		
-elif [[ $# > 3 ]]
-	 then
-		printf "%b" "too many aruments passed to the script" '\n'
-		exit 2 # exit with non zero
-else
+[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
 
 VIDEOURL=`cat "$1"`
 TFLAG="$2"
 DURATION="$3"
 
-echo $VIDEOURL |
-while read url
-do
-source video-regex.sh
+echo $VIDEOURL | while read url; do source video-regex.sh
 
 case "$url" in
 	"$VIDEOFILE")
@@ -54,4 +41,3 @@ case "$url" in
 	;;
 esac
 done
-fi
