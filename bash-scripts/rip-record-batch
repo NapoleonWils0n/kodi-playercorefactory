@@ -2,6 +2,6 @@
 
 # rip batch recording
 
-[[ $# > 0 ]] && printf "%b" "run script without arguments" '\n' exit 1
+[[ $# > 0 ]] && printf "%b" "run script without arguments" '\n' && exit 1
 read -erp "enter a directory path: " DIR
 [ -d $DIR ] && find $DIR -maxdepth 1 -name '*.txt' -type f -print0 | xargs -i -0 rip-record '{}' || echo no directory
