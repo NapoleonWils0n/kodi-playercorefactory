@@ -34,4 +34,5 @@ case "$url" in
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$VIDEOURL" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-esac done
+esac 
+done

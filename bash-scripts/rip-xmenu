@@ -10,12 +10,11 @@ function which_play {
 
     select fileName in quit $fileList; do
         case $fileName in
-	quit ) 
-	break ;;
+	quit ) break ;;
 	$fileName ) rip-play ${IPTVDIR}/${fileName}$EXT ;;
 	* ) echo “Invalid Selection, enter a number” ;;
-        esac
-    done
+        esac 
+done
 }
 
 function which_record {
@@ -23,12 +22,11 @@ function which_record {
 
     select fileName in quit $fileList; do
         case $fileName in
-	quit ) 
-	break ;;
+	quit ) break ;;
 	$fileName ) rip-record ${IPTVDIR}/${fileName}$EXT ;;
 	* ) echo “Invalid Selection, enter a number” ;;
-        esac
-    done
+        esac 
+done
 }
 
 function which_stream {
@@ -36,12 +34,11 @@ function which_stream {
 
     select fileName in quit $fileList; do
         case $fileName in
-	quit ) 
-	break ;;
+	quit ) break ;;
 	$fileName ) rip-stream ${IPTVDIR}/${fileName}$EXT ;;
 	* ) echo “Invalid Selection, enter a number” ;;
-        esac
-    done
+        esac 
+done
 }
 
 ACTIONS=("quit" "play" "record" "stream")
@@ -50,13 +47,9 @@ PS3="Make a selection, or press '1' to quit: "
 select action in "${ACTIONS[@]}"
 do
     case $action in
-        "quit") 
-	break ;;
-        "play") which_play 
-	break ;;
-        "record") which_record 
-	break ;;
-        "stream") which_stream
-	break ;;
+        "quit") break ;;
+        "play") which_play break ;;
+        "record") which_record break ;;
+        "stream") which_stream break ;;
     esac
 done
