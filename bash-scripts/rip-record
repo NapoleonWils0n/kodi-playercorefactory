@@ -29,5 +29,4 @@ case "$url" in
 		ffmpeg -hide_banner -i "$VIDEOURL" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
-esac
-done
+esac done
