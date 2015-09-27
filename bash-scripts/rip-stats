@@ -2,22 +2,8 @@
 
 # ffprobe analyse video url 
 
-if [[ $# < 1 ]]
-	then
-		printf "%b" "error not enough aruments passed to the script" '\n'
-		exit 1 # exit with non zero		
-elif [[ $# > 1 ]]
-	 then
-		printf "%b" "too many aruments passed to the script" '\n'
-		exit 2 # exit with non zero
-else
-
-VIDEOURL=`cat "$1"`
-
-echo $VIDEOURL |
-while read url
-do
-source video-regex.sh
+[[ $# -eq 1 ]] || exit
+VIDEOURL=`cat "$1"`; echo $VIDEOURL | while read url; do source video-regex.sh
 
 case "$url" in
 	"$VIDEOFILE")
@@ -58,4 +44,3 @@ case "$url" in
 	;;
 esac
 done
-fi
