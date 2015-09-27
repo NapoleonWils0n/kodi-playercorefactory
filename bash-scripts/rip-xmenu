@@ -2,6 +2,7 @@
 
 # rip-menu
 
+[[ $# -eq 0 ]] || exit
 IPTVDIR="$HOME/Documents/iptv" 
 
 EXT='.txt' # file extension
