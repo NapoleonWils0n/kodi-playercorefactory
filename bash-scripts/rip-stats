@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# ffprobe analyse video url 
-
 [[ $# -eq 1 ]] || exit
 VIDEOURL=`cat "$1"`; echo $VIDEOURL | while read url; do source video-regex.sh
 
