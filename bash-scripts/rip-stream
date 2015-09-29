@@ -1,8 +1,7 @@
 #!/bin/bash
 
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
-[[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
-TFLAG="$2"; DURATION="$3"
+VIDEOURL=`cat "$1"`; TFLAG="$2"; DURATION="$3"
 echo $VIDEOURL | while read url; do source video-regex.sh
 
 case "$url" in
