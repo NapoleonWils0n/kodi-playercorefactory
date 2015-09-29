@@ -1,13 +1,13 @@
 <playercorefactory>
  <players>
    <player name="save url" type="ExternalPlayer" audio="false" video="true">
-		<filename>echo</filename>
+	<filename>echo</filename>
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="play" type="ExternalPlayer" audio="false" video="true">
-		<filename>echo</filename>
-     <args>export SDL_AUDIODRIVER="alsa"; export AUDIODEV="plughw:1,0"; echo "{0}" | rip-play -</args>
+	<filename>rip-play</filename>
+     <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
  </players>
