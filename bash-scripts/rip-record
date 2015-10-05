@@ -26,6 +26,12 @@ case "$url" in
 		ffmpeg -hide_banner -loglevel error -user-agent "$M3U8UAG" -i "$M3U8UAGM3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
+	"$M3U8UAGENTREFERER")
+		ffmpeg -hide_banner -loglevel error -user-agent "$M3U8USERAGENTREF" \
+		-headers 'Referer: '"$REFERER"''$'\r\n' \
+		-i "$M3U8UAGNTREF" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
 	*)
 		ffmpeg -hide_banner -i "$VIDEOURL" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \

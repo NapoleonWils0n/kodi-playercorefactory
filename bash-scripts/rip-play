@@ -10,6 +10,7 @@ case "$url" in
 	"$XFORWARD") ffplay -hide_banner -fs -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' "$M3U8";;
 	"$USEREF") ffplay -fs -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$VIDEOFILE";;
 	"$M3U8USERAGENT") ffplay -hide_banner -fs -user-agent "$M3U8UAG" "$M3U8UAGM3U8";;
+	"$M3U8UAGENTREFERER") ffplay -hide_banner -fs -user-agent "$M3U8USERAGENTREF" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8UAGNTREF";;
 	*) ffplay -hide_banner -fs "$VIDEOURL";;
 esac 
 done
