@@ -1,0 +1,13 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] || exit
+[[ -f "$1" ]] && INPUT=`cat "$1"` || INPUT="$1"
+
+for line in $INPUT ; do
+	BASENAME=`basename -a -s .m3u8 "$1"`
+	LINK=`echo "$line" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@&%-]*'`
+ 	curl -L -I 2>/dev/null "$LINK" | head -1 | grep 'HTTP/1.1 200 OK'
+	[ $? -eq 0 ] && grep -B 1 "$LINK" "$1" | sed -e '/--/d' >> ${BASENAME}-200.m3u8
+done
+
+sed -i '1i #EXTM3U' ${BASENAME}-200.m3u8
