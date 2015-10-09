@@ -13,4 +13,4 @@ lynx -dump \
 | sed -e 's/http\?s:\/\/[www.]*google.[a-z]*\/url?q=//g' \
 | grep -Eo '(http|https)://[www.]*pastebin.[a-z]*/[a-zA-Z0-9]*' \
 | sed -e 's#http://[www.]*pastebin.[a-z]*/#&raw.php?i=#' \
-> lynx-dump-$(date +"%H-%M-%m-%d-%y").txt
+> pastebin-links-$(date +"%H-%M-%m-%d-%y").txt
