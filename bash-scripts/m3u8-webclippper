@@ -9,4 +9,4 @@ read -p "Enter a file name: " FILENAME
 
 hxnormalize -x "$URL" 2>/dev/null | \
 hxselect -s '\n' -c "$CSSPATH" | 
-pandoc -f html -t plain --normalize -o "$FILENAME".m3u8 
+pandoc -f html -t plain --normalize -o "$FILENAME".m3u
