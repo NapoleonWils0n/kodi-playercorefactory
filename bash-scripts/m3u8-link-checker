@@ -5,10 +5,9 @@ read -erp "enter a directory path to m3u8 files: " DIR
 [ -d $DIR ] && find $DIR -maxdepth 1 -name '*.m3u8' -type f \
 | while read file
 do 
-echo '#EXTM3U' > iptv.m3u8
 for line in `cat "$file"`; do
 	LINK=`echo "$line" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@&%-]*'`
  	curl -L -I 2>/dev/null "$LINK" | head -1 | grep 'HTTP/1.1 200 OK'
 	[ $? -eq 0 ] && grep -B 1 "$LINK" "$file" | sed -e '/--/d' >> iptv.m3u8
 done
-done || echo no directory found
+done && sed -i '1i #EXTM3U' iptv.m3u8 || echo no directory found
