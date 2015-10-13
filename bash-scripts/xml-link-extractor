@@ -1,0 +1,5 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] || exit
+awk -F "[><]" '/title/{print $3} /name/{print $3} /link/{print $3}' "$1" \
+| sed 's/^[^(http)]/#&/' > xml-links-$(date +"%H-%M-%m-%d-%y").txt
