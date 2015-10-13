@@ -28,13 +28,19 @@ case "$url" in
 	"$M3U8USERAGENT")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-user-agent "$M3U8UAG" -i "$M3U8UAGM3U8" \
+		-user-agent "$USERAGENT" -i "$M3U8" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
 	"$M3U8UAGENTREFERER")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-user-agent "$M3U8USERAGENTREF" -headers 'Referer: '"$REFERER"''$'\r\n' \
+		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' \
 		-i "$M3U8UAGNTREF" \
+		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+	"$REFUSERAGENT")
+		ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
+		-i "$VIDEOFILE" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
 	*)
 		ffprobe -v error -hide_banner -pretty -show_entries \
