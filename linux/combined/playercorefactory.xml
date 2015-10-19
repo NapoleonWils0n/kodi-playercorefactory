@@ -15,6 +15,11 @@
      <args>"{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
+  <player name="wget download" type="ExternalPlayer" audio="false" video="true">
+		<filename>wget</filename>
+     <args>-bqc -i "{0}" -O "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").mkv"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
    <player name="record" type="ExternalPlayer" audio="false" video="true">
 	<filename>rip-record</filename>
      <args>"{0}" &</args>
