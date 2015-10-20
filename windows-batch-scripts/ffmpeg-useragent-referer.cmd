@@ -3,7 +3,7 @@ Set LF=^
 
 
 for /f %%a in ('copy /z "%~f0" nul') do set "CR=%%a"
-set VIDEOURL=http://example.com/.m3u8
+set VIDEOURL=http://example.com/video.mkv
 set USERAGENT=Mozilla/5.0
 set REFERER=example.com
 Set VNAME=video.mkv
