@@ -2,6 +2,8 @@
 
 Windows batch files to record url from kodi
 
+https://www.youtube.com/watch?v=FlV-xza4Jas
+
 Copy the windows-batch-scripts folder to your desktop
 
 ## How to use the scripts
