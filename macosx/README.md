@@ -1,5 +1,9 @@
 # Mac osx set up
 
+youtube video outline the set up
+
+https://www.youtube.com/watch?v=nULCurjynVU
+
 ### download the ffmpeg ffplay binaries
 
 https://evermeet.cx/ffmpeg/
