@@ -1,0 +1,59 @@
+<playercorefactory>
+ <players>
+  <player name="play" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-play"</filename>
+     <args>"{0}"</args>
+     <hidexbmc>true</hidexbmc>
+   </player>
+   <player name="save url" type="ExternalPlayer" audio="false" video="true">
+		<filename>echo</filename>
+     <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+  <player name="wget download" type="ExternalPlayer" audio="false" video="true">
+		<filename>wget</filename>
+     <args>-bqc -i "{0}" -O "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").mkv"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+  <player name="record" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-record"</filename>
+     <args>"{0}" &</args>
+     <hidexbmc>false</hidexbmc>
+   </player>  
+   <player name="record 30 mins" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-record"</filename>
+     <args>"{0}" -t 00:30:00 &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
+   <player name="record 1 hour" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-record"</filename>
+     <args>"{0}" -t 01:00:00 &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
+   <player name="record 2 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-record"</filename>
+     <args>"{0}" -t 02:00:00 &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
+   <player name="record 3 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-record"</filename>
+     <args>"{0}" -t 03:00:00 &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
+   <player name="stream" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-stream"</filename>
+     <args>"{0}" &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
+   <player name="stream 2 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-stream"</filename>
+     <args>"{0}" -t 02:00:00 &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
+   <player name="stream 3 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-stream"</filename>
+     <args>"{0}" -t 03:00:00 &</args>
+     <hidexbmc>false</hidexbmc>
+   </player> 
+ </players>
+</playercorefactory>
