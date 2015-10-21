@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] || exit
+read -erp "enter a directory path to xml files: " DIR
+[ -d $DIR ] && find $DIR -maxdepth 1 -name '*.xml' -type f \
+| while read file
+do 
+awk -F "[><]" '/title/{print $3} /name/{print $3} /link/{print $3}' "$file" \
+| sed 's/^[^(http)]/#&/' >> xml-links.txt
+done || echo no directory found
