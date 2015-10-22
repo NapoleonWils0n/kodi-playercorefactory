@@ -20,13 +20,13 @@ Set M3U8UAGNTREF=`echo "%M3U8UAGENTREFERER%" | grep -Eo '(^http|https)://[a-zA-Z
 Set REFUSERAGENT=`echo "%VIDEOURL%" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&User-Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*'`
 
 Select Case URL
-	case "%VIDEOFILE%" ffplay -hide_banner -fs "%VIDEOFILE%"
-	case "%M3U8%" ffplay -hide_banner -fs "%M3U8%" 2>&1 | sed '/\[/d'
-	case "%XFORWARD%" ffplay -hide_banner -fs -headers "X-Forwarded-For: %XFORWARDIP%!CR!!LF!" "%M3U8%"
-	case "%USEREF%" ffplay -fs -user-agent "%USERAGENT%" -headers "Referer: %REFERER%!CR!!LF!" "%VIDEOFILE%"
-	case "%M3U8USERAGENT%" ffplay -hide_banner -fs -user-agent "%USERAGENT%" "%M3U8%"
-	case "%M3U8UAGENTREFERER%" ffplay -hide_banner -fs -user-agent "%USERAGENT%" -headers "Referer: %REFERER%!CR!!LF!" "%M3U8UAGNTREF%"
-	case "%REFUSERAGENT%" ffplay -hide_banner -fs -headers "Referer: %REFERER%!CR!!LF!" -user-agent "%USERAGENT%" "%VIDEOFILE%"
+	case "VIDEOFILE" ffplay -hide_banner -fs "%VIDEOFILE%"
+	case "M3U8" ffplay -hide_banner -fs "%M3U8%" 2>&1 | sed '/\[/d'
+	case "XFORWARD" ffplay -hide_banner -fs -headers "X-Forwarded-For: %XFORWARDIP%!CR!!LF!" "%M3U8%"
+	case "USEREF" ffplay -fs -user-agent "%USERAGENT%" -headers "Referer: %REFERER%!CR!!LF!" "%VIDEOFILE%"
+	case "M3U8USERAGENT" ffplay -hide_banner -fs -user-agent "%USERAGENT%" "%M3U8%"
+	case "M3U8UAGENTREFERER" ffplay -hide_banner -fs -user-agent "%USERAGENT%" -headers "Referer: %REFERER%!CR!!LF!" "%M3U8UAGNTREF%"
+	case "REFUSERAGENT" ffplay -hide_banner -fs -headers "Referer: %REFERER%!CR!!LF!" -user-agent "%USERAGENT%" "%VIDEOFILE%"
 	case ELSE ffplay -hide_banner -fs "%VIDEOURL%"
 End Select
 done
