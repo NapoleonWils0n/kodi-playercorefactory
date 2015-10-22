@@ -24,7 +24,6 @@ then double click the .7zip and they will unzip
 
 In the new version of Mac osx El Capitan you cant modify the system, 
 so have to put the binaries in /usr/local
- 
 
 open the terminal and cd to your downloads folder
 
@@ -35,6 +34,30 @@ switch to root and copy ffmpeg and ffplay to /usr/local
 	sudo cp ffplay ffmpeg probe /usr/local
 
 enter your admin password at the prompt
+
+
+#### if you cannot install binaries to /usr/local on mac osx El Capitan, here's a fix
+
+create a folder called bin in your home folder, /Users/your-username/bin
+copy the ffmpeg, ffprobe and ffplay in to the bin folder
+
+then edit your ~/.bash_profile, for example with nano
+
+nano ~/.bash_profile
+
+and add the code below to your ~/.bash_profile, 
+which will add any binaries in ~/bin to your bash path
+
+
+	if [ -d "$HOME/bin" ] ; then
+	        PATH="$HOME/bin:$PATH"
+	fi
+
+ 
+Then source your ~/.bash_profile
+
+	. ~/.bash_profile
+
 
 
 ###  download the kodi-playercorefactory repo with git
