@@ -29,9 +29,9 @@ open the terminal and cd to your downloads folder
 
 	cd ~/Downloads
 
-switch to root and copy ffmpeg and ffplay to /usr/local
+switch to root and copy ffmpeg ffplay and ffprobe to /usr/local
 
-	sudo cp ffplay ffmpeg probe /usr/local
+	sudo cp ffmpeg ffplay ffprobe /usr/local
 
 enter your admin password at the prompt
 
