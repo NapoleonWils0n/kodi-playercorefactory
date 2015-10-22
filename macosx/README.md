@@ -4,7 +4,7 @@ youtube video outline the set up
 
 https://www.youtube.com/watch?v=nULCurjynVU
 
-### download the ffmpeg ffplay binaries
+### download the ffmpeg ffplay ffprobe binaries
 
 https://evermeet.cx/ffmpeg/
  
@@ -20,15 +20,19 @@ open kekaosx from the application folder and click ok for dialog asking if you w
 
 then double click the .7zip and they will unzip
 
-### next you need to copy ffmpeg and ffplay to /usr/bin
+### next you need to copy ffmpeg ffplay and ffprobe to /usr/local
+
+In the new version of Mac osx El Capitan you cant modify the system, 
+so have to put the binaries in /usr/local
+ 
 
 open the terminal and cd to your downloads folder
 
 	cd ~/Downloads
 
-switch to root and copy ffmpeg and ffplay to /usr/bin
+switch to root and copy ffmpeg and ffplay to /usr/local
 
-	sudo cp ffplay ffmpeg /usr/bin
+	sudo cp ffplay ffmpeg probe /usr/local
 
 enter your admin password at the prompt
 
