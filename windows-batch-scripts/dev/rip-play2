@@ -5,7 +5,7 @@ Set LF=^
 for /f %%a in ('copy /z "%~f0" nul') do set "CR=%%a"
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && Set VIDEOURL=`cat "$1"` || Set VIDEOURL="$1"
-echo "%VIDEOURL%" | while read URL; do 
+echo "%VIDEOURL%" | while read url; do 
 
 Set VIDEOFILE=`echo "%VIDEOURL%" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)'`
 Set M3U8=`echo "%VIDEOURL%" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(m3u8)'`
@@ -19,7 +19,7 @@ Set M3U8UAGENTREFERER=`echo "%VIDEOURL%" | grep -Eo '(^http|https)://[a-zA-Z0-9:
 Set M3U8UAGNTREF=`echo "%M3U8UAGENTREFERER%" | grep -Eo '(^http|https)://[a-zA-Z0-9:0-9./?=_&@%-]*'`
 Set REFUSERAGENT=`echo "%VIDEOURL%" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&User-Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*'`
 
-Select Case URL
+Select Case "$url"
 	case "VIDEOFILE" ffplay -hide_banner -fs "%VIDEOFILE%"
 	case "M3U8" ffplay -hide_banner -fs "%M3U8%" 2>&1 | sed '/\[/d'
 	case "XFORWARD" ffplay -hide_banner -fs -headers "X-Forwarded-For: %XFORWARDIP%!CR!!LF!" "%M3U8%"
