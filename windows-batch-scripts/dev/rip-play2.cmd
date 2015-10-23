@@ -4,7 +4,8 @@ Set LF=^
 
 for /f %%a in ('copy /z "%~f0" nul') do set "CR=%%a"
 Set VIDEOURL=%1
-echo %VIDEOURL% | while read url; do 
+echo %VIDEOURL% | while read url
+do 
 
 Set VIDEOFILE=echo %VIDEOURL% | grep -Eo "(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)"
 Set M3U8=echo %VIDEOURL% | grep -Eo "(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(m3u8)"
