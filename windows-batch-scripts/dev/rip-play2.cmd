@@ -1,12 +1,11 @@
+@echo off
 setlocal EnableDelayedExpansion
 Set LF=^
 
 
 for /f %%a in ('copy /z "%~f0" nul') do set "CR=%%a"
 Set VIDEOURL=%1
-echo %VIDEOURL% | while read url
-do 
-
+for /f "tokens=*" %%a in %VIDEOURL% do {
 Set VIDEOFILE=echo %VIDEOURL% | grep -Eo "(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)"
 Set M3U8=echo %VIDEOURL% | grep -Eo "(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(m3u8)"
 Set XFORWARD=echo %VIDEOURL% | grep -Eo "(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)\|X-Forwarded-For=[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
@@ -37,4 +36,4 @@ Select Case url
 	case ELSE 
 		ffplay -hide_banner -fs %VIDEOURL%
 End Select
-done
+}
