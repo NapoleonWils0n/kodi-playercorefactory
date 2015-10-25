@@ -13,7 +13,7 @@ COLUMNS=80
 select fileName in quit $fileList; do
         case $fileName in
 	quit) exit;;
-	$fileName) rip-play ${DIR}${fileName}${EXT};;
+	$fileName) rip-play ${DIR}${fileName}${EXT} 2> /dev/null;;
 	*) echo “Invalid Selection, enter a number”;;
 esac
 break
