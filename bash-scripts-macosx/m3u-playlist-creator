@@ -1,0 +1,15 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] || exit 
+read -erp "enter a directory path to txt files: " DIR
+DIR=${DIR/#\~/$HOME}
+[[ -d $DIR ]] || exit 1
+find $DIR -maxdepth 1 -name '*.txt' -type f \
+| sort | while read file
+do 
+for link in "$file"; do
+	DIR=`echo $DIR | sed 's/^[(.)]//'`
+	echo `basename -s .txt $file` | sed -e 's/[a-zA-Z0-9]*/#EXTINF:0,&/' >> kodi-iptv.m3u
+	cat $file >> kodi-iptv.m3u
+done
+done && sed -i '1i #EXTM3U' kodi-iptv.m3u || echo no directory found
