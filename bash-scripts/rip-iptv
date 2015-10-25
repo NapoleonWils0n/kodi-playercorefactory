@@ -2,11 +2,16 @@
 
 [[ $# -eq 0 ]] || exit
 EXT='.txt'
+
 read -erp "enter a directory path: " DIR
-[ -d $DIR ] && fileList=$(find $DIR -maxdepth 1 -type f -name "*.txt" -exec basename -s $EXT {} \;)
+[ -d $DIR ] && fileList=$(find $DIR -maxdepth 1 -type f -name "*.txt" -exec basename -s $EXT {} \; | sort)
+echo '=================================================================='
+echo '#                       Video select menu                        #'
+echo '=================================================================='
 
 function main_menu {
 PS3="Enter a number next to a video, or press '1' to quit: "
+COLUMNS=80
 select fileName in quit $fileList; do
         case $fileName in
 	quit ) exit;;
