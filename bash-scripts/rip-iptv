@@ -2,6 +2,7 @@
 
 [[ $# -eq 0 ]] || exit
 read -erp "enter a directory path: " DIR
+DIR=${DIR/#\~/$HOME}
 [[ -d $DIR ]] || exit 1
 
 EXT='.txt'
@@ -10,13 +11,14 @@ fileList=$(find $DIR -maxdepth 1 -type f -name "*.txt" -exec basename -s $EXT {}
 function main_menu {
 PS3="Enter a number next to a video, or press '1' to quit: "
 COLUMNS=80
+DIR=`echo $DIR | sed 's/^[(.)]//'`
 select fileName in quit $fileList; do
         case $fileName in
 	quit) exit;;
-	$fileName) rip-play ${DIR}${fileName}${EXT} 2> /dev/null;;
+	$fileName) echo rip-play ${DIR}${fileName}${EXT} 2> /dev/null;;
 	*) echo “Invalid Selection, enter a number”;;
 esac
 break
 done
 }
-while true; do main_menu; done 
+while true; do main_menu; done
