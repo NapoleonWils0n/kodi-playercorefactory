@@ -12,4 +12,4 @@ for link in "$file"; do
 	echo `basename -s .txt $file` | sed -e 's/[a-zA-Z0-9]*/#EXTINF:0,&/' >> kodi-iptv.m3u
 	cat $file >> kodi-iptv.m3u
 done
-done && sed -i '1i #EXTM3U' kodi-iptv.m3u || echo no directory found
+done && sed -i '' '1i\'$'\n''#EXTM3U'$'\n' kodi-iptv.m3u || echo no directory found
