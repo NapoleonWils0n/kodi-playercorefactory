@@ -3,4 +3,4 @@
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
 source kodi-external-player-ip.sh
-xbmc-send --host="$IPADDR" --port=9777 --action="PlayMedia("$VIDEOURL")"
+xbmc-send --host="$IPADDR" --port=9777 --action="PlayMedia($VIDEOURL,[playoffset=0])"
