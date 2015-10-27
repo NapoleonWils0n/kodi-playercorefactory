@@ -9,10 +9,7 @@ Copy the kodi-external-player-ip.sh script to the bash-scripts directory
 in the kodi menu go to system / settings, then services
 
 under Web Server click Allow remote control via HTTP
-
-Under Remote Control click Allow remote control by programs on this system,
-and click Allow remote control by programs on other systems
-
+Under Remote Control click Allow remote control by programs on this system
 
 ### Find the ip address
 
