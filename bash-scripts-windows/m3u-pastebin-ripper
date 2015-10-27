@@ -13,4 +13,4 @@ lynx -dump \
 | sed -e 's/http\?s:\/\/[www.]*google.[a-z]*\/url?q=//g' \
 | grep -Eo '(http|https)://[www.]*pastebin.[a-z]*/[a-zA-Z0-9]*' \
 | sed -e 's#http://[www.]*pastebin.[a-z]*/#&raw.php?i=#' \
-> "%HOMEDRIVE%%HOMEPATH%\Desktop\pastebin-links.txt"
+> "$USERPROFILE/Desktop/pastebin-links.txt"

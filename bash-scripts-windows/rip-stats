@@ -9,43 +9,43 @@ case "$url" in
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
 		-i "$VIDEOFILE" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 	"$M3U8")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 	"$XFORWARD")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 	"$USEREF")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 	"$M3U8USERAGENT")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 	"$M3U8UAGENTREFERER")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' \
 		-i "$M3U8UAGNTREF" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 	"$REFUSERAGENT")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
 		-i "$VIDEOFILE" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 	*)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$VIDEOURL" \
-		> "%HOMEDRIVE%%HOMEPATH%\Desktop\video-stats.txt";;
+		> "$USERPROFILE/Desktop/video-stats.txt";;
 esac 
 done
