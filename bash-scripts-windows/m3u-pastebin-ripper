@@ -1,0 +1,16 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] || exit; read -erp "how many pastebin links do you want: " REPLY
+lynx -dump \
+"https://www.google.com/search?q=intext%3A%E2%80%9D%23EXTM3U%E2%80%9D\
++intext%3A%E2%80%9D%23EXTINF%E2%80%9D\
++site%3Apastebin.com&oq=intext%3A%E2%80%9D%23EXTM3U%E2%80%9D\
++intext%3A%E2%80%9D%23EXTINF%E2%80%9D\
++site%3Apastebin.com&num=$REPLY" \
+| awk '{print $2}' \
+| grep -Eoa '(http|https)://[www.]*google.[a-z.]*/url\?q=[a-zA-Z0-9./?=_@%&:+-]*' \
+| grep -Ev '(http|https)://[a-z./]*\?q=(cache|related|intext):[a-zA-Z0-9./:&=+%]*' \
+| sed -e 's/http\?s:\/\/[www.]*google.[a-z]*\/url?q=//g' \
+| grep -Eo '(http|https)://[www.]*pastebin.[a-z]*/[a-zA-Z0-9]*' \
+| sed -e 's#http://[www.]*pastebin.[a-z]*/#&raw.php?i=#' \
+> "%HOMEDRIVE%%HOMEPATH%\Desktop\pastebin-links.txt"

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
+[[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
+TFLAG="$2"; DURATION="$3"
+echo $VIDEOURL | while read url; do source video-regex.sh
+
+case "$url" in
+	"$VIDEOFILE")
+		ffmpeg -hide_banner -i "$VIDEOFILE" \
+		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv";;
+	"$M3U8")
+		ffmpeg -hide_banner -i "$M3U8" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv" 2>&1 | sed '/\[/d';;
+	"$XFORWARD")
+		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv";;
+	"$USEREF")
+		ffmpeg -hide_banner -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
+		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv";;
+	"$M3U8USERAGENT")
+		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv";;
+	"$M3U8UAGENTREFERER")
+		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" \
+		-headers 'Referer: '"$REFERER"''$'\r\n' \
+		-i "$M3U8UAGNTREF" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv";;
+	"$REFUSERAGENT")
+		ffmpeg -hide_banner -loglevel error \
+		-headers 'Referer: '"$REFERER"''$'\r\n' \
+		-user-agent "$USERAGENT" \
+		-i "$VIDEOFILE" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv";;
+	*)
+		ffmpeg -hide_banner -i "$VIDEOURL" \
+		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
+		"%HOMEDRIVE%%HOMEPATH%\Desktop\video.mkv";;
+esac 
+done
