@@ -1,8 +1,8 @@
 # Kodi Send video urls to an external machine
 
-Copy the kodi-external-player-ip.sh script to the bash-scripts directory if you are on linux,
-or the bash-scripts-macosx directory if you are on mac osx
+## Linux instructions
 
+Copy the kodi-external-player-ip.sh script to the bash-scripts directory
 
 ### Setting up kodi on an external to recieve streams
 
