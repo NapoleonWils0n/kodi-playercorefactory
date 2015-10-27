@@ -16,6 +16,7 @@ download
 
 http://ffmpeg.zeranoe.com/builds/
 
+
 unzip the ffmpeg.7zip file
 
 rename the folder to ffmpeg
@@ -30,32 +31,47 @@ you can run the ff-prompt script to set up ffmpeg with the windows cmd path
 or you can manually add it
 
 
-add ffmpeg path
+### cygwin
 
-system properties
 
-advanced system settings
+https://cygwin.com/install.html
 
-enviormnental variables
 
-system variables
+#### Set up your windows path
 
-path
+system properties, advanced system settings, enviormnental variables
 
-edit
+system variables, path, edit
 
-;C:\ffmpeg\bin
+add the code below to your windows path
 
+;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:\%HOMEPATH%\git\kodi-playercorefactory\bashscripts
 
 
 ## git install
 
 https://git-scm.com/download/win
 
+
+### Adjusting your Path
+
 select 2nd option for path not git bash shell
 
+Use Git from the Windows Command Prompt
 
-download the kodi-playercorefactory git repository
+
+### Configuring the line endings
+
+select the 2nd option
+
+Checkout as--is, commit Unix-style line endings
+
+
+Very important you must use Checkout as--is, commit Unix-style line endings
+or the scripts wont work
+
+
+### download the kodi-playercorefactory git repository
 
 create a folder called git in your home 
 
@@ -85,26 +101,4 @@ then copy the kodi-playercorefactory\windows\playercorefactory.xml to your kodi 
 ## vlc
 
 https://www.videolan.org/vlc/index.html
-
-
-### cygwin
-
-
-https://cygwin.com/install.html
-
-add cygwin path
-
-system properties
-
-advanced system settings
-
-enviormnental variables
-
-system variables
-
-path
-
-edit
-
-;C:\cygwin\bin
 
