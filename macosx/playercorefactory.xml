@@ -5,6 +5,11 @@
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
+  <player name="external player" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-play-external"</filename>
+     <args>"{0}"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
    <player name="save url" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
