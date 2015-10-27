@@ -1,8 +1,12 @@
 # Windows set up
 
+
 Youtube video
 
 https://www.youtube.com/watch?v=r7Funnh1veY
+
+
+Note you need to use the bash-scripts-windows with cygwin
 
 
 ## 7zip
