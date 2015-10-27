@@ -45,7 +45,7 @@ system variables, path, edit
 
 add the code below to your windows path
 
-;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:\%HOMEPATH%\git\kodi-playercorefactory\bashscripts
+;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:\%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows
 
 
 ## git install
