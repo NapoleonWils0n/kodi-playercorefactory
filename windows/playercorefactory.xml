@@ -6,19 +6,55 @@
     <hidexbmc>false</hidexbmc>
     </player>
    <player name="play" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c %HOMEDRIVE%\ffmpeg\bin\ffplay.exe -fs "{0}"</args>
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c bash rip-play "{0}"</args>
+     <hidexbmc>true</hidexbmc>
+   </player>
+   <player name="video stats" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-stats "{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="record" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c %HOMEDRIVE%\ffmpeg\bin\ffmpeg.exe -i "{0}" -c:v copy -c:a copy "%HOMEDRIVE%%HOMEPATH%/Desktop/video.mkv"</args>
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-record "{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
-   <player name="vlc" type="ExternalPlayer" audio="false" video="true">
-		<filename>C:\Program Files (x86)\VideoLAN\VLC\vlc.exe</filename>
-     <args>"{0}"</args>
-     <hidexbmc>true</hidexbmc>
+   <player name="record 30 mins" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-record "{0}" -t 00:30:00</args>
+     <hidexbmc>false</hidexbmc>
    </player>
+   <player name="record 1 hour" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-record "{0}" -t 01:00:00</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="record 2 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-record "{0}" -t 02:00:00</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="record 3 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-record "{0}" -t 03:00:00</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="stream" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-stream "{0}"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="stream 2 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-stream "{0}" -t 02:00:00</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="stream 3 hours" type="ExternalPlayer" audio="false" video="true">
+	<filename>C:\Windows\System32\cmd.exe</filename>
+     <args>/c start /B bash rip-stream "{0}" -t 03:00:00</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+
  </players>
 </playercorefactory>
