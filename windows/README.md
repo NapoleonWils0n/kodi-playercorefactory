@@ -3,7 +3,7 @@
 
 Youtube video
 
-https://www.youtube.com/watch?v=r7Funnh1veY
+https://www.youtube.com/watch?v=syiIx8y__PY
 
 
 Note you need to use the bash-scripts-windows with cygwin
@@ -50,6 +50,13 @@ system variables, path, edit
 add the code below to your windows path
 
 ;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:\%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows
+
+
+cygwin should install sed and grep which are needed for the scripts
+
+you can double click the cygwin setup exe and re run the installer,
+which open a windows where you can search for sed and grep,
+and install them if cygwin doesnt install them automatically for you
 
 
 ## git install
