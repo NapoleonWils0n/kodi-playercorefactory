@@ -34,6 +34,26 @@ you can run the ff-prompt script to set up ffmpeg with the windows cmd path
 
 or you can manually add it
 
+### Install curl
+
+download curl
+
+http://curl.haxx.se/download.html#Win64
+
+unzip the download 
+
+create a directory called curl at the root of your C drive
+
+C:\curl
+
+then copy the curl.exe into the folder
+
+the file path should look like this
+
+C:\curl\curl
+
+you need to add curl to your windows path, see below
+
 
 ### cygwin
 
@@ -49,7 +69,7 @@ system variables, path, edit
 
 add the code below to your windows path
 
-;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:\%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows
+;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:\%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl
 
 
 cygwin should install sed and grep which are needed for the scripts
