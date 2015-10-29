@@ -1,7 +1,7 @@
 #!/bin/bash
 
 [[ $# -eq 0 ]] || exit; read -erp "enter the path to your pcap file: " PCAP
-[ -f $PCAP ] && /cygdrive/c/Windows/system32/find $PCAP -maxdepth 1 -name '*.pcap' -type f -print0 \
-| xargs -i -0 tshark -r '{}' -T fields -e http.host -e http.request.uri -Y 'http.request.method == "GET"' \
+[ -f $PCAP ] && /usr/bin/find $PCAP -maxdepth 1 -name '*.pcap' -type f -print0 \
+| xargs -i -0 'C:\Program Files\Wireshark\tshark' -r '{}' -T fields -e http.host -e http.request.uri -Y 'http.request.method == "GET"' \
 | sort | tr -d " \t\r" | sed 's#^#http://#' \
 | grep -Ev '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(md5|jpg|png)' > pcap-links.txt || echo no pcap file found
