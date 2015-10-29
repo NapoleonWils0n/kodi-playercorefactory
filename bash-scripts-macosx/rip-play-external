@@ -1,0 +1,8 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] || exit
+[[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
+source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/kodi-external-player-ip.sh
+curl --data-binary \
+"{ \"jsonrpc\": \"2.0\", \"method\": \"Player.Open\", \"params\": { \"item\": { \"file\": \"$VIDEOURL\" } }, \"id\": 1 }" \
+-H 'content-type: application/json;' http://"$IPADDR":8080/jsonrpc
