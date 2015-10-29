@@ -3,4 +3,6 @@
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
 source kodi-external-player-ip.sh
-kodi-send --host="$IPADDR" --port=9777 --action="PlayMedia($VIDEOURL)"
+echo curl --data-binary \
+"{ \"jsonrpc\": \"2.0\", \"method\": \"Player.Open\", \"params\": { \"item\": { \"file\": \"$VIDEOURL\" } }, \"id\": 1 }" \
+-H 'content-type: application/json;' http://"$IPADDR":8080/jsonrpc
