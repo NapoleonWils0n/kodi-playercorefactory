@@ -2,7 +2,7 @@
 
 [[ $# -eq 0 ]] || exit
 read -erp "enter a directory path to plx files: " DIR
-[ -d $DIR ] && find $DIR -maxdepth 1 -name '*.plx' -type f \
+[ -d $DIR ] && /usr/bin/find $DIR -maxdepth 1 -name '*.plx' -type f \
 | while read file
 do
 awk '/name/{print $1} /URL/{print $1}' "$file" \

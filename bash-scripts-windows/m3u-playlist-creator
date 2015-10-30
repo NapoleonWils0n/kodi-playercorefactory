@@ -3,7 +3,7 @@
 [[ $# -eq 0 ]] || exit 
 read -erp "enter a directory path to txt files: " DIR
 [[ -d $DIR ]] || exit 1
-find $DIR -maxdepth 1 -name '*.txt' -type f \
+/usr/bin/find $DIR -maxdepth 1 -name '*.txt' -type f \
 | sort | while read file
 do 
 for link in "$file"; do
