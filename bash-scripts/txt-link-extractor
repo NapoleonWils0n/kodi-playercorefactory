@@ -2,8 +2,7 @@
 
 [[ $# -eq 0 ]] || exit
 read -erp "enter a path to a directory or text file: " DIR
-[ -d $DIR ] && find $DIR -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
-|| [ -f $DIR ] && find $DIR -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
+[[ -d $DIR || -f $DIR ]] && find $DIR -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
 | while read file
 do
 grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.txt' "$file" >> iptv.txt
