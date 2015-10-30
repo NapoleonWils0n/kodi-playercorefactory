@@ -1,8 +1,9 @@
 #!/bin/bash
 
 [[ $# -eq 0 ]] || exit
-read -erp "enter a directory path to plx files: " DIR
+read -erp "enter a path to a directory or plx file: " DIR
 [ -d $DIR ] && find $DIR -maxdepth 1 -name '*.plx' -type f \
+|| [ -f $DIR ] && find $DIR -maxdepth 1 -name '*.plx' -type f \
 | while read file
 do
 awk '/name/{print $1} /URL/{print $1}' "$file" \
