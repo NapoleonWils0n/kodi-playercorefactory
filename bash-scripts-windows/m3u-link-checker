@@ -2,8 +2,7 @@
 
 [[ $# -eq 0 ]] || exit 
 read -erp "enter a path to a directory or m3u8 files: " DIR
-[ -d $DIR ] && find $DIR -maxdepth 1 -name '*.m3u' -type f \
-|| [ -f $DIR ] && find $DIR -maxdepth 1 -name '*.m3u' -type f \
+[[ -d $DIR || -f $DIR ]] && /usr/bin/find $DIR -maxdepth 1 -name '*.m3u' -type f \
 | while read file
 do 
 for line in `cat "$file"`; do
