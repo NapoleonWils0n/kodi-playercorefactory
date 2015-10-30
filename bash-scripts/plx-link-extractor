@@ -8,4 +8,4 @@ read -erp "enter a path to a directory or plx file: " DIR
 do
 awk '/name/{print $1} /URL/{print $1}' "$file" \
 | sed 's/^[(URL|name)=]*//' | sed 's/^[^(http)]/#&/' >> plx-links.txt
-done || echo no directory found
+done || echo no directory or file found

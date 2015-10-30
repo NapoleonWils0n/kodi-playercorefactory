@@ -8,4 +8,4 @@ read -erp "enter a path to a directory or xml file: " DIR
 do 
 awk -F "[><]" '/title/{print $3} /name/{print $3} /link/{print $3}' "$file" \
 | sed 's/^[^(http)]/#&/' >> xml-links.txt
-done || echo no directory found
+done || echo no directory or file found

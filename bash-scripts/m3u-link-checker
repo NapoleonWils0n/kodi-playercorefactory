@@ -11,4 +11,4 @@ for line in `cat "$file"`; do
  	[ $? -eq 0 ] && ffprobe -hide_banner "$LINK"
 	[ $? -eq 0 ] && grep -B 1 "$LINK" "$file" | sed -e '/--/d' >> iptv.m3u
 done
-done && sed -i '1i #EXTM3U' iptv.m3u || echo no directory found
+done && sed -i '1i #EXTM3U' iptv.m3u || echo no directory or file found
