@@ -10,7 +10,7 @@ you should see a number next to each network interface
 
 ### find your ip address
 
-i	pconfig /all
+	ipconfig /all
 
 
 #### capture network traffic
