@@ -1,0 +1,9 @@
+#!/bin/bash
+
+[[ $# -eq 0 ]] || exit
+read -erp "enter a path to a directory or text file: " DIR
+[[ -d $DIR || -f $DIR ]] && find "$DIR" -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
+| while read file
+do
+youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3"
+done || echo no directory or file found
