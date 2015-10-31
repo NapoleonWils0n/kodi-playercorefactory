@@ -1,8 +1,8 @@
 #!/bin/bash
 
 [[ $# -eq 0 ]] || exit
-read -erp "enter a path to a directory or xml file: " DIR
-[[ -d $DIR || -f $DIR ]] && find $DIR -maxdepth 1 -name '*.xml' -type f \
+read -erp "enter a path to a directory or xml txt file: " DIR
+[[ -d $DIR || -f $DIR ]] && find $DIR -maxdepth 1 -regex ".*\.\(xml\|txt\)" -type f \
 | while read file
 do 
 awk -F "[><]" '/title/{print $3} /name/{print $3} /link/{print $3}' "$file" \
