@@ -23,7 +23,7 @@ case "$url" in
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
 	"$M3U8USERAGENT")
-		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8" \
+		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8UAG" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
 	"$M3U8UAGENTREFERER")
