@@ -5,13 +5,13 @@
 echo $VIDEOURL | while read url; do source video-regex.sh
 
 case "$url" in
-	"$VIDEOFILE") ffplay -hide_banner "$VIDEOFILE";;
-	"$M3U8") ffplay -hide_banner "$M3U8" 2>&1 | sed '/\[/d';;
-	"$XFORWARD") ffplay -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' "$M3U8";;
-	"$USEREF") ffplay -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$VIDEOFILE";;
-	"$M3U8USERAGENT") ffplay -hide_banner -user-agent "$USERAGENT" "$M3U8UAG";;
-	"$M3U8UAGENTREFERER") ffplay -hide_banner -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8UAGNTREF";;
-	"$REFUSERAGENT") ffplay -hide_banner -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
-	*) ffplay -hide_banner "$VIDEOURL";;
+	"$VIDEOFILE") ffplay -hide_banner -x 640 -y 360 "$VIDEOFILE";;
+	"$M3U8") ffplay -hide_banner -x 640 -y 360 "$M3U8" 2>&1 | sed '/\[/d';;
+	"$XFORWARD") ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' "$M3U8";;
+	"$USEREF") ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$VIDEOFILE";;
+	"$M3U8USERAGENT") ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" "$M3U8UAG";;
+	"$M3U8UAGENTREFERER") ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8UAGNTREF";;
+	"$REFUSERAGENT") ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
+	*) ffplay -hide_banner -x 640 -y 360 "$VIDEOURL";;
 esac 
 done
