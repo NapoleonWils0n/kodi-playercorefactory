@@ -44,4 +44,6 @@ case "$url" in
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 esac 
-done
+done \
+&& which notify-send 2> /dev/null && [[ $? -eq 0 ]] \
+&& notify-send -i kodi "Finished Processing" "$VIDEOURL"
