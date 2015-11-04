@@ -45,5 +45,5 @@ case "$url" in
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 esac 
 done \
-&& which notify-send 2> /dev/null && [[ $? -eq 0 ]] \
-&& notify-send -i kodi "Finished Processing" "$VIDEOURL"
+&& type -P notify-send &> /dev/null && [[ $? -eq 0 ]] \
+&& notify-send -i kodi "Finished Recording" "$VIDEOURL"

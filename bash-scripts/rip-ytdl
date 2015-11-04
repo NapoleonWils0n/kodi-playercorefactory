@@ -1,11 +1,11 @@
 #!/bin/bash
 
 [[ $# -eq 1 ]] && youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
-&& which notify-send 2> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Processing" "$1"
+&& type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
 [[ $# -eq 0 ]] && read -erp "enter a path to a directory or text file: " DIR
 [[ -d $DIR || -f $DIR ]] && find "$DIR" -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
 | while read file
 do
 youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3" \
-&& which notify-send 2> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Processing" "`cat $file`"
+&& type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "`cat $file`"
 done || echo no directory or file found
