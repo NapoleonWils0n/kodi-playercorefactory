@@ -67,7 +67,7 @@ system variables, path, edit
 
 add the code below to your windows path
 
-;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin
+;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin
 
 
 cygwin should install sed and grep which are needed for the scripts
