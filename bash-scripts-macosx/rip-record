@@ -3,6 +3,7 @@
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
 TFLAG="$2"; DURATION="$3"
+NOTIFY='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier'
 echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/video-regex.sh
 
 case "$url" in
@@ -44,4 +45,6 @@ case "$url" in
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 esac 
-done
+done \
+&& type -P "$NOTIFY" &> /dev/null && [[ $? -eq 0 ]] \
+&& "$NOTIFY" -sender 'org.xbmc.kodi' -title 'Finished Recording' -message "$VIDEOURL"
