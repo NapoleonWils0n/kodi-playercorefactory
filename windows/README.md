@@ -67,7 +67,7 @@ system variables, path, edit
 
 add the code below to your windows path
 
-;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin
+;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin;C:\aria2c\bin
 
 
 cygwin should install sed and grep which are needed for the scripts
@@ -130,4 +130,78 @@ then copy the kodi-playercorefactory\windows\playercorefactory.xml to your kodi 
 ## vlc
 
 https://www.videolan.org/vlc/index.html
+
+
+### windows notify-send
+
+Notify-send for Windows site
+
+http://vaskovsky.net/notify-send/
+
+Notify-send for Windows download link
+
+http://vaskovsky.net/notify-send/notify-send.zip
+
+#### unzip the notify-send.zip
+
+create a folder called notify-send,
+and then create a folder inside notify-send called bin
+
+then copy the notify-send script into the bin folder
+
+the folder structure should look like this notify-send\bin\notify-send
+
+copy the notify-send folder to your C drive
+
+the path should look like this
+
+C:\notify-send\bin\notify-send
+
+#### add notify-send to windows system path
+
+system properties, advanced system settings, enviormnental variables
+
+system variables, path, edit
+
+add the code below to the end of your windows system path
+
+;C:\notify-send\bin
+
+
+### windows install aria2c
+
+download the zip file
+
+64 bit
+
+https://github.com/tatsuhiro-t/aria2/releases/download/release-1.19.2/aria2-1.19.2-win-64bit-build1.zip
+
+32 bit
+
+https://github.com/tatsuhiro-t/aria2/releases/download/release-1.19.2/aria2-1.19.2-win-32bit-build1.zip
+
+#### unzip the file
+
+create a folder called aria2c,
+and then create a folder inside aria2c called bin
+
+then copy the aria2c script into the bin folder
+
+the folder structure should look like this aria2c\bin\aria2c
+
+copy the aria2c folder to your C drive
+
+the path should look like this
+
+C:\aria2c\bin\aria2c
+
+#### add aria2c to windows system path
+
+system properties, advanced system settings, enviormnental variables
+
+system variables, path, edit
+
+add the code below to the end of your windows system path
+
+;C:\aria2c\bin
 
