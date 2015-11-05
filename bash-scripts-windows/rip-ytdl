@@ -1,9 +1,12 @@
 #!/bin/bash
 
-[[ $# -eq 1 ]] && youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3"
+NOTIFY='C:\notify-send\bin\notify-send'
+[[ $# -eq 1 ]] && youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
+&& [[ -f "$NOTIFY" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "$1"
 [[ $# -eq 0 ]] && read -erp "enter a path to a directory or text file: " DIR
 [[ -d $DIR || -f $DIR ]] && /usr/bin/find "$DIR" -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
 | while read file
 do
-youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3"
+youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3" \
+&& [[ -f "$NOTIFY" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "`/usr/bin/cat $file`"
 done || echo no directory or file found
