@@ -1,9 +1,9 @@
 #!/bin/bash
 
 NOTIFY='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier'
-&& type -P "$NOTIFY" &> /dev/null && [[ $? -eq 0 ]] \
-&& "$NOTIFY" -sender 'org.xbmc.kodi' -title 'Finished Downloading' -message "$1
 [[ $# -eq 1 ]] && youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
+&& type -P "$NOTIFY" &> /dev/null && [[ $? -eq 0 ]] \
+&& "$NOTIFY" -sender 'org.xbmc.kodi' -title 'Finished Downloading' -message "$1" && exit
 [[ $# -eq 0 ]] && read -erp "enter a path to a directory or text file: " DIR
 [[ -d $DIR || -f $DIR ]] && find "$DIR" -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
 | while read file
