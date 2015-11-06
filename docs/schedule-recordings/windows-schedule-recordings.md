@@ -37,5 +37,5 @@ schtasks /create /sc ONCE /tn "recording video" /tr "\"C:\Windows\System32\cmd.e
 
 
 
-schtasks /create /sc ONCE /tn "recording video" /tr "C:\Windows\System32\cmd.exe /c start /B bash rip-record %HOMEDRIVE%%HOMEPATH%\Desktop\videourl.txt -t 00:30:00" /st 12:00 
+schtasks /create /sc ONCE /tn "recording video" /tr "C:\Windows\System32\cmd.exe /c start /B bash rip-record $USERPROFILE/Desktop/video.mkv -t 00:01:00" /st 01:05 
 
