@@ -2,6 +2,8 @@
 
 ## arch linux ffmpeg full
 
+if you have ffmpeg installed from the offical repos you need to unistall it 
+
 we need to install ffmpeg-full from the aur using yaourt
 so we get the non free codecs
 
@@ -13,11 +15,37 @@ edit pkg with nano during install
 remove the line that says  "--enable-libutvideo" from PKGBUILD.
 then continue with install
 
-## reinstall to fix misisng libraries if needed
+## manual install
 
-	yaourt -Sy fmpeg-full
+create a builds directory in your home
+then create a directoru inside it called ffmpeg
 
-	yaourt -S fmpeg-full
+cd into the ~/builds/ffmpeg directory, then follow instructions below
+
+https://aur.archlinux.org/packages/ffmpeg-full/
+
+download pkg snapshot
+
+https://aur.archlinux.org/cgit/aur.git/snapshot/ffmpeg-full.tar.gz
+
+	wget https://aur.archlinux.org/cgit/aur.git/snapshot/ffmpeg-full.tar.gz
+
+untar the file
+	
+	tar -zxvf ffmpeg-full.tar.gz
+
+copy the PKGBUILD UNREDISTRIBUTABLE.txt to the build directory
+
+edit the PKGBUILD and remove libutvideo
+
+download ffmpeg
+
+http://ffmpeg.org/releases/ffmpeg-2.8.1.tar.bz2
+
+	wget http://ffmpeg.org/releases/ffmpeg-2.8.1.tar.bz2
+
+install
+	makepkg -si
 
 ## ubuntu 
 
