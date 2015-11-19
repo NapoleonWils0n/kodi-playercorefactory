@@ -6,7 +6,7 @@ read -erp "enter the path to your favourites.xml: " FILE
 | while read line; do
 	EXTM3U='#EXTM3U'
 	EXTINF='#EXTINF:-'
-	TVGNAME=`echo "$line" | grep -Eo 'name="[a-zA-Z0-9[:blank:]]*"' | sed 's/name/tvg-&/'`
+	TVGNAME=`echo "$line" | grep -Eo 'name="[a-zA-Z0-9+&;[:blank:]]*"' | sed 's/name/tvg-&/'`
 	TVGLOGO=`echo "$line" | grep -Eo 'thumb="[a-zA-Z0-9:./_]*"' | sed 's/thumb/tvg-logo/'`
 	CHANNEL=`echo "$line" | grep -Eo 'name="[a-zA-Z0-9[:blank:]]*"' | sed 's/[name=\"]//g'`
 	PLUGIN=`echo "$line" | grep -Eo 'plugin://[a-zA-Z0-9./_?&%+=;]*[^(&quot;)]'`
