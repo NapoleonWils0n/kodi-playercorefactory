@@ -14,8 +14,8 @@ read -erp "enter the path to your m3u file: " FILE
 	[[ "$CURLINE" -eq 0 ]] && printf '%s\n%s\n%s\n%s\n' "$VER" "$BGROUND" "$TITLE" '#' > "$PLX"
 	[[ -n "$NAME" ]] && printf '%s\n' 'type=video' >> "$PLX"
 	printf '%s\n' "$line" | grep -Eo '\#EXTINF:0,[a-zA-Z0-9+&;[:blank:]]*' | sed 's/#EXTINF:0,/name=/g' >> "$PLX"
-	printf '%s\n' "$line" | grep -Eo '(logo_url=|iconimage=|http)[a-zA-Z0-9%._]*[^(&description)]\.(png)' \
-	| sed 's/iconimage/thumb/'  | sed 's/%3A/:/g' | sed 's/%2F/\//g' | sed 's/%2520/%20/g'  >> "$PLX" 
+	printf '%s\n' "$line" | grep -Eo '(logo_url|iconimage)[a-zA-Z0-9%.=_]*\.(png)' \
+	| sed 's/\(logo_url\|iconimage\)/thumb/'  | sed 's/%3A/:/g' | sed 's/%2F/\//g' | sed 's/%2520/%20/g'  >> "$PLX" 
 	printf '%s\n' "$line" | grep -Eo 'plugin://[a-zA-Z0-9./_?&%+=;]*[^(&quot;)]' | sed 's/plugin/URL=&/' >> "$PLX" 
 	[[ -n "$PLUGIN" ]] && printf '%s\n' '#' >> "$PLX"
         ((CURLINE++))
