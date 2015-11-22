@@ -7,16 +7,15 @@ read -erp "enter the path to your m3u file: " FILE
 	PLX=`printf '%s' "$FILE" | sed -e 's/.m3u/.plx/g'`
 	PTITLE=`printf '%s' "$FILE" | sed -e 's/.m3u//'`
 	VER='version=1'
-	BGROUND='background=https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Kodi-side-by-side.svg/640px-Kodi-side-by-side.svg.png'
-	LOGO='logo=https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Kodi-side-by-side.svg/320px-Kodi-side-by-side.svg.png'
+	BGROUND='background='
 	TITLE="title=$PTITLE"
 	NAME=`printf '%s\n' "$line" | grep -Eo '\#EXTINF:0,[a-zA-Z0-9+&;[:blank:]]*' | sed 's/#EXTINF:0,/name=/g'`
 	PLUGIN=`printf '%s\n' "$line" | grep -Eo 'plugin://[a-zA-Z0-9./_?&%+=;]*[^(&quot;)]'`
-	[[ "$CURLINE" -eq 0 ]] && printf '%s\n%s\n%s\n%s\n%s\n' "$VER" "$BGROUND" "$LOGO" "$TITLE" '#' > "$PLX"
+	[[ "$CURLINE" -eq 0 ]] && printf '%s\n%s\n%s\n%s\n' "$VER" "$BGROUND" "$TITLE" '#' > "$PLX"
 	[[ -n "$NAME" ]] && printf '%s\n' 'type=video' >> "$PLX"
 	printf '%s\n' "$line" | grep -Eo '\#EXTINF:0,[a-zA-Z0-9+&;[:blank:]]*' | sed 's/#EXTINF:0,/name=/g' >> "$PLX"
-	printf '%s\n' "$line" | grep -Eo 'iconimage=[a-zA-Z0-9%._]*[^(&description)]' | sed 's/iconimage/thumb/' | sed 's/%2F/\//g' >> "$PLX"
-	printf '%s\n' "$line" | grep -Eo 'plugin://[a-zA-Z0-9./_?&%+=;]*[^(&quot;)]' | sed 's/plugin/URL=&/' >> "$PLX"
+	printf '%s\n' "$line" | grep -Eo 'iconimage=[a-zA-Z0-9%._]*[^(&description)]' | sed 's/iconimage/thumb/' | sed 's/%2F/\//g' >> "$PLX" 
+	printf '%s\n' "$line" | grep -Eo 'plugin://[a-zA-Z0-9./_?&%+=;]*[^(&quot;)]' | sed 's/plugin/URL=&/' >> "$PLX" 
 	[[ -n "$PLUGIN" ]] && printf '%s\n' '#' >> "$PLX"
         ((CURLINE++))
 done < "$FILE"
