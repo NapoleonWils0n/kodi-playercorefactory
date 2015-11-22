@@ -7,6 +7,7 @@ read -erp "enter the path to your text file: " FILE
 	LINK=`echo "$line" | grep -Eo '(http|https|rtmp)://[a-zA-Z0-9:0-9./?=_@&%|()[:blank:],;-]*'`
 	[[ -n "$LINK" ]] && echo 'checking:' "$LINK"
 	ffprobe -hide_banner "$LINK" 2> /dev/null
-	[[ $? -eq 0 ]] && echo "$LINK" >> working.txt
+	[[ $? -eq 0 ]] && echo "$LINK" >> working-links.txt
+	[[ $? -eq 0 ]] && echo 'Link Working'
         ((CURLINE++))
-done < "$FILE" || echo no file found 
+done < "$FILE" || echo no file found
