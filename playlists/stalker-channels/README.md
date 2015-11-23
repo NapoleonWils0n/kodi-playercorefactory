@@ -1,4 +1,8 @@
-# Playlist loader config
+# Stalker channels playlists
+
+Playlists for i4atv and kodiland stalker clones
+
+## Playlist loader config
 
 Copy the playLists.txt to kodi/userdata/addon_data/plugin.video.playlistLoader
 
