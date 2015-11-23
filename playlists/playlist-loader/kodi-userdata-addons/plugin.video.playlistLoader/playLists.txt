@@ -1,0 +1,66 @@
+[
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-24-7.plx", 
+        "name": "Stalker 24-7"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-adult.plx", 
+        "name": "Stalker Adult"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-documentary.plx", 
+        "name": "Stalker Documentary"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-hbo.plx", 
+        "name": "Stalker HBO"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-kids.plx", 
+        "name": "Stalker Kids"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-movie-channels.plx", 
+        "name": "Stalker Movie Channels"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-music.plx", 
+        "name": "Stalker Music Channels"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-nba.plx", 
+        "name": "Stalker NBA"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-news.plx", 
+        "name": "Stalker News Channels"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-nhl.plx", 
+        "name": "Stalker NHL"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-ppv.plx", 
+        "name": "Stalker Pay Per View"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-sports.plx", 
+        "name": "Stalker Sports Channels"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-uk.plx", 
+        "name": "Stalker UK Channels"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-us.plx", 
+        "name": "Stalker US Channels"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-us-local.plx", 
+        "name": "Stalker US local Channels"
+    },
+    {
+        "url": "http://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/stalker-channels/i4atv/stalker-world.plx", 
+        "name": "Stalker World Channels"
+    }
+]
