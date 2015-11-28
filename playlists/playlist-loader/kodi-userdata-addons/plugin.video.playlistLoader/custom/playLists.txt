@@ -1,0 +1,22 @@
+[
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/uk-tv.plx", 
+        "name": "UK TV"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/us-tv.plx", 
+        "name": "US TV"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/movies.plx", 
+        "name": "Movies"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/sport.plx", 
+        "name": "Sport"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/news.plx", 
+        "name": "News"
+    }
+]
