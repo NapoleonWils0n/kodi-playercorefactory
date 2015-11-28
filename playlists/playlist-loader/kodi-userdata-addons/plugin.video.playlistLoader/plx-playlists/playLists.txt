@@ -1,5 +1,25 @@
 [
     {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/stalker-uk-tv.plx", 
+        "name": "Stalker - UK TV"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/stalker-us-tv.plx", 
+        "name": "Stalker - US TV"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/stalker-movies.plx", 
+        "name": "Stalker - Movies"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/stalker-sports.plx", 
+        "name": "Stalker - Sports"
+    },
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/stalker-news.plx", 
+        "name": "Stalker - News"
+    },
+    {
         "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/uk-tv.plx", 
         "name": "UK TV"
     },
