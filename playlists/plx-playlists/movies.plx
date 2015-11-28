@@ -1,5 +1,5 @@
 version=1
-background=https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png
+background=https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Warner_Bros._Pictures_logo.svg/1080px-Warner_Bros._Pictures_logo.svg.png
 title=live-tv
 #
 type=video
