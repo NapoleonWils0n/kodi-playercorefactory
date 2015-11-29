@@ -20,6 +20,10 @@
         "name": "Stalker - News"
     },
     {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/stalker-24-7.plx", 
+        "name": "Stalker - 24-7"
+    },
+    {
         "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/uk-tv.plx", 
         "name": "UK TV"
     },
