@@ -1,0 +1,6 @@
+[
+    {
+        "url": "https://raw.githubusercontent.com/NapoleonWils0n/kodi-playercorefactory/master/playlists/plx-playlists/live-tv-combined.plx", 
+        "name": "Live TV"
+    }
+]
