@@ -14,6 +14,10 @@ case "$url" in
 		ffmpeg -hide_banner -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv" 2>&1 | sed '/\[/d';;
+	"$M3U8TOKEN")
+		ffmpeg -hide_banner -i "$M3U8TOKEN" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv" 2>&1 | sed '/\[/d';;
 	"$XFORWARD")
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \

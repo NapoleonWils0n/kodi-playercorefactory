@@ -15,6 +15,11 @@ case "$url" in
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
+	"$M3U8TOKEN")
+		ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-i "$M3U8TOKEN" \
+		| tee "$USERPROFILE/Desktop/video-stats.txt";;
 	"$XFORWARD")
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
