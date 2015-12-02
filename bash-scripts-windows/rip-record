@@ -16,9 +16,9 @@ case "$url" in
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$USERPROFILE/Desktop/video.mkv" 2>&1 | sed '/\[/d';;
 	"$M3U8TOKEN")
-		ffmpeg -hide_banner -i "$M3U8TOKEN" \
+		ffmpeg -hide_banner -loglevel error -i "$M3U8TOKEN" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
-		"$USERPROFILE/Desktop/video.mkv" 2>&1 | sed '/\[/d';;
+		"$USERPROFILE/Desktop/video.mp4";;
 	"$XFORWARD")
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
