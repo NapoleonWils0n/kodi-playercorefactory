@@ -61,6 +61,7 @@
      <hidexbmc>false</hidexbmc>
    </player>
  </players>
+ <rules action="overwrite">
    <rule protocols="nfs|smb" player="dvdplayer"></rule>
 
    <!-- change the default player below -->
@@ -75,6 +76,10 @@
 
    <!-- uncomment to make external player the default player
    <rule video="true" player="external player"></rule>
+    -->
+
+   <!-- uncomment to make stream the default player
+   <rule video="true" player="stream"></rule>
     -->
 
  </rules>
