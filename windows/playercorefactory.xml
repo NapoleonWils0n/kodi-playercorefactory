@@ -60,6 +60,22 @@
      <args>/c start /B bash rip-stream "{0}" -t 03:00:00</args>
      <hidexbmc>false</hidexbmc>
    </player>
-
  </players>
+   <rule protocols="nfs|smb" player="dvdplayer"></rule>
+
+   <!-- change the default player below -->
+
+   <!-- uncomment to make play the default player
+   <rule video="true" player="play"></rule>
+    -->
+
+   <!-- uncomment to make record the default player
+   <rule video="true" player="record"></rule>
+    -->
+
+   <!-- uncomment to make external player the default player
+   <rule video="true" player="external player"></rule>
+    -->
+
+ </rules>
 </playercorefactory>
