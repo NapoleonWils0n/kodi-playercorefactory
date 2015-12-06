@@ -44,6 +44,10 @@ case "$url" in
 		-i "$VIDEOFILE" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
+	"$BEEB")
+		ffmpeg -hide_banner -i "$BEEB" \
+		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
+		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	*)
 		ffmpeg -hide_banner -i "$VIDEOURL" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
