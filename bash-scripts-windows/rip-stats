@@ -47,6 +47,11 @@ case "$url" in
 		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
 		-i "$VIDEOFILE" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
+	"$BEEB")
+		ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
+		-i "$BEEB" \
+		| tee "$USERPROFILE/Desktop/video-stats.txt";;
 	*)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \

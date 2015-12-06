@@ -56,6 +56,11 @@ case "$url" in
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+	"$BEEB")
+		ffmpeg -hide_banner -i "$BEEB" \
+		-c:v copy -c:a copy \
+		${TFLAG} ${DURATION} \
+		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	*)
 		ffmpeg -hide_banner -re -i "$VIDEOURL" \
 		-c:v libx265 -preset ultrafast -tune zero-latency \
