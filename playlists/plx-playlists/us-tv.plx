@@ -3,6 +3,11 @@ background=https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_Unit
 title=live-tv
 #
 type=video
+name=History - cCloud TV
+thumb=http://moonmentum.com/blog/wp-content/uploads/2013/02/HistoryChannel1.png
+URL=plugin://plugin.video.ccloudtv/?url=http%3A%2F%2Fskyiptv.ddns.net%3A8000%2Flive%2Fshima%2Fshima%2F145.m3u8&amp;mode=1&amp;name=History+%28Documentary%29+%28UK%29+%28English%29&amp;iconimage=http%3A%2F%2Fmoonmentum.com%2Fblog%2Fwp-content%2Fuploads%2F2013%2F02%2FHistoryChannel1.png
+#
+type=video
 name=Comedy Central - Sports Devil > Live TV > tvone1
 thumb=http://portal.iptvprivateserver.tv/stalker_portal/misc/logos/320/34.png
 URL=plugin://plugin.video.SportsDevil/?item=title%3dComedy%2bCentral%26url%3dhttp%253A%252F%252Fwww.finecast.tv%252Fembed4.php%253Fu%253Dcc698%2526vw%253D640%2526vh%253D450%26cfg%3dtvone1.com.cfg%2540Stream%26definedIn%3dcustoms%252Ftvone1.com.cfg%26director%3dtvone1.com%26referer%3dhttp%253A%252F%252Flivetvweb.net%252F%26genre%3dLive%2bTV%26type%3drss&amp;mode=1
