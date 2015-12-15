@@ -11,6 +11,7 @@ case "$url" in
 	"$XFORWARD") ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' "$M3U8";;
 	"$USEREF") ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$VIDEOFILE";;
 	"$M3U8USERAGENT") ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" "$M3U8UAG";;
+	"$GVID") ffplay -hide_banner -x 640 -y 360 "$GVID";;
 	"$M3U8UAGENTREFERER") ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8UAGNTREF";;
 	"$REFUSERAGENT") ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
 	"$BEEB") ffplay -hide_banner -x 640 -y 360 "$BEEB";;
