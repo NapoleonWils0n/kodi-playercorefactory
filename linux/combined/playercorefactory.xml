@@ -1,12 +1,12 @@
 <playercorefactory>
  <players>
   <player name="play" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-play</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-play"</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
   <player name="external player" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-play-external</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-play-external"</filename>
      <args>"{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
@@ -16,47 +16,47 @@
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="video stats" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-stats</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-stats"</filename>
      <args>"{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="record" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-record</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-record"</filename>
      <args>"{0}" &</args>
      <hidexbmc>false</hidexbmc>
    </player>  
    <player name="record 30 mins" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-record</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-record"</filename>
      <args>"{0}" -t 00:30:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
    <player name="record 1 hour" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-record</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-record"</filename>
      <args>"{0}" -t 01:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
    <player name="record 2 hours" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-record</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-record"</filename>
      <args>"{0}" -t 02:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
    <player name="record 3 hours" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-record</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-record"</filename>
      <args>"{0}" -t 03:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
    <player name="stream" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-stream</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-stream"</filename>
      <args>"{0}" &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
    <player name="stream 2 hours" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-stream</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-stream"</filename>
      <args>"{0}" -t 02:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player> 
    <player name="stream 3 hours" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-stream</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-stream"</filename>
      <args>"{0}" -t 03:00:00 &</args>
      <hidexbmc>false</hidexbmc>
    </player>
@@ -70,6 +70,7 @@
    <rule protocols="nfs|smb" player="dvdplayer"></rule>
 
    <!-- change the default player below -->
+
 
    <!-- uncomment to make play the default player
    <rule video="true" player="play"></rule>
