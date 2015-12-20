@@ -6,7 +6,7 @@
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="video stats" type="ExternalPlayer" audio="false" video="true">
-	<filename>rip-stats</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-stats"</filename>
      <args>"{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
