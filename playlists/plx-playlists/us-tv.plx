@@ -18,7 +18,7 @@ thumb=http://portal.iptvprivateserver.tv/stalker_portal/misc/logos/320/4.png
 URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Discovery+Science+&description=
 #
 type=video
-name=History
+name=History - UKTV Now
 thumb=http://www.liveonlinetv247.info/images/history.png
 URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=History+&description=
 #
