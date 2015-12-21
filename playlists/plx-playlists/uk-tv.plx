@@ -228,9 +228,24 @@ thumb=http://static.filmon.com/assets/channels/370/big_logo.png
 URL=plugin://plugin.video.SportsDevil/?item=definedIn%3dfilmon.com.cfg%26url.tmp%3d%252Fchannel%252Fdave%26title%3dDave%26url%3dhttp%253A%252F%252Fwww.filmon.com%252Fchannel%252Fdave%26cfg%3dfilmon.com.cfg%2540Streams%26videoTitle%3dDave%26director%3dfilmon.com%26genre%3dLive%2bTV%26type%3drss%26icon%3dhttp%253A%252F%252Fstatic.filmon.com%252Fassets%252Fchannels%252F370%252Fbig_logo.png&amp;mode=1
 #
 type=video
+name=Sky 1 - UKTV Now
+thumb=http://portal.iptvprivateserver.tv/stalker_portal/misc/logos/320/1417.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+1+&description=
+#
+type=video
+name=Sky 2 - UKTV Now
+thumb=http://img3.wikia.nocookie.net/__cb20110602140035/lostpedia/images/0/0b/500px-Sky2_logo.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+2+&description=
+#
+type=video
 name=Sky 2 - Sports Devil > Live TV > tvone1
-thumb=
+thumb=http://img3.wikia.nocookie.net/__cb20110602140035/lostpedia/images/0/0b/500px-Sky2_logo.png
 URL=plugin://plugin.video.SportsDevil/?item=title%3dSky%2b2%26url%3dhttp%253A%252F%252Fwww.finecast.tv%252Fembed4.php%253Fu%253Dsky2uk%2526vw%253D640%2526vh%253D450%26cfg%3dtvone1.com.cfg%2540Stream%26definedIn%3dcustoms%252Ftvone1.com.cfg%26director%3dtvone1.com%26referer%3dhttp%253A%252F%252Flivetvweb.net%252F%26genre%3dLive%2bTV%26type%3drss&amp;mode=1
+#
+type=video
+name=Sky Atlantic - UKTV Now
+thumb=http://portal.iptvprivateserver.tv/stalker_portal/misc/logos/320/1419.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+Atlantic+&description=
 #
 type=video
 name=Sky Atlantic - Sports Devil > Live TV > tvone1
