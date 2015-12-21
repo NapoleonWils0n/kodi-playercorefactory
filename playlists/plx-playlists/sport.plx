@@ -3,6 +3,11 @@ background=http://wallpaperspal.com/wp-content/uploads/Barclays-Premier-League-L
 title=live-tv
 #
 type=video
+name=Sky Sports 1 - UKTV Now
+thumb=http://www.liveonlinetv247.info/images/skysports1.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+Sports+1+&description=
+#
+type=video
 name=Sky Sports 1 - UK Turk
 thumb=http://www.liveonlinetv247.info/images/skysports1.png
 URL=plugin://plugin.video.ukturk/?url=http%3A%2F%2Fmetalkettle.co%2FUKTurk2%2FSportsList.txt&mode=5&name=Sky+Sports+1&iconimage=http%3A%2F%2Fmetalkettle.co%2Flogos%2Flogos2%2FDSAT%2FGlossy%2FTV%2FSky%2520Sports%25201.png&description=
@@ -31,6 +36,11 @@ type=video
 name=Sky Sports 1 - Sports Devil > Live TV > liveonlinetv247
 thumb=http://www.liveonlinetv247.info/images/skysports1.png
 URL=plugin://plugin.video.SportsDevil/?item=catcher%3dstreams%26url.tmp%3d%252Fskysports1.php%26title%3dSky%2bSports%2b1%26url%3dhttp%253A%252F%252Fwww.liveonlinetv247.info%252Fembed%252Fskysports1.php%26videoTitle%3dSky%2bSports%2b1%26director%3dliveonlinetv247%26genre%3dLive%2bTV%26referer%3dhttp%253A%252F%252Fwww.liveonlinetv247.info%252Ftvchannels.php%26definedIn%3dcustoms%252Fliveonlinetv247.net.cfg%26type%3drss%26icon%3dhttp%253A%252F%252Fwww.liveonlinetv247.info%252Fimages%252Fskysports1.png&amp;mode=1
+#
+type=video
+name=Sky Sports 2 - UKTV Now
+thumb=http://www.liveonlinetv247.info/images/skysports2.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+Sports+2+&description=
 #
 type=video
 name=Sky Sports 2 - UK Turk
@@ -63,6 +73,11 @@ thumb=http://www.liveonlinetv247.info/images/skysports2.png
 URL=plugin://plugin.video.cloudtv/?mode=13&amp;name=Sky+Sports+2&amp;playlist=%5Bu%27rtmp%3A%2F%2F89.248.174.38%2Flive+playpath%3Dyoskys2+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys2%26vw%3B%3D620%26vh%3B%3D490+live%3D1+token%3D%25Zrey%28nKa%40%23Z%27%7C%7C+u%27rtmp%3A%2F%2F89.248.168.217%2Flive+playpath%3Dyoskys2+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+live%3D1+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys2%26vw%3B%3D620%26vh%3B%3D490%27%5D
 #
 type=video
+name=Sky Sports 3 - UKTV Now
+thumb=http://www.liveonlinetv247.info/images/skysports3.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+Sports+3+&description=
+#
+type=video
 name=Sky Sports 3 - UK Turk
 thumb=http://www.liveonlinetv247.info/images/skysports3.png
 URL=plugin://plugin.video.ukturk/?url=http%3A%2F%2Fmetalkettle.co%2FUKTurk2%2FSportsList.txt&mode=5&name=Sky+Sports+3&iconimage=http%3A%2F%2Fmetalkettle.co%2Flogos%2Flogos2%2FDSAT%2FGlossy%2FTV%2FSky%2520Sports%25203.png&description=
@@ -91,6 +106,11 @@ type=video
 name=Sky Sports 3 - Sports Devil > Live TV > liveonlinetv247
 thumb=http://www.liveonlinetv247.info/images/skysports3.png
 URL=plugin://plugin.video.SportsDevil/?item=catcher%3dstreams%26url.tmp%3d%252Fskysports3.php%26title%3dSky%2bSports%2b3%26url%3dhttp%253A%252F%252Fwww.liveonlinetv247.info%252Fembed%252Fskysports3.php%26videoTitle%3dSky%2bSports%2b3%26director%3dliveonlinetv247%26genre%3dLive%2bTV%26referer%3dhttp%253A%252F%252Fwww.liveonlinetv247.info%252Ftvchannels.php%26definedIn%3dcustoms%252Fliveonlinetv247.net.cfg%26type%3drss%26icon%3dhttp%253A%252F%252Fwww.liveonlinetv247.info%252Fimages%252Fskysports3.png&amp;mode=1
+#
+type=video
+name=Sky Sports 4 - UKTV Now
+thumb=http://www.liveonlinetv247.info/images/skysports4.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+Sports+4+&description=
 #
 type=video
 name=Sky Sports 4 - UK Turk
@@ -123,6 +143,11 @@ thumb=http://www.liveonlinetv247.info/images/skysports4.png
 URL=plugin://plugin.video.cloudtv/?mode=13&amp;name=Sky+Sports+4&amp;playlist=%5Bu%27rtmp%3A%2F%2F89.248.172.52%2Flive+playpath%3Dyoskys4+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys4%26vw%3B%3D620%26vh%3B%3D490+live%3D1+token%3D%25Zrey%28nKa%40%23Z%27%7C%7C+u%27rtmp%3A%2F%2F89.248.169.50%2Flive+playpath%3Dyoskys4+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+live%3D1+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys4%26vw%3B%3D620%26vh%3B%3D490%27%5D
 #
 type=video
+name=Sky Sports 5 - UKTV Now
+thumb=http://www.liveonlinetv247.info/images/skysports5.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+Sports+5+&description=
+#
+type=video
 name=Sky Sports 5 - UK Turk
 thumb=http://www.liveonlinetv247.info/images/skysports5.png
 URL=plugin://plugin.video.ukturk/?url=http%3A%2F%2Fmetalkettle.co%2FUKTurk2%2FSportsList.txt&mode=5&name=Sky+Sports+5&iconimage=https%3A%2F%2Fencrypted-
@@ -151,6 +176,11 @@ type=video
 name=Sky Sports 5 - Dutch Cloud TV
 thumb=http://www.liveonlinetv247.info/images/skysports5.png
 URL=plugin://plugin.video.cloudtv/?mode=13&amp;name=Sky+Sports+5&amp;playlist=%5Bu%27rtmp%3A%2F%2F89.248.171.90%2Flive+playpath%3Dyoskys5+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys5%26vw%3B%3D620%26vh%3B%3D490+live%3D1+token%3D%25Zrey%28nKa%40%23Z%27%7C%7C+u%27rtmp%3A%2F%2F80.82.78.26%2Flive+playpath%3Dyoskys5+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+live%3D1+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys5%26vw%3B%3D620%26vh%3B%3D490%27%5D
+#
+type=video
+name=Bt sports 1 - UKTV Now
+thumb=http://www.liveonlinetv247.info/images/btsport1.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Bt+sports+1+&description=
 #
 type=video
 name=BT Sport 1 - UK Turk
@@ -183,6 +213,11 @@ thumb=http://www.liveonlinetv247.info/images/btsport1.png
 URL=plugin://plugin.video.cloudtv/?mode=13&amp;name=BT+Sport+1&amp;playlist=%5Bu%27http%3A%2F%2Fdigiteletv.iptvpremium.eu%3A8000%2Flive%2Fiphone1211%2FAbzwCkptst%2F151.ts%27%7C%7C+u%27rtmp%3A%2F%2F80.82.64.117%2Flive+playpath%3Dyobt1+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskysf1%26vw%3B%3D620%26vh%3B%3D490+live%3D1+token%3D%25Zrey%28nKa%40%23Z%27%7C%7C+u%27rtmp%3A%2F%2F80.82.78.26%2Flive+playpath%3Dyobt1+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+live%3D1+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys5%26vw%3B%3D620%26vh%3B%3D490%27%5D
 #
 type=video
+name=Bt sports 2 - UKTV Now
+thumb=http://www.liveonlinetv247.info/images/btsport2.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Bt+sports+2+&description=
+#
+type=video
 name=BT Sport 2 - UK Turk
 thumb=http://www.liveonlinetv247.info/images/btsport2.png
 URL=plugin://plugin.video.ukturk/?url=http%3A%2F%2Fmetalkettle.co%2FUKTurk2%2FSportsList.txt&mode=5&name=BT+Sport+2&iconimage=http%3A%2F%2Fmetalkettle.co%2Flogos%2Flogos1%2FBT%2520Sport%25202.png&description=
@@ -211,6 +246,11 @@ type=video
 name=BT Sport 2 - Dutch Cloud TV
 thumb=http://www.liveonlinetv247.info/images/btsport2.png
 URL=plugin://plugin.video.cloudtv/?mode=13&amp;name=BT+Sport+2&amp;playlist=%5Bu%27rtmp%3A%2F%2F80.82.64.117%2Flive+playpath%3Dyobt2+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskysf1%26vw%3B%3D620%26vh%3B%3D490+live%3D1+token%3D%25Zrey%28nKa%40%23Z%27%7C%7C+u%27rtmp%3A%2F%2F80.82.78.26%2Flive+playpath%3Dyobt2+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+live%3D1+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys5%26vw%3B%3D620%26vh%3B%3D490%27%5D
+#
+type=video
+name=BT Europe - UKTV Now
+thumb=https://img01.bt.co.uk/products/lib/img/packages/tv/btsporteuro.png
+URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=BT+Europe+&description=
 #
 type=video
 name=BT Sport Europe - UK Turk
