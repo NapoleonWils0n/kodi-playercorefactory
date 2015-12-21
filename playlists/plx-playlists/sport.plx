@@ -178,7 +178,7 @@ thumb=http://www.liveonlinetv247.info/images/skysports5.png
 URL=plugin://plugin.video.cloudtv/?mode=13&amp;name=Sky+Sports+5&amp;playlist=%5Bu%27rtmp%3A%2F%2F89.248.171.90%2Flive+playpath%3Dyoskys5+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys5%26vw%3B%3D620%26vh%3B%3D490+live%3D1+token%3D%25Zrey%28nKa%40%23Z%27%7C%7C+u%27rtmp%3A%2F%2F80.82.78.26%2Flive+playpath%3Dyoskys5+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+live%3D1+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys5%26vw%3B%3D620%26vh%3B%3D490%27%5D
 #
 type=video
-name=Bt sports 1 - UKTV Now
+name=BT sports 1 - UKTV Now
 thumb=http://www.liveonlinetv247.info/images/btsport1.png
 URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Bt+sports+1+&description=
 #
@@ -213,7 +213,7 @@ thumb=http://www.liveonlinetv247.info/images/btsport1.png
 URL=plugin://plugin.video.cloudtv/?mode=13&amp;name=BT+Sport+1&amp;playlist=%5Bu%27http%3A%2F%2Fdigiteletv.iptvpremium.eu%3A8000%2Flive%2Fiphone1211%2FAbzwCkptst%2F151.ts%27%7C%7C+u%27rtmp%3A%2F%2F80.82.64.117%2Flive+playpath%3Dyobt1+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskysf1%26vw%3B%3D620%26vh%3B%3D490+live%3D1+token%3D%25Zrey%28nKa%40%23Z%27%7C%7C+u%27rtmp%3A%2F%2F80.82.78.26%2Flive+playpath%3Dyobt1+swfUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fmyplayer%2Fjwplayer.flash.swf+live%3D1+pageUrl%3Dhttp%3A%2F%2Fwww.yocast.tv%2Fembed.php%3Flive%3Dyoskys5%26vw%3B%3D620%26vh%3B%3D490%27%5D
 #
 type=video
-name=Bt sports 2 - UKTV Now
+name=BT sports 2 - UKTV Now
 thumb=http://www.liveonlinetv247.info/images/btsport2.png
 URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Bt+sports+2+&description=
 #

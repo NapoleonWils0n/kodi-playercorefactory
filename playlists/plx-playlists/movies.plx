@@ -63,7 +63,7 @@ thumb=http://portal.iptvprivateserver.tv/stalker_portal/misc/logos/320/66.png
 URL=plugin://plugin.video.SportsDevil/?item=title%3dSky%2bMovies%2bPremiere%26url%3dhttp%253A%252F%252Fwww.finecast.tv%252Fembed4.php%253Fu%253Dskypm%2526vw%253D640%2526vh%253D450%26cfg%3dtvone1.com.cfg%2540Stream%26definedIn%3dcustoms%252Ftvone1.com.cfg%26director%3dtvone1.com%26referer%3dhttp%253A%252F%252Flivetvweb.net%252F%26genre%3dLive%2bTV%26type%3drss&amp;mode=1
 #
 type=video
-name=Sky Movies Scifi
+name=Sky Movies Scifi - UKTV Now
 thumb=http://vignette1.wikia.nocookie.net/logopedia/images/f/f4/Sky-Movies-Sci-Fi.png/revision/latest?cb=20111118191753
 URL=plugin://plugin.video.uktvnow/?url=url&mode=2&name=Sky+Movies+Scifi+&description=
 #
