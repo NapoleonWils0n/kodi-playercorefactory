@@ -18,10 +18,6 @@ case "$url" in
 		ffmpeg -hide_banner -loglevel panic -i "$M3U8TOKEN" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
-	"$M3U8TOKENTIME")
-		ffmpeg -hide_banner -loglevel panic -i "$M3U8TOKENTIME" \
-		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	"$XFORWARD")
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
