@@ -1,18 +1,19 @@
 # Mac osx vlc set up
 
-save script to  /usr/bin/vlc
+create a folder called bin in your home folder, /Users/your-username/bin
 
-	sudo cp vlc /usr/bin/vlc
+save script to  ~/bin
+
+	cp vlc ~/bin
 
 enter your admin password at the prompt
 
 make it executable
 
-	sudo chmod +x /usr/bin/vlc
+	chmod +x ~/bin
 
 enter your admin password at the prompt
 
 reload your ~/.bashrc
 
 	. ~/.bashrc
-
