@@ -1,11 +1,12 @@
 # ffmpeg set up
 
+
+## arch linux ffmpeg
+
+sudo pacman -S ffmpeg
+
+
 ## arch linux ffmpeg full
-
-if you have ffmpeg installed from the offical repos you need to unistall it 
-
-we need to install ffmpeg-full from the aur using yaourt
-so we get the non free codecs
 
 https://aur.archlinux.org/packages/ffmpeg-full/
 
