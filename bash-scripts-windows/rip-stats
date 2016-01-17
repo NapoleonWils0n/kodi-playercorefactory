@@ -57,6 +57,11 @@ case "$url" in
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
 		-i "$BEEB" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
+	"$RTMP")
+		rtmpdump -i "$RTMP" | ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-i - \
+		| tee "$USERPROFILE/Desktop/video-stats.txt";;
 	*)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
