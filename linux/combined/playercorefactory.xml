@@ -5,11 +5,6 @@
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
-  <player name="vlc" type="ExternalPlayer" audio="false" video="true">
-	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-play-vlc"</filename>
-     <args>"{0}"</args>
-     <hidexbmc>true</hidexbmc>
-   </player>
   <player name="external player" type="ExternalPlayer" audio="false" video="true">
 	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-play-external"</filename>
      <args>"{0}"</args>

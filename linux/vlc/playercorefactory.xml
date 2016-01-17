@@ -6,7 +6,7 @@
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="vlc" type="ExternalPlayer" audio="false" video="true">
-	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-play-vlc"</filename>
+	<filename>vlc</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>

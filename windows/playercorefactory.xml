@@ -10,11 +10,6 @@
      <args>/c bash rip-play "{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
-   <player name="vlc" type="ExternalPlayer" audio="false" video="true">
-	<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c bash rip-play-vlc "{0}"</args>
-     <hidexbmc>true</hidexbmc>
-   </player>
    <player name="external player" type="ExternalPlayer" audio="false" video="true">
 	<filename>C:\Windows\System32\cmd.exe</filename>
      <args>/c bash rip-play-external "{0}"</args>
