@@ -1,0 +1,21 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] || exit
+[[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
+echo $VIDEOURL | while read url; do source video-regex.sh
+
+case "$url" in
+	"$VIDEOFILE") C:\Program Files(x86)\VideoLAN\VLC "$VIDEOFILE";;
+	"$M3U8") C:\Program Files(x86)\VideoLAN\VLC "$M3U8";;
+	"$M3U8TOKEN") ffmpeg -i "$M3U8TOKEN" | C:\Program Files(x86)\VideoLAN\VLC fd://0;;
+	"$XFORWARD") ffmpeg -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" | C:\Program Files(x86)\VideoLAN\VLC fd://0;;
+	"$USEREF") ffmpeg -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$VIDEOFILE" | C:\Program Files(x86)\VideoLAN\VLC fd://0;;
+	"$M3U8USERAGENT") ffmpeg -user-agent "$USERAGENT" -i "$M3U8UAG" | C:\Program Files(x86)\VideoLAN\VLC fd://0;;
+	"$GVID") C:\Program Files(x86)\VideoLAN\VLC "$GVID";;
+	"$M3U8UAGENTREFERER") ffmpeg -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$M3U8UAGNTREF" | C:\Program Files(x86)\VideoLAN\VLC fd://0;;
+	"$REFUSERAGENT") ffmpeg -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" -i "$VIDEOFILE" | C:\Program Files(x86)\VideoLAN\VLC fd://0;;
+	"$BEEB") C:\Program Files(x86)\VideoLAN\VLC "$BEEB";;
+	"$RTMP") rtmpdump -i "$RTMP" | C:\Program Files(x86)\VideoLAN\VLC fd://0;;
+	*) vlc "$VIDEOURL";;
+esac 
+done

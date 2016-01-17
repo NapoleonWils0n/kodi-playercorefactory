@@ -5,14 +5,9 @@
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
-   <player name="vlc" type="ExternalPlayer" audio="false" video="true">
-		<filename>vlc</filename>
+  <player name="vlc" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-play-vlc"</filename>
      <args>"{0}"</args>
-     <hidexbmc>true</hidexbmc>
-   </player>
-   <player name="vlc - rtmpdump" type="ExternalPlayer" audio="false" video="true">
-		<filename>rtmpdump</filename>
-     <args>-i "{0}" | vlc fd://0</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="vlc - record" type="ExternalPlayer" audio="false" video="true">
@@ -21,7 +16,6 @@
 	<hidexbmc>false</hidexbmc>
    </player>
  <rules action="overwrite">
-   <rule name="rtmp" protocols="rtmp" player="rtmpdump"></rule>
    <rule video="true" internetstream="true" player="vlc"></rule>
    <rule name="smb" protocols="smb" player="vlc"></rule>
  </rules>
