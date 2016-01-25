@@ -5,18 +5,18 @@
 echo $VIDEOURL | while read url; do source video-regex.sh
 
 case "$url" in
-	"$VIDEOFILE") C:\Program Files (x86)\VideoLAN\VLC "$VIDEOFILE";;
-	"$M3U8") C:\Program Files (x86)\VideoLAN\VLC "$M3U8";;
-	"$M3U8TOKEN") C:\Program Files (x86)\VideoLAN\VLC "$M3U8TOKEN";;
-	"$XFORWARD") wget -c --header="X-Forwarded-For: $XFORWARDIP" "$M3U8" -O- | C:\Program Files (x86)\VideoLAN\VLC fd://0;;
-	"$USEREF") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | C:\Program Files (x86)\VideoLAN\VLC fd://0;;
-	"$M3U8USERAGENT")  wget -c -U "$USERAGENT" "$M3U8" -O- | C:\Program Files (x86)\VideoLAN\VLC fd://0;;
-	"$M3U8USERAGENT2") wget -c -U "$USERAGENT" "$M3U8UAG" -O- | C:\Program Files (x86)\VideoLAN\VLC fd://0;;
-	"$GVID") C:\Program Files (x86)\VideoLAN\VLC "$GVID";;
-	"$M3U8UAGENTREFERER") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | C:\Program Files (x86)\VideoLAN\VLC fd://0;;
-	"$REFUSERAGENT") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | C:\Program Files (x86)\VideoLAN\VLC fd://0;;
-	"$BEEB") C:\Program Files (x86)\VideoLAN\VLC "$BEEB";;
-	"$RTMP") rtmpdump -i "$RTMP" | C:\Program Files (x86)\VideoLAN\VLC fd://0;;
-	*) C:\Program Files (x86)\VideoLAN\VLC "$VIDEOURL";;
+	"$VIDEOFILE") vlc "$VIDEOFILE";;
+	"$M3U8") vlc "$M3U8";;
+	"$M3U8TOKEN") vlc "$M3U8TOKEN";;
+	"$XFORWARD") wget -c --header="X-Forwarded-For: $XFORWARDIP" "$M3U8" -O- | vlc fd://0;;
+	"$USEREF") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
+	"$M3U8USERAGENT")  wget -c -U "$USERAGENT" "$M3U8" -O- | vlc fd://0;;
+	"$M3U8USERAGENT2") wget -c -U "$USERAGENT" "$M3U8UAG" -O- | vlc fd://0;;
+	"$GVID") vlc "$GVID";;
+	"$M3U8UAGENTREFERER") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | vlc fd://0;;
+	"$REFUSERAGENT") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
+	"$BEEB") vlc "$BEEB";;
+	"$RTMP") rtmpdump -i "$RTMP" | vlc fd://0;;
+	*) vlc "$VIDEOURL";;
 esac 
 done

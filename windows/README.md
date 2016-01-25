@@ -82,6 +82,16 @@ C:\rtmpdump\bin
 
 with the executables inside the bin folder
 
+
+### vlc install
+
+download and install vlc and accept the default install location.
+
+edit your windows system path and add the code below to the end of your system path
+
+;C:\Program Files (x86)\VideoLAN\VLC
+
+
 #### Set up your windows path
 
 system properties, advanced system settings, enviormnental variables
@@ -103,7 +113,7 @@ add the code below to the end of your windows path
 
 your windows system path should look like this
 
-;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin;C:\aria2c\bin;C:\rtmpdump\bin
+;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin;C:\aria2c\bin;C:\rtmpdump\bin;C:\Program Files (x86)\VideoLAN\VLC
 
 
 cygwin should install sed and grep which are needed for the scripts
