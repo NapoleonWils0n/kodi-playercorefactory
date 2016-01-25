@@ -112,6 +112,9 @@ you can double click the cygwin setup exe and re run the installer,
 which open a windows where you can search for sed and grep,
 and install them if cygwin doesnt install them automatically for you
 
+## wget install
+
+install wget with cygwin
 
 ## git install
 
