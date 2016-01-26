@@ -75,6 +75,10 @@
    <rule video="true" player="play"></rule>
     -->
 
+   <!-- uncomment to make vlc the default player
+   <rule video="true" player="vlc"></rule>
+    -->
+
    <!-- uncomment to make record the default player
    <rule video="true" player="record"></rule>
     -->
