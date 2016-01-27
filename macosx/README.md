@@ -139,7 +139,7 @@ symbolic link syntax
 
 for example to create a symbolic link for ffmpeg from /usr/local/bin/ffmpeg to $HOME/bin/ffmpeg
 
-	ln -s /usr/local/bin/ffmpeg $HOME/bin/ffmpeg
+	ln -s /usr/local/bin/ffmpeg ~/bin/ffmpeg
 
 
 We have to specify the exact location of the binaries in the scripts to get them to work in El Capitan
