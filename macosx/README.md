@@ -117,12 +117,18 @@ Source your ~/.bash_profile
 	. ~/.bash_profile
 
 
-### You need to install ffmpeg, ffplay, ffprobe, wget and rtmpdump to the following locations
+## Important note
+
+You need to install ffmpeg, ffplay, ffprobe, wget and rtmpdump to the following locations
 
 $HOME/bin/ffmpeg
+
 $HOME/bin/ffplay
+
 $HOME/bin/ffprobe
-/usr/local/bin/wget 
+
+/usr/local/bin/wget
+ 
 /usr/local/bin/rtmpdump
 
 If they are installed in a different location create a symbolic link to the location specified above
