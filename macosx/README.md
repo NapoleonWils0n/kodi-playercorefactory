@@ -20,26 +20,17 @@ open kekaosx from the application folder and click ok for dialog asking if you w
 
 then double click the .7zip and they will unzip
 
-### next you need to copy ffmpeg ffplay and ffprobe to /usr/local
 
-In the new version of Mac osx El Capitan you cant modify the system, 
-so have to put the binaries in /usr/local
-
-open the terminal and cd to your downloads folder
-
-	cd ~/Downloads
-
-switch to root and copy ffmpeg ffplay and ffprobe to /usr/local
-
-	sudo cp ffmpeg ffplay ffprobe /usr/local
-
-enter your admin password at the prompt
-
-
-#### if you cannot install binaries to /usr/local on mac osx El Capitan, here's a fix
+#### install ffmpeg ffplay and ffprobe 
 
 create a folder called bin in your home folder, /Users/your-username/bin
+
+	mkdir -p ~/bin
+
 copy the ffmpeg, ffprobe and ffplay in to the bin folder
+
+if you have ffmpeg installed to another location create a symbolic link to $HOME/bin/ffmpeg
+the same applies to ffplay and ffprobe
 
 then edit your ~/.bash_profile, for example with nano
 
@@ -58,6 +49,33 @@ Then source your ~/.bash_profile
 
 	. ~/.bash_profile
 
+
+## mac osx rtmpdump install
+
+install rtmpdump with homebrew
+
+
+#### install xcode from the mac app store
+
+#### install xcode command line tools
+
+open a terminal and type
+
+	xcode-select --install
+
+### home brew install
+
+open a terminal and paste in the code below
+
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+check brew install
+
+	brew doctor
+
+install rtmpdump
+
+	brew install rtmpdump
 
 
 ###  download the kodi-playercorefactory repo with git
@@ -97,6 +115,28 @@ mv bash_profile ~/.bash_profile
 Source your ~/.bash_profile
 
 	. ~/.bash_profile
+
+
+### You need to install ffmpeg, ffplay, ffprobe, wget and rtmpdump to the following locations
+
+$HOME/bin/ffmpeg
+$HOME/bin/ffplay
+$HOME/bin/ffprobe
+/usr/local/bin/wget 
+/usr/local/bin/rtmpdump
+
+If they are installed in a different location create a symbolic link to the location specified above
+
+symbolic link syntax
+
+	ln -s /path/to/source /path/to/destination
+
+for example to create a symbolic link for ffmpeg from /usr/local/bin/ffmpeg to $HOME/bin/ffmpeg
+
+	ln -s /usr/local/bin/ffmpeg $HOME/bin/ffmpeg
+
+
+We have to specify the exact location of the binaries in the scripts to get them to work in El Capitan
 
 
 Mac osx vlc script
