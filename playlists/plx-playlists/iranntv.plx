@@ -1,0 +1,9 @@
+version=1
+background=https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Flag_of_Iran.svg/2000px-Flag_of_Iran.svg.png
+title=iranntv
+#
+type=video
+name=iranntv
+thumb=http://www.ncr-iran.org/en/images/stories/2011/logo/Simay-Azadi2.jpg
+URL=http://rrr.sz.xlcdn.com/?account=simay&file=MultiL&type=live&service=wowza&protocol=http&output=playlist.m3u8
+#
