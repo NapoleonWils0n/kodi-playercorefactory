@@ -17,8 +17,3 @@ REFUSERAGENT=`echo "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*
 BEEB=`echo "$VIDEOURL" | grep -Eo '^(http|https)://[a-zA-Z0-9:0-9/.&;,~*?[:blank:]_=-]*'`
 GVID=`echo "$VIDEOURL" | grep -Eo '^(http|https)://[a-zA-Z0-9:0-9/.&;,~*?_=-]*'`
 RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?[:blank:]_=-]*'`
-COOKIE=`echo "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|User-Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*&Cookie[a-zA-Z0-9.=-]*;[[:space:]]mediaAuth_v2=[a-zA-Z0-9]*'`
-COOKIEUSERAGTENT=`echo "$COOKIE" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' | sed 's/u\?User-a\?Agent=//'`
-COOKIEDOMAIN=`echo "$COOKIE" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g'`
-COOKIEURL=`echo "$COOKIE" | grep -Eo 'Cookie=[a-zA-Z0-9.=-]*;[[:space:]]mediaAuth_v2=[a-zA-Z0-9]*' | sed 's/Cookie=//'`
-COOKIEM3U8=`echo "$COOKIE" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)'`
