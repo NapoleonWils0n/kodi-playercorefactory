@@ -1,14 +1,14 @@
 <playercorefactory>
  <players>
-   <player name="save url" type="ExternalPlayer" audio="false" video="true">
+  <player name="mpv" type="ExternalPlayer" audio="false" video="true">
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-play-mpv"</filename>
+     <args>"{0}"</args>
+     <hidexbmc>true</hidexbmc>
+   </player>  
+ <player name="save url" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
      <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
      <hidexbmc>false</hidexbmc>
-   </player>
-  <player name="mpv" type="ExternalPlayer" audio="false" video="true">
-		<filename>mpv</filename>
-     <args>"{0}"</args>
-     <hidexbmc>true</hidexbmc>
    </player>
    <player name="mpv - capture" type="ExternalPlayer" audio="false" video="true">
 		<filename>mpv</filename>
