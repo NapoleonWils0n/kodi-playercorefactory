@@ -19,6 +19,10 @@ https://www.youtube.com/watch?v=It92vzpK9xo
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs
 
+### windows set up
+
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/windows
+
 ### mac osx set up
 
 https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/macosx
@@ -35,17 +39,13 @@ create a git directory in your home
 
 	git clone https://github.com/NapoleonWils0n/kodi-playercorefactory.git
 
-#### Step 2 - create the symlink to the playercorefactory.xml file
+#### Step 2 -  copy the playercorefactory.xml file to your kodi userdata folder
 
-symlink from one of the playercorefactory.xml in the git repo to where the playercorefactory.xml is
 
-symlink syntax
+	cp  ~/git/kodi-playercorefactory/linux/combined/playercorefactory.xml ~/.kodi/userdata/playercorefactory.xml 
 
-	ln -s /path/to/source /path/to/destination
-
-	ln -s ~/git/kodi-playercorefactory/linux/combined/playercorefactory.xml ~/.kodi/userdata/playercorefactory.xml 
-
-you should also be able to use an alias on mac osx and the windows equivilant
+or you can manually copy the playercorefactory.xml file to your kodi userdata directory
+see list below for the location of the kodi userdata directory on your operating system
 
 to update the repository change directory to the kodi-playercorefactory  
 
@@ -82,6 +82,59 @@ The scripts are already executable so you dont need to chomd +x the scripts
 source your ~/.bashrc to pick up the scripts
 
 	. ~/.bashrc
+
+### Step 4 - installing software
+
+#### install ffmpeg
+
+arch linux
+
+	sudo pacman -S ffmpeg
+
+ubuntu 
+
+sudo apt install -y ffmpeg
+
+#### install rtmpdump
+
+arch linux
+
+	sudo pacman -S rtmpdump
+
+ubuntu 
+
+	sudo apt install -y rtmpdump
+
+
+#### install vlc
+
+arch linux
+
+	sudo pacman -S vlc
+
+ubuntu 
+
+	sudo apt install -y vlc
+
+#### install mpv
+
+arch linux
+
+	sudo pacman -S mpv
+
+ubuntu 
+
+	sudo apt install vlc
+
+# install youtube-dl
+
+arch linux
+
+	sudo pacman -S youtube-dl
+
+ubuntu 
+
+	sudo apt install -y youtube-dl
 
 see below for location of the userdata folder for your operating system
 
