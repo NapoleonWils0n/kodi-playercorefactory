@@ -81,6 +81,9 @@
 
    <!-- change the default player below -->
 
+   <!-- uncomment to make mpv the default player
+   <rule video="true" player="mpv"></rule>
+    -->
 
    <!-- uncomment to make play the default player
    <rule video="true" player="play"></rule>
