@@ -54,9 +54,6 @@ Then source your ~/.bash_profile
 
 install rtmpdump with homebrew
 
-
-#### install xcode from the mac app store
-
 #### install xcode command line tools
 
 open a terminal and type
@@ -77,6 +74,9 @@ install rtmpdump
 
 	brew install rtmpdump
 
+install wget
+
+	brew install wget 
 
 ###  download the kodi-playercorefactory repo with git
 
@@ -144,7 +144,22 @@ for example to create a symbolic link for ffmpeg from /usr/local/bin/ffmpeg to $
 
 We have to specify the exact location of the binaries in the scripts to get them to work in El Capitan
 
+## mpv install
 
-Mac osx vlc script
+Download the 64bit build from mpv.io and install to your Applications folder
 
-https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/mac-osx-vlc
+https://mpv.io/installation/
+
+latest build, works on El Capitan
+
+http://sva.wakku.to/~chris/mpv_builds/mpv_latest.zip
+
+## vlc install
+
+Download vlc from videolan.org and install to your Applications folder
+
+https://www.videolan.org/vlc/download-macosx.html
+
+
+
+
