@@ -126,7 +126,7 @@ ubuntu
 
 	sudo apt install vlc
 
-# install youtube-dl
+#### install youtube-dl
 
 arch linux
 
