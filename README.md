@@ -124,7 +124,7 @@ arch linux
 
 ubuntu 
 
-	sudo apt install vlc
+	sudo apt install mpv
 
 #### install youtube-dl
 
