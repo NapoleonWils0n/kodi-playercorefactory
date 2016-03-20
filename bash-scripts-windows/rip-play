@@ -2,7 +2,7 @@
 
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
-echo $VIDEOURL | while read url; do source video-regex.sh
+echo $VIDEOURL | while read url; do source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh"
 
 case "$url" in
 	"$VIDEOFILE") ffplay -hide_banner -x 640 -y 360 "$VIDEOFILE";;
