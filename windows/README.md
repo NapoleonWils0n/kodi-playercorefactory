@@ -92,6 +92,33 @@ edit your windows system path and add the code below to the end of your system p
 ;C:\Program Files (x86)\VideoLAN\VLC\
 
 
+### mpv install
+
+mpv site
+
+https://mpv.io/installation/
+
+mpv windows download
+
+https://mpv.srsfckn.biz/
+
+This script sets up file associations for mpv on Windows.
+
+https://github.com/rossy/mpv-install/blob/master/README.md
+
+Make sure you have the latest build of mpv. Official builds here: https://mpv.srsfckn.biz/
+Download the zip: https://github.com/rossy/mpv-install/archive/master.zip
+Copy the .bat files and the .ico to the same directory as mpv.exe
+Run mpv-install.bat as administrator. Note: For an unattended install, use the /u switch.
+Use the Default Programs and AutoPlay control panels to make mpv the default player
+
+To play content from various media streaming sites, 
+place youtube-dl.exe in the same directory as mpv.
+
+### add mpv to your windows system path
+
+;C:\Program Files (x86)\mpv\
+
 #### Set up your windows path
 
 system properties, advanced system settings, enviormnental variables
@@ -101,7 +128,6 @@ system variables, path, edit
 add the code below to your windows path
 
 ### add rtmpdump to your windows system path
-
 
 system properties, advanced system settings, enviormnental variables
 
@@ -113,7 +139,7 @@ add the code below to the end of your windows path
 
 your windows system path should look like this
 
-;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin;C:\aria2c\bin;C:\rtmpdump\bin;C:\Program Files (x86)\VideoLAN\VLC\
+;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin;C:\aria2c\bin;C:\rtmpdump\bin;C:\Program Files (x86)\VideoLAN\VLC\;C:\Program Files (x86)\mpv\
 
 
 cygwin should install sed and grep which are needed for the scripts
