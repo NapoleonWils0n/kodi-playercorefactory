@@ -1,6 +1,6 @@
 # Enabling the at command on Mac OSX
 
-by sirprancalot
+by sirprancelot
 
 1) Edit the /System/Library/LaunchDaemons/com.apple.atrun.plist file (open in text editor and change "true" word to "false", then save).
 
