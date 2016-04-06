@@ -29,40 +29,76 @@ https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/macosx
 
 ### linux set up
 
-#### Step 1 - download the kodi-playercorefactory repo with git
+### Step 1 - installing software
+
+#### arch linux install git, ffmpeg, rtmpdump, vlc, youtube-dl, aria2c
+
+```
+sudo pacman -S git ffmpeg rtmpdump vlc mpv youtube-dl aria2c
+```
+
+#### ubuntu install git, ffmpeg, rtmpdump, vlc, mpv, youtube-dl, aria2c
+
+```
+sudo apt install -y git ffmpeg rtmpdump vlc mpv youtube-dl aria2c
+```
+
+#### debian install git, ffmpeg, rtmpdump, vlc, mpv, youtube-dl, aria2c
+
+```
+sudo apt install -y git-core ffmpeg rtmpdump vlc mpv youtube-dl aria2c
+```
+
+note you need to enable backports, or be using the testing or unstable debian branches to install ffmpeg
+
+#### Step 2 - download the kodi-playercorefactory repo with git
 
 create a git directory in your home
 
-	mkdir -p ~/git
+```
+mkdir -p ~/git
+```
 
-	cd ~/git
+```
+cd ~/git
+```
 
-	git clone https://github.com/NapoleonWils0n/kodi-playercorefactory.git
+```
+git clone https://github.com/NapoleonWils0n/kodi-playercorefactory.git
+```
 
-#### Step 2 -  copy the playercorefactory.xml file to your kodi userdata folder
+#### Step 3 -  copy the playercorefactory.xml file to your kodi userdata folder
 
 
-	cp  ~/git/kodi-playercorefactory/linux/combined/playercorefactory.xml ~/.kodi/userdata/playercorefactory.xml 
+```
+cp  ~/git/kodi-playercorefactory/linux/combined/playercorefactory.xml ~/.kodi/userdata/playercorefactory.xml 
+```
 
 or you can manually copy the playercorefactory.xml file to your kodi userdata directory
 see list below for the location of the kodi userdata directory on your operating system
 
 to update the repository change directory to the kodi-playercorefactory  
 
-	cd ~/git/kodi-playercorefactory
+```
+cd ~/git/kodi-playercorefactory
+```
 
 then run the git pull command to pull down the latest changes from github
 
-	git pull
+```
+git pull
+```
 
-#### Step 3 - bash scripts set up
+#### Step 4 - bash scripts set up
 
 add the $HOME/git/kodi-playercorefactory/bash-scripts directory to your bash path
 
 edit your .bashrc in your home directory
 im using vim to edit the file but you can use any text editor
 
-	vim ~/.bashrc
+```
+vim ~/.bashrc
+```
 
 add the code below to your ~/.bashrc
 to add the $HOME/git/kodi-playercorefactory/bash-scripts directory to your bash path
@@ -73,68 +109,19 @@ if you have downloaded the git repo to a different path then change the code bel
 
 set PATH so it includes the kodi playercorefactory scripts
 
-	if [ -d "$HOME/git/kodi-playercorefactory/bash-scripts" ] ; then
-    		PATH="$HOME/git/kodi-playercorefactory/bash-scripts:$PATH"
-	fi
+```
+if [ -d "$HOME/git/kodi-playercorefactory/bash-scripts" ] ; then
+ 		PATH="$HOME/git/kodi-playercorefactory/bash-scripts:$PATH"
+fi
+```
 
 The scripts are already executable so you dont need to chomd +x the scripts
 
 source your ~/.bashrc to pick up the scripts
 
-	. ~/.bashrc
-
-### Step 4 - installing software
-
-#### install ffmpeg
-
-arch linux
-
-	sudo pacman -S ffmpeg
-
-ubuntu 
-
-sudo apt install -y ffmpeg
-
-#### install rtmpdump
-
-arch linux
-
-	sudo pacman -S rtmpdump
-
-ubuntu 
-
-	sudo apt install -y rtmpdump
-
-
-#### install vlc
-
-arch linux
-
-	sudo pacman -S vlc
-
-ubuntu 
-
-	sudo apt install -y vlc
-
-#### install mpv
-
-arch linux
-
-	sudo pacman -S mpv
-
-ubuntu 
-
-	sudo apt install mpv
-
-#### install youtube-dl
-
-arch linux
-
-	sudo pacman -S youtube-dl
-
-ubuntu 
-
-	sudo apt install -y youtube-dl
+```
+. ~/.bashrc
+```
 
 see below for location of the userdata folder for your operating system
 
@@ -166,40 +153,12 @@ to play the video in an external player or record the video stream
 
 You can also select a recording duration from the play using menu
 
-### players
-
-each ffmpeg player also has a recording duration for 30min, 1hr, 2hrs 
-
-* ffmpeg  
-* ffmpeg aac audio fix  
-* ffmpeg x-forward http header  
-* ffmpeg user agent referer http header
-* ffplay  
-* ffplay x-forward http header
-* ffplay user agent referer http header
-* vlc play 
-* vlc record 
-* vlc play and record
-* mpv play 
-* mpv record 
-* mpv play and record
-* curl download video 
-* curl download video - useragent referer http header
-* wget download video
-* wget download video - useragent referer http header
-
 ### bash scripts 
 
-The rip-ffmpeg.sh bash script can also set a duration for the recording using the ffmpeg time option -t 00:00:00  
+The rip-record bash script can also set a duration for the recording using the ffmpeg time option -t 00:00:00  
 Using the hours minutes seconds syntax  
 
-rip-ffmpeg.sh textfile.txt -t 00:00:00
-
-* rip-ffmpeg.sh
-* rip-ffplay.sh
-* curl record m3u8 video stream  
-* wget record m3u8 video stream  
-
+rip-record textfile.txt -t 00:00:00
 
 ### background recording from kodi
 
@@ -211,24 +170,35 @@ so you can specify how long to record the video for
 
 eg:
 
-* ffmpeg  
-* ffmpeg 30mins  
-* ffmpeg 1hrs  
-* ffmpeg 2hrs  
+* 30mins  
+* 1hrs  
+* 2hrs  
 
 if you dont specify a recording duration you have to manually find the process id of ffmpeg and kill it to stop recording
 
 find the process id with ps aux | grep ffmpeg   
 
-	ps aux | grep ffmpeg  
+```
+ps aux | grep ffmpeg  
+```
 
 or by using pgrep ffmpeg  
 
-	pgrep ffmpeg  
+```
+pgrep ffmpeg  
+```
 
 then kill the process, replace PID with the process id you got from ps aux or pgrep  
 
-	kill PID  
+```
+kill PID  
+```
+
+or use pkill or kill the ffmpeg process
+
+```
+pkill ffmpeg
+```
 
 ### foreground recording in the terminal
 
