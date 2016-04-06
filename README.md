@@ -31,7 +31,7 @@ https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/macosx
 
 ### Step 1 - installing software
 
-#### arch linux install git, ffmpeg, rtmpdump, vlc, youtube-dl, aria2c
+#### arch linux install git, ffmpeg, rtmpdump, vlc, mpv, youtube-dl, aria2c
 
 ```
 sudo pacman -S git ffmpeg rtmpdump vlc mpv youtube-dl aria2c
