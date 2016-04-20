@@ -230,6 +230,8 @@ RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 
 
 #### rip-record
 
+rip-record case statement
+
 ```
 "$RTMP")
 		rtmpdump \
