@@ -213,7 +213,7 @@ RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 
 use sed to remove pageUrl=
 
 
-#### rtmpdump video regex code
+#### rtmpdump video-regex.sh code
 
 ```
 RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?()@!#%[:blank:]_=\-]*'`
@@ -225,5 +225,20 @@ RTMPV=`echo "$RTMP" | grep -Eo 'live=[a-zA-Z]*' | sed 's/live=//'`
 RTMPM=`echo "$RTMP" | grep -Eo 'timeout=[0-9]*' | sed 's/timeout=//'`
 RTMPW=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swfUrl=//'`
 RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 's/pageUrl=//'`
+```
+
+#### rip-record
+
+```
+"$RTMP")
+		rtmpdump 
+		-r 
+		-s 
+		-f
+		-T
+		-v
+		-m
+		-W
+		-p
 ```
 
