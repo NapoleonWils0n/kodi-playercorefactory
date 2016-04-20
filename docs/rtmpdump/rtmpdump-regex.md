@@ -30,6 +30,7 @@ pageUrl=http://www.hdcast.org/embedlive1.php?u=mamahdsky11&vw=854&vh=480
 -m Timeout the session after num seconds without receiving data from the server  
 -W URL of the SWF player for this media  
 -p URL of the web page in which the media was embedded  
+-o save file to disk
 
 #### add rtmpdump options
 
@@ -232,13 +233,14 @@ RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 
 ```
 "$RTMP")
 		rtmpdump \
-		-r \
-		-s \
-		-f \
-		-T \
-		-v \
-		-m \
-		-W \
-		-p \
+		-r "$RTMPR" \
+		-s "$RTMPS" \
+		-f "$RTMPF" \
+		-T "$RTMPT" \
+		-v "$RTMPV" \
+		-m "$RTMPM" \
+		-W "$RTMPW" \
+		-p "$RTMPP" \
+		-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;  
 ```
 
