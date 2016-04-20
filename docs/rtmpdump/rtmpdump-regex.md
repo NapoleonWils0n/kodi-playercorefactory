@@ -44,6 +44,7 @@ rtmpdump \
 -m 15 \
 -W http://player.hdcast.org/jwplayer.flash.swf \
 -p pageUrl=http://www.hdcast.org/embedlive1.php?u=mamahdsky11&vw=854&vh=480
+-o outfile.mkv
 ```
 
 
