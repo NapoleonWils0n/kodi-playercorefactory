@@ -114,13 +114,13 @@ RTMPR=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&?_=-]*'`
 #### -s URL of the SWF player for the media
 
 ```
-grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf'
+grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9._/]*\.swf'
 ```
 
 ##### video regex code
 
 ```
-RTMPS=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swfUrl=//'`
+RTMPS=`echo "$RTMP" | grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swf[uU]rl=//'`
 ```
 
 use sed to remove swfUrl=
@@ -129,13 +129,13 @@ use sed to remove swfUrl=
 #### -f Version of the Flash plugin used to run the SWF player
 
 ```
-grep -Eo 'flashver=[a-zA-Z0-9\,]*'
+grep -Eo 'flash[vV]er=[a-zA-Z0-9\,]*'
 ```
 
 ##### video regex code
 
 ```
-RTMPF=`echo "$RTMP" | grep -Eo 'flashver=[a-zA-Z0-9\,]*' | sed 's/flashver=//'`
+RTMPF=`echo "$RTMP" | grep -Eo 'flash[vV]er=[a-zA-Z0-9\,]*' | sed 's/flash[vV]er=//'`
 ```
 
 use sed to remove flashver=
@@ -188,13 +188,13 @@ use sed to remove timeout=
 ##### -W URL of the SWF player for this media
 
 ```
-grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf'
+grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf'
 ```
 
 ##### video regex code
 
 ```
-RTMPW=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swfUrl=//'`
+RTMPW=`echo "$RTMP" | grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swf[uU]rl=//'`
 ```
 
 use sed to remove swfUrl=
@@ -202,14 +202,14 @@ use sed to remove swfUrl=
 ##### -p URL  of  the  web  page in which the media was embedded
 
 ```
-grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*'
+grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*'
 ```
 
 ##### video regex code
 
 
 ```
-RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 's/pageUrl=//'`
+RTMPP=`echo "$RTMP" | grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 's/page[uU]rl=//'`
 ```
 
 use sed to remove pageUrl=
