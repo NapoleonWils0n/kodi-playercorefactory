@@ -231,14 +231,14 @@ RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 
 
 ```
 "$RTMP")
-		rtmpdump 
-		-r 
-		-s 
-		-f
-		-T
-		-v
-		-m
-		-W
-		-p
+		rtmpdump \
+		-r \
+		-s \
+		-f \
+		-T \
+		-v \
+		-m \
+		-W \
+		-p \
 ```
 
