@@ -108,8 +108,11 @@ grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf'
 ##### video regex code
 
 ```
-RTMPS=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf'`
+RTMPS=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swfUrl=//'`
 ```
+
+use sed to remove swfUrl=
+
 
 #### -f Version of the Flash plugin used to run the SWF player
 
@@ -176,10 +179,25 @@ use sed to remove timeout=
 grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf'
 ```
 
+##### video regex code
+
+```
+RTMPW=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swfUrl=//'`
+```
+
+use sed to remove swfUrl=
+
 ##### -p URL  of  the  web  page in which the media was embedded
 
 ```
 grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*'
 ```
 
+##### video regex code
 
+
+```
+RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 's/pageUrl=//'`
+```
+
+use sed to remove pageUrl=
