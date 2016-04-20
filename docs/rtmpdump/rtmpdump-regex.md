@@ -216,6 +216,10 @@ use sed to remove pageUrl=
 
 #### rtmpdump video-regex.sh code
 
+video url is match by the VIDEOURL variable
+we then grep inside the VIDEOURL for various rtmpdump parameters
+which are then stored into different variables
+
 ```
 RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?()@!#%[:blank:]_=\-]*'`
 RTMPR=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&?_=-]*'`
@@ -232,17 +236,24 @@ RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 
 
 rip-record case statement
 
+we use a case statement and check if the variables are empty
+if the variable isnt empty we execute some code
+
+```
+[[ -z "$SOMEVARIABLE" ]] && -r "$SOMEVARIABLE" 
+```
+
 ```
 "$RTMP")
 		rtmpdump \
-		-r "$RTMPR" \
-		-s "$RTMPS" \
-		-f "$RTMPF" \
-		-T "$RTMPT" \
-		-v "$RTMPV" \
-		-m "$RTMPM" \
-		-W "$RTMPW" \
-		-p "$RTMPP" \
+		[[ -z "$RTMPR" ]] && -r "$RTMPR" \
+		[[ -z "$RTMPS" ]] && -s "$RTMPS" \
+		[[ -z "$RTMPF" ]] && -f "$RTMPF" \
+		[[ -z "$RTMPT" ]] && -T "$RTMPT" \
+		[[ -z "$RTMPV" ]] && -v "$RTMPV" \
+		[[ -z "$RTMPM" ]] && -m "$RTMPM" \
+		[[ -z "$RTMPW" ]] && -W "$RTMPW" \
+		[[ -z "$RTMPP" ]] && -p "$RTMPP" \
 		-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;  
 ```
 
