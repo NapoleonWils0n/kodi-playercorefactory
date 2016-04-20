@@ -147,6 +147,14 @@ use sed to remove token=
 grep -Eo 'live=[a-zA-Z]*'
 ```
 
+##### video regex code
+
+```
+RTMPV=`echo "$RTMP" | grep -Eo 'live=[a-zA-Z]*' | sed 's/live=//'`
+```
+
+use sed to remove live=
+
 ##### -m Timeout the session after num seconds without receiving data from the server
 
 ```
