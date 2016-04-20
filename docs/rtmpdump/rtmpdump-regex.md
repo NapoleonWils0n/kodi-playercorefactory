@@ -161,6 +161,15 @@ use sed to remove live=
 grep -Eo 'timeout=[0-9]*'
 ```
 
+##### video regex code
+
+```
+RTMPM=`echo "$RTMP" | grep -Eo 'timeout=[0-9]*' | sed 's/timeout=//'`
+```
+
+use sed to remove timeout=
+
+
 ##### -W URL of the SWF player for this media
 
 ```
