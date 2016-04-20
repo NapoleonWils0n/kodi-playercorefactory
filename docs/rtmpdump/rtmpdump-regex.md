@@ -88,6 +88,7 @@ RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?()@!#%[
 
 #### -r URL of the server and media content
 
+
 ```
 grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&?_=-]*'
 ```
@@ -132,6 +133,12 @@ grep -Eo 'token=[a-zA-Z0-9.#%?()@!]*'
 ```
 
 ##### video regex code
+
+```
+RTMPT=`echo "$RTMP" | grep -Eo 'token=[a-zA-Z0-9.#%?()@!]*' | sed 's/token=//'`
+```
+
+use sed to remove token=
 
 
 #### -v Specify that the media is a live  stream
