@@ -22,14 +22,14 @@ pageUrl=http://www.hdcast.org/embedlive1.php?u=mamahdsky11&vw=854&vh=480
 
 ### rtmpdump options
 
--r URL of the server and media content
--s URL of the SWF player for the media
--f Version of the Flash plugin used to run the SWF player
--T Key for SecureToken response
--v Specify that the media is a live stream
--m Timeout the session after num seconds without receiving data from the server
--W URL of the SWF player for this media
--p URL of the web page in which the media was embedded
+-r URL of the server and media content  
+-s URL of the SWF player for the media  
+-f Version of the Flash plugin used to run the SWF player  
+-T Key for SecureToken response  
+-v Specify that the media is a live stream  
+-m Timeout the session after num seconds without receiving data from the server  
+-W URL of the SWF player for this media  
+-p URL of the web page in which the media was embedded  
 
 #### add rtmpdump options
 
