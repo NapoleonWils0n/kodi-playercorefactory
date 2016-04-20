@@ -211,3 +211,19 @@ RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 
 ```
 
 use sed to remove pageUrl=
+
+
+#### rtmpdump video regex code
+
+```
+RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?()@!#%[:blank:]_=\-]*'`
+RTMPR=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&?_=-]*'`
+RTMPS=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swfUrl=//'`
+RTMPF=`echo "$RTMP" | grep -Eo 'flashver=[a-zA-Z0-9\,]*' | sed 's/flashver=//'`
+RTMPT=`echo "$RTMP" | grep -Eo 'token=[a-zA-Z0-9.#%?()@!]*' | sed 's/token=//'`
+RTMPV=`echo "$RTMP" | grep -Eo 'live=[a-zA-Z]*' | sed 's/live=//'`
+RTMPM=`echo "$RTMP" | grep -Eo 'timeout=[0-9]*' | sed 's/timeout=//'`
+RTMPW=`echo "$RTMP" | grep -Eo 'swfUrl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swfUrl=//'`
+RTMPP=`echo "$RTMP" | grep -Eo 'pageUrl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 's/pageUrl=//'`
+```
+
