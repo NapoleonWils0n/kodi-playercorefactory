@@ -272,7 +272,7 @@ if the variable isnt empty we execute some code
 		[[ -z "$RTMPM" ]] && -m "$RTMPM" \
 		[[ -z "$RTMPW" ]] && -W "$RTMPW" \
 		[[ -z "$RTMPP" ]] && -p "$RTMPP" \
-		[[ -z "$RTMPP" ]] && -y "$RTMPY" \
+		[[ -z "$RTMPY" ]] && -y "$RTMPY" \
 		-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;  
 ```
 
