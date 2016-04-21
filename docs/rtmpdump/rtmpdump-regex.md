@@ -250,29 +250,3 @@ RTMPP=`echo "$RTMP" | grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*' | s
 RTMPY=`echo "$RTMP" | grep -Eo 'play[pP]ath=[a-zA-Z0-9/.:_-]*' | sed 's/play[pP]ath=//'`
 ```
 
-#### rip-record
-
-rip-record case statement
-
-we use a case statement and check if the variables are empty
-if the variable isnt empty we execute some code
-
-```
-[[ -z "$SOMEVARIABLE" ]] && -r "$SOMEVARIABLE" 
-```
-
-```
-"$RTMP")
-		rtmpdump \
-		[[ -z "$RTMPR" ]] && -r "$RTMPR" \
-		[[ -z "$RTMPS" ]] && -s "$RTMPS" \
-		[[ -z "$RTMPF" ]] && -f "$RTMPF" \
-		[[ -z "$RTMPT" ]] && -T "$RTMPT" \
-		[[ -z "$RTMPV" ]] && -v "$RTMPV" \
-		[[ -z "$RTMPM" ]] && -m "$RTMPM" \
-		[[ -z "$RTMPW" ]] && -W "$RTMPW" \
-		[[ -z "$RTMPP" ]] && -p "$RTMPP" \
-		[[ -z "$RTMPY" ]] && -y "$RTMPY" \
-		-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;  
-```
-
