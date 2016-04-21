@@ -30,6 +30,7 @@ pageUrl=http://www.hdcast.org/embedlive1.php?u=mamahdsky11&vw=854&vh=480
 -m Timeout the session after num seconds without receiving data from the server  
 -W URL of the SWF player for this media  
 -p URL of the web page in which the media was embedded  
+-y Overrides the playpath parsed from the RTMP URL
 -o save file to disk
 
 #### add rtmpdump options
@@ -215,6 +216,21 @@ RTMPP=`echo "$RTMP" | grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*' | s
 use sed to remove pageUrl=
 
 
+##### -y Overrides the playpath parsed from the RTMP URL
+
+```
+grep -Eo 'play[pP]ath=[a-zA-Z0-9/.:_-]*'
+```
+
+##### video regex code
+
+```
+RTMPY=`echo "$RTMP" | grep -Eo 'play[pP]ath=[a-zA-Z0-9/.:_-]*' | sed 's/play[pP]ath=//'`
+```
+
+remove playpath with sed
+
+
 #### rtmpdump video-regex.sh code
 
 video url is match by the VIDEOURL variable
@@ -231,6 +247,7 @@ RTMPV=`echo "$RTMP" | grep -Eo 'live=[a-zA-Z]*' | sed 's/live=//'`
 RTMPM=`echo "$RTMP" | grep -Eo 'timeout=[0-9]*' | sed 's/timeout=//'`
 RTMPW=`echo "$RTMP" | grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swf[uU]rl=//'`
 RTMPP=`echo "$RTMP" | grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 's/page[uU]rl=//'`
+RTMPY=`echo "$RTMP" | grep -Eo 'play[pP]ath=[a-zA-Z0-9/.:_-]*' | sed 's/play[pP]ath=//'`
 ```
 
 #### rip-record
