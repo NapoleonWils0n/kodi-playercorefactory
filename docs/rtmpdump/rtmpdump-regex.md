@@ -30,7 +30,7 @@ pageUrl=http://www.hdcast.org/embedlive1.php?u=mamahdsky11&vw=854&vh=480
 -m Timeout the session after num seconds without receiving data from the server  
 -W URL of the SWF player for this media  
 -p URL of the web page in which the media was embedded  
--y Overrides the playpath parsed from the RTMP URL
+-y Overrides the playpath parsed from the RTMP URL  
 -o save file to disk
 
 #### add rtmpdump options
