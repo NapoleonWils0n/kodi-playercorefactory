@@ -238,7 +238,9 @@ we then grep inside the VIDEOURL for various rtmpdump parameters
 which are then stored into different variables
 
 ```
+# entire video url
 RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?()@!#%[:blank:]_=\-]*'`
+# -r URL of the server and media content
 RTMPR=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*'`
 RTMPS=`echo "$RTMP" | grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf' | sed 's/swf[uU]rl=//'`
 RTMPF=`echo "$RTMP" | grep -Eo 'flash[vV]er=[a-zA-Z0-9\,]*' | sed 's/flash[vV]er=//'`
