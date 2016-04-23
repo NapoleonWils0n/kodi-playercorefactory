@@ -267,5 +267,7 @@ RTMPP=`echo "$RTMP" | grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*' | s
 
 # -y Overrides the playpath parsed from the RTMP URL
 RTMPY=`echo "$RTMP" | grep -Eo 'play[pP]ath=[a-zA-Z0-9/?.:&=_-]*' | sed 's/play[pP]ath=//'`
+
+# url combinations
 ```
 
