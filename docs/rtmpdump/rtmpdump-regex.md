@@ -347,3 +347,22 @@ esac
 done
 ```
 
+#### video-regex.sh code without comments
+
+```
+RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?()@!#%[:blank:]_=\-]*'`
+RTMPR=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*'`
+RTMPS=`echo "$RTMP" | grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9./_]*\.swf' | sed 's/swf[uU]rl=//'`
+RTMPF=`echo "$RTMP" | grep -Eo 'flash[vV]er=[a-zA-Z0-9\,]*' | sed 's/flash[vV]er=//'`
+RTMPT=`echo "$RTMP" | grep -Eo 'token=[a-zA-Z0-9.#%?()@!]*' | sed 's/token=//'`
+RTMPV=`echo "$RTMP" | grep -Eo 'live=[a-zA-Z]*' | sed 's/live=//'`
+RTMPVFY=`echo "$RTMP" | grep -Eo 'swf[vV]fy=(1|0|[tT]rue|[fF]alse)'`
+RTMPM=`echo "$RTMP" | grep -Eo 'timeout=[0-9]*' | sed 's/timeout=//'`
+RTMPW=`echo "$RTMP" | grep -Eo 'swf[uU]rl=(http|https)://[a-zA-Z0-9./_]*\.swf' | sed 's/swf[uU]rl=//'`
+RTMPP=`echo "$RTMP" | grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*' | sed 's/page[uU]rl=//'`
+RTMPY=`echo "$RTMP" | grep -Eo 'play[pP]ath=[a-zA-Z0-9/?.:&=_-]*' | sed 's/play[pP]ath=//'`
+RTMPXRSFTMVWP=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]swf[uU]rl=(http|https)://[a-zA-Z0-9./_]*\.swf[[:blank:]]flash[vV]er=[a-zA-Z0-9\,]*[[:blank:]]token=[a-zA-Z0-9.#%?()@!]*[[:blank:]]timeout=[0-9]*[[:blank:]]live=[a-zA-Z]*[[:blank:]]swf[vV]fy=(1|0|[tT]rue|[fF]alse)*[[:blank:]]page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*'`
+RTMPXRY=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]play[pP]ath=[a-zA-Z0-9/?.:&=_-]*'`
+RTMPXRSY=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]swf[uU]rl=(http|https)://[a-zA-Z0-9./_]*\.swf[[:blank:]]play[pP]ath=[a-zA-Z0-9/?.:&=_-]*'`
+```
+
