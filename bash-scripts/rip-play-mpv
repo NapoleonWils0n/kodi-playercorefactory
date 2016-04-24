@@ -16,7 +16,6 @@ case "$url" in
 	"$M3U8UAGENTREFERER") mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
 	"$REFUSERAGENT") mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	"$BEEB") mpv "$BEEB";;
-	"$RTMP") rtmpdump -i "$RTMP" | mpv -;;
 	"$RTMPXRSFTMVWP") rtmpdump -r "$RTMPR" -s "$RTMPS" -f "$RTMPF" -T "$RTMPT" \
 	 -m "$RTMPM" -v "$RTMPV" -W "$RTMPW" -p "$RTMPP" | mpv -;;
 	"$RTMPXRY") rtmpdump -r "$RTMPR" -y "$RTMPY" | mpv -;;
