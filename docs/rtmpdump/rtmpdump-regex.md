@@ -317,3 +317,36 @@ done \
 && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] \
 && notify-send -i kodi "Finished Recording" "$VIDEOURL"
 ```
+
+#### rip-play-mpv rtmpdump
+
+rtmpdump section of the main rip-play-mpv script
+
+```
+#!/bin/bash
+
+[[ $# -eq 1 ]] || exit
+[[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
+echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh 
+
+case "$url" in
+		  "$RTMPXRSFTMVWP")
+					  rtmpdump \
+					  -r "$RTMPR" -s "$RTMPS" -f "$RTMPF" -T "$RTMPT" \
+					  -m $RTMPM" -v "$RTMPV" -W "$RTMPW" -p "$RTMPP" \
+					  ${TFLAG} ${DURATION} \
+					  -o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+			"$RTMPXRY")
+					  rtmpdump \
+					  -r "$RTMPR" -y "$RTMPY" \
+					  ${TFLAG} ${DURATION} \
+					  -o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+			"$RTMPXRSY")
+					  rtmpdump \
+					  -r "$RTMPR" -s "$RTMPS" -y "$RTMPY" \
+					  ${TFLAG} ${DURATION} \
+					  -o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+esac 
+done
+```
+
