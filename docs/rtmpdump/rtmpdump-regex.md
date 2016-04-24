@@ -257,7 +257,7 @@ RTMPT=`echo "$RTMP" | grep -Eo 'token=[a-zA-Z0-9.#%?()@!]*' | sed 's/token=//'`
 RTMPV=`echo "$RTMP" | grep -Eo 'live=[a-zA-Z]*' | sed 's/live=//'`
 
 # swfVfy, corresponds to -W 
-RTMPVFY=`echo "$RTMP" | grep -Eo 'swf[vV]fy=[0-9]*'`
+RTMPVFY=`echo "$RTMP" | grep -Eo 'swf[vV]fy=(1|0|[tT]rue|[fF]alse)'`
 
 # -m Timeout the session after num seconds without receiving data from the server
 RTMPM=`echo "$RTMP" | grep -Eo 'timeout=[0-9]*' | sed 's/timeout=//'`
@@ -274,7 +274,7 @@ RTMPY=`echo "$RTMP" | grep -Eo 'play[pP]ath=[a-zA-Z0-9/?.:&=_-]*' | sed 's/play[
 # url combinations
 
 # -r, -s, -f, -T, -m, -v, -W, -p
-RTMPXRSFTMVWP=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf[[:blank:]]flash[vV]er=[a-zA-Z0-9\,]*[[:blank:]]token=[a-zA-Z0-9.#%?()@!]*[[:blank:]]timeout=[0-9]*[[:blank:]]live=[a-zA-Z]*[[:blank:]]swf[vV]fy=[0-9]*[[:blank:]]page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*'`
+RTMPXRSFTMVWP=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf[[:blank:]]flash[vV]er=[a-zA-Z0-9\,]*[[:blank:]]token=[a-zA-Z0-9.#%?()@!]*[[:blank:]]timeout=[0-9]*[[:blank:]]live=[a-zA-Z]*[[:blank:]]swf[vV]fy=(1|0|[tT]rue|[fF]alse)*[[:blank:]]page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*'`
 
 # -r, -y
 RTMPXRY=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]play[pP]ath=[a-zA-Z0-9/?.:&=_-]*'`
