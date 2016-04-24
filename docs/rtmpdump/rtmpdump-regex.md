@@ -285,6 +285,8 @@ RTMPXRSY=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:bl
 
 #### rip-record rtmpdump
 
+rtmpdump section of main rip-record script
+
 ```
 #!/bin/bash
 
