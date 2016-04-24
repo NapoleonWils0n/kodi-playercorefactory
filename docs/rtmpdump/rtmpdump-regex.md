@@ -272,7 +272,11 @@ RTMPP=`echo "$RTMP" | grep -Eo 'page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*' | s
 RTMPY=`echo "$RTMP" | grep -Eo 'play[pP]ath=[a-zA-Z0-9/?.:&=_-]*' | sed 's/play[pP]ath=//'`
 
 # url combinations
+
 # -r, -s, -f, -T, -m, -v, -W, -p
 RTMPXRSFTMVWP=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]swf[uU]rl=(http|https)://[a-zA-Z0-9./]*\.swf[[:blank:]]flash[vV]er=[a-zA-Z0-9\,]*[[:blank:]]token=[a-zA-Z0-9.#%?()@!]*[[:blank:]]timeout=[0-9]*[[:blank:]]live=[a-zA-Z]*[[:blank:]]swf[vV]fy=[0-9]*[[:blank:]]page[uU]rl=(http|https)://[a-zA-Z0-9/.?&=]*'`
+
+# -r, -y
+RTMPXRY=`echo "$RTMP" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;?_=-]*[[:blank:]]play[pP]ath=[a-zA-Z0-9/?.:&=_-]*'`
 ```
 
