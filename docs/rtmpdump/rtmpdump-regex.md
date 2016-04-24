@@ -305,6 +305,11 @@ case "$url" in
 					-r "$RTMPR" -y "$RTMPY" \
 					${TFLAG} ${DURATION} \
 					-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+			"$RTMPXRSY")
+					rtmpdump \
+					-r "$RTMPR" -s "$RTMPS" -y "$RTMPY" \
+					${TFLAG} ${DURATION} \
+					-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 esac 
 done \
 && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] \
