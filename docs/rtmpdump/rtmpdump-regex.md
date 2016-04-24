@@ -334,18 +334,15 @@ case "$url" in
 					  rtmpdump \
 					  -r "$RTMPR" -s "$RTMPS" -f "$RTMPF" -T "$RTMPT" \
 					  -m $RTMPM" -v "$RTMPV" -W "$RTMPW" -p "$RTMPP" \
-					  ${TFLAG} ${DURATION} \
-					  -o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+					  | mpv -;;
 			"$RTMPXRY")
 					  rtmpdump \
 					  -r "$RTMPR" -y "$RTMPY" \
-					  ${TFLAG} ${DURATION} \
-					  -o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+					  | mpv -;;
 			"$RTMPXRSY")
 					  rtmpdump \
 					  -r "$RTMPR" -s "$RTMPS" -y "$RTMPY" \
-					  ${TFLAG} ${DURATION} \
-					  -o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+					  | mpv -;;
 esac 
 done
 ```
