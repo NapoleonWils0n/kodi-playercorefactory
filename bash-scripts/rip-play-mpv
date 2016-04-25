@@ -16,9 +16,11 @@ case "$url" in
 	"$M3U8UAGENTREFERER") mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
 	"$REFUSERAGENT") mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	"$BEEB") mpv "$BEEB";;
+	"$RTMP") rtmpdump -i "$RTMP" | mpv -;;
 	"$RTMPXRSFTMVWP") rtmpdump -r "$RTMPR" -s "$RTMPS" -f "$RTMPF" -T "$RTMPT" -v "$RTMPV" -m "$RTMPM" -W "$RTMPW" -p "$RTMPP" | mpv -;;
 	"$RTMPXRY") rtmpdump -r "$RTMPR" -y "$RTMPY" | mpv -;;
 	"$RTMPXRSY") rtmpdump -r "$RTMPR" -s "$RTMPS" -y "$RTMPY" | mpv -;;
+	"$RTMPXRSYVFY") rtmpdump -r "$RTMPR" -s "$RTMPS" -y "$RTMPY" | mpv -;;
 	*) mpv "$VIDEOURL";;
 esac 
 done
