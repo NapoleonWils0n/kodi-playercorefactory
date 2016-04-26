@@ -3,7 +3,7 @@
 grep rtmp vide stream need to escape blackslash
 
 ```
-grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?[:blank:]#%@!()_=-]*'
+grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9\:0-9/.&;,~*?[:blank:]#%@!()_=-]*'
 ```
 
 url to match 
@@ -21,7 +21,7 @@ grep command and case statement
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
 echo $VIDEOURL | while read url; do 
 
-RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?[:blank:]#%@!()_=-]*'`
+RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9\:0-9/.&;,~*?[:blank:]#%@!()_=-]*'`
 
 case "$url" in
 	"$VIDEOFILE") mpv "$VIDEOFILE";;
