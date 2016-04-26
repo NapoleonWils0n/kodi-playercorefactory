@@ -5,18 +5,18 @@
 echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh 
 
 case "$url" in
-	$VIDEOFILE) mpv $VIDEOFILE;;
-	$M3U8) mpv $M3U8;;
-	$M3U8TOKEN) mpv $M3U8TOKEN;;
-	$XFORWARD) mpv --http-header-fields="X-Forwarded-For: $XFORWARDIP" $M3U8;;
-	$USEREF) mpv --user-agent=$USERAGENT --referrer=$REFERER $VIDEOFILE;;
-	$M3U8USERAGENT) mpv --user-agent=$USERAGENT $M3U8;;
-	$M3U8USERAGENT2) mpv --user-agent=$USERAGENT $M3U8UAG;;
-	$GVID) mpv $GVID;;
-	$M3U8UAGENTREFERER) mpv --user-agent=$USERAGENT --referrer=$REFERER $M3U8UAGNTREF;;
-	$REFUSERAGENT) mpv --user-agent=$USERAGENT --referrer=$REFERER $VIDEOFILE;;
-	$BEEB) mpv $BEEB;;
-	$RTMP) rtmpdump -i $RTMP | mpv -;;
-	*) mpv $VIDEOURL;;
+	$VIDEOFILE) mpv "$VIDEOFILE";;
+	$M3U8) mpv "$M3U8";;
+	$M3U8TOKEN) mpv "$M3U8TOKEN";;
+	$XFORWARD) mpv --http-header-fields="X-Forwarded-For: $XFORWARDIP" "$M3U8";;
+	$USEREF) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
+	$M3U8USERAGENT) mpv --user-agent="$USERAGENT" "$M3U8";;
+	$M3U8USERAGENT2) mpv --user-agent="$USERAGENT" "$M3U8UAG";;
+	$GVID) mpv "$GVID";;
+	$M3U8UAGENTREFERER) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
+	$REFUSERAGENT) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
+	$BEEB) mpv "$BEEB";;
+	$RTMP) rtmpdump -i "$RTMP" | mpv -;;
+	*) mpv "$VIDEOURL";;
 esac 
 done
