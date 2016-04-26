@@ -55,10 +55,10 @@ case "$url" in
 		ffmpeg -hide_banner -i "$BEEB" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
-	"$RTMP")
-		rtmpdump -i "$RTMP" | ffmpeg -hide_banner -i - \
-		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+	$RTMP)
+		rtmpdump -i "$RTMP" \
+		${TFLAG} ${DURATION} \
+		-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	*)
 		ffmpeg -hide_banner -i "$VIDEOURL" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
