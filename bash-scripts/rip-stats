@@ -6,64 +6,64 @@ echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash
 
 
 case "$url" in
-	"$VIDEOFILE")
+	$VIDEOFILE)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
 		-i "$VIDEOFILE" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$M3U8")
+	$M3U8)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$M3U8TOKEN")
+	$M3U8TOKEN)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8TOKEN" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$XFORWARD")
+	$XFORWARD)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$USEREF")
+	$USEREF)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$M3U8USERAGENT")
+	$M3U8USERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$M3U8USERAGENT2")
+	$M3U8USERAGENT2)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8UAG" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$GVID")
+	$GVID)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$GVID" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$M3U8UAGENTREFERER")
+	$M3U8UAGENTREFERER)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' \
 		-i "$M3U8UAGNTREF" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$REFUSERAGENT")
+	$REFUSERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
 		-i "$VIDEOFILE" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$BEEB")
+	$BEEB)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$BEEB" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
-	"$RTMP")
+	$RTMP)
 		rtmpdump -i "$RTMP" | ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i - \
