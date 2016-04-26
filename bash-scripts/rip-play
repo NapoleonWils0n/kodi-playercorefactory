@@ -16,7 +16,7 @@ case "$url" in
 	"$M3U8UAGENTREFERER") ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8UAGNTREF";;
 	"$REFUSERAGENT") ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
 	"$BEEB") ffplay -hide_banner -x 640 -y 360 "$BEEB";;
-	"$RTMP") rtmpdump -i "$RTMP" | ffplay -hide_banner -x 640 -y 360 -;;
+	$RTMP) rtmpdump -i "$RTMP" | ffplay -hide_banner -x 640 -y 360 -;;
 	*) ffplay -hide_banner -x 640 -y 360 "$VIDEOURL";;
 esac 
 done
