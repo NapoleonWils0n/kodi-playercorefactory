@@ -16,6 +16,4 @@ M3U8UAGNTREF=`echo "$M3U8UAGENTREFERER" | grep -Eo '(^http|https)://[a-zA-Z0-9:0
 REFUSERAGENT=`echo "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&User-Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*'`
 BEEB=`echo "$VIDEOURL" | grep -Eo '^(http|https)://[a-zA-Z0-9:0-9/.&;,~*?[:blank:]_=-]*'`
 GVID=`echo "$VIDEOURL" | grep -Eo '^(http|https)://[a-zA-Z0-9:0-9/.&;,~*?_=-]*'`
-#RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[a-zA-Z0-9:0-9/.&;,~*?[:blank:]_=-]*'`
 RTMP=`echo "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[-/.&;,~*?[:blank:]#%@!()_=:a-zA-Z0-9\]*'`
-RTMP2=`echo "$VIDEOURL" | grep -Eo '[a-zA-Z0-9]*'`
