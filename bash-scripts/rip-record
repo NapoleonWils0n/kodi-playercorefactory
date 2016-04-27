@@ -59,6 +59,12 @@ case "$url" in
 		rtmpdump -i "$RTMP" \
 		${TFLAG} ${DURATION} \
 		-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+	$COOKIEM3U8)
+		ffmpeg -hide_banner -loglevel panic \
+		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
+		-i "$COOKIEM3U8" \
+		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	*)
 		ffmpeg -hide_banner -i "$VIDEOURL" \
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
