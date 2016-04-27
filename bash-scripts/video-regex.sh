@@ -17,3 +17,5 @@ REFUSERAGENT=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9
 BEEB=$(printf "%s" "$VIDEOURL" | grep -Eo '^(http|https)://[a-zA-Z0-9:0-9/.&;,~*?[:blank:]_=-]*')
 GVID=$(printf "%s" "$VIDEOURL" | grep -Eo '^(http|https)://[a-zA-Z0-9:0-9/.&;,~*?_=-]*')
 RTMP=$(printf "%s" "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[-/.&;,~*?[:blank:]#%@!()_=:a-zA-Z0-9\]*')
+COOKIEM3U8=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)\?nltid=[a-zA-Z0-9&%_*=]*')
+COOKIEDOMAIN=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
