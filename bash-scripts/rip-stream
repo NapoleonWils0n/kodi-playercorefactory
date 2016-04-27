@@ -3,7 +3,7 @@
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
 TFLAG="$2"; DURATION="$3"
-echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh 
+printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh 
 
 case "$url" in
 	$VIDEOFILE)
