@@ -63,7 +63,7 @@ case "$url" in
 		-i "$BEEB" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
 	$RTMP)
-		rtmpdump -i "$RTMP" | ffprobe -v error -hide_banner -pretty -show_entries \
+		rtmpdump -q -i "$RTMP" | ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i - \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;

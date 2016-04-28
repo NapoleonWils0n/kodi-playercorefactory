@@ -16,7 +16,7 @@ case "$url" in
 	$M3U8UAGENTREFERER) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
 	$REFUSERAGENT) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$BEEB) mpv "$BEEB";;
-	$RTMP) rtmpdump -i "$RTMP" | mpv -;;
+	$RTMP) rtmpdump -q -i "$RTMP" | mpv -;;
 	*) mpv "$VIDEOURL";;
 esac 
 done

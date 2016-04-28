@@ -56,7 +56,7 @@ case "$url" in
 		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	$RTMP)
-		rtmpdump -i "$RTMP" \
+		rtmpdump -q -i "$RTMP" \
 		${TFLAG} ${DURATION} \
 		-o "$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	$COOKIEM3U8)

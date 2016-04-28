@@ -74,7 +74,7 @@ case "$url" in
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$RTMP)
-		rtmpdump -i "$RTMP" | ffmpeg -hide_banner -loglevel error \
+		rtmpdump -q -i "$RTMP" | ffmpeg -hide_banner -loglevel error \
 		-i - \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \

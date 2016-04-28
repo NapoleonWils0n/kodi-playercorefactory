@@ -16,7 +16,7 @@ case "$url" in
 	$M3U8UAGENTREFERER) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | vlc fd://0;;
 	$REFUSERAGENT) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
 	$BEEB) vlc "$BEEB";;
-	$RTMP) rtmpdump -i "$RTMP" | vlc fd://0;;
+	$RTMP) rtmpdump -q -i "$RTMP" | vlc fd://0;;
 	*) vlc "$VIDEOURL";;
 esac 
 done
