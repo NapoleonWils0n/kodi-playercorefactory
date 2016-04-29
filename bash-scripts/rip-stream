@@ -3,10 +3,10 @@
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
 TFLAG="$2"; DURATION="$3"
-echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh 
+printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh 
 
 case "$url" in
-	"$VIDEOFILE")
+	$VIDEOFILE)
 		ffmpeg -hide_banner -re -i "$VIDEOFILE" \
 		-c:v libx265 -preset ultrafast -tune zero-latency \
 		-x265-params crf=28 \
@@ -14,22 +14,22 @@ case "$url" in
 		${TFLAG} ${DURATION} \
 		-maxrate 4000k -bufsize 4000k \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$M3U8")
+	$M3U8)
 		ffmpeg -hide_banner -i "$M3U8" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316 2>&1 | sed '/\[/d';;
-	"$M3U8TOKEN")
+	$M3U8TOKEN)
 		ffmpeg -hide_banner -loglevel panic -i "$M3U8TOKEN" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$XFORWARD")
+	$XFORWARD)
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$USEREF")
+	$USEREF)
 		ffmpeg -hide_banner -re -i  "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
 		-c:v libx265 -preset ultrafast -tune zero-latency \
 		-x265-params crf=28 \
@@ -37,46 +37,52 @@ case "$url" in
 		${TFLAG} ${DURATION} \
 		-maxrate 4000k -bufsize 4000k \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$M3U8USERAGENT")
+	$M3U8USERAGENT)
 		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$M3U8USERAGENT2")
+	$M3U8USERAGENT2)
 		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8UAG" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$GVID")
+	$GVID)
 		ffmpeg -hide_banner -loglevel error \
 		-i "$GVID" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$M3U8UAGENTREFERER")
+	$M3U8UAGENTREFERER)
 		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" \
 		-headers 'Referer: '"$REFERER"''$'\r\n' \
 		-i "$M3U8UAGNTREF" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$REFUSERAGENT")
+	$REFUSERAGENT)
 		ffmpeg -hide_banner -loglevel error \
 		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
 		-i "$VIDEOFILE" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$BEEB")
+	$BEEB)
 		ffmpeg -hide_banner -loglevel error \
 		-i "$BEEB" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	"$RTMP")
-		rtmpdump -i "$RTMP" | ffmpeg -hide_banner -loglevel error \
+	$RTMP)
+		rtmpdump -q -i "$RTMP" | ffmpeg -hide_banner -loglevel error \
 		-i - \
 		-c:v copy -c:a copy \
+		${TFLAG} ${DURATION} \
+		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+	$COOKIEM3U8)
+		ffmpeg -hide_banner -loglevel error \
+		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
+		-i "$COOKIEM3U8" \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	*)

@@ -2,21 +2,21 @@
 
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
-echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/video-regex.sh 
+printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/video-regex.sh 
 
 case "$url" in
-	"$VIDEOFILE") /Applications/mpv.app/Contents/MacOS/mpv "$VIDEOFILE";;
-	"$M3U8") /Applications/mpv.app/Contents/MacOS/mpv "$M3U8";;
-	"$M3U8TOKEN") /Applications/mpv.app/Contents/MacOS/mpv "$M3U8TOKEN";;
-	"$XFORWARD") /Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="X-Forwarded-For: $XFORWARDIP" "$M3U8";;
-	"$USEREF") /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
-	"$M3U8USERAGENT") /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" "$M3U8";;
-	"$M3U8USERAGENT2") /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" "$M3U8UAG";;
-	"$GVID") /Applications/mpv.app/Contents/MacOS/mpv "$GVID";;
-	"$M3U8UAGENTREFERER") /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
-	"$REFUSERAGENT") /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
-	"$BEEB") /Applications/mpv.app/Contents/MacOS/mpv "$BEEB";;
-	"$RTMP") /usr/local/bin/rtmpdump -i "$RTMP" | /Applications/mpv.app/Contents/MacOS/mpv -;;
+	$VIDEOFILE) /Applications/mpv.app/Contents/MacOS/mpv "$VIDEOFILE";;
+	$M3U8) /Applications/mpv.app/Contents/MacOS/mpv "$M3U8";;
+	$M3U8TOKEN) /Applications/mpv.app/Contents/MacOS/mpv "$M3U8TOKEN";;
+	$XFORWARD) /Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="X-Forwarded-For: $XFORWARDIP" "$M3U8";;
+	$USEREF) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
+	$M3U8USERAGENT) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" "$M3U8";;
+	$M3U8USERAGENT2) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" "$M3U8UAG";;
+	$GVID) /Applications/mpv.app/Contents/MacOS/mpv "$GVID";;
+	$M3U8UAGENTREFERER) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
+	$REFUSERAGENT) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
+	$BEEB) /Applications/mpv.app/Contents/MacOS/mpv "$BEEB";;
+	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | /Applications/mpv.app/Contents/MacOS/mpv -;;
 	*) /Applications/mpv.app/Contents/MacOS/mpv "$VIDEOURL";;
 esac 
 done

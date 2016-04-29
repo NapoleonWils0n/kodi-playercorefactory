@@ -2,21 +2,21 @@
 
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
-echo $VIDEOURL | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/video-regex.sh
+printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/video-regex.sh
 
 case "$url" in
-	"$VIDEOFILE") /Applications/VLC.app/Contents/MacOS/VLC "$VIDEOFILE" 2> /dev/null;;
-	"$M3U8") /Applications/VLC.app/Contents/MacOS/VLC "$M3U8" 2> /dev/null;;
-	"$M3U8TOKEN") /Applications/VLC.app/Contents/MacOS/VLC "$M3U8TOKEN" 2> /dev/null;;
-	"$XFORWARD") /usr/local/bin/wget -c --header="X-Forwarded-For: $XFORWARDIP" "$M3U8" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	"$USEREF") /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	"$M3U8USERAGENT")  /usr/local/bin/wget -c -U "$USERAGENT" "$M3U8" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	"$M3U8USERAGENT2") /usr/local/bin/wget -c -U "$USERAGENT" "$M3U8UAG" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	"$GVID") /Applications/VLC.app/Contents/MacOS/VLC "$GVID" 2> /dev/null;;
-	"$M3U8UAGENTREFERER") /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	"$REFUSERAGENT") /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	"$BEEB") /Applications/VLC.app/Contents/MacOS/VLC "$BEEB" 2> /dev/null;;
-	"$RTMP") /usr/local/bin/rtmpdump -i "$RTMP" | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$VIDEOFILE) /Applications/VLC.app/Contents/MacOS/VLC "$VIDEOFILE" 2> /dev/null;;
+	$M3U8) /Applications/VLC.app/Contents/MacOS/VLC "$M3U8" 2> /dev/null;;
+	$M3U8TOKEN) /Applications/VLC.app/Contents/MacOS/VLC "$M3U8TOKEN" 2> /dev/null;;
+	$XFORWARD) /usr/local/bin/wget -c --header="X-Forwarded-For: $XFORWARDIP" "$M3U8" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$USEREF) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$M3U8USERAGENT)  /usr/local/bin/wget -c -U "$USERAGENT" "$M3U8" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$M3U8USERAGENT2) /usr/local/bin/wget -c -U "$USERAGENT" "$M3U8UAG" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$GVID) /Applications/VLC.app/Contents/MacOS/VLC "$GVID" 2> /dev/null;;
+	$M3U8UAGENTREFERER) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$REFUSERAGENT) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$BEEB) /Applications/VLC.app/Contents/MacOS/VLC "$BEEB" 2> /dev/null;;
+	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
 	*) /Applications/VLC.app/Contents/MacOS/VLC "$VIDEOURL" 2> /dev/null;;
 esac 
 done
