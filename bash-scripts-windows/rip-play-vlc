@@ -2,21 +2,21 @@
 
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
-echo $VIDEOURL | while read url; do source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh"
+printf "%s\n" "$VIDEOURL" | while read url; do source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh"
 
 case "$url" in
-	"$VIDEOFILE") vlc "$VIDEOFILE";;
-	"$M3U8") vlc "$M3U8";;
-	"$M3U8TOKEN") vlc "$M3U8TOKEN";;
-	"$XFORWARD") wget -c --header="X-Forwarded-For: $XFORWARDIP" "$M3U8" -O- | vlc fd://0;;
-	"$USEREF") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
-	"$M3U8USERAGENT")  wget -c -U "$USERAGENT" "$M3U8" -O- | vlc fd://0;;
-	"$M3U8USERAGENT2") wget -c -U "$USERAGENT" "$M3U8UAG" -O- | vlc fd://0;;
-	"$GVID") vlc "$GVID";;
-	"$M3U8UAGENTREFERER") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | vlc fd://0;;
-	"$REFUSERAGENT") wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
-	"$BEEB") vlc "$BEEB";;
-	"$RTMP") rtmpdump -i "$RTMP" | vlc fd://0;;
+	$VIDEOFILE) vlc "$VIDEOFILE";;
+	$M3U8) vlc "$M3U8";;
+	$M3U8TOKEN) vlc "$M3U8TOKEN";;
+	$XFORWARD) wget -c --header="X-Forwarded-For: $XFORWARDIP" "$M3U8" -O- | vlc fd://0;;
+	$USEREF) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
+	$M3U8USERAGENT)  wget -c -U "$USERAGENT" "$M3U8" -O- | vlc fd://0;;
+	$M3U8USERAGENT2) wget -c -U "$USERAGENT" "$M3U8UAG" -O- | vlc fd://0;;
+	$GVID) vlc "$GVID";;
+	$M3U8UAGENTREFERER) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | vlc fd://0;;
+	$REFUSERAGENT) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
+	$BEEB) vlc "$BEEB";;
+	$RTMP) rtmpdump -q -i "$RTMP" | vlc fd://0;;
 	*) vlc "$VIDEOURL";;
 esac 
 done
