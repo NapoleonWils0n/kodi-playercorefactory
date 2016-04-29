@@ -2,70 +2,76 @@
 
 [[ $# -eq 1 ]] || exit
 [[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
-echo $VIDEOURL | while read url; do source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh"
+printf "%s\n" "$VIDEOURL" | while read url; do source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh"
 
 case "$url" in
-	"$VIDEOFILE")
+	$VIDEOFILE)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
 		-i "$VIDEOFILE" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$M3U8")
+	$M3U8)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$M3U8TOKEN")
+	$M3U8TOKEN)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8TOKEN" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$XFORWARD")
+	$XFORWARD)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$USEREF")
+	$USEREF)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$M3U8USERAGENT")
+	$M3U8USERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$M3U8USERAGENT2")
+	$M3U8USERAGENT2)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8UAG" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$GVID")
+	$GVID)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$GVID" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$M3U8UAGENTREFERER")
+	$M3U8UAGENTREFERER)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' \
 		-i "$M3U8UAGNTREF" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$REFUSERAGENT")
+	$REFUSERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
 		-i "$VIDEOFILE" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$BEEB")
+	$BEEB)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
 		-i "$BEEB" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	"$RTMP")
-		rtmpdump -i "$RTMP" | ffprobe -v error -hide_banner -pretty -show_entries \
+	$RTMP)
+		rtmpdump -q -i "$RTMP" | ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i - \
+		| tee "$USERPROFILE/Desktop/video-stats.txt";;
+	$COOKIEM3U8)
+		ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
+		-i "$COOKIEM3U8" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
 	*)
 		ffprobe -v error -hide_banner -pretty -show_entries \
