@@ -1,7 +1,7 @@
 #!/bin/bash
 
 [[ $# -eq 1 ]] || exit
-[[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
+[[ -f "$1" ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
 printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/video-regex.sh 
 
 case "$url" in
