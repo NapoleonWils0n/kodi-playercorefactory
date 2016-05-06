@@ -30,7 +30,7 @@ case "$url" in
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$USEREF)
-		ffmpeg -hide_banner -re -i  "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
+		ffmpeg -hide_banner -re -i  "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$VIDEOFILE" \
 		-c:v libx265 -preset ultrafast -tune zero-latency \
 		-x265-params crf=28 \
 		-c:a aac -strict experimental -b:a 192k \
