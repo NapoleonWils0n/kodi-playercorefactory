@@ -28,7 +28,7 @@ case "$url" in
 	$USEREF)
 		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$URL" \
+		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$VIDEOFILE" \
 		> "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
 	$M3U8USERAGENT)
 		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
