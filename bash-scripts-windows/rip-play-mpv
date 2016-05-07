@@ -15,7 +15,6 @@ case "$url" in
 	$GVID) mpv --vo=direct3d "$GVID";;
 	$M3U8UAGENTREFERER) mpv --vo=direct3d --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
 	$REFUSERAGENT) mpv --vo=direct3d --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
-	$BEEB) mpv --vo=direct3d "$BEEB";;
 	$RTMP) rtmpdump -q -i "$RTMP" | mpv --vo=direct3d -;;
 	*) mpv --vo=direct3d "$VIDEOURL";;
 esac 
