@@ -15,7 +15,6 @@ case "$url" in
 	$GVID) /Applications/VLC.app/Contents/MacOS/VLC "$GVID" 2> /dev/null;;
 	$M3U8UAGENTREFERER) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
 	$REFUSERAGENT) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	$BEEB) /Applications/VLC.app/Contents/MacOS/VLC "$BEEB" 2> /dev/null;;
 	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
 	*) /Applications/VLC.app/Contents/MacOS/VLC "$VIDEOURL" 2> /dev/null;;
 esac 

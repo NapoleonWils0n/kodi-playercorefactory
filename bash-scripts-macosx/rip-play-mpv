@@ -15,7 +15,6 @@ case "$url" in
 	$GVID) /Applications/mpv.app/Contents/MacOS/mpv "$GVID";;
 	$M3U8UAGENTREFERER) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
 	$REFUSERAGENT) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
-	$BEEB) /Applications/mpv.app/Contents/MacOS/mpv "$BEEB";;
 	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | /Applications/mpv.app/Contents/MacOS/mpv -;;
 	*) /Applications/mpv.app/Contents/MacOS/mpv "$VIDEOURL";;
 esac 

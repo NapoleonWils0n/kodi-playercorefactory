@@ -15,7 +15,6 @@ case "$url" in
 	$GVID) $HOME/bin/ffplay -hide_banner -x 640 -y 360 "$GVID";;
 	$M3U8UAGENTREFERER) $HOME/bin/ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8UAGNTREF";;
 	$REFUSERAGENT) $HOME/bin/ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
-	$BEEB) $HOME/bin/ffplay -hide_banner -x 640 -y 360 "$BEEB";;
 	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | $HOME/bin/ffplay -hide_banner -x 640 -y 360 -;;
 	*) $HOME/bin/ffplay -hide_banner -x 640 -y 360 "$VIDEOURL";;
 esac 
