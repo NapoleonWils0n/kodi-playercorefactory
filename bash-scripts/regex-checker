@@ -1,0 +1,35 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] || exit
+[[ -f "$1" ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
+printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh
+
+case "$url" in
+	$VIDEOFILE)
+		printf "%s\n" VIDEOFILE;;
+	$M3U8)
+		printf "%s\n" M3U8;;
+	$M3U8TOKEN)
+		printf "%s\n" M3U8TOKEN;;
+	$XFORWARD)
+		printf "%s\n" XFORWARD;;
+	$USEREF)
+		printf "%s\n" USEREF;;
+	$M3U8USERAGENT)
+		printf "%s\n" M3U8USERAGENT;;
+	$M3U8USERAGENT2)
+		printf "%s\n" M3U8USERAGENT2;;
+	$GVID)
+		printf "%s\n" GVID;;
+	$M3U8UAGENTREFERER)
+		printf "%s\n" M3U8UAGENTREFERER;;
+	$REFUSERAGENT)
+		printf "%s\n" REFUSERAGENT;;
+	$RTMP)
+		printf "%s\n" RTMP;;
+	$COOKIEM3U8)
+		printf "%s\n" COOKIEM3U8;;
+	*)
+		printf "%s\n" WILDCARD;;
+esac 
+done
