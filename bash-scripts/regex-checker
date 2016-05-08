@@ -19,8 +19,6 @@ case "$url" in
 		printf "%s\n" M3U8USERAGENT;;
 	$M3U8USERAGENT2)
 		printf "%s\n" M3U8USERAGENT2;;
-	$HTTP)
-		printf "%s\n" HTTP;;
 	$M3U8UAGENTREFERER)
 		printf "%s\n" M3U8UAGENTREFERER;;
 	$REFUSERAGENT)
@@ -29,6 +27,8 @@ case "$url" in
 		printf "%s\n" RTMP;;
 	$COOKIEM3U8)
 		printf "%s\n" COOKIEM3U8;;
+	$HTTP)
+		printf "%s\n" HTTP;;
 	*)
 		printf "%s\n" WILDCARD;;
 esac 
