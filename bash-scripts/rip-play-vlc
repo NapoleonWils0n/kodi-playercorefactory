@@ -12,7 +12,7 @@ case "$url" in
 	$USEREF) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
 	$M3U8USERAGENT)  wget -c -U "$USERAGENT" "$M3U8" -O- | vlc fd://0;;
 	$M3U8USERAGENT2) wget -c -U "$USERAGENT" "$M3U8UAG" -O- | vlc fd://0;;
-	$GVID) vlc "$GVID";;
+	$HTTP) vlc "$HTTP";;
 	$M3U8UAGENTREFERER) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8" -O- | vlc fd://0;;
 	$REFUSERAGENT) wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | vlc fd://0;;
 	$RTMP) rtmpdump -q -i "$RTMP" | vlc fd://0;;

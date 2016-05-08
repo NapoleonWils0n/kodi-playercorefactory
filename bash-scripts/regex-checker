@@ -19,8 +19,8 @@ case "$url" in
 		printf "%s\n" M3U8USERAGENT;;
 	$M3U8USERAGENT2)
 		printf "%s\n" M3U8USERAGENT2;;
-	$GVID)
-		printf "%s\n" GVID;;
+	$HTTP)
+		printf "%s\n" HTTP;;
 	$M3U8UAGENTREFERER)
 		printf "%s\n" M3U8UAGENTREFERER;;
 	$REFUSERAGENT)
