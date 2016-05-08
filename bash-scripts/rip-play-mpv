@@ -12,10 +12,10 @@ case "$url" in
 	$USEREF) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$M3U8USERAGENT) mpv --user-agent="$USERAGENT" "$M3U8";;
 	$M3U8USERAGENT2) mpv --user-agent="$USERAGENT" "$M3U8UAG";;
-	$HTTP) mpv "$HTTP";;
 	$M3U8UAGENTREFERER) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8";;
 	$REFUSERAGENT) mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$RTMP) rtmpdump -q -i "$RTMP" | mpv -;;
+	$HTTP) mpv "$HTTP";;
 	*) mpv "$VIDEOURL";;
 esac 
 done
