@@ -49,7 +49,7 @@ case "$url" in
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' \
-		-i "$M3U8UAGNTREF" \
+		-i "$M3U8" \
 		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
 	$REFUSERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \

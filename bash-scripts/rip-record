@@ -41,7 +41,7 @@ case "$url" in
 	$M3U8UAGENTREFERER)
 		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" \
 		-headers 'Referer: '"$REFERER"''$'\r\n' \
-		-i "$M3U8UAGNTREF" \
+		-i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
 	$REFUSERAGENT)
