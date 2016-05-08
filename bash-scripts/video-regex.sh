@@ -12,7 +12,7 @@ REFERER=$(printf "%s" "$VIDEOURL" | grep -Eo 'Referer=(http|https)(://|%3A%2F%2F
 M3U8USERAGENT=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)[a-zA-Z0-9?&=%*]*\|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
 M3U8USERAGENT2=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)[a-zA-Z0-9?&=%*]*\|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
 #M3U8UAGENTREFERER=$(printf "%s" "$VIDEOURL" | grep -Eo '(^http|https)://[a-zA-Z0-9:0-9./?=_&@%|()[:blank:],;-]*')
-REFUSERAGENT=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&User-Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*')
+REFUSERAGENT=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*')
 GVID=$(printf "%s" "$VIDEOURL" | grep -Eo '^(http|https)://[a-zA-Z0-9:0-9/.&@%;,~*?_=-]*')
 RTMP=$(printf "%s" "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[-/.&;,~*?[:blank:]#%@!()_=:a-zA-Z0-9\]*')
 COOKIEM3U8=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)\?nltid=[a-zA-Z0-9&%_*=]*')
