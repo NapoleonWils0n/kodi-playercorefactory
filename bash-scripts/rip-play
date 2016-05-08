@@ -12,10 +12,10 @@ case "$url" in
 	$USEREF) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$VIDEOFILE";;
 	$M3U8USERAGENT) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" "$M3U8";;
 	$M3U8USERAGENT2) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" "$M3U8UAG";;
-	$HTTP) ffplay -hide_banner -x 640 -y 360 "$HTTP";;
 	$M3U8UAGENTREFERER) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8";;
 	$REFUSERAGENT) ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
 	$RTMP) rtmpdump -q -i "$RTMP" | ffplay -hide_banner -x 640 -y 360 -;;
+	$HTTP) ffplay -hide_banner -x 640 -y 360 "$HTTP";;
 	*) ffplay -hide_banner -x 640 -y 360 "$VIDEOURL";;
 esac 
 done
