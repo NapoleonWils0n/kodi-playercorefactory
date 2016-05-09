@@ -40,16 +40,11 @@ case "$url" in
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8UAG" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
-	$GVID)
-		ffprobe -v error -hide_banner -pretty -show_entries \
-		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-i "$GVID" \
-		| tee "$USERPROFILE/Desktop/video-stats.txt";;
 	$M3U8UAGENTREFERER)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' \
-		-i "$M3U8UAGNTREF" \
+		-i "$M3U8" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
 	$REFUSERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \
@@ -67,6 +62,11 @@ case "$url" in
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
 		-i "$COOKIEM3U8" \
+		| tee "$USERPROFILE/Desktop/video-stats.txt";;
+	$HTTP)
+		ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-i "$HTTP" \
 		| tee "$USERPROFILE/Desktop/video-stats.txt";;
 	*)
 		ffprobe -v error -hide_banner -pretty -show_entries \
