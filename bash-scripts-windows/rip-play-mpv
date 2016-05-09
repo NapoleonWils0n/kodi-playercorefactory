@@ -12,10 +12,10 @@ case "$url" in
 	$USEREF) mpv --vo=direct3d --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$M3U8USERAGENT) mpv --vo=direct3d --user-agent="$USERAGENT" "$M3U8";;
 	$M3U8USERAGENT2) mpv --vo=direct3d --user-agent="$USERAGENT" "$M3U8UAG";;
-	$GVID) mpv --vo=direct3d "$GVID";;
-	$M3U8UAGENTREFERER) mpv --vo=direct3d --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
+	$M3U8UAGENTREFERER) mpv --vo=direct3d --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8";;
 	$REFUSERAGENT) mpv --vo=direct3d --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$RTMP) rtmpdump -q -i "$RTMP" | mpv --vo=direct3d -;;
+	$HTTP) mpv --vo=direct3d "$HTTP";;
 	*) mpv --vo=direct3d "$VIDEOURL";;
 esac 
 done
