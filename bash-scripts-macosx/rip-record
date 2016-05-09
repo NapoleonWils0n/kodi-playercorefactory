@@ -35,14 +35,10 @@ case "$url" in
 		$HOME/bin/ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8UAG" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
-	$GVID)
-		$HOME/bin/ffmpeg -hide_banner -i "$GVID" \
-		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	$M3U8UAGENTREFERER)
 		$HOME/bin/ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" \
 		-headers 'Referer: '"$REFERER"''$'\r\n' \
-		-i "$M3U8UAGNTREF" \
+		-i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%H-%M-%m-%d-%y").mkv";;
 	$REFUSERAGENT)
@@ -61,6 +57,10 @@ case "$url" in
 		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
 		-i "$COOKIEM3U8" \
 		-c:v copy -bsf:a aac_adtstoasc ${TFLAG} ${DURATION} \
+		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
+	$HTTP)
+		$HOME/bin/ffmpeg -hide_banner -i "$HTTP" \
+		-c:v copy -c:a copy ${TFLAG} ${DURATION} \
 		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv";;
 	*)
 		$HOME/bin/ffmpeg -hide_banner -i "$VIDEOURL" \
