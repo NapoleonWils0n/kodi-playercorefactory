@@ -47,16 +47,10 @@ case "$url" in
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$GVID)
-		$HOME/bin/ffmpeg -hide_banner -loglevel error \
-		-i "$GVID" \
-		-c:v copy -c:a copy \
-		${TFLAG} ${DURATION} \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$M3U8UAGENTREFERER)
 		$HOME/bin/ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" \
 		-headers 'Referer: '"$REFERER"''$'\r\n' \
-		-i "$M3U8UAGNTREF" \
+		-i "$M3U8" \
 		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
@@ -77,6 +71,12 @@ case "$url" in
 		$HOME/bin/ffmpeg -hide_banner -loglevel error \
 		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
 		-i "$COOKIEM3U8" \
+		${TFLAG} ${DURATION} \
+		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+	$HTTP)
+		$HOME/bin/ffmpeg -hide_banner -loglevel error \
+		-i "$HTTP" \
+		-c:v copy -c:a copy \
 		${TFLAG} ${DURATION} \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	*)
