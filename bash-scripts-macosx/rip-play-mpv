@@ -12,10 +12,10 @@ case "$url" in
 	$USEREF) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$M3U8USERAGENT) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" "$M3U8";;
 	$M3U8USERAGENT2) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" "$M3U8UAG";;
-	$GVID) /Applications/mpv.app/Contents/MacOS/mpv "$GVID";;
-	$M3U8UAGENTREFERER) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8UAGNTREF";;
+	$M3U8UAGENTREFERER) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8";;
 	$REFUSERAGENT) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | /Applications/mpv.app/Contents/MacOS/mpv -;;
+	$HTTP) /Applications/mpv.app/Contents/MacOS/mpv "$HTTP";;
 	*) /Applications/mpv.app/Contents/MacOS/mpv "$VIDEOURL";;
 esac 
 done
