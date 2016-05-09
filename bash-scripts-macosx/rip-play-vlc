@@ -12,10 +12,10 @@ case "$url" in
 	$USEREF) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
 	$M3U8USERAGENT)  /usr/local/bin/wget -c -U "$USERAGENT" "$M3U8" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
 	$M3U8USERAGENT2) /usr/local/bin/wget -c -U "$USERAGENT" "$M3U8UAG" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
-	$GVID) /Applications/VLC.app/Contents/MacOS/VLC "$GVID" 2> /dev/null;;
-	$M3U8UAGENTREFERER) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8UAGNTREF" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$M3U8UAGENTREFERER) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$M3U8" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
 	$REFUSERAGENT) /usr/local/bin/wget -c -U "$USERAGENT" --header="Referer: $REFERER" "$VIDEOFILE" -O- | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
 	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | /Applications/VLC.app/Contents/MacOS/VLC fd://0 2> /dev/null;;
+	$HTTP) /Applications/VLC.app/Contents/MacOS/VLC "$HTTP" 2> /dev/null;;
 	*) /Applications/VLC.app/Contents/MacOS/VLC "$VIDEOURL" 2> /dev/null;;
 esac 
 done
