@@ -1,45 +1,5 @@
 # Sending ffmpeg commands over ssh
 
-## playercorefactory.xml
+Read the ssh client and server set up
 
-copy the ssh section of the playercorefactory.xml to your playercorefactory.xml
-
-edit the playercorefactory.xml and change user@sshserver to the username and server domain name or ip address  
-you can also use a hostname defined in your ~/.ssh/config instead of the username@sshserver syntax
-
-### Command line
-
-How to use the rip-ssh script
-Make sure you have set up ssh keys with your ssh server for password less login
-
-You need to specify username@sshserver or a hostname define in your ~/.ssh/config as the first argument to the rip-ssh script.  
-The second argument passed to the script should be a text file contain a url, or a url in single quotes
-
-
-* username at server
-
-```
-rip-ssh username@sshserver videourl.txt
-```
-
-* specify a duration for the recording
-* use the hours minutes seconds syntax
-
-record for 30 minutes
-
-```
-rip-ssh username@sshserver videourl.txt -t 00:30:00
-```
-
-* url in single quotes
-
-```
-rip-ssh username@sshserver 'http://example.com/video.m3u8' 
-```
-
-* ssh host name, where sshserver is a hostname in your ~/.ssh/config
-
-```
-rip-ssh sshserver videourl.txt
-```
-
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/ssh
