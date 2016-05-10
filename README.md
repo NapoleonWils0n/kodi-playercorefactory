@@ -43,10 +43,10 @@ sudo pacman -S git ffmpeg libfdk-aac rtmpdump vlc mpv youtube-dl aria2c
 sudo apt install -y git ffmpeg fdk-aac rtmpdump vlc mpv youtube-dl aria2c
 ```
 
-#### debian install git, ffmpeg, rtmpdump, vlc, mpv, youtube-dl, aria2c
+#### debian install git, ffmpeg, fdk-aac, rtmpdump, vlc, mpv, youtube-dl, aria2c
 
 ```
-sudo apt install -y git-core ffmpeg rtmpdump vlc mpv youtube-dl aria2c
+sudo apt install -y git-core ffmpeg fdk-aac rtmpdump vlc mpv youtube-dl aria2c
 ```
 
 note you need to enable backports, or be using the testing or unstable debian branches to install ffmpeg
