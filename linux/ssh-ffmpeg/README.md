@@ -117,3 +117,17 @@ sudo pacman -S openssh ffmpeg rtmpdump libfdk-aac
 sudo apt install -y openssh-server ffmpeg rtmpdump fdk-aac
 ```
 
+#### secure ssh to only allow ssh keys 
+
+* edit the sshd_config
+
+```
+sudo vim /etc/ssh/sshd_config
+```
+
+```
+PermitRootLogin no
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+UsePAM no
+```
