@@ -2,10 +2,14 @@
 
 ## playercorefactory.xml
 
+edit the playercorefactory.xml and change user@sshserver to the username and server domain name or ip address  
+you can also use a hostname defined in your ~/.ssh/config instead of the username@sshserver syntax
+
 
 ### Command line
 
 How to use the rip-ssh script
+Make sure you have set up ssh keys with your ssh server for password less login
 
 You need to specify username@sshserver or a hostname define in your ~/.ssh/config as the first argument to the rip-ssh script.  
 The second argument passed to the script should be a text file contain a url, or a url in single quotes
