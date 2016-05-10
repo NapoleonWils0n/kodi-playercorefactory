@@ -1,4 +1,4 @@
-# ssh ffmpeg
+# Sending ffmpeg commands over ssh
 
 
 ### arch linux install ssh
@@ -65,6 +65,7 @@ ssh-add ~/.ssh/id_rsa
 ```
 ssh-copy-id username@sshserver
 ```
+
 #### ssh client config 
 
 edit your ~/.ssh/config 
@@ -73,7 +74,8 @@ edit your ~/.ssh/config
 vim ~/.ssh/config
 ```
 
-and add the code below change username and ip to match your server
+and add the code below change username, 
+host name and ip to match your server
 
 ```
 # ffmpeg ssh server
@@ -92,3 +94,14 @@ you can also use the user@server format as well
 
 	<filename>/usr/bin/ssh</filename>
 	<args>user@example.com
+
+### Set up server and install ffmpeg
+
+#### Arch linux 
+
+* install ssh, ffmpeg and rtmpdump
+
+```
+sudo pacman -S openssh ffmpeg rtmpdump libfdk-aac sed
+```
+
