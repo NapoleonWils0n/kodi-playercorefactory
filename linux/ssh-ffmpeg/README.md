@@ -17,6 +17,15 @@ The second argument passed to the script should be a text file contain a url, or
 rip-ssh username@sshserver videourl.txt
 ```
 
+* specify a duration for the recording
+* use the hours minutes seconds syntax
+
+record for 30 minutes
+
+```
+rip-ssh username@sshserver videourl.txt -t 00:30:00
+```
+
 * url in single quotes
 
 ```
