@@ -7,6 +7,12 @@
 sudo pacman -S openssh
 ```
 
+### Create ssh keys
+
+```
+ssh-keygen -b 4096
+```
+
 #### ssh agent 
 
 ```
