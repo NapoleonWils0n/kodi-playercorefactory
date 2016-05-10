@@ -1,10 +1,15 @@
 # Sending ffmpeg commands over ssh
 
-
-## arch linux install ssh
+* arch linux install ssh
 
 ```
 sudo pacman -S openssh
+```
+
+* debian install ssh if not already installed
+
+```
+sudo apt install -y openssh-client
 ```
 
 ### Create ssh keys
@@ -13,7 +18,34 @@ sudo pacman -S openssh
 ssh-keygen -b 4096
 ```
 
+### copy ssh public key to your ssh server
+
+```
+ssh-copy-id username@sshserver
+```
+
+#### ssh client config 
+
+edit your ~/.ssh/config 
+
+```
+vim ~/.ssh/config
+```
+
+and add the code below change username, 
+host name and ip to match your server
+
+```
+# ffmpeg ssh server
+Host ffmpegserver
+User username
+Port 22
+HostName 192.168.1.2
+```
+
 #### ssh agent 
+
+* arch linux ssh agent service
 
 ```
 vim ~/.config/systemd/user/ssh-agent.service
@@ -65,41 +97,6 @@ ssh-add ~/.ssh/id_rsa
 ```
 
 * at the prompt enter your ssh private key password
-
-### copy ssh public key to your ssh server
-
-```
-ssh-copy-id username@sshserver
-```
-
-#### ssh client config 
-
-edit your ~/.ssh/config 
-
-```
-vim ~/.ssh/config
-```
-
-and add the code below change username, 
-host name and ip to match your server
-
-```
-# ffmpeg ssh server
-Host ffmpegserver
-User username
-Port 22
-HostName 192.168.1.2
-```
-
-in the playercorefactory.xml you will see ffmpegserver which is the Host in ~/.ssh/config
-
-	<filename>/usr/bin/ssh</filename>
-	<args>ffmpegserver
-
-you can also use the user@server format as well
-
-	<filename>/usr/bin/ssh</filename>
-	<args>user@example.com
 
 
 ### Set up server and install ffmpeg
