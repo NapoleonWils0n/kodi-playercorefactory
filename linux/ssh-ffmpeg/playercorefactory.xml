@@ -7,27 +7,27 @@
    </player>
    <player name="ssh record" type="ExternalPlayer" audio="false" video="true">
 		<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-ssh"</filename>
-     <args>"{0}"</args>
+     <args>username@sshserver "{0}"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ssh record 30 mins" type="ExternalPlayer" audio="false" video="true">
 		<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-ssh"</filename>
-     <args>"{0}" -t 00:30:00</args>
+     <args>username@sshserver "{0}" -t 00:30:00</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ssh record 1 hour" type="ExternalPlayer" audio="false" video="true">
 		<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-ssh"</filename>
-     <args>"{0}" -t 01:00:00</args>
+     <args>username@sshserver "{0}" -t 01:00:00</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ssh record 2 hours" type="ExternalPlayer" audio="false" video="true">
 		<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-ssh"</filename>
-     <args>"{0}" -t 02:00:00</args>
+     <args>username@sshserver "{0}" -t 02:00:00</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="ssh record 3 hours" type="ExternalPlayer" audio="false" video="true">
 		<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-ssh"</filename>
-     <args>"{0}" -t 03:00:00</args>
+     <args>username@sshserver "{0}" -t 03:00:00</args>
      <hidexbmc>false</hidexbmc>
    </player>
  </players>
