@@ -160,6 +160,7 @@ Download vlc from videolan.org and install to your Applications folder
 
 https://www.videolan.org/vlc/download-macosx.html
 
+### Read the ssh client and server set up
 
-
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/ssh
 

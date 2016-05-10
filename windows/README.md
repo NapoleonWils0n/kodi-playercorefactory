@@ -280,3 +280,6 @@ add the code below to the end of your windows system path
 
 ;C:\aria2c\bin
 
+### Read the ssh client and server set up
+
+https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/docs/ssh
