@@ -1,7 +1,7 @@
 # Sending ffmpeg commands over ssh
 
 
-### arch linux install ssh
+## arch linux install ssh
 
 ```
 sudo pacman -S openssh
@@ -100,15 +100,17 @@ you can also use the user@server format as well
 
 #### Arch linux 
 
-* install openssh ffmpeg rtmpdump libfdk-aac sed
+* install openssh ffmpeg rtmpdump libfdk-aac
 
 ```
-sudo pacman -S openssh ffmpeg rtmpdump libfdk-aac sed
+sudo pacman -S openssh ffmpeg rtmpdump libfdk-aac
 ```
 
-#### Debian 
+#### Debian and Ubuntu
 
 * install openssh-server ffmpeg rtmpdump fdk-aac
 
 ```
 sudo apt install -y openssh-server ffmpeg rtmpdump fdk-aac
+```
+
