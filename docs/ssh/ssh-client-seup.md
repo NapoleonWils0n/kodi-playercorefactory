@@ -1,4 +1,4 @@
-# Sending ffmpeg commands over ssh
+# SSH Client set up
 
 * arch linux install ssh
 
