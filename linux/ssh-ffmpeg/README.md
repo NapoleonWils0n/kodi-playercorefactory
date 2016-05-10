@@ -17,8 +17,15 @@ The second argument passed to the script should be a text file contain a url, or
 rip-ssh username@sshserver videourl.txt
 ```
 
+* url in single quotes
+
+```
+rip-ssh username@sshserver 'http://example.com/video.m3u8' 
+```
+
 * ssh host name, where sshserver is a hostname in your ~/.ssh/config
 
 ```
 rip-ssh sshserver videourl.txt
 ```
+
