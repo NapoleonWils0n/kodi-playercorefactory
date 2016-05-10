@@ -2,9 +2,10 @@
 
 ## playercorefactory.xml
 
+copy the ssh section of the playercorefactory.xml to your playercorefactory.xml
+
 edit the playercorefactory.xml and change user@sshserver to the username and server domain name or ip address  
 you can also use a hostname defined in your ~/.ssh/config instead of the username@sshserver syntax
-
 
 ### Command line
 
