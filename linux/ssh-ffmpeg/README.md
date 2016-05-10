@@ -95,13 +95,20 @@ you can also use the user@server format as well
 	<filename>/usr/bin/ssh</filename>
 	<args>user@example.com
 
+
 ### Set up server and install ffmpeg
 
 #### Arch linux 
 
-* install ssh, ffmpeg and rtmpdump
+* install openssh ffmpeg rtmpdump libfdk-aac sed
 
 ```
 sudo pacman -S openssh ffmpeg rtmpdump libfdk-aac sed
 ```
 
+#### Debian 
+
+* install openssh-server ffmpeg rtmpdump fdk-aac
+
+```
+sudo apt install -y openssh-server ffmpeg rtmpdump fdk-aac
