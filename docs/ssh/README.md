@@ -43,3 +43,11 @@ rip-ssh username@sshserver 'http://example.com/video.m3u8'
 rip-ssh sshserver videourl.txt
 ```
 
+### Monitor the ffmpeg process on the ssh server
+
+ssh into your server and then use the watch command with ps to show the start time of ffmpeg processes,  
+and how long they have been recording
+
+```
+watch -n 1 "ps -C ffmpeg -o pid,comm,cmd,start,etime"
+```
