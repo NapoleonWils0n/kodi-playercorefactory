@@ -2,7 +2,7 @@
  <players>
    <player name="save url" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
-     <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
+     <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="vlc" type="ExternalPlayer" audio="false" video="true">
@@ -12,7 +12,7 @@
    </player>
    <player name="vlc - record" type="ExternalPlayer" audio="false" video="true">
 	<filename>vlc</filename>
-	<args>"{0}" --sout=file/ts:"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M").mkv" &</args>
+	<args>"{0}" --sout=file/ts:"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" &</args>
 	<hidexbmc>false</hidexbmc>
    </player>
  <rules action="overwrite">
