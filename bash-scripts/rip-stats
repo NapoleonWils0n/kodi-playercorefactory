@@ -9,69 +9,69 @@ case "$url" in
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \	
 		-i "$VIDEOFILE" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$M3U8)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$M3U8TOKEN)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$M3U8TOKEN" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$XFORWARD)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$USEREF)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$VIDEOFILE" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$M3U8USERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$M3U8USERAGENT2)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -i "$M3U8UAG" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$M3U8UAGENTREFERER)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' \
 		-i "$M3U8" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$REFUSERAGENT)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
 		-i "$VIDEOFILE" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$RTMP)
 		rtmpdump -q -i "$RTMP" | ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i - \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$COOKIEM3U8)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
 		-i "$COOKIEM3U8" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$HTTP)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$HTTP" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	*)
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$VIDEOURL" \
-		| tee "$HOME/Desktop/video-stats-$(date +"%m-%d-%y-%H-%M").txt";;
+		| tee "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 esac 
 done
