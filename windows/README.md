@@ -163,15 +163,11 @@ cygwin can install into either C:\cygwin\bin or C:\cygwin\bin
 
 your windows system path should look like this with C:\cygwin\bin
 
-```
 ;C:\cygwin\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin;C:\aria2c\bin;C:\rtmpdump\bin;C:\Program Files (x86)\VideoLAN\VLC\;C:\Program Files (x86)\mpv\
-```
 
 your windows system path should look like this with C:\cygwin64\bin
 
-```
 ;C:\cygwin64\bin;C:\ffmpeg\bin;C:\Program Files\Git\cmd;C:%HOMEPATH%\git\kodi-playercorefactory\bash-scripts-windows;C:\curl\bin;C:\youtube-dl\bin;C:\windump\bin;C:\notify-send\bin;C:\aria2c\bin;C:\rtmpdump\bin;C:\Program Files (x86)\VideoLAN\VLC\;C:\Program Files (x86)\mpv\
-```
 
 cygwin should install sed and grep which are needed for the scripts
 
