@@ -4,7 +4,7 @@
 SSHSERVER="$1"
 [[ -f "$2" ]] && VIDEOURL=$(cat "$2") || VIDEOURL="$2"
 TFLAG="$3"; DURATION="$4"
-printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh
+printf "%s\n" "$VIDEOURL" | while read url; do source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh"
 
 case "$url" in
 	$VIDEOFILE)
