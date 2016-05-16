@@ -22,7 +22,7 @@
    </player>
    <player name="save url" type="ExternalPlayer" audio="false" video="true">
 		<filename>echo</filename>
-     <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").txt"</args>
+     <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="video stats" type="ExternalPlayer" audio="false" video="true">
@@ -97,7 +97,7 @@
    </player>
   <player name="wget download" type="ExternalPlayer" audio="false" video="true">
 		<filename>wget</filename>
-     <args>-bqc -i "{0}" -O "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").mkv"</args>
+     <args>-bqc -i "{0}" -O "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").mkv"</args>
      <hidexbmc>false</hidexbmc>
    </player>
  </players>
