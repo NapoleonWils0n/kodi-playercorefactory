@@ -119,6 +119,28 @@ place youtube-dl.exe in the same directory as mpv.
 
 ;C:\Program Files (x86)\mpv\
 
+#### youtube-dl
+
+Download the youtube-dl exe here
+
+https://rg3.github.io/youtube-dl/download.html
+
+create a folder called youtube-dl and then inside it create a folder called bin
+
+like this
+
+youtube-dl/bin
+
+copy the youtube-dl exe into youtube-dl\bin
+
+then move the youtube-dl folder to your C drive
+
+The file path should look like this
+
+C:\youtube-dl\bin\youtube-dl
+
+You also need to copy youtube-dl to C:\Program Files (x86)\mpv as well
+
 #### Set up your windows path
 
 system properties, advanced system settings, enviormnental variables
