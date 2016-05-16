@@ -1,8 +1,8 @@
 <playercorefactory>
  <players>
    <player name="save url" type="ExternalPlayer" audio="false" video="true">
-	<filename>echo</filename>
-     <args>"{0}" > "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
+	<filename>printf</filename>
+     <args>"%s\n" "{0}" > "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="record" type="ExternalPlayer" audio="false" video="true">
