@@ -11,20 +11,20 @@ case "$url" in
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -i' "$VIDEOFILE" \
 		'-c:v copy -c:a copy' $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$M3U8)
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -i' "$M3U8" \
 		'-c:v copy -bsf:a aac_adtstoasc' $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$M3U8TOKEN)
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -loglevel panic -i' "$M3U8TOKEN" \
 		'-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$XFORWARD)
 		printf "%s '%s' %s '%s' %s %s %s %s\n" \
@@ -33,7 +33,7 @@ case "$url" in
 		'-i' "$M3U8" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$USEREF)
 		printf "%s %s %s %s %s %s %s %s %s %s\n" \
@@ -42,7 +42,7 @@ case "$url" in
 		'Referer: '"$REFERER"''$'\r\n' \
 		'-i' "$VIDEOFILE" '-c:v copy -c:a copy' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$M3U8USERAGENT)
 		printf "%s %s %s '%s' %s %s %s %s\n" \
@@ -50,7 +50,7 @@ case "$url" in
 		"$USERAGENT" '-i' "$M3U8" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$M3U8USERAGENT2)
 		printf "%s %s %s '%s' %s %s %s %s\n" \
@@ -58,7 +58,7 @@ case "$url" in
 		"$USERAGENT" '-i' "$M3U8UAG" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$M3U8UAGENTREFERER)
 		printf "%s %s %s '%s' %s '%s' %s %s %s %s\n" \
@@ -69,7 +69,7 @@ case "$url" in
 		'-i' "$M3U8" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$REFUSERAGENT)
 		printf "%s %s '%s' %s %s %s '%s' %s %s %s\n" \
@@ -80,14 +80,14 @@ case "$url" in
 		'-i' "$VIDEOFILE" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$RTMP)
 		printf "%s '%s' %s %s %s %s %s\n" \
 		'rtmpdump -q -i' "$RTMP" \
 		'| ffmpeg -hide_banner -i -' \
 		'-c:v copy -c:a copy' $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$COOKIEM3U8)
 		printf "%s %s '%s' %s '%s' %s %s %s %s\n" \
@@ -97,19 +97,19 @@ case "$url" in
 		'-i' "$COOKIEM3U8" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
 		$TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$HTTP)
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -i' "$HTTP" \
 		'-c:v copy -c:a copy' $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	*)
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -i' "$VIDEOURL" \
 		'-c:v copy -c:a copy' $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%m-%d-%y-%H-%M-%S").mkv" \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 esac 
 done
