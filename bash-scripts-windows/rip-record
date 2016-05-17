@@ -14,7 +14,7 @@ case "$url" in
 	$M3U8)
 		ffmpeg -hide_banner -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
+		"$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 2>&1 | sed '/\[/d';;
 	$M3U8TOKEN)
 		ffmpeg -hide_banner -loglevel panic -i "$M3U8TOKEN" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $TFLAG $DURATION \
