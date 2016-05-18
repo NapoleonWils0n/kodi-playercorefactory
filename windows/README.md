@@ -115,6 +115,20 @@ Use the Default Programs and AutoPlay control panels to make mpv the default pla
 To play content from various media streaming sites, 
 place youtube-dl.exe in the same directory as mpv.
 
+### mpv config file
+
+This is a fix for black screen when trying to play videos with mpv
+
+open the mpv config folder by typing in the following into Search Windows dialog box
+
+%APPDATA%\mpv
+
+create a text file called mpv.conf and add the following code
+
+vo=direct3d
+
+move the mpv.conf text file into the %APPDATA%\mpv folder
+
 ### add mpv to your windows system path
 
 ;C:\Program Files (x86)\mpv\
