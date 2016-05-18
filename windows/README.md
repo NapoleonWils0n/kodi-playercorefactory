@@ -129,6 +129,8 @@ vo=direct3d
 
 move the mpv.conf text file into the %APPDATA%\mpv folder
 
+the mpv.conf file is included in this directory
+
 ### add mpv to your windows system path
 
 ;C:\Program Files (x86)\mpv\
