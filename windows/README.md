@@ -175,7 +175,7 @@ add the code below to the end of your windows path
 
 ;C:\rtmpdump\bin
 
-cygwin can install into either C:\cygwin\bin or C:\cygwin\bin
+cygwin can install into either C:\cygwin\bin or C:\cygwin64\bin
 
 your windows system path should look like this with C:\cygwin\bin
 
