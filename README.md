@@ -37,7 +37,7 @@ https://github.com/NapoleonWils0n/kodi-playercorefactory/tree/master/macosx
 sudo pacman -S git ffmpeg libfdk-aac rtmpdump vlc mpv youtube-dl aria2c
 ```
 
-#### ubuntu install git, ffmpeg, fdk-aac, rtmpdump, vlc, mpv, youtube-dl, aria2c
+#### ubuntu install git, ffmpeg, fdk-aac-dev, rtmpdump, vlc, mpv, youtube-dl, aria2
 
 ```
 sudo apt install -y git ffmpeg fdk-aac-dev rtmpdump vlc mpv youtube-dl aria2
