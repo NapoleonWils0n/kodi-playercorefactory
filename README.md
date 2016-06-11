@@ -40,7 +40,7 @@ sudo pacman -S git ffmpeg libfdk-aac rtmpdump vlc mpv youtube-dl aria2c
 #### ubuntu install git, ffmpeg, fdk-aac, rtmpdump, vlc, mpv, youtube-dl, aria2c
 
 ```
-sudo apt install -y git ffmpeg fdk-aac rtmpdump vlc mpv youtube-dl aria2c
+sudo apt install -y git ffmpeg fdk-aac-dev rtmpdump vlc mpv youtube-dl aria2
 ```
 
 #### debian install git, ffmpeg, fdk-aac, rtmpdump, vlc, mpv, youtube-dl, aria2c
