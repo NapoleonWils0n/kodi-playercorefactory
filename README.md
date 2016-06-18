@@ -58,6 +58,23 @@ sudo apt install -y git-core ffmpeg fdk-aac rtmpdump vlc mpv youtube-dl aria2c
 
 note you need to enable backports, or be using the testing or unstable debian branches to install ffmpeg
 
+#### linux mint 17 install git, ffmpeg, libfdk-aac-dev, rtmpdump, vlc, mpv, youtube-dl, aria2
+
+linux mint 17 doesnt have ffmpeg in the main software repository so you have to add it via a ppa
+
+* linux mint 17 add ffmpeg ppa
+
+```
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:mc3man/trusty-media
+sudo apt-get update
+```
+* install ffmpeg and all the other packages
+
+```
+sudo apt install -y git ffmpeg libfdk-aac-dev rtmpdump vlc mpv youtube-dl aria2
+```
+
 #### Step 2 - download the kodi-playercorefactory repo with git
 
 create a git directory in your home
@@ -100,11 +117,21 @@ git pull
 
 add the $HOME/git/kodi-playercorefactory/bash-scripts directory to your bash path
 
+* linux mint doesnt come with a ~/.bashrc file so you need to create it
+* you can use gedit and create a file called .bashrc and save it your home folder
+* or you can create the bashrc on the command line
+
 edit your .bashrc in your home directory
 im using vim to edit the file but you can use any text editor
 
 ```
 vim ~/.bashrc
+```
+
+if you dont have a ~/.bashrc file you can create it by running the following command
+
+```
+touch ~/.bashrc
 ```
 
 add the code below to your ~/.bashrc
