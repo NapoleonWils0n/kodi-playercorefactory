@@ -1,7 +1,7 @@
 #!/bin/bash
 
 [[ $# -eq 1 ]] || exit
-[[ -f "$1" ]] && VIDEOURL=`cat "$1"` || VIDEOURL="$1"
+[[ "$1" =~ \.txt$ ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
 source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/kodi-external-player-ip.sh"
 curl --data-binary \
 "{ \"jsonrpc\": \"2.0\", \"method\": \"Player.Open\", \"params\": { \"item\": { \"file\": \"$VIDEOURL\" } }, \"id\": 1 }" \

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
-[[ -f "$1" ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
+[[ "$1" =~ \.txt$ ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
 TFLAG="$2"; DURATION="$3"
 printf "%s\n" "$VIDEOURL" | while read url; do source "$USERPROFILE/git/kodi-playercorefactory/bash-scripts-windows/video-regex.sh"
 
