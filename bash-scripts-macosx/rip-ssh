@@ -2,7 +2,7 @@
 
 [[ $# -eq 2 ]] || [[ $# -eq 4 ]] || exit
 SSHSERVER="$1"
-[[ -f "$2" ]] && VIDEOURL=$(cat "$2") || VIDEOURL="$2"
+[[ "$2" =~ \.txt$ ]] && VIDEOURL=$(cat "$2") || VIDEOURL="$2"
 TFLAG="$3"; DURATION="$4"
 printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts-macosx/video-regex.sh
 
