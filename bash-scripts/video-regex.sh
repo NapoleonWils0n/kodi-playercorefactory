@@ -18,3 +18,5 @@ RTMP=$(printf "%s" "$VIDEOURL" | grep -Eo '^(rtmp|rtmpe)://[-/.&;,~*?[:blank:]#%
 COOKIEM3U8=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)\?nltid=[a-zA-Z0-9&%_*=]*')
 COOKIEURL=$(printf "%s" "$VIDEOURL" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 COOKIEDOMAIN=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
+COOKIEMEDIA=$(printf "%s" "$VIDEOURL" | grep -Eo 'Cookie=mediaAuth=[a-zA-Z0-9]*')
+COOKIEM3U8UAGENT=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)\|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*&Cookie=mediaAuth=[a-zA-Z0-9]*')
