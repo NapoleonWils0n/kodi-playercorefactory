@@ -57,12 +57,6 @@ case "$url" in
 		-i "$COOKIEM3U8" \
 		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
 		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$COOKIEM3U8UAGENT)                                                        
-       ffmpeg -hide_banner -loglevel panic \                   
-       -cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \       
-       -i "$COOKIEM3U8UAGENT" \                                
-       -c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \       
-       "$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
 	$HTTP)
 		ffmpeg -hide_banner -i "$HTTP" \
 		-c:v copy -c:a copy $TFLAG $DURATION \
