@@ -15,6 +15,8 @@ case "$url" in
 	$M3U8UAGENTREFERER) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8";;
 	$REFUSERAGENT) ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
 	$RTMP) rtmpdump -q -i "$RTMP" | ffplay -hide_banner -x 640 -y 360 -;;
+	$COOKIEM3U8UAGENT) ffplay -hide_banner -x 640 -y 360 \
+   -cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" "$COOKIEM3U8UAGENT";;
 	$HTTP) ffplay -hide_banner -x 640 -y 360 "$HTTP";;
 	*) ffplay -hide_banner -x 640 -y 360 "$VIDEOURL";;
 esac 
