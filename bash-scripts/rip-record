@@ -61,7 +61,7 @@ case "$url" in
 		ffmpeg -hide_banner -loglevel panic \
 		-user-agent "$USERAGENT2" \
 		-cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \
-		-i "$COOKIEM3U8UAGENT" \
+		-i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
 		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
 	$HTTP)
