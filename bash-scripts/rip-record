@@ -62,7 +62,7 @@ case "$url" in
 		-user-agent "$USERAGENT2" \
 		-cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \
 		-i "$M3U8" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
+		-c:v copy -c:a copy $TFLAG $DURATION \
 		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
 	$HTTP)
 		ffmpeg -hide_banner -i "$HTTP" \
