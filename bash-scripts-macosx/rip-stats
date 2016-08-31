@@ -63,6 +63,12 @@ case "$url" in
 		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
 		-i "$COOKIEM3U8" \
 		> "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
+	$COOKIEM3U8UAGENT)
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-user-agent "$USERAGENT2" -cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \
+		-i "$M3U8" \
+		> "$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt";;
 	$HTTP)
 		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
