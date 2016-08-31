@@ -15,6 +15,7 @@ case "$url" in
 	$M3U8UAGENTREFERER) $HOME/bin/ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8";;
 	$REFUSERAGENT) $HOME/bin/ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
 	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | $HOME/bin/ffplay -hide_banner -x 640 -y 360 -;;
+	$COOKIEM3U8UAGENT) $HOME/bin/ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT2" -cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" "$M3U8";;
 	$HTTP) $HOME/bin/ffplay -hide_banner -x 640 -y 360 "$HTTP";;
 	*) $HOME/bin/ffplay -hide_banner -x 640 -y 360 "$VIDEOURL";;
 esac 
