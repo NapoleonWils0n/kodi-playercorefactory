@@ -27,6 +27,8 @@ case "$url" in
 		printf "%s\n" RTMP;;
 	$COOKIEM3U8)
 		printf "%s\n" COOKIEM3U8;;
+	$COOKIEM3U8UAGENT)
+		printf "%s\n" COOKIEM3U8UAGENT;;
 	$HTTP)
 		printf "%s\n" HTTP;;
 	*)
