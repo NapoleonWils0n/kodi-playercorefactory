@@ -15,6 +15,7 @@ case "$url" in
 	$M3U8UAGENTREFERER) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$M3U8";;
 	$REFUSERAGENT) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT" --referrer="$REFERER" "$VIDEOFILE";;
 	$RTMP) /usr/local/bin/rtmpdump -q -i "$RTMP" | /Applications/mpv.app/Contents/MacOS/mpv -;;
+	$COOKIEM3U8UAGENT) /Applications/mpv.app/Contents/MacOS/mpv --user-agent="$USERAGENT2" --http-header-fields="cookie: $COOKIEMEDIA","path=/: $COOKIEDOMAIN" "$M3U8";;
 	$HTTP) /Applications/mpv.app/Contents/MacOS/mpv "$HTTP";;
 	*) /Applications/mpv.app/Contents/MacOS/mpv "$VIDEOURL";;
 esac 
