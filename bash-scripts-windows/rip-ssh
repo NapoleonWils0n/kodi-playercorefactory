@@ -99,6 +99,15 @@ case "$url" in
 		$TFLAG $DURATION \
 		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
+	$COOKIEM3U8UAGENT)
+		printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
+		'ffmpeg -hide_banner -loglevel panic' \
+		'-user-agent' "$USERAGENT2" \
+		'-cookies' "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \
+		'-i' "$M3U8" \
+		'-c:v copy -c:a copy' $TFLAG $DURATION \
+		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
+		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$HTTP)
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -i' "$HTTP" \
