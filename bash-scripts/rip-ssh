@@ -100,7 +100,7 @@ case "$url" in
 		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" \
 		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$COOKIEM3U8UAGENT)
-		printf "%s %s '%s' %s '%s' %s %s %s %s %s %s\n" \
+		printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -loglevel panic' \
 		'-user-agent' "$USERAGENT2" \
 		'-cookies' "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \
