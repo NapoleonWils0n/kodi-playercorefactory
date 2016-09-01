@@ -9,7 +9,7 @@ XFORWARDIP=$(printf "%s" "$XFORWARD" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1
 USEREF=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*')
 USERAGENT=$(printf "%s" "$VIDEOURL" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
 USERAGENT2=$(printf "%s" "$VIDEOURL" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' | sed 's/User-Agent=//g')
-REFERER=$(printf "%s" "$VIDEOURL" | grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' | sed 's/[r-R]eferer=//')
+REFERER=$(printf "%s" "$VIDEOURL" | grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' | sed 's/Referer=//')
 M3U8USERAGENT=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)[a-zA-Z0-9?&=%*]*\|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
 M3U8USERAGENT2=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_@%-]*\.(m3u8)[a-zA-Z0-9?&=%*]*\|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
 M3U8UAGENTREFERER=$(printf "%s" "$VIDEOURL" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_&@%-]*\.(m3u8)|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;&@%+-]*\&r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*')
