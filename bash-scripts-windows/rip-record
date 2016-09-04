@@ -65,7 +65,6 @@ case "$url" in
 		-i "$M3U8" \
 		-c:v copy -c:a copy $TFLAG $DURATION \
 		"$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$COOKIEM3U8UAGENT)
 	$HTTP)
 		ffmpeg -hide_banner -i "$HTTP" \
 		-c:v copy -c:a copy $TFLAG $DURATION \
