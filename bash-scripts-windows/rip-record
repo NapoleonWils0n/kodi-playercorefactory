@@ -28,7 +28,7 @@ case "$url" in
 		-c:v copy -c:a copy $TFLAG $DURATION \
 		"$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
 	$M3U8USERAGENT)
-		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8" \
+		ffmpeg -hide_banner -loglevel panic -user-agent "$USERAGENT" -i "$M3U8" \
 		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
 		"$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
 	$M3U8USERAGENT2)
