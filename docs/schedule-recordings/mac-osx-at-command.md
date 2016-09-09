@@ -1,20 +1,251 @@
 # Enabling the at command on Mac OSX
 
-by sirprancelot
+## El Capitan
 
-1) Edit the /System/Library/LaunchDaemons/com.apple.atrun.plist file (open in text editor and change "true" word to "false", then save).
+### Create a LaunchDaemon directory 
 
-2) Unload the current /System/Library/LaunchDaemons/com.apple.atrun.plist by copying/pasting/typing into terminal:
+Create a LaunchDaemon directory in your home Library
+
+* run the following command in the terminal to create the LaunchDaemons directory
+
+```
+mkdir -p ~/Library/LaunchDaemons
+```
+
+Show the Library directory in the Finder by clicking on the Go menu in the Finder,  
+and then pressing alt will show the Library in the drop down menu
+
+Select the Library to open a Finder window with the Library directory now visible
+
+You can also create the ~/Library/LaunchDaemons folder in the Finder
+
+### Copying LaunchDaemons directory from this git repo
+
+* Option 1 - copy LaunchDaemons from this git repo
+
+Copy the LaunchDaemons directory from the github repo into your home Library  
+the path is kodi-playercorefactory/docs/schedule-recordings/LaunchDaemons
+
+run the following command to copy the LaunchDaemons directory from the git repo to your home Library
+
+```
+cp -r ~/git/kodi-playercorefactory/docs/schedule-recordings/LaunchDaemons ~/Library
+```
+
+Or you can manually copy the directory to your ~/Library
+
+#### Fixing the file permissions on the plist file
+
+The plist file needs to have the file permissions changed to user root and group wheel,
+and also needs to have owner write permissions removed
+
+* Check the file permissions on the ~/Library/LaunchDaemons/com.apple.atrun.plist file
+
+```
+ls -l ~/Library/LaunchDaemons/com.apple.atrun.plist
+```
+
+Replace username with your username in the following commands
+
+* Change owner to root for the com.apple.atrun.plist file
+
+```
+sudo chown root /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+* Change group to wheel for the com.apple.atrun.plist file
+
+```
+sudo chgrp wheel /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+* Remove owner write permissions on the com.apple.atrun.plist file
+
+```
+sudo chmod o-w /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+##### Load the new at command plist
+
+Run the following command to load the new at command plist
+
+* Replace username with your username
+
+```
+sudo launchctl load -F /Users/username/Library/LaunchDaemons/com.apple.atrun.plist
+```
+
+### Copying existing LaunchDaemons directory 
+
+* Option 2 - copy existing LaunchDaemons and edit the file
+
+Copy the existing com.apple.atrun.plist to ~/Library/LaunchDaemons 
+
+```
+cp /System/Library/LaunchDaemons/com.apple.atrun.plist ~/Library/LaunchDaemons
+```
+
+Edit the ~/Library/LaunchDaemons/com.apple.atrun.plist file using your text editor
+
+* We need to change the the word Disabled 
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.apple.atrun</string>
+    <key>ProgramArguments</key>
+    <array>
+	    <string>/usr/libexec/atrun</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>30</integer>
+    <key>Disabled</key>
+    <true/>
+</dict>
+</plist>
+```
+
+* to Enabled
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.apple.atrun</string>
+    <key>ProgramArguments</key>
+    <array>
+	    <string>/usr/libexec/atrun</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>30</integer>
+    <key>Enabled</key>
+    <true/>
+</dict>
+</plist>
+```
+
+#### Fixing the file permissions on the plist file
+
+The plist file needs to have the file permissions changed to user root and group wheel,
+and also needs to have owner write permissions removed
+
+* Check the file permissions on the ~/Library/LaunchDaemons/com.apple.atrun.plist file
+
+```
+ls -l ~/Library/LaunchDaemons/com.apple.atrun.plist
+```
+
+Replace username with your username in the following commands
+
+* Change owner to root for the com.apple.atrun.plist file
+
+```
+sudo chown root /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+* Change group to wheel for the com.apple.atrun.plist file
+
+```
+sudo chgrp wheel /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+* Remove owner write permissions on the com.apple.atrun.plist file
+
+```
+sudo chmod o-w /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+##### Load the new at command plist
+
+Run the following command to load the new at command plist
+
+* Replace username with your username
+
+```
+sudo launchctl load -F /Users/username/Library/LaunchDaemons/com.apple.atrun.plist
+```
+
+## Pre El Capitan Macs
+
+* Unload the current /System/Library/LaunchDaemons/com.apple.atrun.plist by copying/pasting/typing into terminal:
 
 ```
 sudo launchctl unload -F /System/Library/LaunchDaemons/com.apple.atrun.plist
 ```
 
-3) Then load the edited version by copying/pasting/typing into terminal
+Create a LaunchDaemon directory in your home Library
+
+* run the following command in the terminal to create the LaunchDaemons directory
 
 ```
-sudo launchctl load -F /System/Library/LaunchDaemons/com.apple.atrun.plist
+mkdir -p ~/Library/LaunchDaemons
 ```
+
+Show the Library directory in the Finder by clicking on the Go menu in the Finder,  
+and then pressing alt will show the Library in the drop down menu
+
+Select the Library to open a Finder window with the Library directory now visible
+
+You can also create the ~/Library/LaunchDaemons folder in the Finder
+
+* Copy the existing com.apple.atrun.plist to ~/Library/LaunchDaemons 
+
+```
+cp /System/Library/LaunchDaemons/com.apple.atrun.plist ~/Library/LaunchDaemons
+```
+
+* Edit the ~/Library/LaunchDaemons/com.apple.atrun.plist file 
+
+(open in text editor and change "true" word to "false", then save).
+
+
+#### Fixing the file permissions on the plist file
+
+The plist file needs to have the file permissions changed to user root and group wheel,
+and also needs to have owner write permissions removed
+
+* Check the file permissions on the ~/Library/LaunchDaemons/com.apple.atrun.plist file
+
+```
+ls -l ~/Library/LaunchDaemons/com.apple.atrun.plist
+```
+
+Replace username with your username in the following commands
+
+* Change owner to root for the com.apple.atrun.plist file
+
+```
+sudo chown root /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+* Change group to wheel for the com.apple.atrun.plist file
+
+```
+sudo chgrp wheel /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+* Remove owner write permissions on the com.apple.atrun.plist file
+
+```
+sudo chmod o-w /Users/username/Library/LaunchDaemons/com.apple.atrun.plist 
+```
+
+##### Load the new at command plist
+
+Run the following command to load the new at command plist
+
+* Replace username with your username
+
+```
+sudo launchctl load -F /Users/username/Library/LaunchDaemons/com.apple.atrun.plist
+```
+
+### at command syntax
 
 With the above done, now it's really just a question of calling "at" commands in terminal 
 
