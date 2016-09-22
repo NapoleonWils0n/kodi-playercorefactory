@@ -24,8 +24,6 @@ m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*
 xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])" # x-forward
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
 
-# grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)|u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*'
-
 # pattern match inside command 
 xforwardip="${videourl#*X-Forwarded-For=}" # match ip address
 xforwardm3u8="${videourl%\|X-Forwarded-For=*}" # match link to m3u8 playlist
