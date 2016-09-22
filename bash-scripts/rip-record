@@ -15,28 +15,31 @@ duration="$3"
 # video recording file path
 recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 
-# regular expressions
+# case statement switch on pattern match
 videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)" # video file
 m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8" # m3u8 playlist
 m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*" # m3u8 playlist + token
 xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])" # x-forward
 
+# pattern match inside command
+xforwardip="${videourl#*X-Forwarded-For=}"
+xforwardm3u8="${videourl%%\|X-Forwarded-For=*}"
+
 # case statement with regular expression to execute ffmpeg commands based on matching url
 
 case "$videourl" in
 	$videofile) # video file
-		echo ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
+		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	$m3u8) 		# m3u8 playlist
-		echo ffmpeg -hide_banner -loglevel error -i "$videourl" \
+		ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$m3u8token) # m3u8 playlist + token
-		echo ffmpeg -hide_banner -loglevel error -i "$videourl" \
+		ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$xforward) # xforward
-		echo ffmpeg -hide_banner -headers 'X-Forwarded-For: '"${videourl#*X-Forwarded-For=}"''$'\r\n' \
-		-i "${videourl%%\|X-Forwarded-For=*}" -c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-
-	*) echo ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; # wildcard
+		echo ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
+		-i "$xforwardm3u8" -c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	*) ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; # wildcard
 esac 
 
 # turn off shell globbing
