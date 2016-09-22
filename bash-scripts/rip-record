@@ -24,11 +24,12 @@ m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*
 xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])" # x-forward
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*" # user agent + referer
 
-# pattern match inside command - delete match 
-xforwardip="${videourl#*X-Forwarded-For=}" # match ip address
-xforwardm3u8="${videourl%\|X-Forwarded-For=*}" # match link to m3u8 playlist
+# pattern match inside command - delete match we want the reminder
+xforwardip="${videourl#*X-Forwarded-For=}" # match from the start
+xforwardm3u8="${videourl%\|X-Forwarded-For=*}" # match from the back
 useragent=""
 referer=""
+videofilecase="${videourl%%\|*}" match from back
 
 # case statement with regular expression to execute ffmpeg commands based on matching url
 case "$videourl" in
@@ -44,9 +45,10 @@ case "$videourl" in
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$xforwardm3u8" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$useref)    # useragent referer
-		echo useragent;;
+		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
+		-i "$videofilecase" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	*) 		   # wildcard
-		echo ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
+		echo wildcard - ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
 esac 
 
 # turn off shell globbing
