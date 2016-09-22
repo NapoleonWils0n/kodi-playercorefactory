@@ -29,7 +29,7 @@ xforwardip="${videourl#*X-Forwarded-For=}" # match from the start
 xforwardm3u8="${videourl%\|X-Forwarded-For=*}" # match from the back
 useragent=""
 referer=""
-videofilecase="${videourl%%\|*}" match from back
+videofilecase="${videourl%%\|*}" # match from back
 
 # case statement with regular expression to execute ffmpeg commands based on matching url
 case "$videourl" in
