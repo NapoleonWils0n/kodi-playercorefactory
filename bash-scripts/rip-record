@@ -1,78 +1,43 @@
 #!/bin/bash
 
-[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
-[[ "$1" =~ \.txt$ ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
-TFLAG="$2"; DURATION="$3"
-printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh
+# rip-record
 
-case "$url" in
-	$VIDEOFILE)
-		ffmpeg -hide_banner -i "$VIDEOFILE" \
-		-c:v copy -c:a copy $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$M3U8)
-		ffmpeg -hide_banner -i "$M3U8" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 2>&1 | sed '/\[/d';;
-	$M3U8TOKEN)
-		ffmpeg -hide_banner -loglevel panic -i "$M3U8TOKEN" \
-		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$XFORWARD)
-		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$USEREF)
-		ffmpeg -hide_banner -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$VIDEOFILE" \
-		-c:v copy -c:a copy $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$M3U8USERAGENT)
-		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$M3U8USERAGENT2)
-		ffmpeg -hide_banner -loglevel panic -user-agent "$USERAGENT" -i "$M3U8UAG" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$M3U8UAGENTREFERER)
-		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" \
-		-headers 'Referer: '"$REFERER"''$'\r\n' \
-		-i "$M3U8" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$REFUSERAGENT)
-		ffmpeg -hide_banner -loglevel error \
-		-headers 'Referer: '"$REFERER"''$'\r\n' \
-		-user-agent "$USERAGENT" \
-		-i "$VIDEOFILE" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$RTMP)
-		rtmpdump -q -i "$RTMP" | ffmpeg -hide_banner -i - \
-		-c:v copy -c:a copy $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$COOKIEM3U8)
-		ffmpeg -hide_banner -loglevel panic \
-		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
-		-i "$COOKIEM3U8" \
-		-c:v copy -bsf:a aac_adtstoasc $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$COOKIEM3U8UAGENT)
-		ffmpeg -hide_banner -loglevel panic \
-		-user-agent "$USERAGENT2" \
-		-cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \
-		-i "$M3U8" \
-		-c:v copy -c:a copy $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	$HTTP)
-		ffmpeg -hide_banner -i "$HTTP" \
-		-c:v copy -c:a copy $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
-	*)
-		ffmpeg -hide_banner -i "$VIDEOURL" \
-		-c:v copy -c:a copy $TFLAG $DURATION \
-		"$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv";;
+[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit # check if 1 or 3 arguments are passed to script
+[[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1" # videourl in first argument
+
+# enable shell globbing for pattern matching
+shopt -s extglob 
+
+# ffmpeg duration
+tflag="$2"
+duration="$3" 
+
+# video recording file path
+recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+
+# regular expressions
+videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)" # video file
+m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8" # m3u8 playlist
+m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*" # m3u8 playlist + token
+xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])" # x-forward
+
+# case statement with regular expression to execute ffmpeg commands based on matching url
+
+case "$videourl" in
+	$videofile) # video file
+		echo ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
+	$m3u8) 		# m3u8 playlist
+		echo ffmpeg -hide_banner -loglevel error -i "$videourl" \
+		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	$m3u8token) # m3u8 playlist + token
+		echo ffmpeg -hide_banner -loglevel error -i "$videourl" \
+		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	$xforward) # xforward
+		echo ffmpeg -hide_banner -headers 'X-Forwarded-For: '"${videourl#*X-Forwarded-For=}"''$'\r\n' \
+		-i "${videourl%%\|X-Forwarded-For=*}" -c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+
+	*) echo ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; # wildcard
 esac 
-done \
-&& type -P notify-send &> /dev/null && [[ $? -eq 0 ]] \
-&& notify-send -i kodi "Finished Recording" "$VIDEOURL"
+
+# turn off shell globbing
+shopt -u extglob 
