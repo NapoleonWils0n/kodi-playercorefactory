@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# rip-record
+# rip-record - execute ffmpeg commands based on matching url
 
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit # check if 1 or 3 arguments are passed to script
 [[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1" # videourl in first argument
@@ -26,7 +26,6 @@ xforwardip="${videourl#*X-Forwarded-For=}"
 xforwardm3u8="${videourl%%\|X-Forwarded-For=*}"
 
 # case statement with regular expression to execute ffmpeg commands based on matching url
-
 case "$videourl" in
 	$videofile) # video file
 		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
@@ -37,8 +36,8 @@ case "$videourl" in
 		ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$xforward) # xforward
-		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-		-i "$xforwardm3u8" -c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$xforwardm3u8" \
+		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	*) ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; # wildcard
 esac 
 
