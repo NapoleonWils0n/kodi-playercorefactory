@@ -7,6 +7,11 @@
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit 
 [[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1" 
 
+# validate arguments passed to script
+# $1 == http|https|rtmp|rtmpe
+# $2 == -t
+# $3 == 00:00:00 syntax
+
 # enable shell globbing for pattern matching
 shopt -s extglob 
 
@@ -30,6 +35,8 @@ m3u8_case="$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)' $1)"
 xforwardip="$(grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' $1)"
 useragent="$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' $1)"
 referer="$(grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' $1)"
+
+# \{x,y\}
 
 # case statement with regular expression to execute ffmpeg commands based on matching url
 case "$videourl" in
