@@ -28,7 +28,7 @@ useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[a
 xforwardip="${videourl##*X-Forwarded-For=}" # match from the start
 xforwardm3u8="${videourl%%\|X-Forwarded-For=*}" # match from the back
 #useragent="${videourl##*[uU]ser-[aA]gent=!([a-zA-Z0-9/.()[:blank:],:;%+-]*)*([^\&])}"
-useragent="${videourl##*[uU]ser-[aA]gent=!([a-zA-Z0-9/.()[:blank:],:;%+-]*)}"
+useragent="${videourl##*[uU]ser-[aA]gent=*([^&])}"
 referer="${videourl##*[uU]ser-[aA]gent=!([&])[rR]eferer=}"
 videofilecase="${videourl%%\|*}" # match from back
 
