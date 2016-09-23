@@ -42,7 +42,7 @@ case "$videourl" in
 		ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$xforward)  # xforward
-		echo ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_case" \
+		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_case" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$useref)    # useragent referer
 		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \ 
