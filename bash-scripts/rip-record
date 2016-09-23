@@ -8,9 +8,12 @@
 [[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1" 
 
 # validate arguments passed to script
+# $0 print usage and exit if no args
 # $1 == http|https|rtmp|rtmpe
 # $2 == -t
 # $3 == 00:00:00 syntax
+
+# error checking and exit status
 
 # enable shell globbing for pattern matching
 shopt -s extglob 
