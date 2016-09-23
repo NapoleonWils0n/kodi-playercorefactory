@@ -25,11 +25,11 @@ xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*" # user agent + referer
 
 # grep inside url to extract strings
+videofile_case="$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)' $1)"
 m3u8_case="$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)' $1)"
 xforwardip="$(grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' $1)"
-useragent=
-referer=
-videofile_case=
+useragent="$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' $1)"
+referer="$(grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' $1)"
 
 # case statement with regular expression to execute ffmpeg commands based on matching url
 case "$videourl" in
@@ -45,8 +45,7 @@ case "$videourl" in
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_case" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$useref)    # useragent referer
-		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \ 
-		-i "$videofilecase" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
+		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' -i "$videofile_case" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	*) 		   # wildcard
 		echo wildcard - ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
 esac 
