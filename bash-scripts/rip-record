@@ -7,6 +7,8 @@
 # exit status
 SUCCESS=0
 E_NOARGS=65
+
+# script usage
 script_usage="Usage: $(basename $0) [video url] {[-t] [00:00:00]}"
 
 # validate user input
@@ -14,7 +16,7 @@ first_arg_validated="^(http|https|rtmp|rtmpe)://*"
 second_arg_validated="^-t$"
 third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$"
 
-# ffmpeg duration 
+# ffmpeg duration second and third arguments passed to script
 tflag="$2"
 duration="$3" 
 
