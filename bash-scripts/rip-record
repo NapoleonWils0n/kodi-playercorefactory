@@ -41,21 +41,24 @@ xforwardip=$(printf "%s" "$videourl" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1
 
 # case statement with regular expression to execute ffmpeg commands based on matching url
 case "$videourl" in
-	$videofile) # video file
+	$videofile)     # video file
 		ffmpeg -hide_banner -i "$videofile_case" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
-	$m3u8)      # m3u8 playlist
+	$m3u8)          # m3u8 playlist
 		ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$m3u8token) # m3u8 playlist + token
+	$m3u8token)     # m3u8 playlist + token
 		ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$xforward)  # xforward
+	$xforward)      # xforward
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_case" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$useref)    # useragent referer
+	$useref)        # useragent referer
 		ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$videofile_case" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
-	*) 		   # wildcard
+	$m3u8useragent) # m3u8 user agent
+		echo ffmpeg -hide_banner -loglevel error \
+		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	*) 		       # wildcard
 		#ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
 		echo 'not found';;
 esac 
