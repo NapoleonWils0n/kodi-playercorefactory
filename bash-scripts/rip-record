@@ -7,7 +7,7 @@
 SUCCESS=0
 E_NOARGS=65
 script_usage="Usage: $(basename $0) [video url] {[-t] [00:00:00]}"
-first_argument="(http|https|rtmp|rtmpe)://"
+first_argument="(http|https|rtmp|rtmpe)://*"
 second_argument="^-t$"
 third_argument=""
 
@@ -35,14 +35,6 @@ fi
 
 # enable shell globbing for pattern matching
 shopt -s extglob 
-
-# validate arguments passed to script
-# $1 == http|https|rtmp|rtmpe
-
-# check if 3 args are passed to script
-# $2 == -t
-#[[ "$2" =~ ^-t$ ]] && echo yes
-# $3 == 00:00:00 syntax
 
 # video recording file path
 recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
