@@ -53,7 +53,8 @@ case "$videourl" in
 		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_case" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$useref)    # useragent referer
-		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' -i "$videofile_case" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
+		ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
+		-i "$videofile_case" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	*) 		   # wildcard
 		#ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
 		echo 'not found';;
