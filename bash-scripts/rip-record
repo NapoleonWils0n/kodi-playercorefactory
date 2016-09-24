@@ -7,9 +7,9 @@
 SUCCESS=0
 E_NOARGS=65
 script_usage="Usage: $(basename $0) [video url] {[-t] [00:00:00]}"
-first_argument="(http|https|rtmp|rtmpe)://*"
-second_argument="^-t$"
-third_argument=""
+first_arg_validated="(http|https|rtmp|rtmpe)://*"
+second_arg_validated="^-t$"
+third_arg_validated=""
 
 # ffmpeg duration 2nd and 3rd arguments passed to script
 tflag="$2"
@@ -17,18 +17,17 @@ duration="$3"
 
 
 # check if 1 or 3 arguments are passed to script
-#[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit "$E_NOARGS"  
 [[ "$1" =~ \.txt$ ]] && videourl=$(cat "$1") || videourl="$1"
 
-# check
-if ! [[ $videourl =~ $first_argument ]]; then
+# first arg check
+if ! [[ $videourl =~ $first_arg_validated ]]; then
    printf "%s\n" "$script_usage"
 	exit "$E_NOARGS" 
 fi
 
-
-#if ! [[ $2 =~ $second_argument ]]; then
+# second arg check
+#if ! [[ $2 =~ $second_arg_validated ]]; then
 #   printf "%s\n" "$script_usage"
 #	exit "$E_NOARGS" 
 #fi
