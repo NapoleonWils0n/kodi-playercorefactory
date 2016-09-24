@@ -3,8 +3,11 @@
 # rip-record - execute ffmpeg commands based on matching url
 #===========================================================
 
+SUCCESS=0
+E_NOARGS=65
+
 # check if 1 or 3 arguments are passed to script
-[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || printf "%s\n" "Usage: $(basename $0) [video url] [-t] [00:00:00]"; exit 1
+[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || printf "%s\n" "Usage: $(basename $0) [video url] [-t] [00:00:00]"; exit $E_NOARGS
 [[ "$1" =~ \.txt$ ]] && videourl=$(cat "$1") || videourl="$1"
 
 # enable shell globbing for pattern matching
