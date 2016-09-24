@@ -12,9 +12,9 @@ E_NOARGS=65
 script_usage="Usage: $(basename $0) [video url] {[-t] [00:00:00]}"
 
 # validate user input for first, second, third arguments passed to script
-first_arg_validated="^(http|https|rtmp|rtmpe)://*"
-second_arg_validated="^-t$"
-third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$"
+first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
+second_arg_validated="^-t$"								# matches: -t
+third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
 
 # ffmpeg duration second and third arguments passed to script
 tflag="$2"
