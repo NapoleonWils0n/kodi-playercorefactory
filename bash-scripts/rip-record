@@ -3,6 +3,7 @@
 # rip-record - execute ffmpeg commands based on matching url
 #===========================================================
 
+# exit status
 SUCCESS=0
 E_NOARGS=65
 
