@@ -25,22 +25,22 @@ duration="$3"
 [[ "$1" =~ \.txt$ ]] && videourl=$(cat "$1") || videourl="$1"
 
 # first arg check
-if ! [[ $videourl =~ $first_arg_validated ]]; then
-	printf "%s\n" "$videourl = invalid option"
-   printf "%s\n" "$script_usage"
-	exit "$E_NOARGS" 
-fi
+#if ! [[ $videourl =~ $first_arg_validated ]]; then
+#	printf "%s\n" "'$videourl' invalid option"
+#   printf "%s\n" "$script_usage"
+#	exit "$E_NOARGS" 
+#fi
 
 # second arg check
-#if ! [[ $2 =~ $second_arg_validated ]]; then
-#	printf "%s\n" "$2 = invalid option"
+#if ! [[ $tflag =~ $second_arg_validated ]]; then
+#	printf "%s\n" "'$2' invalid option"
 #   printf "%s\n" "$script_usage"
 #	exit "$E_NOARGS" 
 #fi
 
 # third arg check
 #if ! [[ $3 =~ $third_arg_validated ]]; then
-#	printf "%s\n" "$3 = invalid option"
+#	printf "%s\n" "'$3' invalid option"
 #   printf "%s\n" "$script_usage"
 #	exit "$E_NOARGS" 
 #fi
