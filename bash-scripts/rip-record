@@ -7,25 +7,26 @@
 SUCCESS=0
 E_NOARGS=65
 
-# display script usage when script is run with no arguments and with error messages
+# display script usage when script is run with no arguments or when invalid input is entered by the user
 script_usage="Usage: $(basename $0) [(http|https|rtmp|rtmpe)://domain.com/video.(mp4|mkv|m3u8|avi|flv)] ([-t] [00:00:00])"
 
-# validate user input for 1st, 2nd and 3rd arguments passed to script
+# validate user input for first, second and third arguments passed to script
 first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
 second_arg_validated="^-t$"								# matches: -t
 third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
 
-# ffmpeg duration - 2nd and 3rd arguments passed to script
+# ffmpeg duration - second and third arguments passed to script
 tflag="$2"
 duration="$3" 
 
+# check if first argument is a url in a text file or on the command line
+if [[ "$1" =~ \.txt$ ]]; then
+	videourl=$(cat "$1")  
+else
+	videourl="$1"
+fi
+
 # check if 1 or 3 arguments are passed to script
-
-#[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit "$E_NOARGS"  
-
-[[ "$1" =~ \.txt$ ]] && videourl=$(cat "$1") || videourl="$1"
-
-
 if [[ $# -eq 1 ]]; then
 	if ! [[ $videourl =~ $first_arg_validated ]]; then
 		printf "%s\n" "'$videourl' invalid input"
@@ -38,9 +39,6 @@ else
    printf "%s\n" "$script_usage"
 	exit "$E_NOARGS" 
 fi
-
-#[[ $videourl =~ $first_arg_validated ]] || \
-#printf "%s\n" "'$videourl' invalid input"; printf "%s\n" "$script_usage" && exit "$E_NOARGS" 
 
 # first arg check
 #if ! [[ $videourl =~ $first_arg_validated ]]; then
