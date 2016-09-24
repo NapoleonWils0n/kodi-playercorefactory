@@ -8,7 +8,7 @@ SUCCESS=0
 E_NOARGS=65
 
 # display script usage when script is run with no arguments or when invalid input is entered by the user
-script_usage="Usage: $(basename $0) [(http|https|rtmp|rtmpe)://domain.com/video.(mp4|mkv|m3u8|avi|flv)] ([-t] [00:00:00])"
+script_usage="Usage: $(basename $0) [(http|https|rtmp|rtmpe)://domain.com/video(.mp4|.mkv|.m3u8|.avi|.flv)] ([-t] [00:00:00])"
 
 # validate user input for first, second and third arguments passed to script
 first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
