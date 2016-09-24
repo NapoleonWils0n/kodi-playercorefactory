@@ -7,7 +7,7 @@
 SUCCESS=0
 E_NOARGS=65
 script_usage="Usage: $(basename $0) [video url] [-t] [00:00:00]"
-first_argument=""
+first_argument="(http|https|rtmp|rtmpe)://"
 second_argument="^-t$"
 third_argument=""
 
@@ -17,6 +17,12 @@ third_argument=""
 [[ "$1" =~ \.txt$ ]] && videourl=$(cat "$1") || videourl="$1"
 
 # check
+if ! [[ $videourl =~ $first_argument ]]; then
+   printf "%s\n" "$script_usage"
+	exit "$E_NOARGS" 
+fi
+
+
 if ! [[ $2 =~ $second_argument ]]; then
    printf "%s\n" "$script_usage"
 	exit "$E_NOARGS" 
