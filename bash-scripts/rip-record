@@ -7,11 +7,20 @@
 SUCCESS=0
 E_NOARGS=65
 script_usage="Usage: $(basename $0) [video url] [-t] [00:00:00]"
+first_argument=""
+second_argument="^-t$"
+third_argument=""
 
 # check if 1 or 3 arguments are passed to script
 #[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
 [[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit "$E_NOARGS"  
 [[ "$1" =~ \.txt$ ]] && videourl=$(cat "$1") || videourl="$1"
+
+# check
+if ! [[ $2 =~ $second_argument ]]; then
+   printf "%s\n" "$script_usage"
+	exit "$E_NOARGS" 
+fi
 
 # enable shell globbing for pattern matching
 shopt -s extglob 
@@ -22,7 +31,6 @@ shopt -s extglob
 # check if 3 args are passed to script
 # $2 == -t
 #[[ "$2" =~ ^-t$ ]] && echo yes
-
 # $3 == 00:00:00 syntax
 
 # ffmpeg duration 2nd and 3rd arguments passed to script
