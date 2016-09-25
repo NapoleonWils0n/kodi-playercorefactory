@@ -8,7 +8,7 @@
 # [rip-record] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffmpeg]
 
 #+=========================================================+#
-# exit status																#
+# exit status and error codes											#
 #+=========================================================+#
 
 SUCCESS=0		# success exit code
@@ -57,7 +57,7 @@ fi
 #+========================================================+#
 
 if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
-	if ! [[ $videourl =~ $first_arg_validated ]]; then # + 
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
 		printf "%s\n" "'$videourl' invalid input"			# + display user input with error message
 		printf "%s\n" "$script_usage"							# + display script usage
 		exit "$E_NOMATCH"											# + exit with E_NOMATCH error code
