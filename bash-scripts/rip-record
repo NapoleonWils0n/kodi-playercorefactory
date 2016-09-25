@@ -38,8 +38,10 @@ tflag="$2" 		# second argument should be: -t
 duration="$3"	# third argument should be in this format: 00:00:00
 
 
-# check if first argument is a url in a text file or on the command line
-#=======================================================================
+#+========================================================+#
+# check if first argument is a url in a text file 			  #
+# + or a url on the command line									  #
+#+========================================================+#
 
 if [[ "$1" =~ \.txt$ ]]; then
 	videourl=$(cat "$1")  
