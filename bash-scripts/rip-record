@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# rip-record - execute ffmpeg commands based on matching url
-#===========================================================
+#+==========================================================+#
+# rip-record - execute ffmpeg commands based on matching url #
+#+==========================================================+#
 
 # exit status
 SUCCESS=0
@@ -38,20 +39,20 @@ fi
 #===============================================
 
 if [[ $# -eq 1 ]]; then											# one argument is passed to the script
-	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt start with http|https|rtmp|rtmpe
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt start with: http|https|rtmp|rtmpe
 		printf "%s\n" "'$videourl' invalid input"			# + display the url the user entered with error message
 	   printf "%s\n" "$script_usage"							# + show script usage
-		exit "$E_NOARGS" 											# exit
+		exit "$E_NOARGS" 											# + exit
 	fi
 elif [[ $# -eq 3 ]]; then										# three arguments are passed to the script
 	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt start with http|https|rtmp|rtmpe
 		printf "%s\n" "'$videourl' invalid input"			# + display the url the user entered with error message
 	   printf "%s\n" "$script_usage"							# + show script usage
-		exit "$E_NOARGS" 											# exit
-	elif ! [[ $tflag =~ $second_arg_validated ]]; then
-		printf "%s\n" "'$2' invalid input"
-	   printf "%s\n" "$script_usage"
-		exit "$E_NOARGS" 
+		exit "$E_NOARGS" 											# + exit
+	elif ! [[ $tflag =~ $second_arg_validated ]]; then # second argument passed to the script should be: -t
+		printf "%s\n" "'$2' invalid input"					# + display user input with error message
+	   printf "%s\n" "$script_usage"							# + show script usage
+		exit "$E_NOARGS" 											# + exit
 	else ! [[ $3 =~ $third_arg_validated ]]
 		printf "%s\n" "'$3' invalid input"
    	printf "%s\n" "$script_usage"
