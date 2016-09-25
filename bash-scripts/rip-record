@@ -60,18 +60,18 @@ elif [[ $# -eq 3 ]]; then										# - three arguments are passed to the script
 		printf "%s\n" "'$videourl' invalid input"			# + display the url the user entered with error message
 	   printf "%s\n" "$script_usage"							# + show script usage
 		exit "$E_NOARGS" 											# + exit
-	elif ! [[ $tflag =~ $second_arg_validated ]]; then # - second argument passed to the script should be: -t
+	elif ! [[ $tflag =~ $second_arg_validated ]]; then # - if second argument passed to the script is not: -t
 		printf "%s\n" "'$2' invalid input"					# + display user input with error message
 	   printf "%s\n" "$script_usage"							# + show script usage
 		exit "$E_NOARGS" 											# + exit
-	else ! [[ $duration =~ $third_arg_validated ]]		# - 
-		printf "%s\n" "'$3' invalid input"
-   	printf "%s\n" "$script_usage"
-		exit "$E_NOARGS" 
+	else ! [[ $duration =~ $third_arg_validated ]]		# - if third argument doesnt match 00:00:00
+		printf "%s\n" "'$3' invalid input"					# + display user input with error message
+   	printf "%s\n" "$script_usage"							# + show script usage
+		exit "$E_NOARGS" 											# + exit
 	fi
-else
-   printf "%s\n" "$script_usage"
-	exit "$E_NOARGS" 
+else																	# - no arguments are passed to the script
+   printf "%s\n" "$script_usage"								# + display script usage
+	exit "$E_NOARGS" 												# + exit
 fi
 
 # enable shell globbing for pattern matching
