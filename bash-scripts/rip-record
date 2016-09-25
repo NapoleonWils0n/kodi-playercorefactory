@@ -7,7 +7,8 @@
 SUCCESS=0
 E_NOARGS=65
 
-# display script usage when script is run with no arguments or when invalid input is entered by the user
+# display script usage when script is run with no arguments
+# + or when invalid input is entered by the user
 script_usage="Usage: $(basename $0) [(http|https|rtmp|rtmpe)://domain.com/video(.mp4|.mkv|.m3u8|.avi|.flv)] ([-t] [00:00:00])"
 
 
