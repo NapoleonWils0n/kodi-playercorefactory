@@ -4,6 +4,7 @@
 # rip-record - execute ffmpeg commands based on matching url #
 #+==========================================================+#
 
+# How the script works
 # [rip-record] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffmpeg]
 
 # exit status
@@ -74,20 +75,32 @@ else																	# - no arguments are passed to the script
 	exit "$E_NOARGS" 												# + exit
 fi
 
-# enable shell globbing for pattern matching
+#+========================================================+#
+# enable shell globbing for pattern matching					  #
+#+========================================================+#
+
 shopt -s extglob 
 
-# video recording file path
+#+========================================================+#
+# video recording file path										  #
+#+========================================================+#
+
 recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 
-# case statement switch on pattern match
+#+========================================================+#
+# case statement switch on pattern match						  #
+#+========================================================+#
+
 videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)" # video file
 m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8" # m3u8 playlist
 m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*" # m3u8 playlist + token
 xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])" # x-forward
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*" # user agent + referer
 
-# grep inside url to extract strings
+#+========================================================+#
+# grep inside url to extract strings							  #
+#+========================================================+#
+
 videofile_case=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)')
 m3u8_case=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8)')
 useragent=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
