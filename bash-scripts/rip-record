@@ -140,9 +140,8 @@ esac
 
 shopt -u extglob 
 
-
 #+========================================================+#
-# exit status															  #
+# exit status SUCCESS if script runs without errors		  #
 #+========================================================+#
 
 exit "$SUCCESS"
