@@ -21,7 +21,7 @@ script_usage="Usage: $(basename $0) [(http|https|rtmp|rtmpe)://domain.com/video(
 
 #+=========================================================+#
 # validate user input for first, second and third arguments #
-# + passed to script	using regular expressions					#
+# + passed to script	by matching with regular expressions	#
 #+=========================================================+#
 
 first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
