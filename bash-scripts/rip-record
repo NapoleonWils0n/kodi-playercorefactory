@@ -57,10 +57,10 @@ fi
 #+========================================================+#
 
 if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
-	if ! [[ $videourl =~ $first_arg_validated ]]; then
-		printf "%s\n" "'$videourl' invalid input"
-		printf "%s\n" "$script_usage"	
-		exit "$E_NOMATCH"
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # + 
+		printf "%s\n" "'$videourl' invalid input"			# + display user input with error message
+		printf "%s\n" "$script_usage"							# + display script usage
+		exit "$E_NOMATCH"											# + exit with E_NOMATCH error code
 	fi
 elif [[ $# -eq 3 ]]; then										# - three arguments are passed to the script, validate user input
 	if ! [[ $videourl =~ $first_arg_validated && $tflag =~ $second_arg_validated && $duration =~ $third_arg_validated ]]; then
