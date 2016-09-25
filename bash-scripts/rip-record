@@ -32,8 +32,8 @@ third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
 #+==========================================================
 # ffmpeg duration second and third arguments passed to script
 
-tflag="$2"
-duration="$3" 
+tflag="$2" 		# second argument should be: -t
+duration="$3"	# third argument should be in this format: 00:00:00
 
 
 # check if first argument is a url in a text file or on the command line
