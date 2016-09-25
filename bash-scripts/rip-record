@@ -64,9 +64,9 @@ if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
 	fi
 elif [[ $# -eq 3 ]]; then									# - three arguments are passed to the script
 	if ! [[ $videourl =~ $first_arg_validated && $tflag =~ $second_arg_validated && $duration =~ $third_arg_validated ]]; then
-		printf "%s\n" "'$@' invalid input"
+		printf "%s\n" "'$1 $2 $3' invalid input" 
 		printf "%s\n" "$script_usage"	
-		exit "$E_NOARGS"
+		exit "$E_WRONGARGS"
 	fi
 else [[ $# -eq 0 ]]														# - no arguments are passed to the script
    printf "%s\n" "$script_usage"								# + display script usage
