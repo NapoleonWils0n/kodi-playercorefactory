@@ -11,6 +11,8 @@ E_NOARGS=65
 script_usage="Usage: $(basename $0) [(http|https|rtmp|rtmpe)://domain.com/video(.mp4|.mkv|.m3u8|.avi|.flv)] ([-t] [00:00:00])"
 
 # validate user input for first, second and third arguments passed to script
+#===========================================================================
+
 first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
 second_arg_validated="^-t$"								# matches: -t
 third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
@@ -20,6 +22,8 @@ tflag="$2"
 duration="$3" 
 
 # check if first argument is a url in a text file or on the command line
+#=======================================================================
+
 if [[ "$1" =~ \.txt$ ]]; then
 	videourl=$(cat "$1")  
 else
@@ -27,11 +31,13 @@ else
 fi
 
 # check if 1 or 3 arguments are passed to script
-if [[ $# -eq 1 ]]; then
-	if ! [[ $videourl =~ $first_arg_validated ]]; then
-		printf "%s\n" "'$videourl' invalid input"
-	   printf "%s\n" "$script_usage"
-		exit "$E_NOARGS" 
+#===============================================
+
+if [[ $# -eq 1 ]]; then											# check if one argument is passed to the script
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt start with http|https|rtmp|rtmpe
+		printf "%s\n" "'$videourl' invalid input"			# + display the url the user entered with error message
+	   printf "%s\n" "$script_usage"							# + show script usage
+		exit "$E_NOARGS" 											# exit
 	fi
 elif [[ $# -eq 3 ]]; then
 	if ! [[ $videourl =~ $first_arg_validated ]]; then
