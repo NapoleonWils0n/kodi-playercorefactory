@@ -51,6 +51,7 @@ fi
 
 #+========================================================+#
 # check if 1 or 3 arguments are passed to script			  #
+# + and validate user input										  #
 #+========================================================+#
 
 if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
