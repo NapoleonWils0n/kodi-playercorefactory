@@ -35,14 +35,14 @@ if [[ $# -eq 1 ]]; then
 	fi
 elif [[ $# -eq 3 ]]; then
 	if ! [[ $videourl =~ $first_arg_validated ]]; then
-		 printf "%s\n" "'$videourl' invalid input"
+		printf "%s\n" "'$videourl' invalid input"
 	   printf "%s\n" "$script_usage"
 		exit "$E_NOARGS" 
 	elif ! [[ $tflag =~ $second_arg_validated ]]; then
 		printf "%s\n" "'$2' invalid input"
 	   printf "%s\n" "$script_usage"
 		exit "$E_NOARGS" 
-	else ! [[ $3 =~ $third_arg_validated ]]; then
+	else ! [[ $3 =~ $third_arg_validated ]]
 		printf "%s\n" "'$3' invalid input"
    	printf "%s\n" "$script_usage"
 		exit "$E_NOARGS" 
@@ -51,28 +51,6 @@ else
    printf "%s\n" "$script_usage"
 	exit "$E_NOARGS" 
 fi
-
-# first arg check
-#if ! [[ $videourl =~ $first_arg_validated ]]; then
-#	 printf "%s\n" "'$videourl' invalid input"
-#   printf "%s\n" "$script_usage"
-#	exit "$E_NOARGS" 
-#fi
-
-# second arg check
-#if ! [[ $tflag =~ $second_arg_validated ]]; then
-#	printf "%s\n" "'$2' invalid input"
-#   printf "%s\n" "$script_usage"
-#	exit "$E_NOARGS" 
-#fi
-
-# third arg check
-#if ! [[ $3 =~ $third_arg_validated ]]; then
-#	printf "%s\n" "'$3' invalid input"
-#   printf "%s\n" "$script_usage"
-#	exit "$E_NOARGS" 
-#fi
-
 
 # enable shell globbing for pattern matching
 shopt -s extglob 
