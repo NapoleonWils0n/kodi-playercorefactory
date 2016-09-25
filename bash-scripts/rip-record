@@ -57,13 +57,18 @@ fi
 #+========================================================+#
 
 if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
-	[[ $videourl =~ $first_arg_validated ]] || \
-	exit "$E_NOARGS"
+	if ! [[ $videourl =~ $first_arg_validated ]]; then
+		printf "%s\n" "'$videourl' invalid input"
+		printf "%s\n" "$script_usage"	
+		exit "$E_NOARGS"
+	fi
 elif [[ $# -eq 3 ]]; then										# - three arguments are passed to the script
-	[[ $videourl =~ $first_arg_validated ]] || \
-	[[ $tflag =~ $second_arg_validated ]] || \
-	[[ $duration =~ $third_arg_validated ]] || \
-	exit "$E_NOARGS"
+
+#	[[ $videourl =~ $first_arg_validated ]] || \
+#	[[ $tflag =~ $second_arg_validated ]] || \
+#	[[ $duration =~ $third_arg_validated ]] || \
+
+	exit "$E_WRONGARGS"
 else																	# - no arguments are passed to the script
    printf "%s\n" "$script_usage"								# + display script usage
 	exit "$E_NOARGS" 												# + exit
