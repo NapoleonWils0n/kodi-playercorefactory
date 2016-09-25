@@ -4,7 +4,7 @@
 # rip-record - execute ffmpeg commands based on matching url #
 #+==========================================================+#
 
-# How the script works
+# diagram of how the script works
 # [rip-record] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffmpeg]
 
 #+=========================================================+#
