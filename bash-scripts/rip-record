@@ -29,8 +29,10 @@ second_arg_validated="^-t$"								# matches: -t
 third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
 
 
-#+==========================================================
-# ffmpeg duration second and third arguments passed to script
+#+========================================================+#
+# second and third arguments passed to script are used	  #
+# + to specify a recording duration								  #
+#+========================================================+#
 
 tflag="$2" 		# second argument should be: -t
 duration="$3"	# third argument should be in this format: 00:00:00
