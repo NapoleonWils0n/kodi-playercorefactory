@@ -34,7 +34,19 @@ if [[ $# -eq 1 ]]; then
 		exit "$E_NOARGS" 
 	fi
 elif [[ $# -eq 3 ]]; then
-	echo "3 args"
+	if ! [[ $videourl =~ $first_arg_validated ]]; then
+		 printf "%s\n" "'$videourl' invalid input"
+	   printf "%s\n" "$script_usage"
+		exit "$E_NOARGS" 
+	elif ! [[ $tflag =~ $second_arg_validated ]]; then
+		printf "%s\n" "'$2' invalid input"
+	   printf "%s\n" "$script_usage"
+		exit "$E_NOARGS" 
+	else ! [[ $3 =~ $third_arg_validated ]]; then
+		printf "%s\n" "'$3' invalid input"
+   	printf "%s\n" "$script_usage"
+		exit "$E_NOARGS" 
+	fi
 else
    printf "%s\n" "$script_usage"
 	exit "$E_NOARGS" 
