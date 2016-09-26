@@ -136,7 +136,7 @@ case "$videourl" in
 		ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$http)
-		echo http;;
+		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	*) 		       # wildcard
 		#ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
 		echo 'not found';;
