@@ -97,6 +97,8 @@ useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[a
 m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8[a-zA-Z0-9?\&=%*]*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^\&]"
 cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
 http="@(http|https)://[a-zA-Z0-9:0-9/.\&;,~*?%@_=-]*"
+#rtmp="@(rtmp|rtmpe)://[-/.\&;,~*?[:blank:]#%@!()_=:a-zA-Z0-9\]*"
+rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]]*"
 
 #+========================================================+#
 # grep inside url to extract strings							  #
@@ -130,12 +132,14 @@ case "$videourl" in
 	$useref)        # useragent referer
 		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$videofile_grep" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
-	$m3u8useragent) # m3u8 user agent
+	$m3u8useragent) # m3u8 user agent - todo
 		echo ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" -c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	$rtmp)          # rtmp
+		echo "rtmp";;
 	$cookiem3u8)    # cookie m3u8
 		ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$http)
+	$http)          # http
 		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	*) 		       # wildcard
 		#ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
