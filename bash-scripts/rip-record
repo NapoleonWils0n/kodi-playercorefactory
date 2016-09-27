@@ -118,34 +118,33 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 case "$videourl" in
-	$videofile)     # video file
+	$videofile)         # video file
 		echo ffmpeg -hide_banner -i "$videofile_grep" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
-	$m3u8)          # m3u8 playlist
+	$m3u8)              # m3u8 playlist
 		echo ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$m3u8token)     # m3u8 playlist + token
+	$m3u8token)         # m3u8 playlist + token
 		echo ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$xforward)      # xforward
+	$xforward)          # xforward
 		echo ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$useref)        # useragent referer
+	$useref)            # useragent referer
 		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$videofile_grep" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
-	$m3u8useragent) # m3u8 user agent 
+	$m3u8useragent)     # m3u8 user agent 
 		echo xffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$m3u8uagentreferer)
-	echo "m3u8 useragent referer";;
-	#	echo ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT"
-	$rtmp)          # rtmp
-		rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
-	$cookiem3u8)    # cookie m3u8
-		ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
+	$m3u8uagentreferer) # m3u8 useragent referer
+		echo ffmpeg -hide_banner -loglevel error -user-agent "$useragent";;
+	$rtmp)              # rtmp
+		echo rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
+	$cookiem3u8)        # cookie m3u8
+		echo ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$http)          # http
+	$http)              # http
 		echo http ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
-	*) 		       # wildcard
+	*) 		           # wildcard
 		#ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";; 
 		echo 'not found';;
 esac 
