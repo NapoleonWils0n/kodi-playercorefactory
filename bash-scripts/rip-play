@@ -100,42 +100,34 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 
 case "$videourl" in
 	$videofile)         # video file
-		ffmpeg -hide_banner -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 "$videofile_grep";;
 	$m3u8)              # m3u8 playlist
-		ffmpeg -hide_banner  -i "$videourl" \
-		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 "$videourl";;
 	$m3u8token)         # m3u8 playlist + token
-		ffmpeg -hide_banner -loglevel error -i "$videourl" \
-		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
 	$xforward)          # xforward
-		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
-		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$m3u8_grep";;
 	$useref)            # useragent referer
-		ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
-		-i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
 	$m3u8useragent)     # m3u8 user agent 
-		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
-		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" "$m3u8_grep";;
 	$m3u8uagentreferer) # m3u8 useragent referer
-		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" \
-		-headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
-		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" \
+		-headers 'Referer: '"$referer"''$'\r\n' "$m3u8_grep";;
 	$refuseragent)      # referer user agent
-		ffmpeg -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-		-user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
+		-user-agent "$useragent" "$videofile_grep";;
 	$rtmp)              # rtmp
-		rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		rtmpdump -q -i "$videourl" | ffplay -hide_banner -x 640 -y 360 -;;
 	$cookiem3u8)        # cookie m3u8
-		ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
-		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" "$videourl";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
-		ffmpeg -hide_banner -loglevel panic -user-agent "$useragent2" \
-		-cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
-		-c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent2" \
+		-cookies "$cookiemedia; path=/; $cookiedomain;" "$m3u8_grep";;
 	$http)              # http
-		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		ffplay -hide_banner -x 640 -y 360 "$videourl";;
 	*) 		           # wildcard
-		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";; 
+		ffplay -hide_banner -x 640 -y 360 "$videourl";;
 esac 
 
 #+========================================================+#
