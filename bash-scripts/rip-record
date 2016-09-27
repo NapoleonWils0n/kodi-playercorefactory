@@ -21,7 +21,7 @@ E_NOMATCH=67	# url not matched by regular expression
 # + or when invalid input is entered by the user				#
 #+=========================================================+#
 
-script_usage="Usage: $(basename $0) [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
+script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
 
 #+=========================================================+#
 # validate user input for first, second and third arguments #
