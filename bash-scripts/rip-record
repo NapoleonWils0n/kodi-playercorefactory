@@ -148,6 +148,8 @@ case "$videourl" in
 	$cookiem3u8)        # cookie m3u8
 		echo ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	$cookiem3u8uagent)  # cookie m3u8 useragent
+		;;
 	$http)              # http
 		echo http ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	*) 		           # wildcard
