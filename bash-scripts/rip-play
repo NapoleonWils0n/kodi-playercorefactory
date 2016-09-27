@@ -13,8 +13,7 @@
 
 SUCCESS=0		# success exit code
 E_NOARGS=65		# no arguments passed to script
-E_WRONGARGS=66 # wrong number of arguments passed to script
-E_NOMATCH=67	# url not matched by regular expression
+E_NOMATCH=66	# url not matched by regular expression
 
 #+=========================================================+#
 # display script usage when script is run with no arguments #
