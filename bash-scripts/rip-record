@@ -138,8 +138,11 @@ case "$videourl" in
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		echo ffmpeg -hide_banner -loglevel error -user-agent "$useragent" \
-		-headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" -c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
-	$refuseragent) echo "refuseragent";;
+		-headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
+		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	$refuseragent)      # referer user agent
+		echo ffmpeg -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
+		-user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
 	$rtmp)              # rtmp
 		echo rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	$cookiem3u8)        # cookie m3u8
