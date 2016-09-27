@@ -93,40 +93,46 @@ cookieurl=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
+# ffplay set default video player size							  # 
+#+========================================================+#
+
+player_size='-x 640 -y 360'
+
+#+========================================================+#
 # case statement with regular expression 						  #
 # + to execute ffmpeg commands based on matching url		  #
 #+========================================================+#
 
 case "$videourl" in
 	$videofile)         # video file
-		ffplay -hide_banner -x 640 -y 360 "$videofile_grep";;
+		ffplay -hide_banner "$player_size" "$videofile_grep";;
 	$m3u8)              # m3u8 playlist
-		ffplay -hide_banner -x 640 -y 360 "$videourl";;
+		ffplay -hide_banner "$player_size" "$videourl";;
 	$m3u8token)         # m3u8 playlist + token
-		ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
+		ffplay -hide_banner "$player_size" -loglevel error "$videourl";;
 	$xforward)          # xforward
-		ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$m3u8_grep";;
+		ffplay -hide_banner "$player_size" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$m3u8_grep";;
 	$useref)            # useragent referer
-		ffplay -hide_banner -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
+		ffplay -hide_banner  "$player_size" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
 	$m3u8useragent)     # m3u8 user agent 
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" "$m3u8_grep";;
+		ffplay -hide_banner "$player_size" -loglevel error -user-agent "$useragent" "$m3u8_grep";;
 	$m3u8uagentreferer) # m3u8 useragent referer
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" \
+		ffplay -hide_banner "$player_size" -loglevel error -user-agent "$useragent" \
 		-headers 'Referer: '"$referer"''$'\r\n' "$m3u8_grep";;
 	$refuseragent)      # referer user agent
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
+		ffplay -hide_banner "$player_size" -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
 		-user-agent "$useragent" "$videofile_grep";;
 	$rtmp)              # rtmp
-		rtmpdump -q -i "$videourl" | ffplay -hide_banner -x 640 -y 360 -;;
+		rtmpdump -q -i "$videourl" | ffplay -hide_banner "$player_size" -;;
 	$cookiem3u8)        # cookie m3u8
-		ffplay -hide_banner -x 640 -y 360 -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" "$videourl";;
+		ffplay -hide_banner "$player_size" -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" "$videourl";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
-		ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent2" \
+		ffplay -hide_banner "$player_size" -loglevel panic -user-agent "$useragent2" \
 		-cookies "$cookiemedia; path=/; $cookiedomain;" "$m3u8_grep";;
 	$http)              # http
-		ffplay -hide_banner -x 640 -y 360 "$videourl";;
+		ffplay -hide_banner "$player_size" "$videourl";;
 	*) 		           # wildcard
-		ffplay -hide_banner -x 640 -y 360 "$videourl";;
+		ffplay -hide_banner "$player_size" "$videourl";;
 esac 
 
 #+========================================================+#
