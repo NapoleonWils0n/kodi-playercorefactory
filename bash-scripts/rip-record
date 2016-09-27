@@ -94,7 +94,8 @@ m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8"
 m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*"
 xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])"
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
-m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^\&]"
+m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[\&]"
+m3u8uagentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.m3u8|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;&@%+-]*\&r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
 cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
 http="@(http|https)://[a-zA-Z0-9:0-9/.\&;,~*?%@_=-]*"
 rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]#%@!()_=:-/.\&;,~*?]*"
@@ -132,8 +133,11 @@ case "$videourl" in
 		echo ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$videofile_grep" -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	$m3u8useragent) # m3u8 user agent 
-		echo ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
+		echo xffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc "$tflag" "$duration" "$recordingfile";;
+	$m3u8uagentreferer)
+	echo "m3u8 useragent referer";;
+	#	echo ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT"
 	$rtmp)          # rtmp
 		rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy "$tflag" "$duration" "$recordingfile";;
 	$cookiem3u8)    # cookie m3u8
