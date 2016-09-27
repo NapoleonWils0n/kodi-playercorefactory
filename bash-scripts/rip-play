@@ -1,22 +1,151 @@
 #!/bin/bash
 
-[[ $# -eq 1 ]] || exit
-[[ "$1" =~ \.txt$ ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
-printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh
+#+==========================================================+#
+# rip-play - execute ffplay commands based on matching url   #
+#+==========================================================+#
 
-case "$url" in
-	$VIDEOFILE) ffplay -hide_banner -x 640 -y 360 "$VIDEOFILE";;
-	$M3U8) ffplay -hide_banner -x 640 -y 360 "$M3U8" 2>&1 | sed '/\[/d';;
-	$M3U8TOKEN) ffplay -hide_banner -x 640 -y 360 "$M3U8TOKEN" 2>&1 | sed '/\[/d';;
-	$XFORWARD) ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' "$M3U8";;
-	$USEREF) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$VIDEOFILE";;
-	$M3U8USERAGENT) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" "$M3U8";;
-	$M3U8USERAGENT2) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" "$M3U8UAG";;
-	$M3U8UAGENTREFERER) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' "$M3U8";;
-	$REFUSERAGENT) ffplay -hide_banner -x 640 -y 360 -headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" "$VIDEOFILE";;
-	$RTMP) rtmpdump -q -i "$RTMP" | ffplay -hide_banner -x 640 -y 360 -;;
-	$COOKIEM3U8UAGENT) ffplay -hide_banner -x 640 -y 360 -user-agent "$USERAGENT2" -cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" "$M3U8";;
-	$HTTP) ffplay -hide_banner -x 640 -y 360 "$HTTP";;
-	*) ffplay -hide_banner -x 640 -y 360 "$VIDEOURL";;
+# diagram of how the script works
+# [rip-record] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffplay]
+
+#+=========================================================+#
+# exit status and error codes											#
+#+=========================================================+#
+
+SUCCESS=0		# success exit code
+E_NOARGS=65		# no arguments passed to script
+E_WRONGARGS=66 # wrong number of arguments passed to script
+E_NOMATCH=67	# url not matched by regular expression
+
+#+=========================================================+#
+# display script usage when script is run with no arguments #
+# + or when invalid input is entered by the user				#
+#+=========================================================+#
+
+script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url]"
+
+#+=========================================================+#
+# validate user input for first argument                    #
+# + passed to script	by matching with regular expressions	#
+#+=========================================================+#
+
+first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
+
+#+========================================================+#
+# check if first argument is a url in a text file 			  #
+# + or a url on the command line									  #
+#+========================================================+#
+
+if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
+	videourl=$(cat "$1")  		# + cat the text file to extract the url
+else
+	videourl="$1"					# url is on the command line
+fi
+
+#+========================================================+#
+# check if 1 argument is  passed to script			        #
+# + and validate user input										  #
+#+========================================================+#
+
+if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
+		printf "%s\n" "'$videourl' invalid input"			# + display invalid user input with error message
+		printf "%s\n" "$script_usage"							# + display script usage
+		exit "$E_NOMATCH"											# + exit with E_NOMATCH error code
+	fi
+else [[ $# -eq 0 ]]												# - no arguments are passed to the script
+   printf "%s\n" "$script_usage"								# + display script usage
+	exit "$E_NOARGS" 												# + exit with E_NOARGS error code
+fi
+
+#+========================================================+#
+# enable shell globbing for pattern matching					  #
+#+========================================================+#
+
+shopt -s extglob 
+
+#+========================================================+#
+# case statement switch on pattern match						  #
+#+========================================================+#
+
+videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)"
+m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8"
+m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*"
+xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])"
+useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
+m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[\&]"
+m3u8uagentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.m3u8\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;\&@%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
+cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
+refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
+http="@(http|https)://[a-zA-Z0-9:0-9/.\&;,~*?%@_=-]*"
+rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]#%@!()_=:-/.\&;,~*?]*"
+cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie=mediaAuth=[a-zA-Z0-9]*"
+
+#+========================================================+#
+# grep inside url to extract strings							  #
+#+========================================================+#
+
+videofile_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)')
+m3u8_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.m3u8?([a-zA-Z0-9?&=%*]*[^|])')
+useragent=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
+useragent2=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' | sed 's/[u-U]ser-[a-A]gent=//g')
+referer=$(printf "%s" "$videourl" | grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*'| sed 's/[r-R]eferer=//')
+xforwardip=$(printf "%s" "$videourl" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
+cookieurl=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
+cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
+
+#+========================================================+#
+# case statement with regular expression 						  #
+# + to execute ffmpeg commands based on matching url		  #
+#+========================================================+#
+
+case "$videourl" in
+	$videofile)         # video file
+		ffmpeg -hide_banner -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$m3u8)              # m3u8 playlist
+		ffmpeg -hide_banner  -i "$videourl" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$m3u8token)         # m3u8 playlist + token
+		ffmpeg -hide_banner -loglevel error -i "$videourl" \
+		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$xforward)          # xforward
+		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$useref)            # useragent referer
+		ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
+		-i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$m3u8useragent)     # m3u8 user agent 
+		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$m3u8uagentreferer) # m3u8 useragent referer
+		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" \
+		-headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$refuseragent)      # referer user agent
+		ffmpeg -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
+		-user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$rtmp)              # rtmp
+		rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$cookiem3u8)        # cookie m3u8
+		ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$cookiem3u8uagent)  # cookie m3u8 useragent
+		ffmpeg -hide_banner -loglevel panic -user-agent "$useragent2" \
+		-cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
+		-c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$http)              # http
+		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	*) 		           # wildcard
+		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";; 
 esac 
-done
+
+#+========================================================+#
+# turn off shell globbing											  #
+#+========================================================+#
+
+shopt -u extglob 
+
+#+========================================================+#
+# exit status SUCCESS if script runs without errors		  #
+#+========================================================+#
+
+exit "$SUCCESS"
