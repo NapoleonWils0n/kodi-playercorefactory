@@ -83,7 +83,7 @@ case "$videourl" in
 	$xforward)          # xforward
 		 wget -c --header="X-Forwarded-For: $xforwardip" "$m3u8_grep" -O- | vlc fd://0;;
 	$useref)            # useragent referer
-		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
+		wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
 	$m3u8useragent)     # m3u8 user agent 
 		mpv --user-agent="$useragent" "$m3u8_grep";;
 	$m3u8uagentreferer) # m3u8 useragent referer
