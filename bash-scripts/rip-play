@@ -101,7 +101,7 @@ case "$videourl" in
 	$videofile)         # video file
 		ffplay -hide_banner -x 640 -y 360 "$videofile_grep";;
 	$m3u8)              # m3u8 playlist
-		ffplay -hide_banner -x 640 -y 360 "$videourl";;
+		ffplay -hide_banner -x 640 -y 360 "$videourl" 2>&1 | sed '/\[/d';;
 	$m3u8token)         # m3u8 playlist + token
 		ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
 	$xforward)          # xforward
