@@ -1,98 +1,145 @@
 #!/bin/bash
 
-[[ $# -eq 1 ]] || [[ $# -eq 3 ]] || exit
-[[ "$1" =~ \.txt$ ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
-TFLAG="$2"; DURATION="$3"
-printf "%s\n" "$VIDEOURL" | while read url; do source $HOME/git/kodi-playercorefactory/bash-scripts/video-regex.sh 
+#+==========================================================+#
+# rip-stream - execute ffmpeg commands based on matching url #
+#+==========================================================+#
 
-case "$url" in
-	$VIDEOFILE)
-		ffmpeg -hide_banner -re -i "$VIDEOFILE" \
-		-c:v libx265 -preset ultrafast -tune zero-latency \
-		-x265-params crf=28 \
-		-c:a aac -strict experimental -b:a 192k \
-		$TFLAG $DURATION \
-		-maxrate 4000k -bufsize 4000k \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$M3U8)
-		ffmpeg -hide_banner -i "$M3U8" \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316 2>&1 | sed '/\[/d';;
-	$M3U8TOKEN)
-		ffmpeg -hide_banner -loglevel panic -i "$M3U8TOKEN" \
-		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$XFORWARD)
-		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$XFORWARDIP"''$'\r\n' -i "$M3U8" \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$USEREF)
-		ffmpeg -hide_banner -re -i  "$USERAGENT" -headers 'Referer: '"$REFERER"''$'\r\n' -i "$VIDEOFILE" \
-		-c:v libx265 -preset ultrafast -tune zero-latency \
-		-x265-params crf=28 \
-		-c:a aac -strict experimental -b:a 192k \
-		$TFLAG $DURATION \
-		-maxrate 4000k -bufsize 4000k \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$M3U8USERAGENT)
-		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8" \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$M3U8USERAGENT2)
-		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" -i "$M3U8UAG" \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$M3U8UAGENTREFERER)
-		ffmpeg -hide_banner -loglevel error -user-agent "$USERAGENT" \
-		-headers 'Referer: '"$REFERER"''$'\r\n' \
-		-i "$M3U8" \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$REFUSERAGENT)
-		ffmpeg -hide_banner -loglevel error \
-		-headers 'Referer: '"$REFERER"''$'\r\n' -user-agent "$USERAGENT" \
-		-i "$VIDEOFILE" \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$RTMP)
-		rtmpdump -q -i "$RTMP" | ffmpeg -hide_banner -loglevel error \
-		-i - \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$COOKIEM3U8)
-		ffmpeg -hide_banner -loglevel error \
-		-cookies "$COOKIEURL; path=/; $COOKIEDOMAIN;" \
-		-i "$COOKIEM3U8" \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$COOKIEM3U8UAGENT)
-		ffmpeg -hide_banner -loglevel error \
-		-user-agent "$USERAGENT2" \
-		-cookies "$COOKIEMEDIA; path=/; $COOKIEDOMAIN;" \
-		-i "$M3U8" \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$HTTP)
-		ffmpeg -hide_banner -loglevel error \
-		-i "$HTTP" \
-		-c:v copy -c:a copy \
-		$TFLAG $DURATION \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	*)
-		ffmpeg -hide_banner -re -i "$VIDEOURL" \
-		-c:v libx265 -preset ultrafast -tune zero-latency \
-		-x265-params crf=28 \
-		-c:a aac -strict experimental -b:a 192k \
-		$TFLAG $DURATION \
-		-maxrate 4000k -bufsize 4000k \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+# diagram of how the script works
+# [rip-stream] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffmpeg]
+
+#+=========================================================+#
+# source external file containing regular expressions			#
+#+=========================================================+#
+
+if [ -f $HOME/git/kodi-playercorefactory/bash-scripts/rip-config ]; then
+	source $HOME/git/kodi-playercorefactory/bash-scripts/rip-config
+fi
+
+#+=========================================================+#
+# exit status and error codes											#
+#+=========================================================+#
+
+SUCCESS=0		# success exit code
+E_NOARGS=65		# no arguments passed to script
+E_WRONGARGS=66 # wrong number of arguments passed to script
+E_NOMATCH=67	# url not matched by regular expression
+
+#+=========================================================+#
+# display script usage when script is run with no arguments #
+# + or when invalid input is entered by the user				#
+#+=========================================================+#
+
+script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
+
+#+=========================================================+#
+# validate user input for first, second and third arguments #
+# + passed to script	by matching with regular expressions	#
+#+=========================================================+#
+
+first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
+second_arg_validated="^-t$"								# matches: -t
+third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
+
+#+========================================================+#
+# second and third arguments passed to script are used	  #
+# + to specify a recording duration								  #
+#+========================================================+#
+
+tflag="$2" 		# second argument should be: -t
+duration="$3"	# third argument should be in this format: 00:00:00
+
+#+========================================================+#
+# check if first argument is a url in a text file 			  #
+# + or a url on the command line									  #
+#+========================================================+#
+
+if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
+	videourl=$(cat "$1")  		# + cat the text file to extract the url
+else
+	videourl="$1"					# url is on the command line
+fi
+
+#+========================================================+#
+# check if 1 or 3 arguments are passed to script			  #
+# + and validate user input										  #
+#+========================================================+#
+
+if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
+		printf "%s\n" "'$videourl' invalid input"			# + display invalid user input with error message
+		printf "%s\n" "$script_usage"							# + display script usage
+		exit "$E_NOMATCH"											# + exit with E_NOMATCH error code
+	fi
+elif [[ $# -eq 3 ]]; then										# - three arguments are passed to the script, validate user input
+	if ! [[ $videourl =~ $first_arg_validated && $tflag =~ $second_arg_validated && $duration =~ $third_arg_validated ]]; then
+		printf "%s\n" "'$1 $2 $3' invalid input" 			# + display invalid user input with error message
+		printf "%s\n" "$script_usage"							# + display script usage
+		exit "$E_NOMATCH"											# + exit with E_NOMATCH error code
+	fi
+else [[ $# -eq 0 ]]												# - no arguments are passed to the script
+   printf "%s\n" "$script_usage"								# + display script usage
+	exit "$E_NOARGS" 												# + exit with E_NOARGS error code
+fi
+
+#+========================================================+#
+# enable shell globbing for pattern matching					  #
+#+========================================================+#
+
+shopt -s extglob 
+
+#+========================================================+#
+# case statement with regular expression 						  #
+# + to execute ffmpeg commands based on matching url		  #
+#+========================================================+#
+
+case "$videourl" in
+	$videofile)         # video file
+		ffmpeg -hide_banner -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$m3u8)              # m3u8 playlist
+		ffmpeg -hide_banner  -i "$videourl" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d';;
+	$m3u8token)         # m3u8 playlist + token
+		ffmpeg -hide_banner -loglevel error -i "$videourl" \
+		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$xforward)          # xforward
+		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$useref)            # useragent referer
+		ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
+		-i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$m3u8useragent)     # m3u8 user agent 
+		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$m3u8uagentreferer) # m3u8 useragent referer
+		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" \
+		-headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$refuseragent)      # referer user agent
+		ffmpeg -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
+		-user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$rtmp)              # rtmp
+		rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$cookiem3u8)        # cookie m3u8
+		ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
+		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+	$cookiem3u8uagent)  # cookie m3u8 useragent
+		ffmpeg -hide_banner -loglevel panic -user-agent "$useragent2" \
+		-cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
+		-c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$http)              # http
+		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	*) 		           # wildcard
+		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";; 
 esac 
-done
+
+#+========================================================+#
+# turn off shell globbing											  #
+#+========================================================+#
+
+shopt -u extglob 
+
+#+========================================================+#
+# exit status SUCCESS if script runs without errors		  #
+#+========================================================+#
+
+exit "$SUCCESS"
