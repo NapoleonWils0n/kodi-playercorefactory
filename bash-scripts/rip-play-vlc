@@ -87,7 +87,7 @@ case "$videourl" in
 	$m3u8useragent)     # m3u8 user agent 
 		wget -c -U "$useragent" "$m3u8_grep" -O- | vlc fd://0;;
 	$m3u8uagentreferer) # m3u8 useragent referer
-		mpv --user-agent="$useragent" --referrer="$referer" "$m3u8_grep";;
+		wget -c -U "$useragent" --header="Referer: $referer" "$m3u8_grep" -O- | vlc fd://0;;
 	$refuseragent)      # referer user agent
 		mpv --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
 	$rtmp)              # rtmp
