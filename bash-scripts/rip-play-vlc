@@ -81,7 +81,7 @@ case "$videourl" in
 	$m3u8token)         # m3u8 playlist + token
 		vlc "$videourl";;
 	$xforward)          # xforward
-		mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$m3u8_grep";;
+		 wget -c --header="X-Forwarded-For: $xforwardip" "$m3u8_grep" -O- | vlc fd://0;;
 	$useref)            # useragent referer
 		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
 	$m3u8useragent)     # m3u8 user agent 
