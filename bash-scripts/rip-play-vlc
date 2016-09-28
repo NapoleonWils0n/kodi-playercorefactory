@@ -97,7 +97,7 @@ case "$videourl" in
 	$cookiem3u8)        # cookie m3u8
 		wget -c --header="cookie: $cookieurl","path=/: $cookiedomain" "$videourl" -O- | vlc fd://0;;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
-		mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep";;
+		wget -c -U "$useragent2" --header="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep" -O- | vlc fd://0;;
 	$http)              # http
 		vlc "$videourl";;
 	*) 		           # wildcard
