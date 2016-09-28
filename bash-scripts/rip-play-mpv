@@ -11,7 +11,9 @@
 # source external file containing regular expressions			#
 #+=========================================================+#
 
-source $HOME/git/kodi-playercorefactory/bash-scripts/rip-config
+if [ -f $HOME/git/kodi-playercorefactory/bash-scripts/rip-config ]; then
+	source $HOME/git/kodi-playercorefactory/bash-scripts/rip-config
+fi
 
 #+=========================================================+#
 # exit status and error codes											#
