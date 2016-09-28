@@ -5,8 +5,11 @@
 #+==========================================================+#
 
 # diagram of how the script works
-# [rip-record] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffplay]
+# [rip-play] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffplay]
 
+#+=========================================================+#
+# source external file containing regular expressions			#
+#+=========================================================+#
 
 source $HOME/git/kodi-playercorefactory/bash-scripts/rip-config
 
