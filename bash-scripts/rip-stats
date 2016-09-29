@@ -131,16 +131,25 @@ case "$videourl" in
 		printf "%s\n" "Statistics for: '$videourl'"
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$m3u8_grep" \
+		-headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
+		-i "$m3u8_grep" \
 		| tee "$statistics_file";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffplay -hide_banner  -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
+		ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
+		-i "$videofile_grep" \
+		| tee "$statistics_file";;
 	$m3u8useragent)     # m3u8 user agent 
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" "$m3u8_grep";;
+		ffprobe -v error -hide_banner -pretty -show_entries \
+		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
+		-user-agent "$useragent" \
+		-i "$m3u8_grep" \
+		| tee "$statistics_file";;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
