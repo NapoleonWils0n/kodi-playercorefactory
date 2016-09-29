@@ -77,7 +77,7 @@ shopt -s extglob
 
 case "$videourl" in
 	$videofile)         # video file
-		ffplay -hide_banner -x 640 -y 360 "$videofile_grep";;
+		ffplay -hide_banner -x 640 -y 360 "$videourl";;
 	$m3u8)              # m3u8 playlist
 		ffplay -hide_banner -x 640 -y 360 "$videourl" 2>&1 | sed '/\[/d';;
 	$m3u8token)         # m3u8 playlist + token

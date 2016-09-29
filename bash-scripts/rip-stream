@@ -94,7 +94,7 @@ shopt -s extglob
 
 case "$videourl" in
 	$videofile)         # video file
-		ffmpeg -hide_banner -re -i "$videofile_grep" \
+		ffmpeg -hide_banner -re -i "$videourl" \
 		-c:v libx265 -preset ultrafast -tune zero-latency \
 		-x265-params crf=28 \
 		-c:a aac -strict experimental -b:a 192k \
