@@ -114,7 +114,9 @@ case "$videourl" in
 	$m3u8uagentreferer) # m3u8 useragent referer
 		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" \
 		-headers 'Referer: '"$referer"''$'\r\n' "$m3u8_grep";;
-	$m3u8refuseragent) echo found;;
+	$m3u8refuseragent)  # m3u8 referer user agent
+		ffplay -hide_banner -x 640 -y 360 -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
+		-user-agent "$useragent" "$m3u8_grep";;
 	$refuseragent)      # referer user agent
 		ffplay -hide_banner -x 640 -y 360 -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
 		-user-agent "$useragent" "$videofile_grep";;
