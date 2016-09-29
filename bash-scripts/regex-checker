@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #+==========================================================+#
-# regex-checker - display case statement that matches url    #
+# regex-checker - show matching bash pattern for urls        #
 #+==========================================================+#
 
 # diagram of how the script works
@@ -100,37 +100,47 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 
 case "$videourl" in
 	$videofile)         # video file
-		ffplay -hide_banner -x 640 -y 360 "$videourl";;
+		printf "%s\n" 'url matches: $videofile bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$m3u8)              # m3u8 playlist
-		ffplay -hide_banner -x 640 -y 360 "$videourl" 2>&1 | sed '/\[/d';;
+		printf "%s\n" 'url matches: $m3u8 bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$m3u8token)         # m3u8 playlist + token
-		ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
+		printf "%s\n" 'url matches: $m3u8token bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$xforward)          # xforward
-		ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$m3u8_grep";;
+		printf "%s\n" 'url matches: $xforward bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$useref)            # useragent referer
-		ffplay -hide_banner  -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
+		printf "%s\n" 'url matches: $useref bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$m3u8useragent)     # m3u8 user agent 
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" "$m3u8_grep";;
+		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$m3u8uagentreferer) # m3u8 useragent referer
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" \
-		-headers 'Referer: '"$referer"''$'\r\n' "$m3u8_grep";;
+		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$m3u8refuseragent)  # m3u8 referer user agent
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-		-user-agent "$useragent" "$m3u8_grep";;
+		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$refuseragent)      # referer user agent
-		ffplay -hide_banner -x 640 -y 360 -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-		-user-agent "$useragent" "$videofile_grep";;
+		printf "%s\n" 'url matches: $refuseragent bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$rtmp)              # rtmp
-		rtmpdump -q -i "$videourl" | ffplay -hide_banner -x 640 -y 360 -;;
+		printf "%s\n" 'url matches: $rtmp bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$cookiem3u8)        # cookie m3u8
-		ffplay -hide_banner -x 640 -y 360 -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" "$videourl";;
+		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
-		ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent2" \
-		-cookies "$cookiemedia; path=/; $cookiedomain;" "$m3u8_grep";;
+		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 	$http)              # http
-		ffplay -hide_banner -x 640 -y 360 "$videourl";;
+		printf "%s\n" 'url matches: $http bash pattern'
+		printf "%s\n" "Playing: a'$videourl'";;
 	*) 		           # wildcard
-		ffplay -hide_banner -x 640 -y 360 "$videourl";;
+		printf "%s\n" 'url matches: * bash pattern'
+		printf "%s\n" "Playing: '$videourl'";;
 esac 
 
 #+========================================================+#
