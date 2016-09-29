@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #+==========================================================+#
-# rip-play-vlc - execute vlc commands based on matching url  #
+# rip-vlc - execute vlc commands based on matching url       #
 #+==========================================================+#
 
 # diagram of how the script works
-# [rip-play-vlc] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [vlc]
+# [rip-vlc] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [vlc]
 
 #+=========================================================+#
 # exit status and error codes											#

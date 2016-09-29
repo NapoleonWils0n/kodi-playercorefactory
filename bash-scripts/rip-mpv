@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #+==========================================================+#
-# rip-play-mpv - execute mpv commands based on matching url  #
+# rip-mpv - execute mpv commands based on matching url       #
 #+==========================================================+#
 
 # diagram of how the script works
-# [rip-play-mpv] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [mpv]
+# [rip-mpv] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [mpv]
 
 #+=========================================================+#
 # exit status and error codes											#
