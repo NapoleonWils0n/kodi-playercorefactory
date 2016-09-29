@@ -95,7 +95,7 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 
 #+========================================================+#
 # case statement with regular expression 						  #
-# + to execute ffmpeg commands based on matching url		  #
+# + to execute ffplay commands based on matching url		  #
 #+========================================================+#
 
 case "$videourl" in

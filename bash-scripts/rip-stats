@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #+==========================================================+#
-# rip-play - execute ffplay commands based on matching url   #
+# rip-stats - execute ffprobe commands based on matching url #
 #+==========================================================+#
 
 # diagram of how the script works
-# [rip-play] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffplay]
+# [rip-stats] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffprobe]
 
 #+=========================================================+#
 # exit status and error codes											#
@@ -95,7 +95,7 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 
 #+========================================================+#
 # case statement with regular expression 						  #
-# + to execute ffmpeg commands based on matching url		  #
+# + to execute ffprobe commands based on matching url		  #
 #+========================================================+#
 
 case "$videourl" in
