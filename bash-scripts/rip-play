@@ -100,8 +100,12 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 
 case "$videourl" in
 	$videofile)         # video file
+		printf "%s\n" 'url matches $videofile bash pattern'
+		printf "%s\n" "Playing $videourl"
 		ffplay -hide_banner -x 640 -y 360 "$videourl";;
 	$m3u8)              # m3u8 playlist
+		printf "%s\n" 'url matches $m3u8 bash pattern'
+		printf "%s\n" "Playing $videourl"
 		ffplay -hide_banner -x 640 -y 360 "$videourl" 2>&1 | sed '/\[/d';;
 	$m3u8token)         # m3u8 playlist + token
 		ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
