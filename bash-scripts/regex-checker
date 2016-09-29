@@ -101,46 +101,46 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 case "$videourl" in
 	$videofile)         # video file
 		printf "%s\n" 'url matches: $videofile bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$m3u8)              # m3u8 playlist
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$m3u8token)         # m3u8 playlist + token
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$m3u8useragent)     # m3u8 user agent 
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$m3u8refuseragent)  # m3u8 referer user agent
 		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$rtmp)              # rtmp
 		printf "%s\n" 'url matches: $rtmp bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Playing: a'$videourl'";;
+		printf "%s\n" "url checked: a'$videourl'";;
 	*) 		           # wildcard
 		printf "%s\n" 'url matches: * bash pattern'
-		printf "%s\n" "Playing: '$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 esac 
 
 #+========================================================+#
