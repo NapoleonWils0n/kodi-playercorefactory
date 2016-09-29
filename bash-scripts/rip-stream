@@ -116,7 +116,12 @@ case "$videourl" in
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$useref)            # useragent referer
 		ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
-		-i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		-i "$videofile_grep" -c:v libx265 -preset ultrafast -tune zero-latency \
+		-x265-params crf=28 \
+		-c:a aac -strict experimental -b:a 192k \
+		$tflag $duration \
+		-maxrate 4000k -bufsize 4000k \
+		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$m3u8useragent)     # m3u8 user agent 
 		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
