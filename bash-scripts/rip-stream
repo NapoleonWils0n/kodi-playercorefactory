@@ -151,7 +151,13 @@ case "$videourl" in
 		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	*) 		           # wildcard
-		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";; 
+		ffmpeg -hide_banner -re -i "$videourl" \
+		-c:v libx265 -preset ultrafast -tune zero-latency \
+		-x265-params crf=28 \
+		-c:a aac -strict experimental -b:a 192k \
+		-c:v copy -c:a copy $tflag $duration \
+		-maxrate 4000k -bufsize 4000k \
+		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 esac 
 
 #+========================================================+#
