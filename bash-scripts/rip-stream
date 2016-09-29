@@ -94,7 +94,13 @@ shopt -s extglob
 
 case "$videourl" in
 	$videofile)         # video file
-		ffmpeg -hide_banner -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		ffmpeg -hide_banner -re -i "$videofile_grep" \
+		-c:v libx265 -preset ultrafast -tune zero-latency \
+		-x265-params crf=28 \
+		-c:a aac -strict experimental -b:a 192k \
+		$tflag $duration \
+		-maxrate 4000k -bufsize 4000k \
+		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$m3u8)              # m3u8 playlist
 		ffmpeg -hide_banner  -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d';;
