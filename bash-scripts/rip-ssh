@@ -153,8 +153,14 @@ case "$videourl" in
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
-		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		printf "%s '%s' %s '%s' %s %s %s %s\n" \
+		'ffmpeg -hide_banner -headers' \
+		'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
+		'-i' "$m3u8_grep" \
+		'-c:v copy -bsf:a aac_adtstoasc' \
+		$tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$SSHSERVER" $(< /dev/fd/0) &>/dev/null;;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
