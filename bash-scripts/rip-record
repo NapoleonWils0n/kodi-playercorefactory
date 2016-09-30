@@ -192,7 +192,9 @@ case "$videourl" in
 		printf "%s\n" 'url matches: * bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";; 
-esac 
+esac \
+&& type -P notify-send &> /dev/null && [[ $? -eq 0 ]] \
+&& notify-send -i kodi "Finished Recording" "$videourl"
 
 #+========================================================+#
 # turn off shell globbing											  #
