@@ -211,8 +211,16 @@ case "$videourl" in
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-		-user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		printf "%s %s '%s' %s %s %s '%s' %s %s %s\n" \
+		'ffmpeg -hide_banner -loglevel error' \
+		'-headers' \
+		'Referer: '"$referer"''$'\r\n' \
+		'-user-agent' "$useragent" \
+		'-i' "$videofile_grep" \
+		'-c:v copy -bsf:a aac_adtstoasc' \
+		$tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$rtmp)              # rtmp
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
