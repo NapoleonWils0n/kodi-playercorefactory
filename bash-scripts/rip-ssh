@@ -5,7 +5,7 @@
 #+==========================================================+#
 
 # diagram of how the script works
-# [rip-ssh] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ssh]
+# [rip-ssh] > [ssh server] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ssh]
 
 #+=========================================================+#
 # exit status and error codes											#
@@ -21,14 +21,14 @@ E_NOMATCH=67	# url not matched by regular expression
 # + or when invalid input is entered by the user				#
 #+=========================================================+#
 
-script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
+script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
 
 #+=========================================================+#
 # validate user input for first, second and third arguments #
 # + passed to script	by matching with regular expressions	#
 #+=========================================================+#
 
-sshserver="$1"
+sshserver="$1" # ssh server
 second_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
 third_arg_validated="^-t$"								# matches: -t
 fourth_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
