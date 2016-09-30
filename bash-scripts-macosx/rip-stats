@@ -108,112 +108,112 @@ case "$videourl" in
 	$videofile)         # video file
 		printf "%s\n" 'url matches: $videofile bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$videourl" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$m3u8)              # m3u8 playlist
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$videourl" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$m3u8token)         # m3u8 playlist + token
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$videourl" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
 		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$videofile_grep" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$m3u8useragent)     # m3u8 user agent 
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$useragent" \
 		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$m3u8refuseragent)  # m3u8 referer user agent
 		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'Referer: '"$referer"''$'\r\n' \
 		-user-agent "$useragent" \
 		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'Referer: '"$referer"''$'\r\n' \
 		-user-agent "$useragent" \
 		-i "$videofile_grep" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$rtmp)              # rtmp
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		rtmpdump -q -i "$rtmp" | ffprobe -v error -hide_banner -pretty -show_entries \
+		/usr/local/bin/rtmpdump -q -i "$rtmp" | $HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i - \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-cookies "$cookieurl; path=/; $cookiedomain;" \
 		-i "$videourl" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$useragent2" \
 		-cookies "$cookiemedia; path=/; $cookiedomain;" \
 		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		printf "%s\n" "Statistics for: a'$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$videourl" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 	*) 		           # wildcard
 		printf "%s\n" 'url matches: * bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
+		$HOME/bin/ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$videourl" \
-		| tee "$statistics_file";;
+		> "$statistics_file";;
 esac 
 
 #+========================================================+#
