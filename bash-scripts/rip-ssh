@@ -29,7 +29,7 @@ script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://ex
 #+=========================================================+#
 
 sshserver="$1" # ssh server
-first_arg_validated="^[a-zA-Z0-9:0-9./@-]*"
+first_arg_validated="^[a-zA-Z0-9:0-9./@-]*" # validate ssh server address
 second_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
 third_arg_validated="^-t$"								# matches: -t
 fourth_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
@@ -128,7 +128,11 @@ case "$videourl" in
 	$videofile)         # video file
 		printf "%s\n" 'url matches: $videofile bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		printf "%s '%s' %s %s %s %s\n" \
+		'ffmpeg -hide_banner -i' "$videourl" \
+		'-c:v copy -c:a copy' $tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$m3u8)              # m3u8 playlist
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
