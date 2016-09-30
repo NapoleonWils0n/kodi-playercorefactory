@@ -28,10 +28,10 @@ script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://ex
 # + passed to script	by matching with regular expressions	#
 #+=========================================================+#
 
-sshserver="$1" # ssh server
-first_arg_validated="^[a-zA-Z0-9:0-9./@-]*" # validate ssh server address
+sshserver="$1" 												 # ssh server
+first_arg_validated="^[a-zA-Z0-9:0-9./@-]*"         # validate ssh server address
 second_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
-third_arg_validated="^-t$"								# matches: -t
+third_arg_validated="^-t$"									 # matches: -t
 fourth_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
 
 #+========================================================+#
@@ -144,8 +144,12 @@ case "$videourl" in
 	$m3u8token)         # m3u8 playlist + token
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -i "$videourl" \
-		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		printf "%s '%s' %s %s %s %s\n" \
+		'ffmpeg -hide_banner -loglevel panic -i' "$videourl" \
+		'-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc' \
+		$tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
