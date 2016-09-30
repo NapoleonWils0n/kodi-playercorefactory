@@ -224,7 +224,13 @@ case "$videourl" in
 	$rtmp)              # rtmp
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		printf "%s '%s' %s %s %s %s %s\n" \
+		'rtmpdump -q -i' "$rtmp" \
+		'| ffmpeg -hide_banner -i -' \
+		'-c:v copy -c:a copy' \
+		$tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
