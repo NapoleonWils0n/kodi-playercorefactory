@@ -175,8 +175,13 @@ case "$videourl" in
 	$m3u8useragent)     # m3u8 user agent 
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
-		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
+		printf "%s %s %s '%s' %s %s %s %s\n" \
+		'ffmpeg -hide_banner -loglevel error -user-agent' \
+		"$useragent" '-i' "$m3u8_grep" \
+		'-c:v copy -bsf:a aac_adtstoasc' \
+		$tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
