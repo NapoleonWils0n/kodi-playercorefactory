@@ -80,10 +80,16 @@ fi
 shopt -s extglob 
 
 #+========================================================+#
+# desktop notifications when recording is complete			  #
+#+========================================================+#
+
+notify='C:\notify-send\bin\notify-send'
+
+#+========================================================+#
 # video recording file path										  #
 #+========================================================+#
 
-recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+recordingfile="$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
 
 #+========================================================+#
 # case statement switch on pattern match						  #
@@ -193,8 +199,8 @@ case "$videourl" in
 		printf "%s\n" "Recording: '$videourl'"
 		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";; 
 esac \
-&& type -P notify-send &> /dev/null && [[ $? -eq 0 ]] \
-&& notify-send -i kodi "Finished Recording" "$videourl"
+&& [[ -f "$notify" ]] && [[ $? -eq 0 ]] \
+&& notify-send "Finished Recording" "$videourl"
 
 #+========================================================+#
 # turn off shell globbing											  #
