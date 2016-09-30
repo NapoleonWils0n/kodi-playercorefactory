@@ -1,7 +1,7 @@
 <playercorefactory>
  <players>
    <player name="mpv" type="ExternalPlayer" audio="false" video="true">
-	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-play-mpv"</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-mpv"</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
@@ -11,7 +11,7 @@
      <hidexbmc>true</hidexbmc>
    </player>
   <player name="vlc" type="ExternalPlayer" audio="false" video="true">
-	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-play-vlc"</filename>
+	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-vlc"</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>

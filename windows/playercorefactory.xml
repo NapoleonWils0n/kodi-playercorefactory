@@ -7,7 +7,7 @@
     </player>
    <player name="mpv" type="ExternalPlayer" audio="false" video="true">
 	<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c bash rip-play-mpv "{0}"</args>
+     <args>/c bash rip-mpv "{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="play" type="ExternalPlayer" audio="false" video="true">
@@ -17,7 +17,7 @@
    </player>
    <player name="vlc" type="ExternalPlayer" audio="false" video="true">
 	<filename>C:\Windows\System32\cmd.exe</filename>
-     <args>/c bash rip-play-vlc "{0}"</args>
+     <args>/c bash rip-vlc "{0}"</args>
      <hidexbmc>true</hidexbmc>
    </player>
    <player name="external player" type="ExternalPlayer" audio="false" video="true">
