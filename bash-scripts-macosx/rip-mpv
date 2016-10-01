@@ -8,62 +8,62 @@
 # [rip-mpv] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [mpv]
 
 #+=========================================================+#
-# exit status and error codes											#
+# exit status and error codes                               #
 #+=========================================================+#
 
-SUCCESS=0		# success exit code
-E_NOARGS=65		# no arguments passed to script
-E_NOMATCH=66	# url not matched by regular expression
+SUCCESS=0      # success exit code
+E_NOARGS=65    # no arguments passed to script
+E_NOMATCH=66   # url not matched by regular expression
 
 #+=========================================================+#
 # display script usage when script is run with no arguments #
-# + or when invalid input is entered by the user				#
+# + or when invalid input is entered by the user            #
 #+=========================================================+#
 
 script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url]"
 
 #+=========================================================+#
 # validate user input for first argument                    #
-# + passed to script	by matching with regular expressions	#
+# + passed to script	by matching with regular expressions   #
 #+=========================================================+#
 
 first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
 
 #+========================================================+#
-# check if first argument is a url in a text file 			  #
-# + or a url on the command line									  #
+# check if first argument is a url in a text file          #
+# + or a url on the command line                           #
 #+========================================================+#
 
 if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
-	videourl=$(cat "$1")  		# + cat the text file to extract the url
+	videourl=$(cat "$1")       # + cat the text file to extract the url
 else
-	videourl="$1"					# url is on the command line
+	videourl="$1"              # url is on the command line
 fi
 
 #+========================================================+#
-# check if 1 argument is  passed to script			        #
-# + and validate user input										  #
+# check if 1 argument is  passed to script                 #
+# + and validate user input                                #
 #+========================================================+#
 
-if [[ $# -eq 1 ]]; then											# - one argument is passed to the script
+if [[ $# -eq 1 ]]; then                               # - one argument is passed to the script
 	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
-		printf "%s\n" "'$videourl' invalid input"			# + display invalid user input with error message
-		printf "%s\n" "$script_usage"							# + display script usage
-		exit "$E_NOMATCH"											# + exit with E_NOMATCH error code
+		printf "%s\n" "'$videourl' invalid input"       # + display invalid user input with error message
+		printf "%s\n" "$script_usage"                   # + display script usage
+		exit "$E_NOMATCH"                               # + exit with E_NOMATCH error code
 	fi
-else [[ $# -eq 0 ]]												# - no arguments are passed to the script
-   printf "%s\n" "$script_usage"								# + display script usage
-	exit "$E_NOARGS" 												# + exit with E_NOARGS error code
+else [[ $# -eq 0 ]]                                   # - no arguments are passed to the script
+   printf "%s\n" "$script_usage"                      # + display script usage
+	exit "$E_NOARGS"                                   # + exit with E_NOARGS error code
 fi
 
 #+========================================================+#
-# enable shell globbing for pattern matching					  #
+# enable shell globbing for pattern matching               #
 #+========================================================+#
 
 shopt -s extglob 
 
 #+========================================================+#
-# case statement switch on pattern match						  #
+# case statement switch on pattern match                   #
 #+========================================================+#
 
 videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)"
@@ -81,7 +81,7 @@ rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]#%@!()_=:-/.\&;,~*?]*"
 cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie=mediaAuth=[a-zA-Z0-9]*"
 
 #+========================================================+#
-# grep inside url to extract strings							  #
+# grep inside url to extract strings                       #
 #+========================================================+#
 
 videofile_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)')
@@ -94,8 +94,8 @@ cookieurl=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
-# case statement with regular expression 						  #
-# + to execute mpv commands based on matching url		     #
+# case statement with regular expression                   #
+# + to execute mpv commands based on matching url          #
 #+========================================================+#
 
 case "$videourl" in
@@ -138,19 +138,19 @@ case "$videourl" in
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
-	*) 		           # wildcard
+	*)                  # wildcard
 		printf "%s\n" 'url matches: * bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
 esac 
 
 #+========================================================+#
-# turn off shell globbing											  #
+# turn off shell globbing                                  #
 #+========================================================+#
 
 shopt -u extglob 
 
 #+========================================================+#
-# exit status SUCCESS if script runs without errors		  #
+# exit status SUCCESS if script runs without errors        #
 #+========================================================+#
 
 exit "$SUCCESS"
