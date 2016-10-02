@@ -132,86 +132,86 @@ case "$videourl" in
 	$videofile)         # video file
 		printf "%s\n" 'url matches: $videofile bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	$m3u8)              # m3u8 playlist
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner  -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d';;
 	$m3u8token)         # m3u8 playlist + token
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -i "$videourl" \
 		-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	$m3u8useragent)     # m3u8 user agent 
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -user-agent "$useragent" \
 		-headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
 	$m3u8refuseragent)  # m3u8 referer user agent
 		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
 		-user-agent "$useragent" -i "$m3u8_grep" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
 		-user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
 	$rtmp)              # rtmp
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		/usr/local/bin/rtmpdump -q -i "$videourl" | $HOME/bin/ffmpeg \
-		-reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		-reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
 		-c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel panic -user-agent "$useragent2" \
 		-cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
 		-c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		printf "%s\n" "Recording: a'$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	*)                  # wildcard
 		printf "%s\n" 'url matches: * bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
-		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 120 \
+		$HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";; 
 esac \
 && type -P "$notify" &> /dev/null && [[ $? -eq 0 ]] \
