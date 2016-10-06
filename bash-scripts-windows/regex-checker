@@ -137,7 +137,7 @@ case "$videourl" in
 		printf "%s\n" "url checked: '$videourl'";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "url checked: a'$videourl'";;
+		printf "%s\n" "url checked: '$videourl'";;
 	*)                  # wildcard
 		printf "%s\n" 'url matches: * bash pattern'
 		printf "%s\n" "url checked: '$videourl'";;
