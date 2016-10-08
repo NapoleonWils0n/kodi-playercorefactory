@@ -268,7 +268,7 @@ case "$videourl" in
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Recording: a'$videourl'"
+		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$videourl" \
 		'-c:v copy -c:a copy' \

@@ -211,7 +211,7 @@ case "$videourl" in
 		| tee "$statistics_file";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Statistics for: a'$videourl'"
+		printf "%s\n" "Statistics for: '$videourl'"
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-i "$videourl" \
