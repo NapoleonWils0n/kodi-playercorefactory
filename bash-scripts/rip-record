@@ -99,6 +99,7 @@ m3u8uagentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.m3u8\|[uU]ser-[aA
 cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
 refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
 m3u8refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\.m3u8\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
+m3u8wmsuseragent="@(http|https)://[a-zA-Z0-9:0-9/]*\.m3u8\?wmsAuthSign=[a-zA-Z0-0=]*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
 http="@(http|https)://[a-zA-Z0-9:0-9/.\&;,~*?%@_=-]*"
 rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]#%@!()_=:-/.\&;,~*?]*"
 cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie=mediaAuth=[a-zA-Z0-9]*"
@@ -196,9 +197,15 @@ case "$videourl" in
 		-hide_banner -loglevel panic -user-agent "$useragent2" \
 		-cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
 		-c:v copy -c:a copy $tflag $duration "$recordingfile";;
+	$m3u8wmsuseragent)  # m3u8 wms user agent
+		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
+		printf "%s\n" "Playing: '$videourl'"
+		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
+		-hide_banner -user-agent "$useragent" -i "$m3u8_grep" \
+      -c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Recording: a'$videourl'"
+		printf "%s\n" "Recording: '$videourl'"
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	*)                  # wildcard
