@@ -154,7 +154,7 @@ case "$videourl" in
 		wget -c -U "$useragent" "$m3u8_grep" -O- | vlc fd://0;;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Playing: a'$videourl'"
+		printf "%s\n" "Playing: '$videourl'"
 		vlc "$videourl";;
 	*)                  # wildcard
 		printf "%s\n" 'url matches: * bash pattern'
