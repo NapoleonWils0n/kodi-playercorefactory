@@ -207,7 +207,7 @@ case "$videourl" in
 		printf "%s\n" "Statistics for: '$videourl'"
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-i "$videourl" \
+		-i "$m3u8_grep" \
 		| tee "$statistics_file";;
 	$m3u8wmsuseragent)   # m3u8 wms user agent 
 		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'

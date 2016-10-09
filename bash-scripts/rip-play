@@ -156,7 +156,7 @@ case "$videourl" in
    $m3u8wms)           # m3u8 wms 
 		printf "%s\n" 'url matches: $m3u8wms bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel error "$m3u8_grep";;
 	$m3u8wmsuseragent)  # m3u8 wms user agent
 		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"

@@ -139,7 +139,7 @@ case "$videourl" in
 		mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep";;
    $m3u8wms)           # m3u8 wms 
 		printf "%s\n" 'url matches: $m3u8wms bash pattern'
-		mpv "$videourl";;
+		mpv "$m3u8_grep";;
 	$m3u8wmsuseragent)  # m3u8 wms user agent
 		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
 		mpv --user-agent="$useragent" "$m3u8_grep";;

@@ -204,7 +204,7 @@ case "$videourl" in
 	$m3u8wms)          # m3u8 wms
 		printf "%s\n" 'url matches: $m3u8wms bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -i "$videourl" \
+		ffmpeg -hide_banner -loglevel error -i "$m3u8_grep" \
 		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$m3u8wmsuseragent)  # m3u8 wms user agent 
