@@ -93,14 +93,16 @@ recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
 
 videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)"
 m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8"
-m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*"
+m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*([^|])"
 xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])"
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
-m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[\&]"
+m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^\&]"
 m3u8uagentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.m3u8\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;\&@%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
 cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
 refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
 m3u8refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\.m3u8\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
+m3u8wms="@(http|https)://[a-zA-Z0-9:0-9/]*\.m3u8\?wmsAuthSign=[a-zA-Z0-0=]*"
+m3u8wmsuseragent="@(http|https)://[a-zA-Z0-9:0-9/]*\.m3u8\?wmsAuthSign=[a-zA-Z0-0=]*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
 http="@(http|https)://[a-zA-Z0-9:0-9/.\&;,~*?%@_=-]*"
 rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]#%@!()_=:-/.\&;,~*?]*"
 cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie=mediaAuth=[a-zA-Z0-9]*"
@@ -129,7 +131,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $videofile bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$videourl" \
 		'-c:v copy -c:a copy' $tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -137,7 +139,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$videourl" \
 		'-c:v copy -bsf:a aac_adtstoasc' $tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -145,7 +147,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel panic -i' "$videourl" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel panic -i' "$videourl" \
 		'-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc' \
 		$tflag $duration \
 		"$recordingfile" \
@@ -154,7 +156,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -headers' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -headers' \
 		'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
 		'-i' "$m3u8_grep" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
@@ -165,7 +167,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s %s %s %s %s %s %s %s %s\n" \
-		'ffmpeg -hide_banner -user-agent' "$useragent" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -user-agent' "$useragent" \
 		'-headers' \
 		'Referer: '"$referer"''$'\r\n' \
 		'-i' "$videofile_grep" '-c:v copy -c:a copy' \
@@ -176,7 +178,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error -user-agent' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error -user-agent' \
 		"$useragent" '-i' "$m3u8_grep" \
 		'-c:v copy -bsf:a aac_adtstoasc' \
 		$tflag $duration \
@@ -186,7 +188,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s %s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error -user-agent' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error -user-agent' \
 		"$useragent" \
 		'-headers' \
 		'Referer: '"$referer"''$'\r\n' \
@@ -199,7 +201,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s '%s' %s %s %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error' \
 		'-headers' \
 		'Referer: '"$referer"''$'\r\n' \
 		'-user-agent' "$useragent" \
@@ -212,7 +214,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s '%s' %s %s %s '%s' %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error' \
 		'-headers' \
 		'Referer: '"$referer"''$'\r\n' \
 		'-user-agent' "$useragent" \
@@ -235,7 +237,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel panic' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel panic' \
 		'-cookies' \
 		"$cookieurl; path=/; $cookiedomain;" \
 		'-i' "$videourl" \
@@ -247,7 +249,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel panic' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel panic' \
 		'-user-agent' "$useragent2" \
 		'-cookies' "$cookiemedia; path=/; $cookiedomain;" \
 		'-i' "$m3u8_grep" \
@@ -255,11 +257,29 @@ case "$videourl" in
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$m3u8wms)           # m3u8 wms 
+		printf "%s\n" 'url matches: $m3u8wms bash pattern'
+		printf "%s\n" "Recording: '$videourl'"
+		printf "%s '%s' %s %s %s %s\n" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$m3u8_grep" \
+		'-c:v copy -c:a copy' $tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$m3u8wmsuseragent)  # m3u8 wms user agent 
+		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
+		printf "%s\n" "Recording: '$videourl'"
+		printf "%s %s %s '%s' %s %s %s %s\n" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error -user-agent' \
+		"$useragent" '-i' "$m3u8_grep" \
+		'-c:v copy -c:a copy' \
+		$tflag $duration \
+		"$recordingfile" \
+		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Recording: a'$videourl'"
+		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$videourl" \
 		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
@@ -268,7 +288,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: * bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$videourl" \
 		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
