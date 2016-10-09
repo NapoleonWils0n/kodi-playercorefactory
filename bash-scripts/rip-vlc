@@ -76,6 +76,7 @@ m3u8uagentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.m3u8\|[uU]ser-[aA
 cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
 refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
 m3u8refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\.m3u8\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
+m3u8wms="@(http|https)://[a-zA-Z0-9:0-9/]*\.m3u8\?wmsAuthSign=[a-zA-Z0-0=]*"
 m3u8wmsuseragent="@(http|https)://[a-zA-Z0-9:0-9/]*\.m3u8\?wmsAuthSign=[a-zA-Z0-0=]*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
 http="@(http|https)://[a-zA-Z0-9:0-9/.\&;,~*?%@_=-]*"
 rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]#%@!()_=:-/.\&;,~*?]*"
@@ -148,6 +149,10 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		wget -c -U "$useragent2" --header="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep" -O- | vlc fd://0;;
+	$m3u8wms)           # m3u8 wms
+		printf "%s\n" 'url matches: $m3u8wms bash pattern'
+		printf "%s\n" "Playing: '$videourl'"
+		vlc "$videourl";;
 	$m3u8wmsuseragent)  # m3u8 wms user agent 
 		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
