@@ -188,7 +188,6 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		/usr/local/bin/rtmpdump -q -i "$videourl" | $HOME/bin/ffmpeg \
-		-reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
