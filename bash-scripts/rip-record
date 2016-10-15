@@ -208,8 +208,8 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
-		-hide_banner -user-agent "$useragent" -i "$m3u8_grep" \
-      -c:v copy -c:a copy $tflag $duration "$recordingfile";;
+		-hide_banner -user-agent "$useragent" -i "$m3u8_grep" \ 
+		-c:v copy -c:a copy $tflag $duration "$recordingfile";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
