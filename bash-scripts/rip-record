@@ -123,7 +123,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $videofile bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
@@ -138,7 +138,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner  -i "$videourl" \
@@ -154,7 +154,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -i "$videourl" \
@@ -170,7 +170,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
@@ -186,7 +186,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
@@ -202,7 +202,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel panic -user-agent "$useragent" -i "$m3u8_grep" \
@@ -218,7 +218,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -user-agent "$useragent" \
@@ -235,7 +235,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
@@ -252,7 +252,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
@@ -268,7 +268,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		rtmpdump -q -i "$videourl" | ffmpeg \
 		-hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile"
@@ -283,7 +283,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
@@ -299,7 +299,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -loglevel panic -user-agent "$useragent2" \
@@ -316,7 +316,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8wms bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$m3u8_grep" \
@@ -332,7 +332,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -user-agent "$useragent" -i "$m3u8_grep" \ 
@@ -348,7 +348,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $http bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
@@ -363,7 +363,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: * bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
-		while [[ $count < 5 ]]; do # while count is less than 5 run the script
+		while [[ "$count" < 2 ]]; do # while count is less than 2 run the script
       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 		ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
 		-hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
