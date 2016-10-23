@@ -134,7 +134,7 @@ case "$videourl" in
        $HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -150,7 +150,7 @@ case "$videourl" in
        -hide_banner  -i "$videourl" \
        -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d'
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -166,7 +166,7 @@ case "$videourl" in
        -hide_banner -loglevel error -i "$videourl" \
        -bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -182,7 +182,7 @@ case "$videourl" in
        -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
        -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -198,7 +198,7 @@ case "$videourl" in
        -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
        -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -214,7 +214,7 @@ case "$videourl" in
        -hide_banner -loglevel panic -user-agent "$useragent" -i "$m3u8_grep" \
        -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -231,7 +231,7 @@ case "$videourl" in
        -headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
        -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -248,7 +248,7 @@ case "$videourl" in
        -user-agent "$useragent" -i "$m3u8_grep" \
        -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -264,7 +264,7 @@ case "$videourl" in
        -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
        -user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -279,7 +279,7 @@ case "$videourl" in
        /usr/local/bin/rtmpdump -q -i "$videourl" | $HOME/bin/ffmpeg \
        -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -295,7 +295,7 @@ case "$videourl" in
        -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
        -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -312,7 +312,7 @@ case "$videourl" in
        -cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -328,7 +328,7 @@ case "$videourl" in
        -hide_banner -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -344,7 +344,7 @@ case "$videourl" in
        -hide_banner -user-agent "$useragent" -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -359,7 +359,7 @@ case "$videourl" in
        $HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
@@ -374,7 +374,7 @@ case "$videourl" in
        $HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-       	break # break out of the while loop
+          break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
