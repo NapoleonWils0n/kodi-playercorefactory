@@ -119,7 +119,7 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 case "$videourl" in
-	$videofile)         # video file
+   $videofile)         # video file
       printf "%s\n" 'url matches: $videofile bash pattern'
       printf "%s\n" "Recording: '$videourl'"
       count=0 # set count to zero
