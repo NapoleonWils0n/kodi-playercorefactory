@@ -24,6 +24,6 @@ fi
 # monitor ffmpeg proceses and show start time and elapsed time      # 
 #+=================================================================+#
 
-watch -n 1 "ps -C ffmpeg -o pid,comm,start,etime"
+watch -n 1 "ps -C $HOME/bin/ffmpeg -o pid,comm,start,etime"
 
 exit "$SUCCESS"
