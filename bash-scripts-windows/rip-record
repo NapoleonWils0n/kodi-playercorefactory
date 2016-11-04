@@ -148,7 +148,7 @@ case "$videourl" in
        recordingfile="$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$videourl" \
-       -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d'
+       -c:v copy -c:a copy $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d'
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
@@ -164,7 +164,7 @@ case "$videourl" in
        recordingfile="$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -i "$videourl" \
-       -bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
@@ -180,7 +180,7 @@ case "$videourl" in
        recordingfile="$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
-       -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
@@ -212,7 +212,7 @@ case "$videourl" in
        recordingfile="$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel panic -user-agent "$useragent" -i "$m3u8_grep" \
-       -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
@@ -229,7 +229,7 @@ case "$videourl" in
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -user-agent "$useragent" \
        -headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
-       -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
@@ -246,7 +246,7 @@ case "$videourl" in
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
        -user-agent "$useragent" -i "$m3u8_grep" \
-       -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
@@ -262,7 +262,7 @@ case "$videourl" in
        recordingfile="$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-       -user-agent "$useragent" -i "$videofile_grep" -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
+       -user-agent "$useragent" -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
@@ -293,7 +293,7 @@ case "$videourl" in
        recordingfile="$USERPROFILE/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
-       -c:v copy -bsf:a aac_adtstoasc $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
