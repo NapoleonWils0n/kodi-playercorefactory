@@ -140,7 +140,7 @@ case "$videourl" in
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$videourl" \
-		'-c:v copy -bsf:a aac_adtstoasc' $tflag $duration \
+		'-c:v copy -c:a copy' $tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$m3u8token)         # m3u8 playlist + token
@@ -148,7 +148,7 @@ case "$videourl" in
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel panic -i' "$videourl" \
-		'-bsf:v mpeg4_unpack_bframes -bsf:a aac_adtstoasc' \
+		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -159,7 +159,7 @@ case "$videourl" in
 		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -headers' \
 		'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
 		'-i' "$m3u8_grep" \
-		'-c:v copy -bsf:a aac_adtstoasc' \
+		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -180,7 +180,7 @@ case "$videourl" in
 		printf "%s %s %s '%s' %s %s %s %s\n" \
 		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error -user-agent' \
 		"$useragent" '-i' "$m3u8_grep" \
-		'-c:v copy -bsf:a aac_adtstoasc' \
+		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -193,7 +193,7 @@ case "$videourl" in
 		'-headers' \
 		'Referer: '"$referer"''$'\r\n' \
 		'-i' "$m3u8_grep" \
-		'-c:v copy -bsf:a aac_adtstoasc' \
+		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -206,7 +206,7 @@ case "$videourl" in
 		'Referer: '"$referer"''$'\r\n' \
 		'-user-agent' "$useragent" \
 		'-i' "$m3u8_grep" \
-		'-c:v copy -bsf:a aac_adtstoasc' \
+		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -219,7 +219,7 @@ case "$videourl" in
 		'Referer: '"$referer"''$'\r\n' \
 		'-user-agent' "$useragent" \
 		'-i' "$videofile_grep" \
-		'-c:v copy -bsf:a aac_adtstoasc' \
+		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -241,7 +241,7 @@ case "$videourl" in
 		'-cookies' \
 		"$cookieurl; path=/; $cookiedomain;" \
 		'-i' "$videourl" \
-		'-c:v copy -bsf:a aac_adtstoasc' \
+		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
