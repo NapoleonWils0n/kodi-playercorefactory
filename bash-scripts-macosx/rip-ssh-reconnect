@@ -17,7 +17,7 @@ E_WRONGARGS=66 # wrong number of arguments passed to script
 E_NOMATCH=67   # url not matched by regular expression
 
 #+=========================================================+#
-# display script usage when script is run with no arguments #
+# display script usage when script is run with no arguments # 
 # + or when invalid input is entered by the user            #
 #+=========================================================+#
 
@@ -261,7 +261,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8wms bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$m3u8_grep" \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -i' "$m3u8_grep" \
 		'-c:v copy -c:a copy' $tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
@@ -269,7 +269,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error -user-agent' \
+		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error -user-agent' \
 		"$useragent" '-i' "$m3u8_grep" \
 		'-c:v copy -c:a copy' \
 		$tflag $duration \

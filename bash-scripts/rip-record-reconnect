@@ -80,12 +80,6 @@ fi
 shopt -s extglob 
 
 #+========================================================+#
-# desktop notifications when recording is complete         #
-#+========================================================+#
-
-notify='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier'
-
-#+========================================================+#
 # case statement switch on pattern match                   #
 #+========================================================+#
 
@@ -94,7 +88,7 @@ m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8"
 m3u8token="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8\?token=[a-zA-Z0-9\&=]*([^|])"
 xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])"
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
-m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[\&]"
+m3u8useragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.m3u8?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^\&]"
 m3u8uagentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.m3u8\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;\&@%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
 cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
 refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
@@ -131,11 +125,11 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -146,12 +140,12 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner  -i "$videourl" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d'
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -162,12 +156,12 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -i "$videourl" \
-       -c:v copy -c:a copy $tflag $duration "$recordingfile"
+       -c;v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -178,12 +172,12 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -194,12 +188,12 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
        -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -210,12 +204,12 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel panic -user-agent "$useragent" -i "$m3u8_grep" \
-       -c:v copy -c;a copy $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -226,13 +220,13 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -user-agent "$useragent" \
        -headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -243,13 +237,13 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
        -user-agent "$useragent" -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -260,12 +254,12 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
        -user-agent "$useragent" -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -276,11 +270,11 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       /usr/local/bin/rtmpdump -q -i "$videourl" | $HOME/bin/ffmpeg \
+       rtmpdump -q -i "$videourl" | ffmpeg \
        -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -291,12 +285,12 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -307,13 +301,13 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel panic -user-agent "$useragent2" \
        -cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
+          exit "$success" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -324,7 +318,7 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$m3u8_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
@@ -340,8 +334,8 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
-       -hide_banner -user-agent "$useragent" -i "$m3u8_grep" \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
+       -hide_banner -user-agent "$useragent" -i "$m3u8_grep" \ 
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
@@ -352,11 +346,11 @@ case "$videourl" in
        done;;
   $http)              # http
        printf "%s\n" 'url matches: $http bash pattern'
-       printf "%s\n" "Recording: a'$videourl'"
+       printf "%s\n" "Recording: '$videourl'"
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
@@ -371,7 +365,7 @@ case "$videourl" in
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg \
+       ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
@@ -381,9 +375,8 @@ case "$videourl" in
        sleep 1
        done;;
 esac \
-&& type -P "$notify" &> /dev/null && [[ $? -eq 0 ]] \
-&& "$notify" -sender 'org.xbmc.kodi' -title 'Finished Recording' -message "$videourl"
-
+&& type -P notify-send &> /dev/null && [[ $? -eq 0 ]] \
+&& notify-send -i kodi "Finished Recording" "$videourl"
 
 #+========================================================+#
 # turn off shell globbing                                  #
