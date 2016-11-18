@@ -147,7 +147,7 @@ case "$videourl" in
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
        $HOME/bin/ffmpeg \
-       -hide_banner  -i "$videourl" \
+       -hide_banner -i "$videourl" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d'
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
