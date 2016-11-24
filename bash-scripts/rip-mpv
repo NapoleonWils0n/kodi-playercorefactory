@@ -86,7 +86,7 @@ cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\|[uU]ser-[aA
 #videofile_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)')
 #m3u8_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.m3u8?([a-zA-Z0-9?&=%*]*[^|])')
 
-videofile_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*]*[^|])')
+videofile_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(m3u8|mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*]*[^|])')
 
 useragent=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
 useragent2=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' | sed 's/[uU]ser-[aA]gent=//g')
@@ -115,19 +115,16 @@ case "$videourl" in
 		mpv "$videourl";;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
-		mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$m3u8_grep";;
+		mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
 	$viduseragent)      # user agent
 		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		mpv --user-agent="$useragent" "$m3u8_grep";;
-	$m3u8uagentreferer) # m3u8 useragent referer
-		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
-		mpv --user-agent="$useragent" --referrer="$referer" "$m3u8_grep";;
-	$m3u8refuseragent)  # m3u8 referer user agent
-		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		mpv --referrer="$referer" --user-agent="$useragent" "$m3u8_grep";;
+	$useragentreferer) # useragent referer
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
+		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		mpv --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
