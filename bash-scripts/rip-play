@@ -122,14 +122,14 @@ case "$videourl" in
 		printf "%s\n" "Playing: '$videourl'"
 		ffplay -hide_banner  -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
 	$viduseragent)      # user agent 
-		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
+		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent" "$videofile_grep";;
-	$m3u8uagentreferer) # m3u8 useragent referer
-		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
+	$useragentreferer) # useragent referer
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" \
-		-headers 'Referer: '"$referer"''$'\r\n' "$m3u8_grep";;
+		-headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
 	$m3u8refuseragent)  # m3u8 referer user agent
 		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
