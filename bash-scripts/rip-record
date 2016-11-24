@@ -281,43 +281,11 @@ case "$videourl" in
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
        ffmpeg \
        -hide_banner -loglevel panic -user-agent "$useragent2" \
-       -cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
+       -cookies "$cookiemedia; path=/; $cookiedomain;" -i "$videofile_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
-       fi
-       let count=count+1 # increment count
-       sleep 1
-       done;;
-  $m3u8wms)           # m3u8 wms
-       printf "%s\n" 'url matches: $m3u8wms bash pattern'
-       printf "%s\n" "Recording: '$videourl'"
-       count=0 # set count to zero
-       while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
-       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       ffmpeg \
-       -hide_banner -i "$m3u8_grep" \
-       -c:v copy -c:a copy $tflag $duration "$recordingfile"
-       if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-          break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
-       fi
-       let count=count+1 # increment count
-       sleep 1
-       done;;
-  $m3u8wmsuseragent)  # m3u8 wms user agent
-       printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
-       printf "%s\n" "Recording: '$videourl'"
-       count=0 # set count to zero
-       while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
-       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       ffmpeg \
-       -hide_banner -user-agent "$useragent" -i "$m3u8_grep" \ 
-       -c:v copy -c:a copy $tflag $duration "$recordingfile"
-       if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-          break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
        fi
        let count=count+1 # increment count
        sleep 1
