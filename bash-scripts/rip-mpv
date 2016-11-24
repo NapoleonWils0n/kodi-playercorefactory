@@ -116,8 +116,8 @@ case "$videourl" in
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$m3u8useragent)     # m3u8 user agent 
-		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
+	$viduseragent)      # user agent
+		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		mpv --user-agent="$useragent" "$m3u8_grep";;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
