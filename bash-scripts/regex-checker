@@ -119,6 +119,9 @@ case "$videourl" in
 	$viduseragent)         # user agent 
 		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		printf "%s\n" "url checked: '$videourl'";;
+	$useragentreferer)         # user agent 
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
+		printf "%s\n" "url checked: '$videourl'";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "url checked: '$videourl'";;
