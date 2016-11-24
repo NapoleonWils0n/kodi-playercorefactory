@@ -107,7 +107,7 @@ case "$videourl" in
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "url checked: '$videourl'";;
-	$videoqmark)         # m3u8 playlist + token
+	$videoqmark)        # video link and question mark
 		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		printf "%s\n" "url checked: '$videourl'";;
 	$xforward)          # xforward
