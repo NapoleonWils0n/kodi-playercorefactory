@@ -116,15 +116,15 @@ case "$videourl" in
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$m3u8_grep";;
+		ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$videofile_grep";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		ffplay -hide_banner  -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
-	$m3u8useragent)     # m3u8 user agent 
+	$viduseragent)      # user agent 
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent" "$m3u8_grep";;
+		ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent" "$videofile_grep";;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
