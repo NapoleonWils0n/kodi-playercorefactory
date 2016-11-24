@@ -83,11 +83,7 @@ cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\|[uU]ser-[aA
 # grep inside url to extract strings                       #
 #+========================================================+#
 
-#videofile_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(mkv|mp4|avi|flv)')
-#m3u8_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.m3u8?([a-zA-Z0-9?&=%*]*[^|])')
-
 videofile_grep=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.(m3u8|mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*]*[^|])')
-
 useragent=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]')
 useragent2=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' | sed 's/[uU]ser-[aA]gent=//g')
 referer=$(printf "%s" "$videourl" | grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*'| sed 's/[rR]eferer=//')
@@ -121,7 +117,7 @@ case "$videourl" in
 		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
 	$viduseragent)      # user agent
 		printf "%s\n" 'url matches: $viduseragent bash pattern'
-		mpv --user-agent="$useragent" "$m3u8_grep";;
+		mpv --user-agent="$useragent" "$videofile_grep";;
 	$useragentreferer) # useragent referer
 		printf "%s\n" 'url matches: $useragentreferer bash pattern'
 		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
@@ -133,14 +129,8 @@ case "$videourl" in
 		rtmpdump -q -i "$videourl" | mpv -;;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep";;
-   $m3u8wms)           # m3u8 wms 
-		printf "%s\n" 'url matches: $m3u8wms bash pattern'
-		mpv "$m3u8_grep";;
-	$m3u8wmsuseragent)  # m3u8 wms user agent
-		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
-		mpv --user-agent="$useragent" "$m3u8_grep";;
-	$http)              # http
+		mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$videofile_grep";;
+  	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		mpv "$videourl";;
 	*)                  # wildcard
