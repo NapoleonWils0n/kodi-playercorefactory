@@ -69,7 +69,7 @@ shopt -s extglob
 videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)"
 m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8"
 videoqmark="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv|m3u8)?([^|])[a-zA-Z0-9=?&]*([^|])"
-viduseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^\&]"
+viduseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*([^&])"
 useragentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.@(mkv|mp4|avi|flv|m3u8)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;\&@%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
 useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
 refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*?(.m3u8)\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
