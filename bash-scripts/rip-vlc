@@ -121,10 +121,10 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
-	$m3u8useragent)     # m3u8 user agent 
+	$viduseragent)     # user agent 
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent" "$m3u8_grep" -O- | vlc fd://0;;
+		wget -c -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
 	$m3u8uagentreferer) # m3u8 useragent referer
 		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
