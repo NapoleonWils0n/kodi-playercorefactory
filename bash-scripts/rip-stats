@@ -156,13 +156,13 @@ case "$videourl" in
 		-user-agent "$useragent" \
 		-i "$videofile_grep" \
 		| tee "$statistics_file";;
-	$m3u8uagentreferer) # m3u8 useragent referer
-		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
+	$useragentreferer) # useragent referer
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
-		-i "$m3u8_grep" \
+		-i "$videofile_grep" \
 		| tee "$statistics_file";;
 	$m3u8refuseragent)  # m3u8 referer user agent
 		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
