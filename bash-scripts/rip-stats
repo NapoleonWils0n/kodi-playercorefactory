@@ -196,22 +196,7 @@ case "$videourl" in
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-user-agent "$useragent2" \
 		-cookies "$cookiemedia; path=/; $cookiedomain;" \
-		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
-	$m3u8wms)           # m3u8 wms
-		printf "%s\n" 'url matches: $m3u8wms bash pattern'
-		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
-		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
-	$m3u8wmsuseragent)   # m3u8 wms user agent 
-		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
-		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
-		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-user-agent "$useragent" \
-		-i "$m3u8_grep" \
+		-i "$videofile_grep" \
 		| tee "$statistics_file";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
