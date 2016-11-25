@@ -125,14 +125,10 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		wget -c -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
-	$m3u8uagentreferer) # m3u8 useragent referer
-		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
+	$useragentreferer) # useragent referer
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent" --header="Referer: $referer" "$m3u8_grep" -O- | vlc fd://0;;
-	$m3u8refuseragent)  # m3u8 referer user agent
-		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c --header="Referer: $referer" -U "$useragent" "$m3u8_grep" -O- | vlc fd://0;;
+		wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
@@ -144,15 +140,7 @@ case "$videourl" in
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent2" --header="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep" -O- | vlc fd://0;;
-	$m3u8wms)           # m3u8 wms
-		printf "%s\n" 'url matches: $m3u8wms bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		vlc "$m3u8_grep";;
-	$m3u8wmsuseragent)  # m3u8 wms user agent 
-		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent" "$m3u8_grep" -O- | vlc fd://0;;
+		wget -c -U "$useragent2" --header="cookie: $cookiemedia","path=/: $cookiedomain" "$videofile_grep" -O- | vlc fd://0;;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
