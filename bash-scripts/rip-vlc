@@ -116,7 +116,7 @@ case "$videourl" in
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		wget -c --header="X-Forwarded-For: $xforwardip" "$m3u8_grep" -O- | vlc fd://0;;
+		wget -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | vlc fd://0;;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
