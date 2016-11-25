@@ -166,7 +166,7 @@ case "$videourl" in
 		printf "%s '%s' %s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -headers' \
 		'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-		'-i' "$m3u8_grep" \
+		'-i' "$videofile_grep" \
 		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
