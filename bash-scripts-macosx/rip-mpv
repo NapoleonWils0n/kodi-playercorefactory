@@ -103,6 +103,9 @@ case "$videourl" in
 	$m3u8)              # m3u8 playlist
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
+	$cookiem3u8)        # cookie m3u8
+		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
+		/Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videourl";;
 	$m3u8token)         # m3u8 playlist + token
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
@@ -127,9 +130,6 @@ case "$videourl" in
 	$rtmp)              # rtmp
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		/usr/local/bin/rtmpdump -q -i "$videourl" | /Applications/mpv.app/Contents/MacOS/mpv -;;
-	$cookiem3u8)        # cookie m3u8
-		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videourl";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep";;
