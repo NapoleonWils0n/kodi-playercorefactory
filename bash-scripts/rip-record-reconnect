@@ -282,7 +282,7 @@ case "$videourl" in
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
        ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
        -hide_banner -loglevel panic -user-agent "$useragent2" \
-       -cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
+       -cookies "$cookiemedia; path=/; $cookiedomain;" -i "$videofile_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
