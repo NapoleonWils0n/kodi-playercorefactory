@@ -125,8 +125,8 @@ case "$videourl" in
 		-cookies "$cookieurl; path=/; $cookiedomain;" \
 		-i "$videourl" \
 		| tee "$statistics_file";;
-	$m3u8token)         # m3u8 playlist + token
-		printf "%s\n" 'url matches: $m3u8token bash pattern'
+	$videoqmark)         # video link and question mark
+		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
