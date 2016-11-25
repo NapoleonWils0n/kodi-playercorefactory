@@ -204,19 +204,6 @@ case "$videourl" in
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$m3u8refuseragent)  # m3u8 referer user agent
-		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s '%s' %s %s %s '%s' %s %s %s %s\n" \
-		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error' \
-		'-headers' \
-		'Referer: '"$referer"''$'\r\n' \
-		'-user-agent' "$useragent" \
-		'-i' "$m3u8_grep" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
