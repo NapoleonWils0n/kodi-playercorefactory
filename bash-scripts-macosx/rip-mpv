@@ -106,12 +106,12 @@ case "$videourl" in
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videourl";;
-	$m3u8token)         # m3u8 playlist + token
-		printf "%s\n" 'url matches: $m3u8token bash pattern'
+	$videoqmark)         # video link and question mark
+		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$m3u8_grep";;
+		/Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
