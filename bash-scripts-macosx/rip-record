@@ -231,15 +231,15 @@ case "$videourl" in
        let count=count+1 # increment count
        sleep 1
        done;;
-  $m3u8uagentreferer) # m3u8 useragent referer
-       printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
+  $useragentreferer) # useragent referer
+       printf "%s\n" 'url matches: $useragentreferer bash pattern'
        printf "%s\n" "Recording: '$videourl'"
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
        $HOME/bin/ffmpeg \
        -hide_banner -loglevel error -user-agent "$useragent" \
-       -headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
+       -headers 'Referer: '"$referer"''$'\r\n' -i "$videofile_grep" \
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
