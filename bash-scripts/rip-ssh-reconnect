@@ -165,7 +165,7 @@ case "$videourl" in
 		printf "%s '%s' %s '%s' %s %s %s %s\n" \
 		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -headers' \
 		'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-		'-i' "$m3u8_grep" \
+		'-i' "$videofile_grep" \
 		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
