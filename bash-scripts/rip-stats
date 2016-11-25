@@ -138,7 +138,7 @@ case "$videourl" in
 		ffprobe -v error -hide_banner -pretty -show_entries \
 		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 		-headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-		-i "$m3u8_grep" \
+		-i "$videofile_grep" \
 		| tee "$statistics_file";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
