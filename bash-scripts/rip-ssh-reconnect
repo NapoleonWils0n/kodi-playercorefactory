@@ -181,12 +181,12 @@ case "$videourl" in
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$m3u8useragent)     # m3u8 user agent 
-		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
+	$viduseragent)     # user agent 
+		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s %s '%s' %s %s %s %s\n" \
 		'ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 -hide_banner -loglevel error -user-agent' \
-		"$useragent" '-i' "$m3u8_grep" \
+		"$useragent" '-i' "$videofile_grep" \
 		'-c:v copy -c:a copy' \
 		$tflag $duration \
 		"$recordingfile" \
