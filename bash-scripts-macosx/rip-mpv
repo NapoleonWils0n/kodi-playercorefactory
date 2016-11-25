@@ -115,15 +115,12 @@ case "$videourl" in
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$m3u8useragent)     # m3u8 user agent 
-		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" "$m3u8_grep";;
-	$m3u8uagentreferer) # m3u8 useragent referer
-		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" --referrer="$referer" "$m3u8_grep";;
-	$m3u8refuseragent)  # m3u8 referer user agent
-		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --referrer="$referer" --user-agent="$useragent" "$m3u8_grep";;
+	$viduseragent)     # user agent 
+		printf "%s\n" 'url matches: $viduseragent bash pattern'
+		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" "$videofile_grep";;
+	$useragentreferer) # useragent referer
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
+		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
@@ -132,13 +129,7 @@ case "$videourl" in
 		/usr/local/bin/rtmpdump -q -i "$videourl" | /Applications/mpv.app/Contents/MacOS/mpv -;;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep";;
-   $m3u8wms)           # m3u8 wms 
-		printf "%s\n" 'url matches: $m3u8wms bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv "$m3u8_grep";;
-	$m3u8wmsuseragent)  # m3u8 wms user agent
-		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" "$m3u8_grep";;
+		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$videofile_grep";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
