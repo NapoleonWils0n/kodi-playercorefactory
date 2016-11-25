@@ -151,8 +151,8 @@ case "$videourl" in
 		$tflag $duration \
 		"$recordingfile" \
 		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$m3u8token)         # m3u8 playlist + token
-		printf "%s\n" 'url matches: $m3u8token bash pattern'
+	$videoqmark)         # video link and question mark
+		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s '%s' %s %s %s %s\n" \
 		'ffmpeg -hide_banner -loglevel panic -i' "$videourl" \
