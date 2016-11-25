@@ -116,7 +116,7 @@ case "$videourl" in
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		$HOME/bin/ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$m3u8_grep";;
+		$HOME/bin/ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$videofile_grep";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
