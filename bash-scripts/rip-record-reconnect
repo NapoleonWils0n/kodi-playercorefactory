@@ -162,8 +162,8 @@ case "$videourl" in
        let count=count+1 # increment count
        sleep 1
        done;;
-  $m3u8token)         # m3u8 playlist + token
-       printf "%s\n" 'url matches: $m3u8token bash pattern'
+  $videoqmark)         # video link and question mark
+       printf "%s\n" 'url matches: $videoqmark bash pattern'
        printf "%s\n" "Recording: '$videourl'"
        count=0 # set count to zero
        while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
