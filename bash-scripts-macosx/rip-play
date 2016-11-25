@@ -109,8 +109,8 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		$HOME/bin/ffplay -hide_banner -x 640 -y 360 -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" "$videourl";;
-	$m3u8token)         # m3u8 playlist + token
-		printf "%s\n" 'url matches: $m3u8token bash pattern'
+	$videoqmark)         # video link and question mark
+		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		$HOME/bin/ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
 	$xforward)          # xforward
