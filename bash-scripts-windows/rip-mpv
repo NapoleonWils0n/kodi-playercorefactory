@@ -109,30 +109,26 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		mpv --vo=direct3d --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videourl";;
-	$m3u8token)         # m3u8 playlist + token
-		printf "%s\n" 'url matches: $m3u8token bash pattern'
+	$videoqmark)         # video link and question mark
+		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		mpv --vo=direct3d "$videourl";;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		mpv --vo=direct3d --http-header-fields="X-Forwarded-For: $xforwardip" "$m3u8_grep";;
+		mpv --vo=direct3d --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
 		mpv --vo=direct3d --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$m3u8useragent)     # m3u8 user agent 
-		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
+	$viduseragent)     # user agent 
+		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		mpv --vo=direct3d --user-agent="$useragent" "$m3u8_grep";;
-	$m3u8uagentreferer) # m3u8 useragent referer
-		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
+		mpv --vo=direct3d --user-agent="$useragent" "$videofile_grep";;
+	$useragentreferer) # useragent referer
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		mpv --vo=direct3d --user-agent="$useragent" --referrer="$referer" "$m3u8_grep";;
-	$m3u8refuseragent)  # m3u8 referer user agent
-		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		mpv --vo=direct3d --referrer="$referer" --user-agent="$useragent" "$m3u8_grep";;
+		mpv --vo=direct3d --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
@@ -144,13 +140,7 @@ case "$videourl" in
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		mpv --vo=direct3d --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$m3u8_grep";;
-   $m3u8wms)           # m3u8 wms 
-		printf "%s\n" 'url matches: $m3u8wms bash pattern'
-		mpv --vo=direct3d "$m3u8_grep";;
-	$m3u8wmsuseragent)  # m3u8 wms user agent
-		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
-		mpv --vo=direct3d --user-agent="$useragent" "$m3u8_grep";;
+		mpv --vo=direct3d --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$videofile_grep";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
