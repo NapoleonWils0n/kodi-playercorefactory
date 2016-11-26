@@ -151,6 +151,22 @@ case "$videourl" in
        let count=count+1 # increment count
        sleep 1
        done;;
+  $cookiem3u8)        # cookie m3u8
+       printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
+       printf "%s\n" "Recording: '$videourl'"
+       count=0 # set count to zero
+       while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
+       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+       $HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
+       -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
+       if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
+          break # break out of the while loop
+          exit "$SUCCESS" # exit with $SUCCESS error code
+       fi
+       let count=count+1 # increment count
+       sleep 1
+       done;;
   $m3u8token)         # m3u8 playlist + token
        printf "%s\n" 'url matches: $m3u8token bash pattern'
        printf "%s\n" "Recording: '$videourl'"
@@ -273,22 +289,6 @@ case "$videourl" in
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
        /usr/local/bin/rtmpdump -q -i "$videourl" | $HOME/bin/ffmpeg \
        -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile"
-       if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
-          break # break out of the while loop
-          exit "$SUCCESS" # exit with $SUCCESS error code
-       fi
-       let count=count+1 # increment count
-       sleep 1
-       done;;
-  $cookiem3u8)        # cookie m3u8
-       printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-       printf "%s\n" "Recording: '$videourl'"
-       count=0 # set count to zero
-       while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
-       recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-       $HOME/bin/ffmpeg -reconnect 1 -reconnect_at_eof 1 -reconnect_streamed 1 -reconnect_delay_max 300 \
-       -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
-       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$SUCCESS" # exit with $SUCCESS error code
