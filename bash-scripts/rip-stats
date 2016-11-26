@@ -164,15 +164,6 @@ case "$videourl" in
 		-user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
 		-i "$videofile_grep" \
 		| tee "$statistics_file";;
-	$m3u8refuseragent)  # m3u8 referer user agent
-		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		printf "%s\n" "Statistics for: '$videourl'"
-		ffprobe -v error -hide_banner -pretty -show_entries \
-		format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-		-headers 'Referer: '"$referer"''$'\r\n' \
-		-user-agent "$useragent" \
-		-i "$m3u8_grep" \
-		| tee "$statistics_file";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
 		printf "%s\n" "Statistics for: '$videourl'"
