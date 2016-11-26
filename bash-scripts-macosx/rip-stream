@@ -137,8 +137,8 @@ case "$videourl" in
 		$HOME/bin/ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
 		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$m3u8token)         # m3u8 playlist + token
-		printf "%s\n" 'url matches: $m3u8token bash pattern'
+	$videoqmark)         # video link and question mark
+		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
 		$HOME/bin/ffmpeg -hide_banner -loglevel error -i "$videourl" \
 		-c:v copy -c:a copy $tflag $duration \
@@ -146,7 +146,7 @@ case "$videourl" in
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
-		$HOME/bin/ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$m3u8_grep" \
+		$HOME/bin/ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$videofile_grep" \
 		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$useref)            # useragent referer
@@ -159,24 +159,17 @@ case "$videourl" in
 		$tflag $duration \
 		-maxrate 4000k -bufsize 4000k \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$m3u8useragent)     # m3u8 user agent 
-		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
+	$viduseragent)     # user agent 
+		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
-		$HOME/bin/ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
+		$HOME/bin/ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$videofile_grep" \
 		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$m3u8uagentreferer) # m3u8 useragent referer
-		printf "%s\n" 'url matches: $m3u8uagentreferer bash pattern'
+	$useragentreferer) # useragent referer
+		printf "%s\n" 'url matches: $useragentreferer bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
 		$HOME/bin/ffmpeg -hide_banner -loglevel error -user-agent "$useragent" \
-		-headers 'Referer: '"$referer"''$'\r\n' -i "$m3u8_grep" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$m3u8refuseragent)  # m3u8 referer user agent
-		printf "%s\n" 'url matches: $m3u8refuseragent bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		$HOME/bin/ffmpeg -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-		-user-agent "$useragent" -i "$m3u8_grep" \
+		-headers 'Referer: '"$referer"''$'\r\n' -i "$videofile_grep" \
 		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$refuseragent)      # referer user agent
@@ -194,19 +187,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
 		$HOME/bin/ffmpeg -hide_banner -loglevel panic -user-agent "$useragent2" \
-		-cookies "$cookiemedia; path=/; $cookiedomain;" -i "$m3u8_grep" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$m3u8wms)          # m3u8 wms
-		printf "%s\n" 'url matches: $m3u8wms bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		$HOME/bin/ffmpeg -hide_banner -loglevel error -i "$m3u8_grep" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$m3u8wmsuseragent)  # m3u8 wms user agent 
-		printf "%s\n" 'url matches: $m3u8wmsuseragent bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		$HOME/bin/ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$m3u8_grep" \
+		-cookies "$cookiemedia; path=/; $cookiedomain;" -i "$videofile_grep" \
 		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$http)              # http
