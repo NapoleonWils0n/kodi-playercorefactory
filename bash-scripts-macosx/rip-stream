@@ -131,6 +131,12 @@ case "$videourl" in
 		-c:v copy -c:a copy \
 		$tflag $duration -f \
 		mpegts udp://239.253.253.4:1234?pkt_size=1316 2>&1 | sed '/\[/d';;
+	$cookiem3u8)        # cookie m3u8
+		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
+		printf "%s\n" "Streaming: '$videourl'"
+		$HOME/bin/ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
+		-c:v copy -c:a copy $tflag $duration \
+		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$m3u8token)         # m3u8 playlist + token
 		printf "%s\n" 'url matches: $m3u8token bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
@@ -183,12 +189,6 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $rtmp bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
 		/usr/local/bin/rtmpdump -q -i "$videourl" | $HOME/bin/ffmpeg -hide_banner -i - -c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
-	$cookiem3u8)        # cookie m3u8
-		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		$HOME/bin/ffmpeg -hide_banner -loglevel panic -cookies "$cookieurl; path=/; $cookiedomain;" -i "$videourl" \
-		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
