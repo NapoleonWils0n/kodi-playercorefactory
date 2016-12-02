@@ -169,7 +169,7 @@ case "$videourl" in
        recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
        ffmpeg \
        -hide_banner -loglevel error -i "$videourl" \
-       -c;v copy -c:a copy $tflag $duration "$recordingfile"
+       -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
           exit "$success" # exit with $success error code
