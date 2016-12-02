@@ -58,6 +58,8 @@ you need to add curl to your windows path, see below
 
 https://cygwin.com/install.html
 
+Install cat, grep and sed if they arent automatically installed
+
 ### rtmpdump
 
 download rtmpdump
