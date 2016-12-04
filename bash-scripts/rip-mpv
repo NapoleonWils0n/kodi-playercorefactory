@@ -89,6 +89,7 @@ useragent2=$(printf "%s" "$videourl" | grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:
 referer=$(printf "%s" "$videourl" | grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*'| sed 's/[rR]eferer=//')
 xforwardip=$(printf "%s" "$videourl" | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')
 cookieurl=$(printf "%s" "$videourl" | grep -Eo '[cC]ookie=[a-zA-Z0-9/&%_*~;=_[:blank:]]*' | sed 's/[cC]ookie=//')
+cookienltid=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
@@ -105,7 +106,7 @@ case "$videourl" in
 		mpv "$videourl";;
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		mpv --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videourl";;
+		mpv --http-header-fields="cookie: $cookienltid","path=/: $cookiedomain" "$videourl";;
 	$videoqmark)         # video link and question mark
 		printf "%s\n" 'url matches: $videoqmark bash pattern'
 		mpv "$videourl";;
