@@ -231,7 +231,7 @@ case "$videourl" in
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
 		printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel panic' \
+		'ffmpeg -hide_banner' \
 		'-user-agent' "$useragent2" \
 		'-cookies' "$cookieurl; path=/; $cookiedomain;" \
 		'-i' "$videofile_grep" \
