@@ -141,7 +141,7 @@ case "$videourl" in
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
-		mpv --vo=direct3d --user-agent="$useragent2" --http-header-fields="cookie: $cookiemedia","path=/: $cookiedomain" "$videofile_grep";;
+		mpv --vo=direct3d --user-agent="$useragent2" --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
 		printf "%s\n" "Playing: '$videourl'"
