@@ -186,7 +186,7 @@ case "$videourl" in
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
 		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -loglevel panic -user-agent "$useragent2" \
+		ffmpeg -hide_banner -user-agent "$useragent2" \
 		-cookies "$cookieurl; path=/; $cookiedomain;" -i "$videofile_grep" \
 		-c:v copy -c:a copy $tflag $duration \
 		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
