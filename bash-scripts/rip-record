@@ -124,7 +124,7 @@ case "$videourl" in
        -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -140,7 +140,7 @@ case "$videourl" in
        -c:v copy -c:a copy $tflag $duration "$recordingfile" 2>&1 | sed '/\[/d'
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -156,7 +156,7 @@ case "$videourl" in
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -172,7 +172,7 @@ case "$videourl" in
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -188,7 +188,7 @@ case "$videourl" in
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -204,7 +204,7 @@ case "$videourl" in
        -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -220,7 +220,7 @@ case "$videourl" in
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -237,7 +237,7 @@ case "$videourl" in
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -253,7 +253,7 @@ case "$videourl" in
        -user-agent "$useragent" -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -268,7 +268,7 @@ case "$videourl" in
        -hide_banner -i - -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
@@ -285,7 +285,7 @@ case "$videourl" in
        -c:v copy -c:a copy $tflag $duration "$recordingfile"
        if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
           break # break out of the while loop
-          exit "$success" # exit with $success error code
+          exit "$SUCCESS" # exit with $success error code
        fi
        let count=count+1 # increment count
        sleep 1
