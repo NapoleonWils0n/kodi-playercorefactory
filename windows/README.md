@@ -1,5 +1,12 @@
 # Windows set up
 
+## Windows GUI installer
+
+Windows GUI installer to install and the programs and scripts, by the t3rmin8tor
+
+https://github.com/t3rmin8tor/kodi-player-core-factory-install
+
+## Manual install instructions
 
 Youtube video
 
