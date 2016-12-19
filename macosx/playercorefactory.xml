@@ -1,5 +1,10 @@
 <playercorefactory>
  <players>
+   <player name="save url" type="ExternalPlayer" audio="true" video="true">
+		<filename>printf</filename>
+     <args>"%s\n" "{0}" > "$HOME/Desktop/url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
    <player name="mpv" type="ExternalPlayer" audio="false" video="true">
 	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-mpv"</filename>
      <args>"{0}"</args>
@@ -18,11 +23,6 @@
   <player name="external player" type="ExternalPlayer" audio="false" video="true">
 	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts-macosx/rip-play-external"</filename>
      <args>"{0}"</args>
-     <hidexbmc>false</hidexbmc>
-   </player>
-   <player name="save url" type="ExternalPlayer" audio="false" video="true">
-		<filename>printf</filename>
-     <args>"%s\n" "{0}" > "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
   <player name="video stats" type="ExternalPlayer" audio="false" video="true">
