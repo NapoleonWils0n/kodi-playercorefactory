@@ -2,4 +2,4 @@
 
 [[ $# -eq 1 ]] || exit
 [[ "$1" =~ \.txt$ ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
-printf "%s\n" "$VIDEOURL" > "$USERPROFILE/Desktop/url-$(date +"%Y-%m-%d-%H-%M-%S").txt"
+printf "%s\n" "$VIDEOURL" > "$USERPROFILE/Desktop/urls-$(date +"%Y-%m-%d-%H-%M-%S").txt"
