@@ -1,6 +1,6 @@
 <playercorefactory>
  <players>
-  <player name="mpv" type="ExternalPlayer" audio="false" video="true">
+  <player name="mpv" type="ExternalPlayer" audio="true" video="true">
 	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-mpv"</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
