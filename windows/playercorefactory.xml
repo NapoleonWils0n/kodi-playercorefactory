@@ -1,6 +1,6 @@
  <playercorefactory>
  <players>
-    <player name="save url" type="ExternalPlayer" audio="true" video="true">
+    <player name="save url" type="ExternalPlayer" audio="false" video="true">
          <filename>C:\Windows\System32\cmd.exe</filename>
          <args>/c bash rip-url "{0}"</args>
     <hidexbmc>false</hidexbmc>
