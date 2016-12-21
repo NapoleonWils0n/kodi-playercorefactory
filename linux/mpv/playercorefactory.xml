@@ -1,6 +1,6 @@
 <playercorefactory>
  <players>
-  <player name="mpv" type="ExternalPlayer" audio="true" video="true">
+  <player name="mpv" type="ExternalPlayer" audio="false" video="true">
 	<filename>"$HOME/git/kodi-playercorefactory/bash-scripts/rip-mpv"</filename>
      <args>"{0}"</args>
      <hidexbmc>true</hidexbmc>
@@ -18,6 +18,11 @@
    <player name="mpv - dump" type="ExternalPlayer" audio="false" video="true">
 		<filename>mpv</filename>
      <args>"{0}" --stream-dump="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" &</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+ <player name="save url audio" type="ExternalPlayer" audio="true" video="false">
+		<filename>printf</filename>
+     <args>"%s\n" "{0}" > "$HOME/Desktop/url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
  </players>

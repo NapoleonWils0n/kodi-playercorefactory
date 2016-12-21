@@ -1,6 +1,6 @@
 <playercorefactory>
  <players>
-   <player name="save url" type="ExternalPlayer" audio="true" video="true">
+   <player name="save url" type="ExternalPlayer" audio="false" video="true">
 		<filename>printf</filename>
      <args>"%s\n" "{0}" > "$HOME/Desktop/url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
@@ -19,6 +19,11 @@ USERAGENT=`echo "$url" | grep -Eo 'User-Agent=[a-zA-Z]*/[0-9]{1,1}\.[0-9]{1,1}(.
 REFERER=`echo "$url" | grep -Eo 'Referer=(http|https)://[a-zA-Z0-9./?=_-]*(/|\.html)' | sed 's/Referer=//'`
 wget -bqc --user-agent="$USERAGENT" --header="Referer: $REFERER" "$URL" -O "$HOME/Desktop/video-url-$(date +"%m-%d-%y-%H-%M").mkv" 
 done</args>
+     <hidexbmc>false</hidexbmc>
+   </player>
+   <player name="save url audio" type="ExternalPlayer" audio="true" video="false">
+		<filename>printf</filename>
+     <args>"%s\n" "{0}" > "$HOME/Desktop/url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
  </players>
