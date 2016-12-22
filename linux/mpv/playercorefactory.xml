@@ -7,7 +7,7 @@
    </player>  
  <player name="save url" type="ExternalPlayer" audio="false" video="true">
 		<filename>printf</filename>
-     <args>"%s\n" "{0}" > "$HOME/Desktop/url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
+     <args>"%s\n" "{0}" > "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
    <player name="mpv - capture" type="ExternalPlayer" audio="false" video="true">
@@ -22,7 +22,7 @@
    </player>
  <player name="save url audio" type="ExternalPlayer" audio="true" video="false">
 		<filename>printf</filename>
-     <args>"%s\n" "{0}" > "$HOME/Desktop/url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
+     <args>"%s\n" "{0}" > "$HOME/Desktop/audio-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
    </player>
  </players>
