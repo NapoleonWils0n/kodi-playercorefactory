@@ -1,6 +1,6 @@
 <playercorefactory>
  <players>
-   <player name="save url" type="ExternalPlayer" audio="false" video="true">
+   <player name="save video url" type="ExternalPlayer" audio="false" video="true">
 		<filename>printf</filename>
      <args>"%s\n" "{0}" > "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>
@@ -100,7 +100,7 @@
      <args>-bqc -i "{0}" -O "$HOME/Desktop/video-url-$(date +"%Y-%m-%d-%H-%M-%S").mkv"</args>
      <hidexbmc>false</hidexbmc>
    </player>
-   <player name="save url audio" type="ExternalPlayer" audio="true" video="false">
+   <player name="save audio url" type="ExternalPlayer" audio="true" video="false">
 		<filename>printf</filename>
      <args>"%s\n" "{0}" > "$HOME/Desktop/audio-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"</args>
      <hidexbmc>false</hidexbmc>

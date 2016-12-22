@@ -1,6 +1,6 @@
  <playercorefactory>
  <players>
-    <player name="save url" type="ExternalPlayer" audio="false" video="true">
+    <player name="save video url" type="ExternalPlayer" audio="false" video="true">
          <filename>C:\Windows\System32\cmd.exe</filename>
          <args>/c bash rip-url "{0}"</args>
     <hidexbmc>false</hidexbmc>
@@ -95,7 +95,7 @@
      <args>/c start /B bash rip-ssh "{0}" -t 03:00:00</args>
      <hidexbmc>false</hidexbmc>
    </player>
-    <player name="save url audio" type="ExternalPlayer" audio="true" video="false">
+    <player name="save audio url" type="ExternalPlayer" audio="true" video="false">
          <filename>C:\Windows\System32\cmd.exe</filename>
          <args>/c bash rip-url-audio "{0}"</args>
     <hidexbmc>false</hidexbmc>
