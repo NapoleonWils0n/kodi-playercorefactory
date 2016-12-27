@@ -1,14 +1,78 @@
 #!/bin/bash
 
-NOTIFY='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier'
-[[ $# -eq 1 ]] && youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
-&& type -P "$NOTIFY" &> /dev/null && [[ $? -eq 0 ]] \
-&& "$NOTIFY" -sender 'org.xbmc.kodi' -title 'Finished Downloading' -message "$1" && exit
-[[ $# -eq 0 ]] && read -erp "enter a path to a directory or text file: " DIR
-[[ -d $DIR || -f $DIR ]] && find "$DIR" -maxdepth 1 -regex ".*\.\(txt\|txt[?0-9=]*\)" -type f \
-| while read file
-do
-youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3" \
-&& type -P "$NOTIFY" &> /dev/null && [[ $? -eq 0 ]] \
-&& "$NOTIFY" -sender 'org.xbmc.kodi' -title 'Finished Downloading' -message "`cat $file`"
-done || echo no directory or file found
+#+==========================================================+#
+# rip-ytdl - youtube-dl with aria2c as external downloader  +#
+#+==========================================================+#
+
+# diagram of how the script works
+# [rip-ytdl] > [(text file with url|url on command line|directory containing text files)]
+
+#+=========================================================+#
+# exit status and error codes                               #
+#+=========================================================+#
+
+SUCCESS=0      # success exit code
+E_NOARGS=65    # no arguments passed to script
+E_NOMATCH=66   # url not matched by regular expression
+
+#+=========================================================+#
+# display script usage when script is run with no arguments #
+# + or when invalid input is entered by the user            #
+#+=========================================================+#
+
+script_usage="Usage: $(basename "$0") [(text file with url|url on command line|directory containing text files)]"
+
+#+=========================================================+#
+# validate user input for first argument passed to script  +#
+#+=========================================================+#
+
+videourl_validated="^(http|https)://*" # matches: http|https
+
+#+========================================================+#
+# check number of arguments passed to script               #
+# + and validate user input                                #
+#+========================================================+#
+
+if [[ $# -eq 1 ]]; then                               # - one argument is passed to the script
+   if ! [[ "$1" =~ $videourl_validated || -d "$1" || -f "$1" ]]; then # + validate user input
+      printf "%s\n" "'$1' invalid input"              # + display invalid user input with error message
+      printf "%s\n" "$script_usage"                   # + display script usage
+      exit "$E_NOMATCH"                               # + exit with E_NOMATCH error code
+   fi
+else [[ $# -eq 0 ]]                                   # - no arguments are passed to the script
+   printf "%s\n" "$script_usage"                      # + display script usage
+	exit "$E_NOARGS"                                   # + exit with E_NOARGS error code
+fi
+
+#+========================================================+#
+# check if first argument is a url in a text file          #
+# + or a url on the command line, or a directory           #
+#+========================================================+#
+
+# mac osx desktop notifications
+notify='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier'
+
+if [[ "$1" =~ \.txt$ ]]; then                # - text file passed as first argument to script
+   youtube-dl -a "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
+   && type -P "$notify" &> /dev/null && [[ $? -eq 0 ]] \
+   && "$notify" -sender 'org.xbmc.kodi' -title 'Finished Downloading' -message "$1"
+elif [[ -d "$1" ]]; then                     # - directory is passed as first argument to script
+	find "$1" -maxdepth 1 -regex ".*\.txt" -type f \
+   | while read file; do
+   youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3"
+   done \
+   && type -P "$notify" &> /dev/null && [[ $? -eq 0 ]] \
+   && "$notify" -sender 'org.xbmc.kodi' -title 'Finished Downloading' -message "$1"
+elif [[ "$1" =~ $videourl_validated ]]; then # url is on the command line
+   youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
+   && type -P "$notify" &> /dev/null && [[ $? -eq 0 ]] \
+   && "$notify" -sender 'org.xbmc.kodi' -title 'Finished Downloading' -message "$1"
+else
+	printf "%s\n" "There was some kind of error"
+fi
+
+#+========================================================+#
+# exit status SUCCESS if script runs without errors        #
+#+========================================================+#
+
+exit "$SUCCESS"
