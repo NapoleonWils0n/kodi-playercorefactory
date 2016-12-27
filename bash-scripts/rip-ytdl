@@ -53,7 +53,7 @@ if [[ "$1" =~ \.txt$ ]]; then                # - text file passed as first argum
    youtube-dl -a "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
    && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
 elif [[ -d "$1" ]]; then                     # - directory is passed as first argument to script
-	find "$1" -maxdepth 1 -regex ".*\.txt" -type f \
+   find "$1" -maxdepth 1 -regex ".*\.txt" -type f \
    | while read file; do
    youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3"
    done \
@@ -62,7 +62,7 @@ elif [[ "$1" =~ $videourl_validated ]]; then # url is on the command line
    youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
    && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
 else
-	printf "%s\n" "There was some kind of error"
+   printf "%s\n" "There was some kind of error"
 fi
 
 #+========================================================+#
