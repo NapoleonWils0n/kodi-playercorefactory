@@ -7,7 +7,7 @@ Windows GUI installer to install and the programs and scripts, by the t3rmin8tor
 https://github.com/t3rmin8tor/kodi-player-core-factory-install
 
 
-[Windows installer youtube video](https://www.youtube.com/watch?v=9hFABPeFUiQ)
+[Windows installer youtube video](https://www.youtube.com/watch?v=1yxescAucF8)
 
 ## Manual install instructions
 
