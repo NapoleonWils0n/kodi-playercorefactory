@@ -1,12 +1,59 @@
 #!/bin/bash
 
-[[ $# -eq 1 ]] || exit 
-file="$1" # filename is first argument passed to script
-outfile="${file%%.*}-checked.m3u8" # get filename without extension
+#+==========================================================+#
+# m3u8-link-checker check m3u8 for working links            +#
+#+==========================================================+#
 
-while IFS= read -r line
+# diagram of how the script works
+# [m3u8-link-checker] > [(m3u8 file)] > [ffprobe]
+
+#+=========================================================+#
+# exit status and error codes                               #
+#+=========================================================+#
+
+SUCCESS=0      # success exit code
+E_NOARGS=65    # no arguments passed to script
+E_WRONGFILE=66 # wrong file passed to script
+
+#+=========================================================+#
+# display script usage when script is run with no arguments #
+# + or when invalid input is entered by the user            #
+#+=========================================================+#
+
+script_usage="Usage: $(basename "$0") [m3u8 file]"
+
+#+========================================================+#
+# check if first argument is m3u8 file                    +#
+#+========================================================+#
+
+if [[ "$1" =~ \.m3u8$ ]]; then         # + m3u8 file passed as first argument to script
+    file="$1"                          # - filename is first argument passed to script
+    outfile="${file%%.*}-checked.m3u8" # - get filename without extension
+else
+	printf "%s\n" "'$1' invalid input"  # + no arguments are passed to the script
+	printf "%s\n" "$script_usage"       # - display script usage
+	exit "$E_WRONGFILE"                 # - exit with E_WRONGFILE error code
+fi
+
+#+========================================================+#
+# check number of arguments passed to script               #
+#+========================================================+#
+
+if [[ $# -ne 1 ]]; then               # + if one agrument isnt passed to script
+	printf "%s\n" "'$1' invalid input" # - print argument passed to script and invalid input
+	printf "%s\n" "$script_usage"      # - print script usage
+	exit "$E_NOARGS"                   # - exit with E_NOARGS error code
+fi
+
+while IFS= read -r line               # while read m3u8 file check links with ffprobe
 do 
   link=$(printf "%s\n" "$line" | grep -Eo '(http|https|rtmp|rtmpe)://[a-zA-Z0-9:0-9./?=_@&%|()[:blank:],;-]*')
   [ $? -eq 0 ] && ffprobe -hide_banner "$link"
   [ $? -eq 0 ] && grep -B 1 "$link" "$file" 2>/dev/null | sed -e '/--/d' >> "$outfile"
 done <"$file" && sed -i '1i #EXTM3U' "$outfile" || printf "%s\n" "no file found"
+
+#+========================================================+#
+# exit status SUCCESS if script runs without errors        #
+#+========================================================+#
+
+exit "$SUCCESS"
