@@ -1,0 +1,12 @@
+#!/bin/bash
+
+[[ $# -eq 1 ]] || exit 
+file="$1" # filename is first argument passed to script
+outfile="${file%%.*}-checked.m3u8" # get filename without extension
+
+while IFS= read -r line
+do 
+  link=$(printf "%s\n" "$line" | grep -Eo '(http|https|rtmp|rtmpe)://[a-zA-Z0-9:0-9./?=_@&%|()[:blank:],;-]*')
+  [ $? -eq 0 ] && ffprobe -hide_banner "$link"
+  [ $? -eq 0 ] && grep -B 1 "$link" "$file" 2>/dev/null | sed -e '/--/d' >> "$outfile"
+done <"$file" && sed -i '1i #EXTM3U' "$outfile" || printf "%s\n" "no file found"
