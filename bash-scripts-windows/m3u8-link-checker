@@ -30,9 +30,9 @@ if [[ "$1" =~ \.m3u8$ ]]; then         # + m3u8 file passed as first argument to
     file="$1"                          # - filename is first argument passed to script
     outfile="${file%%.*}-checked.m3u8" # - get filename without extension
 else
-	printf "%s\n" "'$1' invalid input"  # + no arguments are passed to the script
-	printf "%s\n" "$script_usage"       # - display script usage
-	exit "$E_WRONGFILE"                 # - exit with E_WRONGFILE error code
+   printf "%s\n" "'$1' invalid input"  # + no arguments are passed to the script
+   printf "%s\n" "$script_usage"       # - display script usage
+   exit "$E_WRONGFILE"                 # - exit with E_WRONGFILE error code
 fi
 
 #+========================================================+#
@@ -40,9 +40,9 @@ fi
 #+========================================================+#
 
 if [[ $# -ne 1 ]]; then               # + if one agrument isnt passed to script
-	printf "%s\n" "'$1' invalid input" # - print argument passed to script and invalid input
-	printf "%s\n" "$script_usage"      # - print script usage
-	exit "$E_NOARGS"                   # - exit with E_NOARGS error code
+   printf "%s\n" "'$1' invalid input" # - print argument passed to script and invalid input
+   printf "%s\n" "$script_usage"      # - print script usage
+   exit "$E_NOARGS"                   # - exit with E_NOARGS error code
 fi
 
 while IFS= read -r line               # while read m3u8 file check links with ffprobe
