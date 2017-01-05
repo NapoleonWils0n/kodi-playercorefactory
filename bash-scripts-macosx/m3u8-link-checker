@@ -51,7 +51,7 @@ fi
 
 while IFS= read -r line               # while read m3u8 file check links with ffprobe
 do 
-  link=$(printf "%s\n" "$line" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@&%|()[:blank:],;-]*\.m3u8')
+  link=$(printf "%s\n" "$line" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@&%|()[:blank:],;-]*' | grep -v '.[(jpg|png|gif|svg)]$')
   [[ $? -eq 0 ]] && ffprobe -hide_banner "$link"
   [[ $? -eq 0 ]] && grep -B 1 "$link" "$file" 2>/dev/null | sed -e '/--/d' >> "$outfile"
 done <"$file" && sed -i '1i #EXTM3U' "$outfile" || printf "%s\n" "no file found"
