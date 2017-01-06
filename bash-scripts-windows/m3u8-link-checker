@@ -49,6 +49,8 @@ fi
 # while read file check links with ffprobe                +#
 #+========================================================+#
 
+printf "%s\n" "Checking $file for working links"
+
 while IFS= read -r line               # while read m3u8 file check links with ffprobe
 do 
   link=$(printf "%s\n" "$line" | grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_@&%|()[:blank:],;-]*' | grep -v '.[(jpg|png|gif|svg)]$')
