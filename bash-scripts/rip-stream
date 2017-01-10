@@ -110,6 +110,32 @@ cookienltid=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
+# streaming functions using ffmpeg and rtmpdump           +#
+#+========================================================+#
+
+# ffmpeg function
+stream () {
+printf "%s\n" "Streaming: '$videourl'"
+ffmpeg -hide_banner -loglevel error $2 $3 $4 $5 -i "$1" \
+-c:v libx265 -preset ultrafast -tune zero-latency \
+-x265-params crf=28 \
+-c:a aac -strict experimental -b:a 192k \
+$tflag $duration \
+-maxrate 4000k -bufsize 4000k \
+-f mpegts udp://239.253.253.4:1234?pkt_size=1316
+}
+
+# rtmpdump function
+stream_rtmp () {
+printf "%s\n" "Streaming: '$videourl'"
+rtmpdump -q -i "$1" | ffmpeg -hide_banner -i - \
+-c:v libx265 -preset ultrafast -tune zero-latency \
+-x265-params crf=28 \
+-c:a aac -strict experimental -b:a 192k \
+-f mpegts udp://239.253.253.4:1234?pkt_size=1316
+}
+
+#+========================================================+#
 # case statement with regular expression                   #
 # + to execute ffmpeg commands based on matching url       #
 #+========================================================+#
@@ -117,95 +143,43 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 case "$videourl" in
 	$videofile)         # video file
 		printf "%s\n" 'url matches: $videofile bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -re -i "$videourl" \
-		-c:v libx265 -preset ultrafast -tune zero-latency \
-		-x265-params crf=28 \
-		-c:a aac -strict experimental -b:a 192k \
-		$tflag $duration \
-		-maxrate 4000k -bufsize 4000k \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream "$videourl";;
 	$m3u8)              # m3u8 playlist
 		printf "%s\n" 'url matches: $m3u8 bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner  -i "$videourl" \
-		-c:v copy -c:a copy \
-		$tflag $duration -f \
-		mpegts udp://239.253.253.4:1234?pkt_size=1316 2>&1 | sed '/\[/d';;
+      stream "$videourl";;
 	$cookiem3u8)        # cookie m3u8
 		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -loglevel panic -cookies "$cookienltid; path=/; $cookiedomain;" -i "$videourl" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+		stream "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
 	$videoqmark)         # video link and question mark
 		printf "%s\n" 'url matches: $videoqmark bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -i "$videourl" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+		stream "$videourl";;
 	$xforward)          # xforward
 		printf "%s\n" 'url matches: $xforward bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' -i "$videofile_grep" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'";;
 	$useref)            # useragent referer
 		printf "%s\n" 'url matches: $useref bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
-		-i "$videofile_grep" -c:v libx265 -preset ultrafast -tune zero-latency \
-		-x265-params crf=28 \
-		-c:a aac -strict experimental -b:a 192k \
-		$tflag $duration \
-		-maxrate 4000k -bufsize 4000k \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
 	$viduseragent)     # user agent 
 		printf "%s\n" 'url matches: $viduseragent bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" -i "$videofile_grep" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream "$videofile_grep" -user-agent "$useragent";;
 	$useragentreferer) # useragent referer
 		printf "%s\n" 'url matches: $useragentreferer bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -user-agent "$useragent" \
-		-headers 'Referer: '"$referer"''$'\r\n' -i "$videofile_grep" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
 	$refuseragent)      # referer user agent
 		printf "%s\n" 'url matches: $refuseragent bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-		-user-agent "$useragent" -i "$videofile_grep" -c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream "$videofile_grep" -headers "'Referer: '"$referer"''$'\r\n'" -user-agent "$useragent";;
 	$rtmp)              # rtmp
 		printf "%s\n" 'url matches: $rtmp bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		rtmpdump -q -i "$videourl" | ffmpeg -hide_banner -i - -c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream_rtmp "$videourl";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
 		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -user-agent "$useragent2" \
-		-cookies "$cookieurl; path=/; $cookiedomain;" -i "$videofile_grep" \
-		-c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+      stream "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
 	$http)              # http
 		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -i "$videourl" -c:v copy -c:a copy $tflag $duration \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+		stream "$videourl";;
 	*)                  # wildcard
 		printf "%s\n" 'url matches: * bash pattern'
-		printf "%s\n" "Streaming: '$videourl'"
-		ffmpeg -hide_banner -re -i "$videourl" \
-		-c:v libx265 -preset ultrafast -tune zero-latency \
-		-x265-params crf=28 \
-		-c:a aac -strict experimental -b:a 192k \
-		-c:v copy -c:a copy $tflag $duration \
-		-maxrate 4000k -bufsize 4000k \
-		-f mpegts udp://239.253.253.4:1234?pkt_size=1316;;
+		stream "$videourl";;
 esac 
 
 #+========================================================+#
