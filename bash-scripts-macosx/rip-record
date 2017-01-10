@@ -167,10 +167,10 @@ case "$videourl" in
        record "$videourl";;
   $cookiem3u8)        # cookie m3u8
        printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		 record "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
+       record "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
   $videoqmark)         # video link and question mark
        printf "%s\n" 'url matches: $videoqmark bash pattern'
-		 record "$videourl";;
+       record "$videourl";;
   $xforward)          # xforward
        printf "%s\n" 'url matches: $xforward bash pattern'
        record "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'";;
@@ -194,10 +194,10 @@ case "$videourl" in
        record "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
   $http)              # http
        printf "%s\n" 'url matches: $http bash pattern'
-		 record "$videourl";;
+       record "$videourl";;
   *)                  # wildcard
        printf "%s\n" 'url matches: * bash pattern'
-		 record "$videourl";;
+       record "$videourl";;
 esac \
 && type -P "$notify" &> /dev/null && [[ $? -eq 0 ]] \
 && "$notify" -sender 'org.xbmc.kodi' -title 'Finished Recording' -message "$videourl"

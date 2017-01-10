@@ -128,44 +128,44 @@ format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rat
 
 case "$videourl" in
 	$videofile)         # video file
-		printf "%s\n" 'url matches: $videofile bash pattern'
+      printf "%s\n" 'url matches: $videofile bash pattern'
       stats "$videourl";;
 	$m3u8)              # m3u8 playlist
-		printf "%s\n" 'url matches: $m3u8 bash pattern'
+      printf "%s\n" 'url matches: $m3u8 bash pattern'
       stats "$videourl";;
 	$cookiem3u8)        # cookie m3u8
-		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		stats "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
+      printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
+      stats "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
 	$videoqmark)         # video link and question mark
-		printf "%s\n" 'url matches: $videoqmark bash pattern'
-		stats "$videourl";;
+      printf "%s\n" 'url matches: $videoqmark bash pattern'
+      stats "$videourl";;
 	$xforward)          # xforward
-		printf "%s\n" 'url matches: $xforward bash pattern'
+      printf "%s\n" 'url matches: $xforward bash pattern'
       stats "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'";;
 	$useref)            # useragent referer
-		printf "%s\n" 'url matches: $useref bash pattern'
+      printf "%s\n" 'url matches: $useref bash pattern'
       stats "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
 	$viduseragent)     # user agent 
-		printf "%s\n" 'url matches: $viduseragent bash pattern'
+      printf "%s\n" 'url matches: $viduseragent bash pattern'
       stats "$videofile_grep" -user-agent "$useragent";;
 	$useragentreferer) # useragent referer
-		printf "%s\n" 'url matches: $useragentreferer bash pattern'
+      printf "%s\n" 'url matches: $useragentreferer bash pattern'
       stats "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
 	$refuseragent)      # referer user agent
-		printf "%s\n" 'url matches: $refuseragent bash pattern'
+      printf "%s\n" 'url matches: $refuseragent bash pattern'
       stats "$videofile_grep" -headers "'Referer: '"$referer"''$'\r\n'" -user-agent "$useragent";;
 	$rtmp)              # rtmp
-		printf "%s\n" 'url matches: $rtmp bash pattern'
+      printf "%s\n" 'url matches: $rtmp bash pattern'
       stats_rtmp "$videourl";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
-		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
+      printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
       stats "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
 	$http)              # http
-		printf "%s\n" 'url matches: $http bash pattern'
-		stats "$videourl";;
+      printf "%s\n" 'url matches: $http bash pattern'
+      stats "$videourl";;
 	*)                  # wildcard
-		printf "%s\n" 'url matches: * bash pattern'
-		stats "$videourl";;
+      printf "%s\n" 'url matches: * bash pattern'
+      stats "$videourl";;
 esac 
 
 #+========================================================+#
