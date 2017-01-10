@@ -15,7 +15,7 @@ DIR=`echo $DIR | sed 's/^[(.)]//'`
 select fileName in quit $fileList; do
         case $fileName in
 	quit) exit;;
-	$fileName) rip-play-mpv ${DIR}${fileName}${EXT} 2> /dev/null;;
+	$fileName) rip-mpv ${DIR}${fileName}${EXT} 2> /dev/null;;
 	*) echo “Invalid Selection, enter a number”;;
 esac
 break
