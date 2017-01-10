@@ -158,7 +158,7 @@ case "$videourl" in
        record "$videourl";;
   $m3u8)              # m3u8 playlist
        printf "%s\n" 'url matches: $m3u8 bash pattern'
-		 record "$videourl";;
+       record "$videourl";;
   $cookiem3u8)        # cookie m3u8
        printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
 		 record "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
