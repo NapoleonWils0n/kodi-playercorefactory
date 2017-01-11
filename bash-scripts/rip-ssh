@@ -118,6 +118,15 @@ cookienltid=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
+# recording functions using ffmpeg and rtmpdump           +#
+#+========================================================+#
+
+record_ssh () {
+'ffmpeg -hide_banner -i' "$videourl" \
+'-c:v copy -c:a copy' $tflag $duration "$recordingfile"
+}
+
+#+========================================================+#
 # case statement with regular expression                   #
 # + to execute ffmpeg commands based on matching url       #
 #+========================================================+#
