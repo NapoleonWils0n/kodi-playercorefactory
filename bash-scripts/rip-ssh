@@ -1,12 +1,5 @@
 #!/bin/bash
 
-#+==========================================================+#
-# rip-ssh - execute ffmpeg commands based on matching url    #
-#+==========================================================+#
-
-# diagram of how the script works
-# [rip-ssh] > [ssh server] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ssh]
-
 #+=========================================================+#
 # exit status and error codes                               #
 #+=========================================================+#
@@ -135,23 +128,19 @@ printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
 
 case "$videourl" in
 	$videofile)         # video file
-      printf "%s\n%s\n" 'url matches: $videofile bash pattern' \
-		"Sending ffmpeg comamnd to: $sshserver"
+      printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
       record_ssh "$videourl" \
 		;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$m3u8)              # m3u8 playlist
-      printf "%s\n%s\n" 'url matches: $m3u8 bash pattern' \
-		"Sending ffmpeg comamnd to: '"$sshserver"'"
+      printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
       record_ssh "$videourl" \
       ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$cookiem3u8)        # cookie m3u8
-      printf "%s\n%s\n" 'url matches: $cookiem3u8 bash pattern' \
-		"Sending ffmpeg comamnd to: '"$sshserver"'"
+      printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
       record_ssh "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;" \
       ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$videoqmark)         # video link and question mark
-      printf "%s\n%s\n" 'url matches: $videoqmark bash pattern' \
-		"Sending ffmpeg comamnd to: '"$sshserver"'"
+      printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
       record_ssh "$videourl" \
 		;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$xforward)          # xforward
