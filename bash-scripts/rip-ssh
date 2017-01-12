@@ -135,36 +135,35 @@ printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
 
 case "$videourl" in
 	$videofile)         # video file
-      printf "%s\n%s\n" 'url matches: $videofile bash pattern' "Recording: '"$videourl"'"
+      printf "%s\n%s\n" 'url matches: $videofile bash pattern' \
+		"Sending ffmpeg comamnd to: $sshserver"
       record_ssh "$videourl" \
 		;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$m3u8)              # m3u8 playlist
-      printf "%s\n%s\n" 'url matches: $m3u8 bash pattern' "Recording: '$videourl'"
+      printf "%s\n%s\n" 'url matches: $m3u8 bash pattern' \
+		"Sending ffmpeg comamnd to: '"$sshserver"'"
       record_ssh "$videourl" \
       ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$cookiem3u8)        # cookie m3u8
-      printf "%s\n%s\n" 'url matches: $cookiem3u8 bash pattern' "Recording: '$videourl'"
+      printf "%s\n%s\n" 'url matches: $cookiem3u8 bash pattern' \
+		"Sending ffmpeg comamnd to: '"$sshserver"'"
       record_ssh "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;" \
       ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$videoqmark)         # video link and question mark
-      printf "%s\n%s\n" 'url matches: $videoqmark bash pattern' "Recording: '$videourl'"
+      printf "%s\n%s\n" 'url matches: $videoqmark bash pattern' \
+		"Sending ffmpeg comamnd to: '"$sshserver"'"
       record_ssh "$videourl" \
 		;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$xforward)          # xforward
-		printf "%s\n%s\n" 'url matches: $xforward bash pattern' "Recording: '$videourl'"
+		printf "%s\n%s\n" 'url matches: $xforward bash pattern' \
+		"Sending ffmpeg comamnd to: '"$sshserver"'"
 		record_ssh "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'" \
       ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$useref)            # useragent referer
-		printf "%s\n" 'url matches: $useref bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s %s %s %s %s %s %s %s %s\n" \
-		'ffmpeg -hide_banner -user-agent' "$useragent" \
-		'-headers' \
-		'Referer: '"$referer"''$'\r\n' \
-		'-i' "$videofile_grep" '-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+      printf "%s\n%s\n" 'url matches: $useref bash pattern' \
+		"Sending ffmpeg comamnd to: '"$sshserver"'"
+      record_ssh "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'" \
+		;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$viduseragent)     # user agent 
 		printf "%s\n" 'url matches: $viduseragent bash pattern'
 		printf "%s\n" "Recording: '$videourl'"
