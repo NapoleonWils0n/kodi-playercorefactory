@@ -12,11 +12,21 @@ E_NOMATCH=67   # url not matched by regular expression
 script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
 
 #+=========================================================+#
-# validate user input for first, second and third arguments #
-# + passed to script	by matching with regular expressions   #
-# third and fourth arguments passed to script are used      #
-# + to specify a recording duration                         #
+# + check if second argument is a url in a text file        #
+# - or a url on the command line                            #
+# + validate user input for first, second, third, fourth    #
+# - arguments passed to script                              #
+# + third and fourth arguments passed to script are used    #
+# - to specify a recording duration                         #
+# + check if 2 or 4 arguments are passed to script          #
+# - validate user input and enable shell globing            #
 #+=========================================================+#
+
+if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
+	videourl=$(cat "$2")       # + cat the text file to extract the url
+else
+	videourl="$2"              # url is on the command line
+fi
 
 sshserver="$1"                                      # ssh server
 first_arg_validated="^[a-zA-Z0-9:0-9./@-]*"         # validate ssh server address
@@ -26,22 +36,6 @@ fourth_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
 
 tflag="$3"     # third argument should be: -t
 duration="$4"  # fourth argument should be in this format: 00:00:00
-
-#+========================================================+#
-# check if second argument is a url in a text file         #
-# + or a url on the command line                           #
-#+========================================================+#
-
-if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
-	videourl=$(cat "$2")       # + cat the text file to extract the url
-else
-	videourl="$2"              # url is on the command line
-fi
-
-#+========================================================+#
-# check if 2 or 4 arguments are passed to script           #
-# + validate user input and enable shell globing           #
-#+========================================================+#
 
 if [[ $# -eq 2 ]]; then                                # - two argument are passed to the script
 	if ! [[ $videourl =~ $second_arg_validated ]]; then # + if videourl doesnt match validation regular expression
@@ -103,8 +97,8 @@ printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
 }
 
 #+========================================================+#
-# case statement with regular expression                   #
-# + to execute ffmpeg commands based on matching url       #
+# + case statement with regular expression                 #
+# - to execute ffmpeg commands based on matching url       #
 #+========================================================+#
 
 case "$videourl" in

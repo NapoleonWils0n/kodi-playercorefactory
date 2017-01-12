@@ -15,7 +15,7 @@ script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/vid
 # + check if first argument is a url in a text file        #
 # - or a url on the command line                           #
 # + validate user input for first, second, third arguments #
-# - passed to script	by matching with regular expressions  #
+# - passed to script	                                      #
 # + second and third arguments passed to script are used   #
 # - to specify a recording duration                        #
 # + check if 1 or 3 arguments are passed to script         #

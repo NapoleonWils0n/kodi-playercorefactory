@@ -14,7 +14,7 @@ script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/vid
 # + check if first argument is a url in a text file        #
 # - or a url on the command line                           #
 # + validate user input for first argument                 #
-# - passed to script	by matching with regular expressions  #
+# - passed to script	                                      #
 # + check if 1 argument is passed to script                #
 # - validate user input and enable shell globing           #
 #+========================================================+#
