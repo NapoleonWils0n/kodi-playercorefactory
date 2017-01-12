@@ -91,25 +91,19 @@ case "$videourl" in
 	$useref)            # useragent referer
 		printf "%s\n%s\n" 'url matches: $useref bash pattern' "url checked: '$videourl'";;
 	$viduseragent)      # user agent 
-     printf "%s\n%s\n" 'url matches: $viduseragent bash pattern' "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $viduseragent bash pattern' "url checked: '$videourl'";;
 	$useragentreferer)  # user agent referer
-		printf "%s\n" 'url matches: $useragentreferer bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $useragentreferer bash pattern' "url checked: '$videourl'";;
 	$refuseragent)      # referer user agent
-		printf "%s\n" 'url matches: $refuseragent bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $refuseragent bash pattern' "url checked: '$videourl'";;
 	$rtmp)              # rtmp
-		printf "%s\n" 'url matches: $rtmp bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $rtmp bash pattern' "url checked: '$videourl'";;
 	$cookiem3u8uagent)  # cookie m3u8 useragent
-		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $cookiem3u8uagent bash pattern' "url checked: '$videourl'";;
 	$http)              # http
-		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $http bash pattern' "url checked: '$videourl'";;
 	*)                  # wildcard
-		printf "%s\n" 'url matches: * bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: * bash pattern' "url checked: '$videourl'";;
 esac 
 
 #+========================================================+#
