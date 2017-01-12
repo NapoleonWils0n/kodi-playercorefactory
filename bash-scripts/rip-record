@@ -88,10 +88,10 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 
 record () {
 count=0 # set count to zero
-while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
+while [[ "$count" -lt 3 ]]; do # while count is less than 3 run the script
 recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
-ffmpeg \
--hide_banner -loglevel error $2 $3 $4 $5 -i "$1" -c:v copy -c:a copy $tflag $duration "$recordingfile"
+echo ffmpeg \
+-hide_banner -loglevel error "${@:2}" -i "$1" -c:v copy -c:a copy $tflag $duration "$recordingfile"
 if [[ $? -eq 0 ]]; then
     break # break out of the while loop
     exit "$SUCCESS" # exit with $success error code
@@ -103,7 +103,7 @@ done
 
 record_rtmp () {
 count=0 # set count to zero
-while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
+while [[ "$count" -lt 3 ]]; do # while count is less than 3 run the script
 recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 rtmpdump -q -i "$1" | ffmpeg \
 -hide_banner -loglevel error -i - -c:v copy -c:a copy $tflag $duration "$recordingfile"
@@ -126,11 +126,11 @@ case "$videourl" in
   $m3u8) record "$videourl";;
   $cookiem3u8) record "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
   $videoqmark) record "$videourl";;
-  $xforward) record "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'";;
-  $useref) record "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
+  $xforward) record "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n';;
+  $useref) record "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
   $viduseragent) record "$videofile_grep" -user-agent "$useragent";;
-  $useragentreferer) record "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
-  $refuseragent) record "$videofile_grep" -headers "'Referer: '"$referer"''$'\r\n'" -user-agent "$useragent";;
+  $useragentreferer) record "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+  $refuseragent) record "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent";;
   $rtmp) record_rtmp "$videourl";;
   $cookiem3u8uagent) record "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
   $http) record "$videourl";;

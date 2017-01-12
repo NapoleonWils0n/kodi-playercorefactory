@@ -80,7 +80,7 @@ case "$videourl" in
 	$cookiem3u8) ffplay -hide_banner -x 640 -y 360 -loglevel panic -cookies "$cookienltid; path=/; $cookiedomain;" "$videourl";;
 	$videoqmark) ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
 	$xforward) ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$videofile_grep";;
-	$useref) ffplay -hide_banner  -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
+	$useref) ffplay -hide_banner -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
 	$viduseragent) ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent" "$videofile_grep";;
 	$useragentreferer) ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" \
    -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
