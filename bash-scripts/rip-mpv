@@ -90,32 +90,19 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 case "$videourl" in
-	$videofile)         # video file
-		mpv "$videourl";;
-	$m3u8)              # m3u8 playlist
-		mpv "$videourl";;
-	$cookiem3u8)        # cookie m3u8
-		mpv --http-header-fields="cookie: $cookienltid","path=/: $cookiedomain" "$videourl";;
-	$videoqmark)        # video link and question mark
-		mpv "$videourl";;
-	$xforward)          # xforward
-		mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
-	$useref)            # useragent referer
-		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$viduseragent)      # user agent
-		mpv --user-agent="$useragent" "$videofile_grep";;
-	$useragentreferer) # useragent referer
-		mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$refuseragent)      # referer user agent
-		mpv --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
-	$rtmp)              # rtmp
-		rtmpdump -q -i "$videourl" | mpv -;;
-	$cookiem3u8uagent)  # cookie m3u8 useragent
-		mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep";;
-  	$http)              # http
-		mpv "$videourl";;
-	*)                  # wildcard
-		mpv "$videourl";;
+	$videofile) mpv "$videourl";;
+	$m3u8) mpv "$videourl";;
+	$cookiem3u8) mpv --http-header-fields="cookie: $cookienltid","path=/: $cookiedomain" "$videourl";;
+	$videoqmark) mpv "$videourl";;
+	$xforward) mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
+	$useref) mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
+	$viduseragent) mpv --user-agent="$useragent" "$videofile_grep";;
+	$useragentreferer) mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
+	$refuseragent) mpv --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
+	$rtmp) rtmpdump -q -i "$videourl" | mpv -;;
+	$cookiem3u8uagent) mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep";;
+  	$http) mpv "$videourl";;
+	*) mpv "$videourl";;
 esac 
 
 #+========================================================+#
