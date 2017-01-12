@@ -144,8 +144,7 @@ case "$videourl" in
       record_ssh "$videourl" \
 		;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$xforward)          # xforward
-		printf "%s\n%s\n" 'url matches: $xforward bash pattern' \
-		"Sending ffmpeg comamnd to: '"$sshserver"'"
+		printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
 		record_ssh "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'" \
       ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$useref)            # useragent referer
