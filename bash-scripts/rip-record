@@ -18,13 +18,6 @@ script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/vid
 # + to specify a recording duration                         #
 #+=========================================================+#
 
-first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
-second_arg_validated="^-t$"                        # matches: -t
-third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
-
-tflag="$2"     # second argument should be: -t
-duration="$3"  # third argument should be in this format: 00:00:00
-
 #+========================================================+#
 # check if first argument is a url in a text file          #
 # + or a url on the command line                           #
@@ -35,6 +28,13 @@ if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
 else
 	videourl="$1"              # url is on the command line
 fi
+
+first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
+second_arg_validated="^-t$"                        # matches: -t
+third_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
+
+tflag="$2"     # second argument should be: -t
+duration="$3"  # third argument should be in this format: 00:00:00
 
 #+========================================================+#
 # check if 1 or 3 arguments are passed to script           #
