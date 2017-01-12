@@ -1,12 +1,5 @@
 #!/bin/bash
 
-#+==========================================================+#
-# rip-record - execute ffmpeg commands based on matching url #
-#+==========================================================+#
-
-# diagram of how the script works
-# [rip-record] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ffmpeg]
-
 #+=========================================================+#
 # exit status and error codes                               #
 #+=========================================================+#
