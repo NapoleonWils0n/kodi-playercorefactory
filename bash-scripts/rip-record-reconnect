@@ -87,7 +87,6 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 record () {
-printf "%s\n" "Recording: '$videourl'"
 count=0 # set count to zero
 while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
 recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
@@ -104,7 +103,6 @@ done
 }
 
 record_rtmp () {
-printf "%s\n" "Recording: '$videourl'"
 count=0 # set count to zero
 while [[ "$count" < 3 ]]; do # while count is less than 3 run the script
 recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
