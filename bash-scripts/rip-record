@@ -121,8 +121,6 @@ done
 # - to execute ffmpeg commands based on matching url       #
 #+========================================================+#
 
-printf "%s\n" "Recording: '$videourl'"
-
 case "$videourl" in
   $videofile) record "$videourl";;
   $m3u8) record "$videourl";;
