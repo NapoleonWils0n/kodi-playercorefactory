@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#+=========================================================+#
-# exit status, error codes and script usage                 #
-#+=========================================================+#
+#+========================================================+#
+# exit status, error codes and script usage                #
+#+========================================================+#
 
 SUCCESS=0		# success exit code
 E_NOARGS=65		# no arguments passed to script
@@ -19,8 +19,8 @@ script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/vid
 # - validate user input and enable shell globing           #
 #+========================================================+#
 
-if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
-	videourl=$(cat "$1")       # + cat the text file to extract the url
+if [[ "$1" =~ \.txt$ ]]; then # + text file passed as first argument to script
+	videourl=$(cat "$1")       # - cat the text file to extract the url
 else
 	videourl="$1"              # url is on the command line
 fi
@@ -57,7 +57,7 @@ cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\
 cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9/?\&=%.*_-])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie[a-zA-Z0-9=_]*"
 
 #+========================================================+#
-# + case statement with regular expression                   #
+# + case statement with regular expression                 #
 # - to show matching url                                   #
 #+========================================================+#
 
