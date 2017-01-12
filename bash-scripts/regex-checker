@@ -1,12 +1,5 @@
 #!/bin/bash
 
-#+==========================================================+#
-# regex-checker - show matching bash pattern for urls        #
-#+==========================================================+#
-
-# diagram of how the script works
-# [regex-checker] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [printf]
-
 #+=========================================================+#
 # exit status and error codes                               #
 #+=========================================================+#
@@ -86,26 +79,19 @@ cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.@(mkv|mp4|avi|flv
 
 case "$videourl" in
 	$videofile)         # video file
-		printf "%s\n" 'url matches: $videofile bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+		printf "%s\n%s\n" 'url matches: $videofile bash pattern' "url checked: '$videourl'";;
 	$m3u8)              # m3u8 playlist
-		printf "%s\n" 'url matches: $m3u8 bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $m3u8 bash pattern' "url checked: '$videourl'";;
 	$cookiem3u8)        # cookie m3u8
-		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $cookiem3u8 bash pattern' "url checked: '$videourl'";;
 	$videoqmark)        # video link and question mark
-		printf "%s\n" 'url matches: $videoqmark bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+      printf "%s\n%s\n" 'url matches: $videoqmark bash pattern' "url checked: '$videourl'";;
 	$xforward)          # xforward
-		printf "%s\n" 'url matches: $xforward bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+		printf "%s\n%s\n" 'url matches: $xforward bash pattern' "url checked: '$videourl'";;
 	$useref)            # useragent referer
-		printf "%s\n" 'url matches: $useref bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+		printf "%s\n%s\n" 'url matches: $useref bash pattern' "url checked: '$videourl'";;
 	$viduseragent)      # user agent 
-		printf "%s\n" 'url matches: $viduseragent bash pattern'
-		printf "%s\n" "url checked: '$videourl'";;
+     printf "%s\n%s\n" 'url matches: $viduseragent bash pattern' "url checked: '$videourl'";;
 	$useragentreferer)  # user agent referer
 		printf "%s\n" 'url matches: $useragentreferer bash pattern'
 		printf "%s\n" "url checked: '$videourl'";;
