@@ -19,7 +19,7 @@ script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://ex
 # + third and fourth arguments passed to script are used    #
 # - to specify a recording duration                         #
 # + check if 2 or 4 arguments are passed to script          #
-# - validate user input and enable shell globing            #
+# - validate user input and enable shell globbing           #
 #+=========================================================+#
 
 if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
