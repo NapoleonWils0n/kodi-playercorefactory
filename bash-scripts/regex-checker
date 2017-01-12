@@ -10,16 +10,13 @@ E_NOMATCH=66	# url not matched by regular expression
 
 script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url]"
 
-#+=========================================================+#
-# validate user input for first argument                    #
-# + passed to script	by matching with regular expressions	#
-#+=========================================================+#
-
-first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
-
 #+========================================================+#
-# check if first argument is a url in a text file          #
-# + or a url on the command line                           #
+# + check if first argument is a url in a text file        #
+# - or a url on the command line                           #
+# + validate user input for first argument                 #
+# - passed to script	by matching with regular expressions  #
+# + check if 1 or 3 arguments are passed to script         #
+# - validate user input and enable shell globing           #
 #+========================================================+#
 
 if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
@@ -28,19 +25,16 @@ else
 	videourl="$1"              # url is on the command line
 fi
 
-#+========================================================+#
-# check if 1 or 3 arguments are passed to script           #
-# + validate user input and enable shell globing           #
-#+========================================================+#
+first_arg_validated="^(http|https|rtmp|rtmpe)://*"    # matches: http|https|rtmp|rtmpe
 
-if [[ $# -eq 1 ]]; then                               # - one argument is passed to the script
-	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
+if [[ $# -eq 1 ]]; then                               # + one argument is passed to the script
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # - if videourl doesnt match validation regular expression
 		printf "%s\n%s\n" "'$videourl' invalid input" "$script_usage" # + display invalid user input with error message
-		exit "$E_NOMATCH"                               # + exit with E_NOMATCH error code
+		exit "$E_NOMATCH"                               # - exit with E_NOMATCH error code
 	fi
-else [[ $# -eq 0 ]]                                   # - no arguments are passed to the script
-   printf "%s\n" "$script_usage"                      # + display script usage
-	exit "$E_NOARGS"                                   # + exit with E_NOARGS error code
+else [[ $# -eq 0 ]]                                   # + no arguments are passed to the script
+   printf "%s\n" "$script_usage"                      # - display script usage
+	exit "$E_NOARGS"                                   # - exit with E_NOARGS error code
 fi
 
 shopt -s extglob # enable shell globbing 
@@ -63,8 +57,8 @@ cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\
 cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9/?\&=%.*_-])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie[a-zA-Z0-9=_]*"
 
 #+========================================================+#
-# case statement with regular expression                   #
-# + to show matching url                                   #
+# + case statement with regular expression                   #
+# - to show matching url                                   #
 #+========================================================+#
 
 case "$videourl" in
