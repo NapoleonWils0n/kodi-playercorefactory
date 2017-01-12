@@ -40,8 +40,7 @@ fi
 
 if [[ $# -eq 1 ]]; then                               # - one argument is passed to the script
 	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
-		printf "%s\n" "'$videourl' invalid input"       # + display invalid user input with error message
-		printf "%s\n" "$script_usage"                   # + display script usage
+		printf "%s\n%s\n" "'$videourl' invalid input" "$script_usage" # + display invalid user input with error message
 		exit "$E_NOMATCH"                               # + exit with E_NOMATCH error code
 	fi
 else [[ $# -eq 0 ]]                                   # - no arguments are passed to the script
