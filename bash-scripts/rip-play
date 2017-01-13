@@ -70,6 +70,16 @@ cookienltid=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
+# recording functions using ffmpeg and rtmpdump           +#
+#+========================================================+#
+
+play () {
+}
+
+play_rtmp () {
+}
+
+#+========================================================+#
 # + case statement with regular expression                 #
 # - to execute ffplay commands based on matching url       #
 #+========================================================+#
