@@ -81,19 +81,19 @@ mpv_mac="/Applications/mpv.app/Contents/MacOS/mpv"
 rtmpdump_mac="/usr/local/bin/rtmpdump"
 
 case "$videourl" in
-	$videofile) "$mpv_mac" "$videourl";;
-	$m3u8) "$mpv_mac" "$videourl";;
-	$cookiem3u8) "$mpv_mac" --http-header-fields="cookie: $cookienltid","path=/: $cookiedomain" "$videourl";;
-	$videoqmark) "$mpv_mac" "$videourl";;
-	$xforward) "$mpv_mac" --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
-	$useref) "$mpv_mac" --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$viduseragent) "$mpv_mac" --user-agent="$useragent" "$videofile_grep";;
-	$useragentreferer) "$mpv_mac" --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$refuseragent) "$mpv_mac" --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
-	$rtmp) "$rtmpdump_mac" -q -i "$videourl" | "$mpv_mac" -;;
-	$cookiem3u8uagent) "$mpv_mac" --user-agent="$useragent2" --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep";;
-  	$http) "$mpv_mac" "$videourl";;
-	*) "$mpv_mac" "$videourl";;
+  $videofile) "$mpv_mac" "$videourl";;
+  $m3u8) "$mpv_mac" "$videourl";;
+  $cookiem3u8) "$mpv_mac" --http-header-fields="cookie: $cookienltid","path=/: $cookiedomain" "$videourl";;
+  $videoqmark) "$mpv_mac" "$videourl";;
+  $xforward) "$mpv_mac" --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
+  $useref) "$mpv_mac" --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
+  $viduseragent) "$mpv_mac" --user-agent="$useragent" "$videofile_grep";;
+  $useragentreferer) "$mpv_mac" --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
+  $refuseragent) "$mpv_mac" --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
+  $rtmp) "$rtmpdump_mac" -q -i "$videourl" | "$mpv_mac" -;;
+  $cookiem3u8uagent) "$mpv_mac" --user-agent="$useragent2" --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep";;
+  $http) "$mpv_mac" "$videourl";;
+  *) "$mpv_mac" "$videourl";;
 esac 
 
 shopt -u extglob # turn off shell globbing
