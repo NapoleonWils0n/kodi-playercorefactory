@@ -82,20 +82,20 @@ wget_mac="/usr/local/bin/wget"
 rtmpdump_mac="/usr/local/bin/rtmpdump"
 
 case "$videourl" in
-	$videofile) "$vlc_mac" "$videourl";;
-	$m3u8) "$vlc_mac" "$videourl";;
-	$cookiem3u8) "$wget_mac" -c --header="cookie: $cookienltid","path=/: $cookiedomain" "$videourl" -O- | "$vlc_mac" fd://0;;
-	$videoqmark) "$vlc_mac" "$videourl";;
-	$xforward) "$wget_mac" -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
-	$useref) "$wget_mac" -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
-	$viduseragent) "$wget_mac" -c -U "$useragent" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
-	$useragentreferer) "$wget_mac" -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
-	$refuseragent) "$wget_mac" -c --header="Referer: $referer" -U "$useragent" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
-	$rtmp) "$rtmpdump_mac" -q -i "$videourl" | "$vlc_mac" fd://0;;
-	$cookiem3u8uagent) "$wget_mac" -c -U "$useragent2" --header="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep" -O- \
-   | "$vlc_mac" fd://0;;
-	$http) "$vlc_mac" "$videourl";;
-	*) "$vlc_mac" "$videourl";;
+  $videofile) "$vlc_mac" "$videourl";;
+  $m3u8) "$vlc_mac" "$videourl";;
+  $cookiem3u8) "$wget_mac" -c --header="cookie: $cookienltid","path=/: $cookiedomain" "$videourl" -O- | "$vlc_mac" fd://0;;
+  $videoqmark) "$vlc_mac" "$videourl";;
+  $xforward) "$wget_mac" -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
+  $useref) "$wget_mac" -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
+  $viduseragent) "$wget_mac" -c -U "$useragent" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
+  $useragentreferer) "$wget_mac" -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
+  $refuseragent) "$wget_mac" -c --header="Referer: $referer" -U "$useragent" "$videofile_grep" -O- | "$vlc_mac" fd://0;;
+  $rtmp) "$rtmpdump_mac" -q -i "$videourl" | "$vlc_mac" fd://0;;
+  $cookiem3u8uagent) "$wget_mac" -c -U "$useragent2" --header="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep" -O- \
+  | "$vlc_mac" fd://0;;
+  $http) "$vlc_mac" "$videourl";;
+  *) "$vlc_mac" "$videourl";;
 esac 
 
 shopt -u extglob # turn off shell globbing

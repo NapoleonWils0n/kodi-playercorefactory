@@ -78,19 +78,19 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 case "$videourl" in
-	$videofile) vlc "$videourl";;
-	$m3u8) vlc "$videourl";;
-	$cookiem3u8) wget -c --header="cookie: $cookienltid","path=/: $cookiedomain" "$videourl" -O- | vlc fd://0;;
-	$videoqmark) vlc "$videourl";;
-	$xforward) wget -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | vlc fd://0;;
-	$useref) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
-	$viduseragent) wget -c -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
-	$useragentreferer) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
-	$refuseragent) wget -c --header="Referer: $referer" -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
-	$rtmp) rtmpdump -q -i "$videourl" | vlc fd://0;;
-	$cookiem3u8uagent) wget -c -U "$useragent2" --header="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep" -O- | vlc fd://0;;
-	$http) vlc "$videourl";;
-	*) vlc "$videourl";;
+  $videofile) vlc "$videourl";;
+  $m3u8) vlc "$videourl";;
+  $cookiem3u8) wget -c --header="cookie: $cookienltid","path=/: $cookiedomain" "$videourl" -O- | vlc fd://0;;
+  $videoqmark) vlc "$videourl";;
+  $xforward) wget -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | vlc fd://0;;
+  $useref) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
+  $viduseragent) wget -c -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
+  $useragentreferer) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
+  $refuseragent) wget -c --header="Referer: $referer" -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
+  $rtmp) rtmpdump -q -i "$videourl" | vlc fd://0;;
+  $cookiem3u8uagent) wget -c -U "$useragent2" --header="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep" -O- | vlc fd://0;;
+  $http) vlc "$videourl";;
+  *) vlc "$videourl";;
 esac 
 
 shopt -u extglob # turn off shell globbing
