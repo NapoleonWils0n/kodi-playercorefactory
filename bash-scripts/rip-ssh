@@ -97,9 +97,11 @@ printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
 }
 
 record_ssh_rtmp () {
-printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
-'ffmpeg -hide_banner -loglevel error' "${@:2}" '-i' "$1" \
-'-c:v copy -c:a copy' $tflag $duration "$recordingfile"
+printf "%s %s %s %s %s %s %s\n" \
+'rtmpdump -q -i' "$1" \
+'| ffmpeg -hide_banner -i -' \
+'-c:v copy -c:a copy' \
+$tflag $duration "$recordingfile"
 }
 
 #+========================================================+#
@@ -110,26 +112,26 @@ printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
 printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
 		
 case "$videourl" in
-	$videofile) record_ssh "$videourl";; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$m3u8) record_ssh "$videourl";; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$videofile) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$m3u8) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$cookiem3u8) record_ssh "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;" \
-	;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$videoqmark) record_ssh "$videourl";; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$videoqmark) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$xforward) record_ssh "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-   ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$useref) record_ssh "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
-   ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$viduseragent) record_ssh "$videofile_grep" -user-agent "$useragent" \
-   ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$useragentreferer) record_ssh "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
-   ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$refuseragent) record_ssh "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent" \
-   ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$rtmp) record_ssh_rtmp "$videourl";; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$rtmp) record_ssh_rtmp "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$cookiem3u8uagent) record_ssh "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;" \
-   ;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$http) record_ssh "$videourl";; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	*) record_ssh "$videourl";; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$http) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	*) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 esac 
 
 shopt -u extglob # turn off shell globbing
