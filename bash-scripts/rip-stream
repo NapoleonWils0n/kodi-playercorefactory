@@ -87,7 +87,7 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 stream () {
-ffmpeg -hide_banner -loglevel error "${@:2}" -i "$1" \
+ffmpeg -hide_banner -stats -v panic "${@:2}" -i "$1" \
 -c:v libx265 -preset ultrafast -tune zero-latency \
 -x265-params crf=28 \
 -c:a aac -strict experimental -b:a 192k \
@@ -97,7 +97,7 @@ $tflag $duration \
 }
 
 stream_rtmp () {
-rtmpdump -q -i "$1" | ffmpeg -hide_banner -i - \
+rtmpdump -q -i "$1" | ffmpeg -hide_banner -stats -v panic -i - \
 -c:v libx265 -preset ultrafast -tune zero-latency \
 -x265-params crf=28 \
 -c:a aac -strict experimental -b:a 192k \

@@ -76,13 +76,13 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 statistics_file="$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt" 
 
 stats () {
-ffprobe -v error -hide_banner -pretty -show_entries \
+ffprobe -hide_banner -stats -v panic -pretty -show_entries \
 format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 "${@:2}" -i "$1" | tee "$statistics_file"
 }
 
 stats_rtmp () {
-rtmpdump -q -i "$1" | ffprobe -v error -hide_banner -pretty -show_entries \
+rtmpdump -q -i "$1" | ffprobe -hide_banner -stats -v panic -pretty -show_entries \
 format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
 -i - | tee "$statistics_file"
 }

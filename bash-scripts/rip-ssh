@@ -92,14 +92,14 @@ recordingfile="$HOME/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
 
 record_ssh () {
 printf "%s %q %s %s %s %s %s %s\n" \
-'ffmpeg -hide_banner -loglevel error' "${@:2}" '-i' "$1" \
+'ffmpeg -hide_banner -stats -v panic' "${@:2}" '-i' "$1" \
 '-c:v copy -c:a copy' $tflag $duration "$recordingfile"
 }
 
 record_ssh_rtmp () {
 printf "%s %s %s %s %s %s %s\n" \
 'rtmpdump -q -i' "$1" \
-'| ffmpeg -hide_banner -i -' \
+'| ffmpeg -hide_banner -stats -v panic -i -' \
 '-c:v copy -c:a copy' \
 $tflag $duration "$recordingfile"
 }

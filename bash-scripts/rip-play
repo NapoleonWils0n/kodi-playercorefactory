@@ -74,11 +74,11 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 play () {
-ffplay -hide_banner -x 640 -y 360 -loglevel error "${@:2}" "$1"
+ffplay -hide_banner -x 640 -y 360 -stats -v panic "${@:2}" "$1"
 }
 
 play_rtmp () {
-rtmpdump -q -i "$1" | ffplay -hide_banner -x 640 -y 360 -
+rtmpdump -q -i "$1" | ffplay -hide_banner -x 640 -y 360 -stats -v panic -
 }
 
 #+========================================================+#
