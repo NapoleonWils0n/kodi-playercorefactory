@@ -98,19 +98,19 @@ format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rat
 printf "%s\n" "Statistics for: '$videourl'"
 
 case "$videourl" in
-	$videofile) stats "$videourl";;
-	$m3u8) stats "$videourl";;
-	$cookiem3u8) stats "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
-	$videoqmark) stats "$videourl";;
-	$xforward) stats "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n';;
-	$useref) stats "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
-	$viduseragent) stats "$videofile_grep" -user-agent "$useragent";;
-	$useragentreferer) stats "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
-	$refuseragent) stats "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent";;
-	$rtmp) stats_rtmp "$videourl";;
-	$cookiem3u8uagent) stats "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
-	$http) stats "$videourl";;
-	*) stats "$videourl";;
+  $videofile) stats "$videourl";;
+  $m3u8) stats "$videourl";;
+  $cookiem3u8) stats "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
+  $videoqmark) stats "$videourl";;
+  $xforward) stats "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n';;
+  $useref) stats "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+  $viduseragent) stats "$videofile_grep" -user-agent "$useragent";;
+  $useragentreferer) stats "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+  $refuseragent) stats "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent";;
+  $rtmp) stats_rtmp "$videourl";;
+  $cookiem3u8uagent) stats "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
+  $http) stats "$videourl";;
+  *) stats "$videourl";;
 esac 
 
 shopt -u extglob # turn off shell globbing
