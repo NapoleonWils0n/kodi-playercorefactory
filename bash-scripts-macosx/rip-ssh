@@ -1,14 +1,7 @@
 #!/bin/bash
 
-#+==========================================================+#
-# rip-ssh - execute ffmpeg commands based on matching url    #
-#+==========================================================+#
-
-# diagram of how the script works
-# [rip-ssh] > [ssh server] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [ssh]
-
 #+=========================================================+#
-# exit status and error codes                               #
+# exit status, error codes and script usage                 #
 #+=========================================================+#
 
 SUCCESS=0      # success exit code
@@ -16,16 +9,26 @@ E_NOARGS=65    # no arguments passed to script
 E_WRONGARGS=66 # wrong number of arguments passed to script
 E_NOMATCH=67   # url not matched by regular expression
 
-#+=========================================================+#
-# display script usage when script is run with no arguments # 
-# + or when invalid input is entered by the user            #
-#+=========================================================+#
-
 script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
 
 #+=========================================================+#
-# validate user input for first, second and third arguments #
-# + passed to script	by matching with regular expressions   #
+# + check if second argument is a url in a text file        #
+# - or a url on the command line                            #
+#+=========================================================+#
+
+if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
+	videourl=$(cat "$2")       # + cat the text file to extract the url
+else
+	videourl="$2"              # url is on the command line
+fi
+
+#+=========================================================+#
+# + validate user input for first, second, third, fourth    #
+# - arguments passed to script                              #
+# + third and fourth arguments passed to script are used    #
+# - to specify a recording duration                         #
+# + check if 2 or 4 arguments are passed to script          #
+# - validate user input and enable shell globbing           #
 #+=========================================================+#
 
 sshserver="$1"                                      # ssh server
@@ -34,40 +37,17 @@ second_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|r
 third_arg_validated="^-t$"                          # matches: -t
 fourth_arg_validated="^[0-9]{2}:[0-9]{2}:[0-9]{2}$" # matches: 00:00:00
 
-#+========================================================+#
-# second and third arguments passed to script are used     #
-# + to specify a recording duration                        #
-#+========================================================+#
-
 tflag="$3"     # third argument should be: -t
 duration="$4"  # fourth argument should be in this format: 00:00:00
 
-#+========================================================+#
-# check if second argument is a url in a text file         #
-# + or a url on the command line                           #
-#+========================================================+#
-
-if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
-	videourl=$(cat "$2")       # + cat the text file to extract the url
-else
-	videourl="$2"              # url is on the command line
-fi
-
-#+========================================================+#
-# check if 2 or 4 arguments are passed to script           #
-# + and validate user input                                #
-#+========================================================+#
-
 if [[ $# -eq 2 ]]; then                                # - two argument are passed to the script
 	if ! [[ $videourl =~ $second_arg_validated ]]; then # + if videourl doesnt match validation regular expression
-		printf "%s\n" "'$videourl' invalid input"        # + display invalid user input with error message
-		printf "%s\n" "$script_usage"                    # + display script usage
+		printf "%s\n%s\n" "'$videourl' invalid input" "$script_usage" # + display invalid user input with error message
 		exit "$E_NOMATCH"                                # + exit with E_NOMATCH error code
 	fi
 elif [[ $# -eq 4 ]]; then                              # - three arguments are passed to the script, validate user input
 	if ! [[ $sshserver =~ $first_arg_validated && $videourl =~ $second_arg_validated && $tflag =~ $third_arg_validated && $duration =~ $fourth_arg_validated ]]; then
-		printf "%s\n" "'$1 $2 $3 $4' invalid input"      # + display invalid user input with error message
-		printf "%s\n" "$script_usage"                    # + display script usage
+		printf "%s\n%s\n" "'$1 $2 $3 $4' invalid input" "$script_usage" # + display invalid user input with error message
 		exit "$E_NOMATCH"                                # + exit with E_NOMATCH error code
 	fi
 else [[ $# -eq 0 ]]                                    # - no arguments are passed to the script
@@ -75,17 +55,7 @@ else [[ $# -eq 0 ]]                                    # - no arguments are pass
 	exit "$E_NOARGS"                                    # + exit with E_NOARGS error code
 fi
 
-#+========================================================+#
-# enable shell globbing for pattern matching               #
-#+========================================================+#
-
-shopt -s extglob 
-
-#+========================================================+#
-# video recording file path                                #
-#+========================================================+#
-
-recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+shopt -s extglob # enable shell globbing 
 
 #+========================================================+#
 # case statement switch on pattern match                   #
@@ -118,156 +88,54 @@ cookienltid=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
-# case statement with regular expression                   #
-# + to execute ffmpeg commands based on matching url       #
+# recording functions using ffmpeg and rtmpdump           +#
 #+========================================================+#
 
+recordingfile="$HOME/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+
+record_ssh () {
+printf "%s %q %s %s %s %s %s %s\n" \
+'ffmpeg -hide_banner -stats -v panic' "${@:2}" '-i' "$1" \
+'-c:v copy -c:a copy' $tflag $duration "$recordingfile"
+}
+
+record_ssh_rtmp () {
+printf "%s %s %s %s %s %s %s\n" \
+'rtmpdump -q -i' "$1" \
+'| ffmpeg -hide_banner -stats -v panic -i -' \
+'-c:v copy -c:a copy' \
+$tflag $duration "$recordingfile"
+}
+
+#+========================================================+#
+# + case statement with regular expression                 #
+# - to execute ffmpeg commands based on matching url       #
+#+========================================================+#
+
+printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
+		
 case "$videourl" in
-	$videofile)         # video file
-		printf "%s\n" 'url matches: $videofile bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
-		'-c:v copy -c:a copy' $tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$m3u8)              # m3u8 playlist
-		printf "%s\n" 'url matches: $m3u8 bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
-		'-c:v copy -c:a copy' $tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$cookiem3u8)        # cookie m3u8
-		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel panic' \
-		'-cookies' \
-		"$cookienltid; path=/; $cookiedomain;" \
-		'-i' "$videourl" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$videoqmark)         # video link and question mark
-		printf "%s\n" 'url matches: $videoqmark bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error -i' "$videourl" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$xforward)          # xforward
-		printf "%s\n" 'url matches: $xforward bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -headers' \
-		'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-		'-i' "$videofile_grep" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$useref)            # useragent referer
-		printf "%s\n" 'url matches: $useref bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s %s %s %s %s %s %s %s %s\n" \
-		'ffmpeg -hide_banner -user-agent' "$useragent" \
-		'-headers' \
-		'Referer: '"$referer"''$'\r\n' \
-		'-i' "$videofile_grep" '-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$viduseragent)     # user agent 
-		printf "%s\n" 'url matches: $viduseragent bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error -user-agent' \
-		"$useragent" '-i' "$videofile_grep" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$useragentreferer) # useragent referer
-		printf "%s\n" 'url matches: $useragentreferer bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s %s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error -user-agent' \
-		"$useragent" \
-		'-headers' \
-		'Referer: '"$referer"''$'\r\n' \
-		'-i' "$videofile_grep" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$refuseragent)      # referer user agent
-		printf "%s\n" 'url matches: $refuseragent bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s '%s' %s %s %s '%s' %s %s %s\n" \
-		'ffmpeg -hide_banner -loglevel error' \
-		'-headers' \
-		'Referer: '"$referer"''$'\r\n' \
-		'-user-agent' "$useragent" \
-		'-i' "$videofile_grep" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$rtmp)              # rtmp
-		printf "%s\n" 'url matches: $rtmp bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s '%s' %s %s %s %s %s\n" \
-		'rtmpdump -q -i' "$rtmp" \
-		'| ffmpeg -hide_banner -i -' \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$cookiem3u8uagent)  # cookie m3u8 useragent
-		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner' \
-		'-user-agent' "$useragent2" \
-		'-cookies' "$cookieurl; path=/; $cookiedomain;" \
-		'-i' "$videofile_grep" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	$http)              # http
-		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Recording: a'$videourl'"
-		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-	*)                  # wildcard
-		printf "%s\n" 'url matches: * bash pattern'
-		printf "%s\n" "Recording: '$videourl'"
-		printf "%s '%s' %s %s %s %s\n" \
-		'ffmpeg -hide_banner -i' "$videourl" \
-		'-c:v copy -c:a copy' \
-		$tflag $duration \
-		"$recordingfile" \
-		| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$videofile) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$m3u8) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$cookiem3u8) record_ssh "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;" \
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$videoqmark) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$xforward) record_ssh "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
+	| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$useref) record_ssh "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$viduseragent) record_ssh "$videofile_grep" -user-agent "$useragent" \
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$useragentreferer) record_ssh "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$refuseragent) record_ssh "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent" \
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$rtmp) record_ssh_rtmp "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$cookiem3u8uagent) record_ssh "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;" \
+   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$http) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	*) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 esac 
 
-#+========================================================+#
-# turn off shell globbing                                  #
-#+========================================================+#
-
-shopt -u extglob 
-
-#+========================================================+#
-# exit status SUCCESS if script runs without errors        #
-#+========================================================+#
-
-exit "$SUCCESS"
+shopt -u extglob # turn off shell globbing
+exit "$SUCCESS" # exit status SUCCESS if script runs without errors
