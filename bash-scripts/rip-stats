@@ -23,7 +23,7 @@ fi
 
 #+========================================================+#
 # + validate user input for first argument                 #
-# - passed to script	                                      #
+# - passed to script                                       #
 # + check if 1 argument is passed to script                #
 # - validate user input and enable shell globbing          #
 #+========================================================+#

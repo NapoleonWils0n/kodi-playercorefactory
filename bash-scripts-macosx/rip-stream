@@ -24,7 +24,7 @@ fi
 
 #+========================================================+#
 # + validate user input for first, second, third arguments #
-# - passed to script	                                      #
+# - passed to script                                       #
 # + second and third arguments passed to script are used   #
 # - to specify a recording duration                        #
 # + check if 1 or 3 arguments are passed to script         #
