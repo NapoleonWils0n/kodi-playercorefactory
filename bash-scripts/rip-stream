@@ -127,7 +127,7 @@ case "$videourl" in
   $rtmp) stream_rtmp "$videourl";;
   $cookiem3u8uagent) stream "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
   $http) stream "$videourl";;
-*) stream "$videourl";;
+  *) stream "$videourl";;
 esac 
 
 shopt -u extglob # turn off shell globbing
