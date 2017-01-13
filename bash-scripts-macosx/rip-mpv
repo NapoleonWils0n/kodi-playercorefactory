@@ -1,66 +1,46 @@
 #!/bin/bash
 
-#+==========================================================+#
-# rip-mpv - execute mpv commands based on matching url       #
-#+==========================================================+#
-
-# diagram of how the script works
-# [rip-mpv] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [mpv]
-
-#+=========================================================+#
-# exit status and error codes                               #
-#+=========================================================+#
+#+========================================================+#
+# exit status, error codes and script usage                #
+#+========================================================+#
 
 SUCCESS=0      # success exit code
 E_NOARGS=65    # no arguments passed to script
 E_NOMATCH=66   # url not matched by regular expression
 
-#+=========================================================+#
-# display script usage when script is run with no arguments #
-# + or when invalid input is entered by the user            #
-#+=========================================================+#
-
 script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url]"
 
-#+=========================================================+#
-# validate user input for first argument                    #
-# + passed to script	by matching with regular expressions   #
-#+=========================================================+#
-
-first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
-
 #+========================================================+#
-# check if first argument is a url in a text file          #
-# + or a url on the command line                           #
+# + check if first argument is a url in a text file        #
+# - or a url on the command line                           #
 #+========================================================+#
 
-if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
-	videourl=$(cat "$1")       # + cat the text file to extract the url
+if [[ "$1" =~ \.txt$ ]]; then # + text file passed as first argument to script
+	videourl=$(cat "$1")       # - cat the text file to extract the url
 else
 	videourl="$1"              # url is on the command line
 fi
 
 #+========================================================+#
-# check if 1 argument is  passed to script                 #
-# + and validate user input                                #
+# + validate user input for first argument                 #
+# - passed to script	                                      #
+# + check if 1 or 3 arguments are passed to script         #
+# - validate user input and enable shell globbing          #
 #+========================================================+#
 
-if [[ $# -eq 1 ]]; then                               # - one argument is passed to the script
-	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
-		printf "%s\n" "'$videourl' invalid input"       # + display invalid user input with error message
-		printf "%s\n" "$script_usage"                   # + display script usage
-		exit "$E_NOMATCH"                               # + exit with E_NOMATCH error code
+first_arg_validated="^(http|https|rtmp|rtmpe)://*"    # matches: http|https|rtmp|rtmpe
+
+if [[ $# -eq 1 ]]; then                               # + one argument is passed to the script
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # - if videourl doesnt match validation regular expression
+		printf "%s\n%s\n" "'$videourl' invalid input" "$script_usage" # - display invalid user input with error message
+		exit "$E_NOMATCH"                               # - exit with E_NOMATCH error code
 	fi
-else [[ $# -eq 0 ]]                                   # - no arguments are passed to the script
-   printf "%s\n" "$script_usage"                      # + display script usage
-	exit "$E_NOARGS"                                   # + exit with E_NOARGS error code
+else [[ $# -eq 0 ]]                                   # + no arguments are passed to the script
+   printf "%s\n" "$script_usage"                      # - display script usage
+	exit "$E_NOARGS"                                   # - exit with E_NOARGS error code
 fi
 
-#+========================================================+#
-# enable shell globbing for pattern matching               #
-#+========================================================+#
-
-shopt -s extglob 
+shopt -s extglob # enable shell globbing 
 
 #+========================================================+#
 # case statement switch on pattern match                   #
@@ -93,60 +73,28 @@ cookienltid=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
-# case statement with regular expression                   #
-# + to execute mpv commands based on matching url          #
+# + case statement with regular expression                 #
+# - to execute mpv commands based on matching url          #
 #+========================================================+#
+
+mpv_mac="/Applications/mpv.app/Contents/MacOS/mpv"
+rtmpdump_mac="/usr/local/bin/rtmpdump"
 
 case "$videourl" in
-	$videofile)         # video file
-		printf "%s\n" 'url matches: $videofile bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
-	$m3u8)              # m3u8 playlist
-		printf "%s\n" 'url matches: $m3u8 bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
-	$cookiem3u8)        # cookie m3u8
-		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="cookie: $cookienltid","path=/: $cookiedomain" "$videourl";;
-	$videoqmark)         # video link and question mark
-		printf "%s\n" 'url matches: $videoqmark bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
-	$xforward)          # xforward
-		printf "%s\n" 'url matches: $xforward bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
-	$useref)            # useragent referer
-		printf "%s\n" 'url matches: $useref bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$viduseragent)     # user agent 
-		printf "%s\n" 'url matches: $viduseragent bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" "$videofile_grep";;
-	$useragentreferer) # useragent referer
-		printf "%s\n" 'url matches: $useragentreferer bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
-	$refuseragent)      # referer user agent
-		printf "%s\n" 'url matches: $refuseragent bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
-	$rtmp)              # rtmp
-		printf "%s\n" 'url matches: $rtmp bash pattern'
-		/usr/local/bin/rtmpdump -q -i "$videourl" | /Applications/mpv.app/Contents/MacOS/mpv -;;
-	$cookiem3u8uagent)  # cookie m3u8 useragent
-		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv --user-agent="$useragent2" --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep";;
-	$http)              # http
-		printf "%s\n" 'url matches: $http bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
-	*)                  # wildcard
-		printf "%s\n" 'url matches: * bash pattern'
-		/Applications/mpv.app/Contents/MacOS/mpv "$videourl";;
+	$videofile) "$mpv_mac" "$videourl";;
+	$m3u8) "$mpv_mac" "$videourl";;
+	$cookiem3u8) "$mpv_mac" --http-header-fields="cookie: $cookienltid","path=/: $cookiedomain" "$videourl";;
+	$videoqmark) "$mpv_mac" "$videourl";;
+	$xforward) "$mpv_mac" --http-header-fields="X-Forwarded-For: $xforwardip" "$videofile_grep";;
+	$useref) "$mpv_mac" --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
+	$viduseragent) "$mpv_mac" --user-agent="$useragent" "$videofile_grep";;
+	$useragentreferer) "$mpv_mac" --user-agent="$useragent" --referrer="$referer" "$videofile_grep";;
+	$refuseragent) "$mpv_mac" --referrer="$referer" --user-agent="$useragent" "$videofile_grep";;
+	$rtmp) "$rtmpdump_mac" -q -i "$videourl" | "$mpv_mac" -;;
+	$cookiem3u8uagent) "$mpv_mac" --user-agent="$useragent2" --http-header-fields="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep";;
+  	$http) "$mpv_mac" "$videourl";;
+	*) "$mpv_mac" "$videourl";;
 esac 
 
-#+========================================================+#
-# turn off shell globbing                                  #
-#+========================================================+#
-
-shopt -u extglob 
-
-#+========================================================+#
-# exit status SUCCESS if script runs without errors        #
-#+========================================================+#
-
-exit "$SUCCESS"
+shopt -u extglob # turn off shell globbing
+exit "$SUCCESS" # exit status SUCCESS if script runs without errors
