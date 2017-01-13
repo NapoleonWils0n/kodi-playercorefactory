@@ -13,10 +13,6 @@ script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/vid
 #+========================================================+#
 # + check if first argument is a url in a text file        #
 # - or a url on the command line                           #
-# + validate user input for first argument                 #
-# + passed to script                                       #
-# + check if 1 argument is passed to script                #
-# - and validate user input                                #
 #+========================================================+#
 
 if [[ "$1" =~ \.txt$ ]]; then # + text file passed as first argument to script
@@ -24,6 +20,13 @@ if [[ "$1" =~ \.txt$ ]]; then # + text file passed as first argument to script
 else
 	videourl="$1"              # url is on the command line
 fi
+
+#+========================================================+#
+# + validate user input for first argument                 #
+# + passed to script                                       #
+# + check if 1 argument is passed to script                #
+# - and validate user input                                #
+#+========================================================+#
 
 first_arg_validated="^(http|https|rtmp|rtmpe)://*"    # matches: http|https|rtmp|rtmpe
 

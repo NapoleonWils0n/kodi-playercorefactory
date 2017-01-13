@@ -14,12 +14,6 @@ script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://ex
 #+=========================================================+#
 # + check if second argument is a url in a text file        #
 # - or a url on the command line                            #
-# + validate user input for first, second, third, fourth    #
-# - arguments passed to script                              #
-# + third and fourth arguments passed to script are used    #
-# - to specify a recording duration                         #
-# + check if 2 or 4 arguments are passed to script          #
-# - validate user input and enable shell globbing           #
 #+=========================================================+#
 
 if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
@@ -27,6 +21,15 @@ if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
 else
 	videourl="$2"              # url is on the command line
 fi
+
+#+=========================================================+#
+# + validate user input for first, second, third, fourth    #
+# - arguments passed to script                              #
+# + third and fourth arguments passed to script are used    #
+# - to specify a recording duration                         #
+# + check if 2 or 4 arguments are passed to script          #
+# - validate user input and enable shell globbing           #
+#+=========================================================+#
 
 sshserver="$1"                                      # ssh server
 first_arg_validated="^[a-zA-Z0-9:0-9./@-]*"         # validate ssh server address
