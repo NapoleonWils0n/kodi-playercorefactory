@@ -76,20 +76,15 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 statistics_file="$HOME/Desktop/video-stats-$(date +"%Y-%m-%d-%H-%M-%S").txt" 
 
 stats () {
-printf "%s\n" "Statistics for: '$videourl'"
 ffprobe -v error -hide_banner -pretty -show_entries \
 format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
-$2 $3 $4 $5 -i "$1" \
-| tee "$statistics_file"
+"${@:2}" -i "$1" | tee "$statistics_file"
 }
 
 stats_rtmp () {
-printf "%s\n" "Statistics for: '$videourl'"
-printf "%s\n" "Statistics for: '$videourl'"
 rtmpdump -q -i "$1" | ffprobe -v error -hide_banner -pretty -show_entries \
 format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rate,width,height -of compact \
--i - \
-| tee "$statistics_file"
+-i - | tee "$statistics_file"
 }
 
 #+========================================================+#
@@ -97,16 +92,18 @@ format=size,duration:stream=filename,index,codec_type,codec_name,profile,bit_rat
 # - to execute ffprobe commands based on matching url      #
 #+========================================================+#
 
+printf "%s\n" "Statistics for: '$videourl'"
+
 case "$videourl" in
 	$videofile) stats "$videourl";;
 	$m3u8) stats "$videourl";;
 	$cookiem3u8) stats "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
 	$videoqmark) stats "$videourl";;
-	$xforward) stats "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'";;
-	$useref) stats "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
+	$xforward) stats "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n';;
+	$useref) stats "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
 	$viduseragent) stats "$videofile_grep" -user-agent "$useragent";;
-	$useragentreferer) stats "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
-	$refuseragent) stats "$videofile_grep" -headers "'Referer: '"$referer"''$'\r\n'" -user-agent "$useragent";;
+	$useragentreferer) stats "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+	$refuseragent) stats "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent";;
 	$rtmp) stats_rtmp "$videourl";;
 	$cookiem3u8uagent) stats "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
 	$http) stats "$videourl";;
