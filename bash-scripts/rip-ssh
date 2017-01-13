@@ -112,13 +112,13 @@ $tflag $duration "$recordingfile"
 printf "%s\n" "Sending ffmpeg comamnd to: $sshserver"
 		
 case "$videourl" in
-	$videofile) record_ssh "$videourl";; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	$videofile) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$m3u8) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$cookiem3u8) record_ssh "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;" \
    | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$videoqmark) record_ssh "$videourl" | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$xforward) record_ssh "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-	;; # | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+	| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$useref) record_ssh "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
    | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 	$viduseragent) record_ssh "$videofile_grep" -user-agent "$useragent" \
