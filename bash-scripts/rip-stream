@@ -87,7 +87,7 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 stream () {
-ffmpeg -hide_banner -loglevel error $2 $3 $4 $5 -i "$1" \
+ffmpeg -hide_banner -loglevel error "${@:2}" -i "$1" \
 -c:v libx265 -preset ultrafast -tune zero-latency \
 -x265-params crf=28 \
 -c:a aac -strict experimental -b:a 192k \
@@ -112,19 +112,19 @@ rtmpdump -q -i "$1" | ffmpeg -hide_banner -i - \
 printf "%s\n" "Streaming to: 'udp://@239.253.253.4:1234'"
 
 case "$videourl" in
-	$videofile) stream "$videourl";;
-	$m3u8) stream "$videourl";;
-	$cookiem3u8) stream "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
-	$videoqmark) stream "$videourl";;
-	$xforward) stream "$videofile_grep" -headers "'X-Forwarded-For: '"$xforwardip"''$'\r\n'";;
-	$useref) stream "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
-	$viduseragent) stream "$videofile_grep" -user-agent "$useragent";;
-	$useragentreferer) stream "$videofile_grep" -user-agent "$useragent" -headers "'Referer: '"$referer"''$'\r\n'";;
-	$refuseragent) stream "$videofile_grep" -headers "'Referer: '"$referer"''$'\r\n'" -user-agent "$useragent";;
-	$rtmp) stream_rtmp "$videourl";;
-	$cookiem3u8uagent) stream "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
-	$http) stream "$videourl";;
-	*) stream "$videourl";;
+  $videofile) stream "$videourl";;
+  $m3u8) stream "$videourl";;
+  $cookiem3u8) stream "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
+  $videoqmark) stream "$videourl";;
+  $xforward) stream "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n';;
+  $useref) stream "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+  $viduseragent) stream "$videofile_grep" -user-agent "$useragent";;
+  $useragentreferer) stream "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+  $refuseragent) stream "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent";;
+  $rtmp) stream_rtmp "$videourl";;
+  $cookiem3u8uagent) stream "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
+  $http) stream "$videourl";;
+*) stream "$videourl";;
 esac 
 
 shopt -u extglob # turn off shell globbing
