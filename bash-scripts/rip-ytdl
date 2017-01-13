@@ -15,9 +15,9 @@ script_usage="Usage: $(basename "$0") [(text file with url|url on command line|d
 # - or a url on the command line, or a directory           #
 # + validate user input for first argument                 #
 # - passed to script                                       #
-# + check number of arguments passed to script             #
-# - validate user input and enable shell globbing          #
 #+========================================================+#
+
+videourl_validated="^(http|https)://*"       # matches: http|https
 
 if [[ $# -eq 1 ]]; then                               # + one argument is passed to the script
    if ! [[ "$1" =~ $videourl_validated || -d "$1" || -f "$1" ]]; then # - validate user input
@@ -29,7 +29,9 @@ else [[ $# -eq 0 ]]                                   # + no arguments are passe
 	exit "$E_NOARGS"                                   # - exit with E_NOARGS error code
 fi
 
-videourl_validated="^(http|https)://*"       # matches: http|https
+#+========================================================+#
+# youtube-dl and aria2c as external downloader             #
+#+========================================================+#
 
 if [[ "$1" =~ \.txt$ ]]; then                # text file passed as first argument to script
    youtube-dl -a "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \

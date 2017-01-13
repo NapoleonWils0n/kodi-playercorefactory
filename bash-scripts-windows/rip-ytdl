@@ -1,74 +1,53 @@
 #!/bin/bash
 
-#+==========================================================+#
-# rip-ytdl - youtube-dl with aria2c as external downloader  +#
-#+==========================================================+#
-
-# diagram of how the script works
-# [rip-ytdl] > [(text file with url|url on command line|directory containing text files)]
-
-#+=========================================================+#
-# exit status and error codes                               #
-#+=========================================================+#
+#+========================================================+#
+# exit status, error codes and script usage                #
+#+========================================================+#
 
 SUCCESS=0      # success exit code
 E_NOARGS=65    # no arguments passed to script
 E_NOMATCH=66   # url not matched by regular expression
 
-#+=========================================================+#
-# display script usage when script is run with no arguments #
-# + or when invalid input is entered by the user            #
-#+=========================================================+#
-
 script_usage="Usage: $(basename "$0") [(text file with url|url on command line|directory containing text files)]"
 
-#+=========================================================+#
-# validate user input for first argument passed to script  +#
-#+=========================================================+#
-
-videourl_validated="^(http|https)://*" # matches: http|https
-
 #+========================================================+#
-# check number of arguments passed to script               #
-# + and validate user input                                #
+# + check if first argument is a url in a text file        #
+# - or a url on the command line, or a directory           #
 #+========================================================+#
 
-if [[ $# -eq 1 ]]; then                               # - one argument is passed to the script
-   if ! [[ "$1" =~ $videourl_validated || -d "$1" || -f "$1" ]]; then # + validate user input
-      printf "%s\n" "'$1' invalid input"              # + display invalid user input with error message
-      printf "%s\n" "$script_usage"                   # + display script usage
-      exit "$E_NOMATCH"                               # + exit with E_NOMATCH error code
+if [[ $# -eq 1 ]]; then                               # + one argument is passed to the script
+   if ! [[ "$1" =~ $videourl_validated || -d "$1" || -f "$1" ]]; then # - validate user input
+      printf "%s\n%s\n" "'$1' invalid input" "$script_usage" # - display invalid user input with error message
+      exit "$E_NOMATCH"                               # - exit with E_NOMATCH error code
    fi
-else [[ $# -eq 0 ]]                                   # - no arguments are passed to the script
-   printf "%s\n" "$script_usage"                      # + display script usage
-	exit "$E_NOARGS"                                   # + exit with E_NOARGS error code
+else [[ $# -eq 0 ]]                                   # + no arguments are passed to the script
+   printf "%s\n" "$script_usage"                      # - display script usage
+	exit "$E_NOARGS"                                   # - exit with E_NOARGS error code
 fi
 
 #+========================================================+#
-# check if first argument is a url in a text file          #
-# + or a url on the command line, or a directory           #
+# + validate user input for first argument                 #
+# - passed to script                                       #
+# + check number of arguments passed to script             #
+# - validate user input and enable shell globbing          #
 #+========================================================+#
 
-notify='C:\notify-send\bin\notify-send'
+videourl_validated="^(http|https)://*"       # matches: http|https
 
-if [[ "$1" =~ \.txt$ ]]; then                # - text file passed as first argument to script
+if [[ "$1" =~ \.txt$ ]]; then                # text file passed as first argument to script
    youtube-dl -a "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
-   && [[ -f "$notify" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "$1"
-elif [[ -d "$1" ]]; then                     # - directory is passed as first argument to script
+   && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
+elif [[ -d "$1" ]]; then                     # directory is passed as first argument to script
    find "$1" -maxdepth 1 -regex ".*\.txt" -type f \
    | while read file; do
    youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3"
    done \
-   && [[ -f "$notify" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "$1"
+   && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
 elif [[ "$1" =~ $videourl_validated ]]; then # url is on the command line
    youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
-   && [[ -f "$notify" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "$1"
+   && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
 else
    printf "%s\n" "There was some kind of error"
 fi
 
-#+========================================================+#
-# exit status SUCCESS if script runs without errors        #
-#+========================================================+#
-
-exit "$SUCCESS"
+exit "$SUCCESS" # exit status SUCCESS if script runs without errors
