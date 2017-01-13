@@ -70,13 +70,15 @@ cookienltid=$(printf "%s" "$videourl" | grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*')
 cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
-# recording functions using ffmpeg and rtmpdump           +#
+# play functions using ffmpeg and rtmpdump                +#
 #+========================================================+#
 
 play () {
+ffplay -hide_banner -x 640 -y 360 -loglevel error "${@:2}" "$1"
 }
 
 play_rtmp () {
+rtmpdump -q -i "$1" | ffplay -hide_banner -x 640 -y 360 -
 }
 
 #+========================================================+#
@@ -85,23 +87,20 @@ play_rtmp () {
 #+========================================================+#
 
 case "$videourl" in
-	$videofile) ffplay -hide_banner -x 640 -y 360 "$videourl";;
-	$m3u8) ffplay -hide_banner -x 640 -y 360 "$videourl" 2>&1 | sed '/\[/d';;
-	$cookiem3u8) ffplay -hide_banner -x 640 -y 360 -loglevel panic -cookies "$cookienltid; path=/; $cookiedomain;" "$videourl";;
-	$videoqmark) ffplay -hide_banner -x 640 -y 360 -loglevel error "$videourl";;
-	$xforward) ffplay -hide_banner -x 640 -y 360 -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n' "$videofile_grep";;
-	$useref) ffplay -hide_banner -x 640 -y 360 -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
-	$viduseragent) ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent" "$videofile_grep";;
-	$useragentreferer) ffplay -hide_banner -x 640 -y 360 -loglevel error -user-agent "$useragent" \
-   -headers 'Referer: '"$referer"''$'\r\n' "$videofile_grep";;
-	$refuseragent)ffplay -hide_banner -x 640 -y 360 -loglevel error -headers 'Referer: '"$referer"''$'\r\n' \
-   -user-agent "$useragent" "$videofile_grep";;
-	$rtmp) rtmpdump -q -i "$videourl" | ffplay -hide_banner -x 640 -y 360 -;;
-	$cookiem3u8uagent) ffplay -hide_banner -x 640 -y 360 -loglevel panic -user-agent "$useragent2" \
-   -cookies "$cookieurl; path=/; $cookiedomain;" "$videofile_grep";;
-	$http) ffplay -hide_banner -x 640 -y 360 "$videourl";;
-	*) ffplay -hide_banner -x 640 -y 360 "$videourl";;
-esac 
+  $videofile) play "$videourl";;
+  $m3u8) play "$videourl";;
+  $cookiem3u8) play "$videourl" -cookies "$cookienltid; path=/; $cookiedomain;";;
+  $videoqmark) play "$videourl";;
+  $xforward) play "$videofile_grep" -headers 'X-Forwarded-For: '"$xforwardip"''$'\r\n';;
+  $useref) play "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+  $viduseragent) play "$videofile_grep" -user-agent "$useragent";;
+  $useragentreferer) play "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n';;
+  $refuseragent) play "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent";;
+  $rtmp) play_rtmp "$videourl";;
+  $cookiem3u8uagent) play "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;";;
+  $http) play "$videourl";;
+  *) play "$videourl";;
+esac
 
 shopt -u extglob # turn off shell globbing
 exit "$SUCCESS" # exit status SUCCESS if script runs without errors
