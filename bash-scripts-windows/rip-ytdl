@@ -13,7 +13,11 @@ script_usage="Usage: $(basename "$0") [(text file with url|url on command line|d
 #+========================================================+#
 # + check if first argument is a url in a text file        #
 # - or a url on the command line, or a directory           #
+# + validate user input for first argument                 #
+# - passed to script                                       #
 #+========================================================+#
+
+videourl_validated="^(http|https)://*"       # matches: http|https
 
 if [[ $# -eq 1 ]]; then                               # + one argument is passed to the script
    if ! [[ "$1" =~ $videourl_validated || -d "$1" || -f "$1" ]]; then # - validate user input
@@ -26,26 +30,23 @@ else [[ $# -eq 0 ]]                                   # + no arguments are passe
 fi
 
 #+========================================================+#
-# + validate user input for first argument                 #
-# - passed to script                                       #
-# + check number of arguments passed to script             #
-# - validate user input and enable shell globbing          #
+# youtube-dl and aria2c as external downloader             #
 #+========================================================+#
 
-videourl_validated="^(http|https)://*"       # matches: http|https
+notify='C:\notify-send\bin\notify-send'
 
 if [[ "$1" =~ \.txt$ ]]; then                # text file passed as first argument to script
    youtube-dl -a "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
-   && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
+   && [[ -f "$notify" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "$1"
 elif [[ -d "$1" ]]; then                     # directory is passed as first argument to script
    find "$1" -maxdepth 1 -regex ".*\.txt" -type f \
    | while read file; do
    youtube-dl -a "$file" --external-downloader aria2c --external-downloader-args "-c -x3"
    done \
-   && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
+   && [[ -f "$notify" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "$1"
 elif [[ "$1" =~ $videourl_validated ]]; then # url is on the command line
    youtube-dl "$1" --external-downloader aria2c --external-downloader-args "-c -x3" \
-   && type -P notify-send &> /dev/null && [[ $? -eq 0 ]] && notify-send -i kodi "Finished Downloading" "$1"
+   && [[ -f "$notify" ]] && [[ $? -eq 0 ]] && notify-send "Finished Downloading" "$1"
 else
    printf "%s\n" "There was some kind of error"
 fi
