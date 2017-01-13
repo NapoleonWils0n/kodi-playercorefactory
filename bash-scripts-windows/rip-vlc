@@ -1,66 +1,46 @@
 #!/bin/bash
 
-#+==========================================================+#
-# rip-vlc - execute vlc commands based on matching url       #
-#+==========================================================+#
-
-# diagram of how the script works
-# [rip-vlc] > [(text file with url|url on command line)] > [case-statement -match url] > [grep -extract strings] > [vlc]
-
-#+=========================================================+#
-# exit status and error codes                               #
-#+=========================================================+#
+#+========================================================+#
+# exit status, error codes and script usage                #
+#+========================================================+#
 
 SUCCESS=0      # success exit code
 E_NOARGS=65    # no arguments passed to script
 E_NOMATCH=66   # url not matched by regular expression
 
-#+=========================================================+#
-# display script usage when script is run with no arguments #
-# + or when invalid input is entered by the user            #
-#+=========================================================+#
-
 script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url]"
 
-#+=========================================================+#
-# validate user input for first argument                    #
-# + passed to script	by matching with regular expressions   #
-#+=========================================================+#
-
-first_arg_validated="^(http|https|rtmp|rtmpe)://*" # matches: http|https|rtmp|rtmpe
-
 #+========================================================+#
-# check if first argument is a url in a text file          #
-# + or a url on the command line                           #
+# + check if first argument is a url in a text file        #
+# - or a url on the command line                           #
 #+========================================================+#
 
-if [[ "$1" =~ \.txt$ ]]; then # - text file passed as first argument to script
-	videourl=$(cat "$1")       # + cat the text file to extract the url
+if [[ "$1" =~ \.txt$ ]]; then # + text file passed as first argument to script
+	videourl=$(cat "$1")       # - cat the text file to extract the url
 else
 	videourl="$1"              # url is on the command line
 fi
 
 #+========================================================+#
-# check if 1 argument is  passed to script                 #
-# + and validate user input                                #
+# + validate user input for first argument                 #
+# + passed to script                                       #
+# + check if 1 argument is passed to script                #
+# - and validate user input                                #
 #+========================================================+#
 
-if [[ $# -eq 1 ]]; then                               # - one argument is passed to the script
-	if ! [[ $videourl =~ $first_arg_validated ]]; then # + if videourl doesnt match validation regular expression
-		printf "%s\n" "'$videourl' invalid input"       # + display invalid user input with error message
-		printf "%s\n" "$script_usage"                   # + display script usage
-		exit "$E_NOMATCH"                               # + exit with E_NOMATCH error code
+first_arg_validated="^(http|https|rtmp|rtmpe)://*"    # matches: http|https|rtmp|rtmpe
+
+if [[ $# -eq 1 ]]; then                               # + one argument is passed to the script
+	if ! [[ $videourl =~ $first_arg_validated ]]; then # - if videourl doesnt match validation regular expression
+		printf "%s\n%s\n" "'$videourl' invalid input" "$script_usage" # - display invalid user input with error message
+		exit "$E_NOMATCH"                               # - exit with E_NOMATCH error code
 	fi
-else [[ $# -eq 0 ]]                                   # - no arguments are passed to the script
-   printf "%s\n" "$script_usage"                      # + display script usage
-	exit "$E_NOARGS"                                   # + exit with E_NOARGS error code
+else [[ $# -eq 0 ]]                                   # + no arguments are passed to the script
+   printf "%s\n" "$script_usage"                      # - display script usage
+	exit "$E_NOARGS"                                   # - exit with E_NOARGS error code
 fi
 
-#+========================================================+#
-# enable shell globbing for pattern matching               #
-#+========================================================+#
-
-shopt -s extglob 
+shopt -s extglob # enable shell globbing 
 
 #+========================================================+#
 # case statement switch on pattern match                   #
@@ -98,68 +78,20 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 #+========================================================+#
 
 case "$videourl" in
-	$videofile)         # video file
-		printf "%s\n" 'url matches: $videofile bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		vlc "$videourl";;
-	$m3u8)              # m3u8 playlist
-		printf "%s\n" 'url matches: $m3u8 bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		vlc "$videourl";;
-	$cookiem3u8)        # cookie m3u8
-		printf "%s\n" 'url matches: $cookiem3u8 bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c --header="cookie: $cookienltid","path=/: $cookiedomain" "$videourl" -O- | vlc fd://0;;
-	$videoqmark)        # video link and question mark
-		printf "%s\n" 'url matches: $videoqmark bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		vlc "$videourl";;
-	$xforward)          # xforward
-		printf "%s\n" 'url matches: $xforward bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | vlc fd://0;;
-	$useref)            # useragent referer
-		printf "%s\n" 'url matches: $useref bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
-	$viduseragent)     # user agent 
-		printf "%s\n" 'url matches: $m3u8useragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
-	$useragentreferer) # useragent referer
-		printf "%s\n" 'url matches: $useragentreferer bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
-	$refuseragent)      # referer user agent
-		printf "%s\n" 'url matches: $refuseragent bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c --header="Referer: $referer" -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
-	$rtmp)              # rtmp
-		printf "%s\n" 'url matches: $rtmp bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		rtmpdump -q -i "$videourl" | vlc fd://0;;
-	$cookiem3u8uagent)  # cookie m3u8 useragent
-		printf "%s\n" 'url matches: $cookiem3u8uagent bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		wget -c -U "$useragent2" --header="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep" -O- | vlc fd://0;;
-	$http)              # http
-		printf "%s\n" 'url matches: $http bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		vlc "$videourl";;
-	*)                  # wildcard
-		printf "%s\n" 'url matches: * bash pattern'
-		printf "%s\n" "Playing: '$videourl'"
-		vlc "$videourl";;
+	$videofile) vlc "$videourl";;
+	$m3u8) vlc "$videourl";;
+	$cookiem3u8) wget -c --header="cookie: $cookienltid","path=/: $cookiedomain" "$videourl" -O- | vlc fd://0;;
+	$videoqmark) vlc "$videourl";;
+	$xforward) wget -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | vlc fd://0;;
+	$useref) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
+	$viduseragent) wget -c -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
+	$useragentreferer) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
+	$refuseragent) wget -c --header="Referer: $referer" -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
+	$rtmp) rtmpdump -q -i "$videourl" | vlc fd://0;;
+	$cookiem3u8uagent) wget -c -U "$useragent2" --header="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep" -O- | vlc fd://0;;
+	$http) vlc "$videourl";;
+	*) vlc "$videourl";;
 esac 
 
-#+========================================================+#
-# turn off shell globbing                                  #
-#+========================================================+#
-
-shopt -u extglob 
-
-#+========================================================+#
-# exit status SUCCESS if script runs without errors        #
-#+========================================================+#
-
-exit "$SUCCESS"
+shopt -u extglob # turn off shell globbing
+exit "$SUCCESS" # exit status SUCCESS if script runs without errors
