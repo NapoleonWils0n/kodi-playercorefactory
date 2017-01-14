@@ -1,25 +1,16 @@
 #!/bin/bash
 
 #+========================================================+#
-# exit status, error codes and script usage                #
+# regex-checker                                            # 
 #+========================================================+#
 
+# exit status, error codes
 SUCCESS=0    # success exit code
 E_NOARGS=65  # no arguments passed to script
 E_NOMATCH=66 # url not matched by regular expression
 
+# script usage
 script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url]"
-
-#+========================================================+#
-# + check if first argument is a url in a text file        #
-# - or a url on the command line                           #
-#+========================================================+#
-
-if [[ "$1" =~ \.txt$ ]]; then # + text file passed as first argument to script
-   videourl=$(<"$1")       # - cat the text file to extract the url
-else
-   videourl="$1"              # url is on the command line
-fi
 
 #+========================================================+#
 # + validate user input for first argument                 #
@@ -27,6 +18,9 @@ fi
 # + check if 1 or 3 arguments are passed to script         #
 # - validate user input and enable shell globbing          #
 #+========================================================+#
+
+# check if first argument is a text file or on the command line
+[[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1"
 
 first_arg_validated="^(http|https|rtmp|rtmpe)://*"    # matches: http|https|rtmp|rtmpe
 
