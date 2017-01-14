@@ -17,7 +17,7 @@ script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://ex
 #+=========================================================+#
 
 if [[ "$2" =~ \.txt$ ]]; then # - text file passed as second argument to script
-   videourl=$(cat "$2")       # + cat the text file to extract the url
+   videourl=$(<"$2")       # + cat the text file to extract the url
 else
    videourl="$2"              # url is on the command line
 fi
