@@ -1,5 +1,5 @@
 #!/bin/bash
 
 [[ $# -eq 1 ]] || exit
-[[ "$1" =~ \.txt$ ]] && VIDEOURL=$(cat "$1") || VIDEOURL="$1"
-printf "%s\n" "$VIDEOURL" > "$USERPROFILE/Desktop/audio-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"
+[[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1"
+printf "%s\n" "$videourl" > "$USERPROFILE/Desktop/audio-url-$(date +"%Y-%m-%d-%H-%M-%S").txt"
