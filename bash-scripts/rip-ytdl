@@ -4,9 +4,9 @@
 # exit status, error codes and script usage                #
 #+========================================================+#
 
-SUCCESS=0      # success exit code
-E_NOARGS=65    # no arguments passed to script
-E_NOMATCH=66   # url not matched by regular expression
+SUCCESS=0    # success exit code
+E_NOARGS=65  # no arguments passed to script
+E_NOMATCH=66 # url not matched by regular expression
 
 script_usage="Usage: $(basename "$0") [(text file with url|url on command line|directory containing text files)]"
 
@@ -26,7 +26,7 @@ if [[ $# -eq 1 ]]; then                               # + one argument is passed
    fi
 else [[ $# -eq 0 ]]                                   # + no arguments are passed to the script
    printf "%s\n" "$script_usage"                      # - display script usage
-	exit "$E_NOARGS"                                   # - exit with E_NOARGS error code
+   exit "$E_NOARGS"                                   # - exit with E_NOARGS error code
 fi
 
 #+========================================================+#
