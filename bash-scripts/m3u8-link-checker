@@ -32,7 +32,6 @@ fi
 #+========================================================+#
 
 printf "%s\n" "Checking $file for working links"
-printf "%s\n" "#EXTM3U" > "$outfile"
 
 while IFS= read -r line               # while read m3u8 or m3u file check links with ffprobe
 do 
@@ -40,5 +39,8 @@ do
   [[ $? -eq 0 ]] && ffprobe -hide_banner "$link"
   [[ $? -eq 0 ]] && grep -B 1 "$link" "$file" 2>/dev/null | sed -e '/--/d' >> "$outfile"
 done <"$file"
+
+# check if any working links are found
+[[ -f "$outfile" ]] && sed -i '1i #EXTM3U' "$outfile" || printf "%s\n" "No working links found"
 
 exit "$SUCCESS" # exit 
