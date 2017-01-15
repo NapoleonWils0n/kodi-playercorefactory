@@ -6,9 +6,8 @@
 
 # exit status, error codes
 SUCCESS=0      # success exit code
-E_NOARGS=65    # no arguments passed to script
-E_WRONGARGS=66 # wrong number of arguments passed to script
-E_NOMATCH=67   # url not matched by regular expression
+E_WRONGARGS=65 # wrong number of arguments passed to script
+E_NOMATCH=66   # url not matched by regular expression
 
 # script usage
 script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://example.com/video-url] ([-t] [00:00:00])"
@@ -21,6 +20,9 @@ script_usage="Usage: $(basename "$0") [ssh server] [(http|https|rtmp|rtmpe)://ex
 # + check if 2 or 4 arguments are passed to script          #
 # - validate user input and enable shell globbing           #
 #+=========================================================+#
+
+# check number of arguments passed to script and exit if not correct
+[[ $# -eq 2 || $# -eq 4 ]] || { printf "%s\n" "$script_usage"; exit "$E_WRONGARGS"; }
 
 # check if second argument is a text file or on the command line
 [[ "$2" =~ \.txt$ ]] && videourl=$(<"$2") || videourl="$2"
@@ -39,14 +41,11 @@ if [[ $# -eq 2 ]]; then                                # - two argument are pass
       printf "%s\n%s\n" "'$videourl' invalid input" "$script_usage" # + display invalid user input with error message
       exit "$E_NOMATCH"                                # + exit with E_NOMATCH error code
    fi
-elif [[ $# -eq 4 ]]; then                              # - three arguments are passed to the script, validate user input
+else [[ $# -eq 4 ]]                                    # - three arguments are passed to the script, validate user input
    if ! [[ $sshserver =~ $first_arg_validated && $videourl =~ $second_arg_validated && $tflag =~ $third_arg_validated && $duration =~ $fourth_arg_validated ]]; then
       printf "%s\n%s\n" "'$1 $2 $3 $4' invalid input" "$script_usage" # + display invalid user input with error message
       exit "$E_NOMATCH"                                # + exit with E_NOMATCH error code
    fi
-else [[ $# -eq 0 ]]                                    # - no arguments are passed to the script
-   printf "%s\n" "$script_usage"                       # + display script usage
-   exit "$E_NOARGS"                                    # + exit with E_NOARGS error code
 fi
 
 shopt -s extglob # enable shell globbing 
