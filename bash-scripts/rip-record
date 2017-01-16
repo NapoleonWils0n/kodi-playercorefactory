@@ -82,7 +82,11 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 # recording functions using ffmpeg and rtmpdump           +#
 #+========================================================+#
 
-ripdir="$HOME/video"
+# config file
+ripconfig="$HOME/.ripconfig.txt"
+[[ -f "$ripconfig" ]] && source "$ripconfig"
+
+# default recording directory
 recordingdir="$HOME/Desktop"
 
 record () {
