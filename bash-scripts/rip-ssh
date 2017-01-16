@@ -89,7 +89,7 @@ ripconfig="$HOME/.ripconfig.txt"             # config file
 [[ -d "$ripssh" ]] || ripssh=""              # check if directory exists
 if [[ $ripssh = *[!/] ]]; then ripssh+=/; fi # check if directory has a trailing slash, if not add one
 
-recordingdir="$HOME" # default recording directory
+recordingdir="$HOME/" # default recording directory
 recordingfile="${ripssh:=$recordingdir}video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 
 record_ssh () {

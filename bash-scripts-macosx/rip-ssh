@@ -87,9 +87,10 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 ripconfig="$HOME/.ripconfig.txt"             # config file
 [[ -f "$ripconfig" ]] && source "$ripconfig" # check if config file exist
 [[ -d "$ripssh" ]] || ripssh=""              # check if directory exists
+if [[ $ripssh = *[!/] ]]; then ripssh+=/; fi # check if directory has a trailing slash, if not add one
 
-recordingdir="$HOME" # default recording directory
-recordingfile="${ripssh:=$recordingdir}/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+recordingdir="$HOME/" # default recording directory
+recordingfile="${ripssh:=$recordingdir}video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 
 record_ssh () {
 printf "%s %q %s %s %s %s %s %s\n" \

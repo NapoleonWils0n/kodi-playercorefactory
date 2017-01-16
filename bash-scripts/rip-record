@@ -87,7 +87,7 @@ ripconfig="$HOME/.ripconfig.txt"             # config file
 [[ -d "$ripdir" ]] || ripdir=""              # check if directory exists
 if [[ $ripdir = *[!/] ]]; then ripdir+=/; fi # check if directory has a trailing slash, if not add one
 
-recordingdir="$HOME/Desktop" # default recording directory
+recordingdir="$HOME/Desktop/" # default recording directory
 
 record () {
 count=0 # set count to zero
