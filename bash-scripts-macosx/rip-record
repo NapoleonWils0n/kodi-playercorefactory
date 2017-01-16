@@ -82,10 +82,17 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 # recording functions using ffmpeg and rtmpdump           +#
 #+========================================================+#
 
+# config file
+ripconfig="$HOME/.ripconfig.txt"
+[[ -f "$ripconfig" ]] && source "$ripconfig"
+
+# default recording directory
+recordingdir="$HOME/Desktop"
+
 record () {
 count=0 # set count to zero
 while [[ "$count" -lt 3 ]]; do # while count is less than 3 run the script
-recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+recordingfile="${ripdir:=$recordingdir}/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 $HOME/bin/ffmpeg \
 -hide_banner -stats -v panic "${@:2}" -i "$1" -c:v copy -c:a copy $tflag $duration "$recordingfile"
 if [[ $? -eq 0 ]]; then
@@ -100,7 +107,7 @@ done
 record_rtmp () {
 count=0 # set count to zero
 while [[ "$count" -lt 3 ]]; do # while count is less than 3 run the script
-recordingfile="$HOME/Desktop/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
+recordingfile="${ripdir:=$recordingdir}/video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 /usr/local/bin/rtmpdump -q -i "$1" | $HOME/bin/ffmpeg \
 -hide_banner -stats -v panic -i - -c:v copy -c:a copy $tflag $duration "$recordingfile"
 if [[ $? -eq 0 ]]; then # check the ffmpeg exit code is 0, which means the recording worked
