@@ -86,8 +86,7 @@ ripconfig="$HOME/.ripconfig.txt"             # config file
 [[ -f "$ripconfig" ]] && source "$ripconfig" # check if config file exist
 [[ -d "$ripdir" ]] || ripdir=""              # check if directory exists
 
-# default recording directory
-recordingdir="$HOME/Desktop"
+recordingdir="$HOME/Desktop" # default recording directory
 
 record () {
 count=0 # set count to zero
