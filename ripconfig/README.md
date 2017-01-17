@@ -3,14 +3,15 @@
 
 ## Set up
 
-Copy the ripconfig.txt file to your home folder
+Copy the ripconfig file to your home folder
 
 ### Edit the ripconfig.txt file
 
 Override the default recording destination for the rip-record,  
 rip-record-reconnect and rip-ssh scripts by adding a directory path between the double quotes in the variable
 
-Use Notepad++ on Windows to edit the ripconfig.txt file
+Use TextWrangler on the mac to edit the ripconfig file
+Use Notepad++ on Windows to edit the ripconfig file
 
 #### rip-record and rip-record-reconnect
 
@@ -63,11 +64,11 @@ Default recording location is $HOME/
 
 ### Rename the ripconfig.txt file 
 
-rename the ripconfig.txt file and add a dot prefix,  
+rename the ripconfig file and add a dot prefix,  
 and then save it in your home directory
 
-* rename the ripconfig.txt file with the terminal
+* rename the ripconfig file with the terminal
 
 ```
-mv ripconfig.txt .ripconfig.txt
+mv ripconfig .ripconfig
 ```
