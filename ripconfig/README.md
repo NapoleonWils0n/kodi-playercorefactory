@@ -38,14 +38,25 @@ ripdir="/home/username/Videos/"
 ripdir="$USERPROFILE/Videos/"
 ```
 
-
-Default recording location Linux / Mac: $HOME/Desktop/
+Default recording location Linux / Mac: $HOME/Desktop/  
 Default recording location Windows: $USERPROFILE/Desktop/
 
 #### rip-ssh
 
 ```
 ripssh=""
+```
+
+For example to change directory to $HOME/Videos/
+
+```
+ripdir="$HOME/Videos/"
+```
+
+or you can type the full path, where username is your username
+
+```
+ripdir="/home/username/Videos/"
 ```
 
 Default recording location is $HOME/
