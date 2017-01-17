@@ -13,9 +13,11 @@ Copy the ripconfig.txt file to your home folder
 
 Edit the ripconfig.txt file
 
+Override the default recording destination
+
 * ripdir=""
 
-Default recording location:
+Default recording location :
 
 Linux / Mac
 
