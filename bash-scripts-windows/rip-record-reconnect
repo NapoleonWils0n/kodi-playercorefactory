@@ -82,7 +82,7 @@ cookiedomain=$(printf "%s" "$videourl" | grep -Eo '(http|https)://[a-zA-Z0-9.-]*
 # recording functions using ffmpeg and rtmpdump           +#
 #+========================================================+#
 
-ripconfig="$USERPROFILE/.ripconfig.txt"      # config file
+ripconfig="$USERPROFILE/.ripconfig"      # config file
 [[ -f "$ripconfig" ]] && source "$ripconfig" # check if config file exist
 [[ -d "$ripdir" ]] || ripdir=""              # check if directory exists
 if [[ $ripdir = *[!/] ]]; then ripdir+=/; fi # check if directory has a trailing slash, if not add one
