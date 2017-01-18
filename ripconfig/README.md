@@ -5,7 +5,7 @@
 
 Copy the ripconfig file to your home folder
 
-### Edit the ripconfig.txt file
+### Edit the ripconfig file
 
 Override the default recording destination for the rip-record,  
 rip-record-reconnect and rip-ssh scripts by adding a directory path between the double quotes in the variable
@@ -62,7 +62,7 @@ ripdir="/home/username/Videos/"
 
 Default recording location is $HOME/
 
-### Rename the ripconfig.txt file 
+### Rename the ripconfig file 
 
 rename the ripconfig file and add a dot prefix,  
 and then save it in your home directory
