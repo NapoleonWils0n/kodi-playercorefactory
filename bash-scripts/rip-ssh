@@ -91,8 +91,15 @@ if [[ $ripssh = *[!/] ]]; then ripssh+=/; fi # check if directory has a trailing
 recordingdir="$HOME/" # default recording directory
 recordingfile="${ripssh:=$recordingdir}video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 
+#record_ssh () {
+#printf "%s %s %s %s %s %s %s %s\n" \
+#'ffmpeg -hide_banner -stats -v panic' "${@:2}" '-i' "$1" \
+#'-c:v copy -c:a copy' $tflag $duration "$recordingfile"
+#}
+
+
 record_ssh () {
-printf "%s %b %s %s %s %s %s %s\n" \
+printf "%s %s %s %s %s %s %s %s %s %s %s\n" \
 'ffmpeg -hide_banner -stats -v panic' "${@:2}" '-i' "$1" \
 '-c:v copy -c:a copy' $tflag $duration "$recordingfile"
 }
@@ -122,6 +129,8 @@ case "$videourl" in
   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   $useref) record_ssh "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+  #$viduseragent) record_ssh "$videofile_grep" -user-agent "$useragent" \
+  #| ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   $viduseragent) record_ssh "$videofile_grep" -user-agent "$useragent" \
   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   $useragentreferer) record_ssh "$videofile_grep" -user-agent "$useragent" -headers 'Referer: '"$referer"''$'\r\n' \
