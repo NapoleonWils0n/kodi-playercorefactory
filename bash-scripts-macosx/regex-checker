@@ -85,7 +85,7 @@ recordingfile="${ripdir:=$recordingdir}video-$(date +"%Y-%m-%d-%H-%M-%S").mkv"
 
 case "$videourl" in
   $videofile) 
-	 printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $videofile regular expression' 'ffmpeg command: '; \
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $videofile regular expression' 'ffmpeg command: '; \
     printf "%s %s '%s' %s %s %s %s\n" \
     '$HOME/bin/ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
     '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
@@ -95,7 +95,7 @@ case "$videourl" in
     '$HOME/bin/ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
     '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
   $cookiem3u8) 
-	 printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $cookiem3u8 regular expression' 'ffmpeg command: '; \
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $cookiem3u8 regular expression' 'ffmpeg command: '; \
     printf "%s %s '%s' %s '%s' %s %s %s %s\n" \
     '$HOME/bin/ffmpeg -hide_banner -stats -v panic' \
     '-cookies' \
