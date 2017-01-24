@@ -84,7 +84,7 @@ cookiedomain=$(grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' <<<"$videourl" | sed
 # config file                                              #
 #+========================================================+#
 
-ripconfig="$HOME/.ripconfig"             # config file
+ripconfig="$HOME/.ripconfig"                 # config file
 [[ -f "$ripconfig" ]] && source "$ripconfig" # check if config file exist
 if [[ $ripssh = *[!/] ]]; then ripssh+=/; fi # check if directory has a trailing slash, if not add one
 
@@ -114,10 +114,8 @@ case "$videourl" in
     'ffmpeg -hide_banner -stats -v panic' \
     '-cookies' \
     "$cookienltid; path=/; $cookiedomain;" \
-    '-i' "$videourl" \
-    '-c:v copy -c:a copy' \
-    $tflag $duration \
-    "$recordingfile" \
+    '-i' "$videourl" '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile" \
     | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   $videoqmark)
     printf "%s %s '%s' %s %s %s %s\n" \
@@ -128,8 +126,7 @@ case "$videourl" in
     printf "%s '%s' %s '%s' %s %s %s %s\n" \
     'ffmpeg -hide_banner -stats -v panic -headers' \
     'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
-    '-i' "$videofile_grep" \
-    '-c:v copy -c:a copy' \
+    '-i' "$videofile_grep" '-c:v copy -c:a copy' \
     $tflag $duration "$recordingfile" \
     | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   $useref)
@@ -169,15 +166,15 @@ case "$videourl" in
   | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 
   $http)
-  printf "%s %s '%s' %s %s %s %s\n" \
-  'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
-  '-c:v copy -c:a copy' $tflag $duration "$recordingfile"
-  | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+    printf "%s %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
+    '-c:v copy -c:a copy' $tflag $duration "$recordingfile"
+    | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   *)
-  printf "%s %s '%s' %s %s %s %s\n" \
-  'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
-  '-c:v copy -c:a copy' $tflag $duration "$recordingfile"
-  | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+    printf "%s %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
+    '-c:v copy -c:a copy' $tflag $duration "$recordingfile"
+    | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
 esac 
 
 shopt -u extglob # turn off shell globbing
