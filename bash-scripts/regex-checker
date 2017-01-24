@@ -67,7 +67,7 @@ cookienltid=$(grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*' <<<"$videourl")
 cookiedomain=$(grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' <<<"$videourl" | sed 's/^http\(\|s\):\/\///g')
 
 #+========================================================+#
-# recording functions using ffmpeg and rtmpdump           +#
+# config file                                              #
 #+========================================================+#
 
 ripconfig="$HOME/.ripconfig"             # config file

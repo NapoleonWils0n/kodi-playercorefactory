@@ -54,24 +54,120 @@ cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\
 cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9/?\&=%.*_-])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie[a-zA-Z0-9=_]*"
 
 #+========================================================+#
+# grep inside url to extract strings                       #
+#+========================================================+#
+
+videofile_grep=$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8|mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*_-]*[^|])' <<<"$videourl" | sed q) 
+useragent=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl")
+useragent2=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl" | sed 's/[uU]ser-[aA]gent=//g')
+referer=$(grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' <<<"$videourl" | sed 's/[rR]eferer=//')
+xforwardip=$(grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' <<<"$videourl")
+cookieurl=$(grep -Eo '[cC]ookie=[a-zA-Z0-9/&%_*~;=_[:blank:]]*' <<<"$videourl" | sed 's/[cC]ookie=//')
+cookienltid=$(grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*' <<<"$videourl")
+cookiedomain=$(grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' <<<"$videourl" | sed 's/^http\(\|s\):\/\///g')
+
+#+========================================================+#
+# config file                                              #
+#+========================================================+#
+
+ripconfig="$USERPROFILE/.ripconfig"      # config file
+[[ -f "$ripconfig" ]] && source "$ripconfig" # check if config file exist
+[[ -d "$ripdir" ]] || ripdir=""              # check if directory exists
+if [[ $ripdir = *[!/] ]]; then ripdir+=/; fi # check if directory has a trailing slash, if not add one
+
+recordingdir="$USERPROFILE/Desktop/" # default recording directory
+
+#+========================================================+#
 # + case statement with regular expression                 #
 # - to show matching url                                   #
 #+========================================================+#
 
 case "$videourl" in
-  $videofile) printf "%s\n%s\n" 'url matches: $videofile bash pattern' "url checked: '$videourl'";;
-  $m3u8) printf "%s\n%s\n" 'url matches: $m3u8 bash pattern' "url checked: '$videourl'";;
-  $cookiem3u8) printf "%s\n%s\n" 'url matches: $cookiem3u8 bash pattern' "url checked: '$videourl'";;
-  $videoqmark) printf "%s\n%s\n" 'url matches: $videoqmark bash pattern' "url checked: '$videourl'";;
-  $xforward) printf "%s\n%s\n" 'url matches: $xforward bash pattern' "url checked: '$videourl'";;
-  $useref) printf "%s\n%s\n" 'url matches: $useref bash pattern' "url checked: '$videourl'";;
-  $viduseragent) printf "%s\n%s\n" 'url matches: $viduseragent bash pattern' "url checked: '$videourl'";;
-  $useragentreferer) printf "%s\n%s\n" 'url matches: $useragentreferer bash pattern' "url checked: '$videourl'";;
-  $refuseragent) printf "%s\n%s\n" 'url matches: $refuseragent bash pattern' "url checked: '$videourl'";;
-  $rtmp) printf "%s\n%s\n" 'url matches: $rtmp bash pattern' "url checked: '$videourl'";;
-  $cookiem3u8uagent) printf "%s\n%s\n" 'url matches: $cookiem3u8uagent bash pattern' "url checked: '$videourl'";;
-  $http) printf "%s\n%s\n" 'url matches: $http bash pattern' "url checked: '$videourl'";;
-  *) printf "%s\n%s\n" 'url matches: * bash pattern' "url checked: '$videourl'";;
+  $videofile) 
+	 printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $videofile regular expression' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
+    '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
+  $m3u8)
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $m3u8 regular expression' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
+    '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
+  $cookiem3u8) 
+	 printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $cookiem3u8 regular expression' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' \
+    '-cookies' \
+    "$cookienltid; path=/; $cookiedomain;" \
+    '-i' "$videourl" '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $videoqmark) 
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $videoqmark regular expression' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
+    '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
+  $xforward) 
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $xforward regular expression' 'ffmpeg command: '; \
+    printf "%s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic -headers' \
+    'X-Forwarded-For: '"$xforwardip"''$'\r\n' \
+    '-i' "$videofile_grep" '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $useref)
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $useref regular expression' 'ffmpeg command: '; \
+    printf "%s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic -user-agent' "$useragent" \
+    '-headers' 'Referer: '"$referer"''$'\r\n' \
+    '-i' "$videofile_grep" '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $viduseragent)
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $viduseragent regular expression' 'ffmpeg command: '; \
+    printf "%s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic -user-agent' \
+    "$useragent" '-i' "$videofile_grep" \
+    '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $useragentreferer) 
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $useragentreferer regular expression' 'ffmpeg command: '; \
+    printf "%s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic -user-agent' \
+    "$useragent" \
+    '-headers' 'Referer: '"$referer"''$'\r\n' \
+    '-i' "$videofile_grep" '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $refuseragent) printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $refuseragent regular expression' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' \
+    '-headers' 'Referer: '"$referer"''$'\r\n' \
+    '-user-agent' "$useragent" \
+    '-i' "$videofile_grep" \
+    '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $rtmp) 
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $rtmp regular expression' 'ffmpeg command: '; \
+    printf "%s '%s' %s %s %s %s %s\n" \
+    'rtmpdump -q -i' "$videourl" \
+    '| ffmpeg -hide_banner -stats -v panic -i -' \
+    '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $cookiem3u8uagent)
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $cookiem3u8uagent regular expression' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner' \
+    '-user-agent' "$useragent2" \
+    '-cookies' "$cookieurl; path=/; $cookiedomain;" \
+    '-i' "$videofile_grep" '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile";;
+  $http) 
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: $http bash pattern' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
+    '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
+  *) 
+    printf "%s\n%s\n%s" "url checked: '$videourl'" 'url matches: * bash pattern' 'ffmpeg command: '; \
+    printf "%s %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
+    '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
 esac 
 
 shopt -u extglob # turn off shell globbing
