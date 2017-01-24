@@ -54,6 +54,30 @@ cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\
 cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9/?\&=%.*_-])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie[a-zA-Z0-9=_]*"
 
 #+========================================================+#
+# grep inside url to extract strings                       #
+#+========================================================+#
+
+videofile_grep=$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8|mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*_-]*[^|])' <<<"$videourl" | sed q) 
+useragent=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl")
+useragent2=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl" | sed 's/[uU]ser-[aA]gent=//g')
+referer=$(grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' <<<"$videourl" | sed 's/[rR]eferer=//')
+xforwardip=$(grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' <<<"$videourl")
+cookieurl=$(grep -Eo '[cC]ookie=[a-zA-Z0-9/&%_*~;=_[:blank:]]*' <<<"$videourl" | sed 's/[cC]ookie=//')
+cookienltid=$(grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*' <<<"$videourl")
+cookiedomain=$(grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' <<<"$videourl" | sed 's/^http\(\|s\):\/\///g')
+
+#+========================================================+#
+# recording functions using ffmpeg and rtmpdump           +#
+#+========================================================+#
+
+ripconfig="$HOME/.ripconfig"             # config file
+[[ -f "$ripconfig" ]] && source "$ripconfig" # check if config file exist
+[[ -d "$ripdir" ]] || ripdir=""              # check if directory exists
+if [[ $ripdir = *[!/] ]]; then ripdir+=/; fi # check if directory has a trailing slash, if not add one
+
+recordingdir="$HOME/Desktop/" # default recording directory
+
+#+========================================================+#
 # + case statement with regular expression                 #
 # - to show matching url                                   #
 #+========================================================+#
