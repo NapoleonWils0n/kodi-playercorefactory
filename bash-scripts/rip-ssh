@@ -151,20 +151,31 @@ case "$videourl" in
     '-i' "$videofile_grep" '-c:v copy -c:a copy' \
     $tflag $duration "$recordingfile" \
     | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-
-  $refuseragent) record_ssh "$videofile_grep" -headers 'Referer: '"$referer"''$'\r\n' -user-agent "$useragent" \
-  | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-
+  $refuseragent)
+    printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner -stats -v panic' \
+    '-headers' 'Referer: '"$referer"''$'\r\n' \
+    '-user-agent' "$useragent" \
+    '-i' "$videofile_grep" \
+    '-c:v copy -c:a copy' \
+    $tflag $duration \
+    "$recordingfile" \
+    | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   $rtmp)
-  printf "%s '%s' %s %s %s %s %s\n" \
-  'rtmpdump -q -i' "$videourl" \
-  '| ffmpeg -hide_banner -stats -v panic -i -' \
-  '-c:v copy -c:a copy' \
-  $tflag $duration "$recordingfile"
-
-  $cookiem3u8uagent) record_ssh "$videofile_grep" -user-agent "$useragent2" -cookies "$cookieurl; path=/; $cookiedomain;" \
-  | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
-
+    printf "%s '%s' %s %s %s %s %s\n" \
+    'rtmpdump -q -i' "$videourl" \
+    '| ffmpeg -hide_banner -stats -v panic -i -' \
+    '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile" \
+    | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
+  $cookiem3u8uagent)
+    printf "%s %s '%s' %s '%s' %s '%s' %s %s %s %s\n" \
+    'ffmpeg -hide_banner' \
+    '-user-agent' "$useragent2" \
+    '-cookies' "$cookieurl; path=/; $cookiedomain;" \
+    '-i' "$videofile_grep" '-c:v copy -c:a copy' \
+    $tflag $duration "$recordingfile" \
+    | ssh -fn "$sshserver" $(< /dev/fd/0) &>/dev/null;;
   $http)
     printf "%s %s '%s' %s %s %s %s\n" \
     'ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
