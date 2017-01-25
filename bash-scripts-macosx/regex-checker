@@ -178,7 +178,6 @@ case "$videourl" in
     '$HOME/bin/ffmpeg -hide_banner -stats -v panic' '-i' "$videourl" \
     '-c:v copy -c:a copy' $tflag $duration "$recordingfile";;
   *) 
-
     printf "%s\n%s\n%s\n%s" "video url checked: '$videourl'" \
     'bash pattern match: *' 'bash pattern match: *' 'ffmpeg command: '; \
     printf "%s %s '%s' %s %s %s %s\n" \
