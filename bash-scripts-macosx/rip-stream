@@ -95,7 +95,7 @@ $tflag $duration \
 }
 
 stream_local () {
-$HOME/bin/ffmpeg -hide_banner -stats -v panic -i "$1" \
+$HOME/bin/ffmpeg -hide_banner -stats -v panic -re -i "$1" \
 -c:v libx265 -preset ultrafast -tune zero-latency \
 -x265-params crf=28 \
 -c:a aac -strict experimental -b:a 192k \
