@@ -76,6 +76,7 @@ ripconfig="$USERPROFILE/.ripconfig"      # config file
 if [[ $ripdir = *[!/] ]]; then ripdir+=/; fi # check if directory has a trailing slash, if not add one
 
 recordingdir="$USERPROFILE/Desktop/" # default recording directory
+recordingfile="${ripdir:=$recordingdir}video-$(date +"%Y-%m-%d-%H-%M-%S").mkv" 
 
 #+========================================================+#
 # + case statement with regular expression                 #
