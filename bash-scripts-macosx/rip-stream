@@ -22,7 +22,7 @@ script_usage="Usage: $(basename "$0") [file.(mkv|mp4|avi|flv)] [(http|https|rtmp
 #+========================================================+#
 
 # check number of arguments passed to script and exit if not correct
-[[ $# -eq 1 ]] || { printf "%s\n" "$script_usage"; exit "$E_WRONGARGS"; }
+[[ $# -eq 1 || $# -eq 3 ]] || { printf "%s\n" "$script_usage"; exit "$E_WRONGARGS"; }
 
 # check if first argument is a text file or on the command line
 [[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1"
