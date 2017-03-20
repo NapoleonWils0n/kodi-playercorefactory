@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+#+========================================================+#
+# rip-vlc                                                  # 
+#+========================================================+#
+
+# exit status, error codes
+SUCCESS=0      # success exit code
+E_WRONGARGS=65 # wrong number of arguments passed to script
+E_NOMATCH=66   # url not matched by regular expression
+
+# script usage
+script_usage="Usage: $(basename "$0") [(http|https|rtmp|rtmpe)://example.com/video-url]"
+
+#+========================================================+#
+# + validate user input for first argument                 #
+# + passed to script                                       #
+# + check if 1 argument is passed to script                #
+# - and validate user input                                #
+#+========================================================+#
+
+# check number of arguments passed to script and exit if not correct
+[[ $# -eq 1 ]] || { printf "%s\n" "$script_usage"; exit "$E_WRONGARGS"; }
+
+# check if first argument is a text file or on the command line
+[[ "$1" =~ \.txt$ ]] && videourl=$(<"$1") || videourl="$1"
+
+first_arg_validated="^(http|https|rtmp|rtmpe)://*"    # matches: http|https|rtmp|rtmpe
+
+if [[ $# -eq 1 ]]; then                               # + one argument is passed to the script
+   if ! [[ $videourl =~ $first_arg_validated ]]; then # - if videourl doesnt match validation regular expression
+      printf "%s\n%s\n" "'$videourl' invalid input" "$script_usage" # - display invalid user input with error message
+      exit "$E_NOMATCH"                               # - exit with E_NOMATCH error code
+   fi
+fi
+
+shopt -s extglob # enable shell globbing 
+
+#+========================================================+#
+# case statement switch on pattern match                   #
+#+========================================================+#
+
+videofile="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)"
+m3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8"
+videoqmark="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv|m3u8)?([^|])[a-zA-Z0-9=?&]*([^|])"
+viduseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9?\&=%*])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*([^&])"
+useragentreferer="@(http|https)://[a-zA-Z0-9:0-9./?=_\&@%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9=?&]*)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;\&@%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
+useref="@(http|https)://[a-zA-Z0-9:0-9./?=_@%-]*\.@(mkv|mp4|avi|flv)\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*\&[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*"
+refuseragent="@(http|https)://[a-zA-Z0-9:0-9./?=_-]*?(.m3u8)\|[rR]eferer=@(http|https)@(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*\&[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+-]*"
+xforward="@(http|https)://[a-zA-Z0-9./?=_@%-]*\.m3u8\|X-Forwarded-For=+([0-9])\.+([0-9])\.+([0-9])\.+([0-9])"
+http="@(http|https)://[a-zA-Z0-9:0-9/.\&;,~*?%@_=-]*"
+rtmp="@(rtmp|rtmpe)://[a-zA-Z0-9[:blank:]#%@!()_=:-/.\&;,~*?]*"
+cookiem3u8="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.m3u8\?nltid=[a-zA-Z0-9\&%_*=]*"
+cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.@(mkv|mp4|avi|flv|m3u8)?([a-zA-Z0-9/?\&=%.*_-])*\|[uU]ser-[aA]gent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*\&Cookie[a-zA-Z0-9=_]*"
+
+#+========================================================+#
+# grep inside url to extract strings                       #
+#+========================================================+#
+
+videofile_grep=$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8|mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*_-]*[^|])' <<<"$videourl" | sed q) 
+useragent=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl")
+useragent2=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl" | sed 's/[uU]ser-[aA]gent=//g')
+referer=$(grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' <<<"$videourl" | sed 's/[rR]eferer=//')
+xforwardip=$(grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' <<<"$videourl")
+cookieurl=$(grep -Eo '[cC]ookie=[a-zA-Z0-9/&%_*~;=_[:blank:]]*' <<<"$videourl" | sed 's/[cC]ookie=//')
+cookienltid=$(grep -Eo 'nltid=[a-zA-Z0-9&%_*=]*' <<<"$videourl")
+cookiedomain=$(grep -Eo '(http|https)://[a-zA-Z0-9.-]*[^/]' <<<"$videourl" | sed 's/^http\(\|s\):\/\///g')
+
+#+========================================================+#
+# case statement with regular expression                   #
+# + to execute vlc commands based on matching url          #
+#+========================================================+#
+
+case "$videourl" in
+  $videofile) vlc "$videourl";;
+  $m3u8) vlc "$videourl";;
+  $cookiem3u8) wget -c --header="cookie: $cookienltid","path=/: $cookiedomain" "$videourl" -O- | vlc fd://0;;
+  $videoqmark) vlc "$videourl";;
+  $xforward) wget -c --header="X-Forwarded-For: $xforwardip" "$videofile_grep" -O- | vlc fd://0;;
+  $useref) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
+  $viduseragent) wget -c -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
+  $useragentreferer) wget -c -U "$useragent" --header="Referer: $referer" "$videofile_grep" -O- | vlc fd://0;;
+  $refuseragent) wget -c --header="Referer: $referer" -U "$useragent" "$videofile_grep" -O- | vlc fd://0;;
+  $rtmp) rtmpdump -q -i "$videourl" | vlc fd://0;;
+  $cookiem3u8uagent) wget -c -U "$useragent2" --header="cookie: $cookieurl","path=/: $cookiedomain" "$videofile_grep" -O- | vlc fd://0;;
+  $http) vlc "$videourl";;
+  *) vlc "$videourl";;
+esac 
+
+shopt -u extglob # turn off shell globbing
+exit "$SUCCESS" # exit status SUCCESS if script runs without errors
