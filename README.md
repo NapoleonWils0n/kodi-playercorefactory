@@ -1,5 +1,7 @@
 # Kodi playercorefactory.xml repo
 
+[pilfer is the new python version of the rip-record script](https://github.com/NapoleonWils0n/pilfer)
+
 A set of playercorefactory.xml files for kodi to play videos in an external player or record the video.  
 There is also a set of bash script to record the outside of kodi using the terminal
 
