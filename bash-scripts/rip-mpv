@@ -57,7 +57,7 @@ cookiem3u8uagent="@(http|https)://[a-zA-Z0-9:0-9./?=_,@\&%-]*\.@(mkv|mp4|avi|flv
 # grep inside url to extract strings                       #
 #+========================================================+#
 
-videofile_grep=$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-]*\.(m3u8|mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*_-]*[^|])' <<<"$videourl" | sed q) 
+videofile_grep=$(grep -Eo '(http|https)://[a-zA-Z0-9:0-9./?=_,@&%-~]*\.(m3u8|mkv|mp4|avi|flv)?([a-zA-Z0-9?&=%*_-~]*[^|])' <<<"$videourl" | sed q)
 useragent=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl")
 useragent2=$(grep -Eo 'u?User-a?Agent=[a-zA-Z0-9/.()[:blank:],:;%+_-]*[^&]' <<<"$videourl" | sed 's/[uU]ser-[aA]gent=//g')
 referer=$(grep -Eo 'r?Referer=(http|https)(://|%3A%2F%2F)[a-zA-Z%0-9./?=_-]*' <<<"$videourl" | sed 's/[rR]eferer=//')
