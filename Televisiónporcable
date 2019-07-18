@@ -1,0 +1,259 @@
+#EXTN3U
+
+#EXTINF:-1, 1 > TELEVISIÓN POR CABLE (GUIA PROGRAMACIÓN DECODIFICADOR IPTV)
+***SIN SEÑAL***
+
+#EXTINF:-1, 2 > TELEVISIÓN POR CABLE (GUIA PROGRAMACIÓN DECODIFICADOR IPTV)
+***SIN SEÑAL***
+
+#EXTINF:-1, 3 > TELEVISIÓN POR CABLE (GUIA PROGRAMACIÓN DECODIFICADOR IPTV)
+***SIN SEÑAL***
+
+#EXTINF:-1, 4 > TELEVISIÓN POR CABLE (GUIA PROGRAMACIÓN DECODIFICADOR IPTV)
+***SIN SEÑAL***
+
+#EXTINF:-1, 5 > AZ CORAZÓN
+http://usuarios.club/usuarios/src5/azcorazon/mayo/mayo.m3u8
+
+#EXTINF:-1, 13 > TELEVIDA
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TVID/tu1_1.m3u8
+
+#EXTINF:-1, 14 > GRISTOVISION
+http://live10.cdnmedia.tv/cristovisionlive/smil:live.smil/playlist.m3u8
+
+#EXTINF:-1, 15 > TELEAMIGA
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TAMI/tu1_1.m3u8
+
+#EXTINF:-1, 16 > CANAL TRO
+http://live10.cdnmedia.tv/canaltro2live/smil:live.smil/playlist.m3u8
+
+#EXTINF:-1, 17 > CANAL TRECE
+https://cdn.logicideas.media/canaltrece-live/smil:canal13.smil/chunklist_b4500000.m3u8
+
+#EXTINF:-1, 18 > TELEANTIOQUIA
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TANT/tu1_1.m3u8
+
+#EXTINF:-1, 19 > MUNDO +
+http://vcp1.myplaytv.com:1935/mundomas/mundomas/playlist.m3u8
+
+#EXTINF:-1, 20 > COSMOVISIÓN
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/COSM/tu1_1.m3u8
+
+#EXTINF:-1, 21 > CANAL ANTIESTRES
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/ANTI/tu1_1.m3u8
+
+#EXTINF:-1, 22 > TELE CAFÉ
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TCAF/tu1_1.m3u8
+
+#EXTINF:-1, 23 > TVO
+http://edge.wms28.lorini.net/tvo/tvo/playlist.m3u8?iptvgratis?chile.m3u8
+
+#EXTINF:-1, 24 > CANAL CAPITAL
+https://mdstrm.com/live-stream-playlist/57d01d6c28b263eb73b59a5a.m3u8
+
+#EXTINF:-1, 25 > TELEPAFÍCICO
+https://cdn.logicideas.media/telepacifico-live/smil:live.smil/chunklist_b4500000.m3u8
+
+#EXTINF:-1, 26 > TELEMEDELLÍN
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TMED/tu1_1.m3u8
+
+#EXTINF:-1, 27 > CANAL U
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/CANU/tu1_1.m3u8
+
+#EXTINF:-1, 28 > TELEISLA
+http://vbox2.cehis.net/live-teleislas/smil:teleislas.smil/playlist.m3u8
+
+#EXTINF:-1, 29 > TRENDY
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TREN/tu1_1.m3u8
+
+#EXTINF:-1, 30 > TELE ENVIGADO
+http://66.240.236.25/hls-live/livepkgr/_definst_/liveevent/vivo.m3u8
+
+#EXTINF:-1, 31 > TV AGRO
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TVAG/tu1_3.m3u8
+
+#EXTINF:-1, 33 > ORBIT TV
+http://ss6.domint.net:2082/202_str/orbittv/chunklist_w29206476.m3u8
+
+#EXTINF:-1, 34 > PARAMOUNT NETWORK
+http://paramount.live.flumotion.com/live/playlist.m3u8
+
+#EXTINF:-1, 35 > CAZA VISIÓN
+https://cdn039.fractalmedia.es/hls/caz_es_high.m3u8
+
+#EXTINF:-1, 36 > BE MAD
+https://mdslivehlsb-i.akamaihd.net/hls/live/623615/bemad/bitrate_4.m3u8
+
+#EXTINF:-1, 37 > BOING
+https://mdslivehlsb-i.akamaihd.net/hls/live/623616/boing/bitrate_4.m3u8
+
+#EXTINF:-1, 38 > LOCOMOTION TV
+http://locomotiontv.com/envivo/loco_channel/stream.m3u8
+
+#EXTINF:-1, 40 > HOLVOET TV
+http://unlimited5-cl.dps.live/holvoettv/holvoettv.smil/playlist.m3u8
+
+#EXTINF:-1, 41 > CANAL 26
+http://200.115.193.177/live/26hd-720/.m3u8
+
+#EXTINF:-1, 42 > CANAL PROVINCIAL
+http://www.trimi.com.ar/provincial/streaming/mystream.m3u8
+
+#EXTINF:-1, 43 > CENTRAL TV
+http://cdn2.ujjina.com:1935/iptvcentraltv/livecentraltvtv/playlist.m3u8
+
+#EXTINF:-1, 44 > ATB
+http://stmv1.questreaming.com/atb/atb/playlist.m3u8?wowzasessionid=932599229
+
+#EXTINF:-1, 46 > CANAL 4
+http://streamyes.alsolnet.com:1935/canal4sanjuan/live/chunklist_w931974462.m3u8
+
+#EXTINF:-1, 47 > GH TELEVISIÓN
+http://ss6.domint.net:2046/gh_str/tv10/chunklist_w1301712904.m3u8
+
+#EXTINF:-1, 48 > MULTIVISIÓN FEDERAL
+http://panel.dattalive.com:1935/8250/8250/playlist.m3u8
+
+#EXTINF:-1, 49 > AMÉRICA TV
+https://prepublish.f.qaotic.net/a07/americahls-100056/playlist_720p.m3u8
+
+#EXTINF:-1, 50 > TELECENTRO
+http://stream.grupotelemicro.com/13.m3u8
+
+#EXTINF:-1, 52 > OROMAR TV
+http://europa.tucableip.com:8181/oromarhd/live/tracks-v1a1/index.m3u8
+
+#EXTINF:-1, 53 > CANAL 9 (COLOR VISIÓN)
+http://ss2.domint.net:2138/cvh_str/colorvisionhd/chunklist.m3u8
+
+#EXTINF:-1, 54 > TOP LATINO
+http://online.radiodifusion.net:1935/livetv/latinoSD.stream/chunklist_w446773931.m3u8
+
+#EXTINF:-1, 55 > MI MÚSICA
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/MMHD/tu1_1.m3u8
+
+#EXTINF:-1, 56 > HIT TV
+http://kissfm-cires21-video.secure.footprint.net/hittv/bitrate_3.m3u8
+
+#EXTINF:-1, 57 > MUSIC TOP
+http://live-edge01.telecentro.net.ar/live/msctphd-720/playlist.m3u8
+
+#EXTINF:-1, 58 > TELE MÚSICA
+http://186.155.200.118:1935/live/telemusica_web/chunklist_w1876927115.m3u8
+
+#EXTINF:-1, 59 > CARTINAZO TV
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/CANT/tu1_1.m3u8
+
+#EXTINF:-1, 60 > TELERITMO
+http://mdstrm.com/live-stream-playlist_400/57b4dc126338448314449d0c.m3u8
+
+#EXTINF:-1, 63 > HB TV
+http://cdn2.ujjina.com:1935/iptvbhtv/livebhtvtv/playlist.m3u8
+
+#EXTINF:-1, 64 > TELEMUNDO
+https://ktmdlive-lh.akamaihd.net/i/KTMD_LIVE1@183610/index_1200_av-p.m3u8
+
+#EXTINF:-1, 65 > SUN CHANNEL
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/SUN/tu1_manifest.m3u8
+
+#EXTINF:-1, 66 > DW DEUSCHE WELLE
+http://dwstream3-lh.akamaihd.net/i/dwstream3_live@124409/index_1_av-b.m3u8
+
+#EXTINF:-1, 67 > CAMPUS TV
+http://unlimited6-cl.dps.live/campustv/campustv.smil/campustv/livestream1/chunks.m3u8
+
+#EXTINF:-1, 68 > TELESUR
+https://streaming.openmultimedia.biz/blive/ngrp:balta.stream_all/playlist.m3u8
+
+#EXTINF:-1, 69 > TELE FÓRMULA
+http://wms30.tecnoxia.com/radiof/abr_radioftele/playlist.m3u8
+
+#EXTINF:-1, 70 > MILENIO CENTER
+http://bcoveliveios-i.akamaihd.net/hls/live/201661/57828478001/milenio_center_512k@51752.m3u8
+
+#EXTINF:-1, 71 > REAL MADRID TV
+http://rmtvlive-lh.akamaihd.net/i/rmtv_1@154306/master.m3u8
+
+#EXTINF:-1, 72 > WIN SPORTS
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/0001/tu1/yt1_2.m3u8
+
+#EXTINF:-1, 73 > CDO PREMIUM
+http://edge1.cl.grupoz.cl/cdofree/live/playlist.m3u8
+
+#EXTINF:-1, 74 > PX SPORTS
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/TEST/tu1_manifest.m3u8
+
+#EXTINF:-1, 76 > EL GARAGE TV
+http://186.0.233.76:1935/Garage/smil:garage.smil/playlist.m3u8
+
+#EXTINF:-1, 80 > ENERGY
+https://mdslivehlsb-i.akamaihd.net/hls/live/623617/energy/bitrate_1.m3u8
+
+#EXTINF:-1, 81 > DIVINITY
+https://mdslivehls-i.akamaihd.net/hls/live/571648/divinity/bitrate_1.m3u8
+
+#EXTINF:-1, 85 > QUE HUVO TV
+https://5b50404ec5e4c.streamlock.net/8030/8030/chunklist_w1199689237.m3u8
+
+#EXTINF:-1, 90 > CANAL 4
+http://162.241.190.126:1935/live/canal4/playlist.m3u8
+
+#EXTINF:-1, 91 > READY TV
+http://190.103.183.24:1935/ReadyTV/ReadyHD/playlist.m3u8
+
+#EXTINF:-1, 95 > CANAL 10
+http://panel.dattalive.com:1935/8204/8204/playlist.m3u8
+
+#EXTINF:-1, 100 > CANAL 21
+http://138.117.4.70:8079/streams/d/Canal-21/playlist.m3u8
+
+#EXTINF:-1, 101 > ENLACE TBN 
+http://api.new.livestream.com/accounts/2675843/events/1839332/live.m3u8
+
+#EXTINF:-1, 102 > ABN AVIVAMIENTO TELEVISIÓN
+https://s3.abntelevision.com/avivamiento/avivamiento/playlist.m3u8
+
+#EXTINF:-1, 103 > ESPERANZA TV
+http://k3.usastreams.com:1935/etvSD/etvSD/playlist.m3u8
+
+#EXTINF:-1, 104 > ALIENTO VISIÓN
+http://livestreamcdn.net:1935/AlientoSD/AlientoSD/chunklist_w973892945.m3u8
+
+#EXTINF:-1, 105 > OASIS TV
+http://hlslive.lcdn.une.net.co/v1/AUTH_HLSLIVE/LDTV/tu1_1.m3u8
+
+#EXTINF:-1, 106 > CBN ESPAÑOL
+http://bcliveuniv-lh.akamaihd.net/i/iptv2_1@194050/master.m3u8?iptvgratis?chile.m3u8
+
+#EXTINF:-1, 110 > CANAL NUEVE
+http://live.canalnueve.tv:8082/hls/canal.m3u8
+
+#EXTINF:-1, 111 > CANAL 11
+http://138.117.4.70:8079/streams/d/Canal-11/playlist.m3u8
+
+#EXTINF:-1, 115 > CANAL 12
+http://138.117.4.70:8079/streams/d/Canal-12/playlist.m3u8
+
+#EXTINF:-1, 120 > TELERED
+http://k4.usastreams.com/Telesistemas/Telesistemas/chunklist_w1991417611.m3u8
+
+#EXTINF:-1, 121 > CANAL 4
+http://184.154.28.210:1935/canal4/canal4/playlist.m3u8
+
+#EXTINF:-1, 122 > TICAVISIÓN
+http://k3.usastreams.com:1935/HBTV/HBTV/playlist.m3u8
+
+#EXTINF:-1, 123 > CANAL 6
+http://138.117.4.70:8079/streams/d/Canal-6/playlist.m3u8
+
+#EXTINF:-1, 124 > CANAL 10
+http://138.117.4.70:8079/streams/d/Canal-10/playlist.m3u8
+
+#EXTINF:-1, 125 > TELESUR
+http://k3.usastreams.com:1935/telesur/telesur/playlist.m3u8
+
+#EXTINF:-1, 126 > CANAL 2
+http://138.117.4.70:8079/streams/d/Canal-2/playlist.m3u8
+
+#EXTINF:-1, 128 > ANTARES TELEVISIÓN
+http://173.192.105.252:1935/iptvantares/liveantarestv/playlist.m3u8
